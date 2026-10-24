@@ -964,15 +964,9 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
   letter-spacing: -0.03em;
   display: inline-flex;
   align-items: baseline;
-  gap: 0.35em;
-  transition: color 0.3s;
+  justify-self: start;
 }
-.menu__primary a sup {
-  font-family: var(--font-body), sans-serif;
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  color: var(--gold-500);
-}
+/* Hovering one link softly dims the others (the fade itself is in .menu .menu__item below). */
 .menu__primary:has(a:hover) a:not(:hover) {
   color: rgba(246, 245, 240, 0.3);
 }
@@ -1017,12 +1011,14 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
 .menu .menu__item {
   transform: translateY(30px);
   opacity: 0;
-  transition: transform 0.8s var(--ease-out), opacity 0.8s var(--ease-out);
+  /* colour is listed here too: this rule would otherwise replace the links' hover fade */
+  transition: transform 0.8s var(--ease-out), opacity 0.8s var(--ease-out), color 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 }
 .menu.is-open .menu__item {
   transform: translateY(0);
   opacity: 1;
-  transition-delay: calc(0.35s + var(--i, 0) * 0.06s);
+  /* the stagger applies to the entrance only; the hover fade starts at once */
+  transition-delay: calc(0.35s + var(--i, 0) * 0.06s), calc(0.35s + var(--i, 0) * 0.06s), 0s;
 }
 @media (max-width: 900px) {
   .menu__grid {

@@ -87,7 +87,6 @@ export default function Header({ email, tagline, showBlog }: Props) {
               {nav.map((item, i) => (
                 <Link key={item.href} href={item.href} className="menu__item" style={{ '--i': i } as React.CSSProperties}>
                   {item.label}
-                  <sup>0{i + 1}</sup>
                 </Link>
               ))}
             </nav>
