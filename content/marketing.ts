@@ -11,7 +11,7 @@ const services: Service[] = [
     slug: 'digital-marketing-strategy',
     promise: 'A clear marketing direction before you spend: goals, audience and a plan that fits your budget.',
     seo: { description: 'Digital marketing strategy from Uexora Marketing Studio: clear goals, audience understanding and a plan built around your priorities and budget.' },
-    image: { src: '/images/services/digital-marketing-strategy.jpg', alt: 'Two colleagues planning at a whiteboard covered in sticky notes' },
+    image: { src: '/images/services/digital-marketing-strategy.jpg', alt: 'A team planning strategy around a whiteboard with charts and sticky notes in a bright meeting room' },
     highlights: ['Clear goals', 'Understanding the audience', 'Priorities and budget', 'A plan before investing'],
     whoFor: 'Businesses that want a clear direction for their marketing before they invest in it.',
     details: [
@@ -30,7 +30,7 @@ const services: Service[] = [
     slug: 'search-engine-optimisation',
     promise: 'Be found by people already searching for what you offer, and keep that visibility over time.',
     seo: { description: 'SEO services that improve search visibility through relevant content, website optimisation and practices that support long-term organic discovery.' },
-    image: { src: '/images/services/search-engine-optimisation.jpg', alt: 'Performance analytics graphs on a laptop screen' },
+    image: { src: '/images/services/search-engine-optimisation.jpg', alt: 'Wooden blocks spelling SEO in front of a laptop' },
     highlights: ['Search visibility', 'Relevant content', 'Website optimisation', 'Long-term organic discovery'],
     whoFor: 'Businesses that want to be found in search engines and build visibility that lasts.',
     details: [
@@ -49,7 +49,7 @@ const services: Service[] = [
     slug: 'paid-advertising-and-lead-generation',
     promise: 'Campaigns that reach the right audiences and generate enquiries you can measure.',
     seo: { description: 'Paid advertising and lead generation: campaigns planned and managed to reach relevant audiences, generate enquiries and improve performance over time.' },
-    image: { src: '/images/services/paid-advertising-and-lead-generation.jpg', alt: 'A bar chart on a computer screen' },
+    image: { src: '/images/services/paid-advertising-and-lead-generation.jpg', alt: 'A presenter walking a team through an ad spend breakdown on a projected screen' },
     highlights: ['Campaign planning and management', 'Relevant audiences', 'Enquiry generation', 'Performance insight'],
     whoFor: 'Businesses that want advertising campaigns which reach the right audiences and generate enquiries they can measure.',
     details: [
@@ -68,7 +68,7 @@ const services: Service[] = [
     slug: 'social-media-marketing',
     promise: 'Content and engagement with a purpose, so social media supports your business goals.',
     seo: { description: 'Social media marketing: content planning, brand communication and audience engagement that strengthen your online presence with a clear purpose.' },
-    image: { src: '/images/services/social-media-marketing.jpg', alt: 'Social media apps on a smartphone screen' },
+    image: { src: '/images/services/social-media-marketing.jpg', alt: 'A smartphone on a tripod recording a shoot in a lit studio' },
     highlights: ['Content planning', 'Brand communication', 'A stronger online presence', 'Audience engagement'],
     whoFor: 'Businesses that want to connect with customers, communicate their brand and stay relevant on social media.',
     details: [
@@ -87,7 +87,7 @@ const services: Service[] = [
     slug: 'website-design-and-development',
     promise: 'A website that explains your value clearly and guides visitors towards taking action.',
     seo: { description: 'Website design and development that communicates your value clearly, gives visitors a good experience and guides them towards taking action.' },
-    image: { src: '/images/services/website-design-and-development.jpg', alt: 'A laptop on a desk showing a website wireframe' },
+    image: { src: '/images/services/website-design-and-development.jpg', alt: 'A web design workspace with two monitors and a laptop showing page layouts by a window' },
     highlights: ['First impressions', 'Clear communication of value', 'Good user experience', 'Guiding visitors to act'],
     whoFor: 'Businesses whose website is where potential customers form their first impression of them.',
     details: [
@@ -106,7 +106,7 @@ const services: Service[] = [
     slug: 'ai-powered-marketing-solutions',
     promise: 'Practical uses of artificial intelligence that save time and help your marketing work smarter.',
     seo: { description: 'AI-powered marketing solutions: practical uses of artificial intelligence to support marketing, improve efficiency and help your business work smarter.' },
-    image: { src: '/images/services/ai-powered-marketing-solutions.jpg', alt: 'Abstract blue and pink 3D cubes representing artificial intelligence' },
+    image: { src: '/images/services/ai-powered-marketing-solutions.jpg', alt: 'Abstract 3D render of neural network layers with blue data points' },
     highlights: ['Practical uses of AI', 'Improved efficiency', 'Working smarter', 'Solutions fitted to the problem'],
     whoFor: 'Businesses exploring how artificial intelligence could support their marketing and help them work smarter.',
     details: [
