@@ -151,14 +151,22 @@ first, so first paint, crawlers and screen readers always see the full content. 
 ## Contact form
 
 `components/ContactForm.tsx` posts JSON to `app/api/contact/route.ts`, which validates the fields, runs
-spam checks and emails the enquiry over SMTP with Nodemailer. Recipients come from the site settings
-(`content/settings.ts`, or Site settings in the studio; still placeholders, replace before launch). The
-visitor's address is set as Reply-To so inbox replies go straight back to them.
+spam checks, then does two things: it emails the enquiry over SMTP with Nodemailer, and it saves it in
+Sanity as an `enquiry` document, listed in the studio under **Enquiries** (New / Replied / All). The
+visitor sees success when at least one of the two worked; each failure is logged. Recipients come from
+the site settings (`content/settings.ts`, or Site settings in the studio; still placeholders, replace
+before launch). The visitor's address is set as Reply-To so inbox replies go straight back to them.
+
+**Enquiries in the studio** (`sanity/schemaTypes/enquiry.ts`, `lib/cms/enquiries.ts`): the submitted
+details are read-only; the team sets the status (New, Replied, Closed) and can add internal notes.
+Enquiries cannot be created or duplicated in the studio. Each id starts with `enquiry.`, which keeps
+them out of the public API even though the dataset is public: Sanity only returns dotted ids to signed-in
+users and tokens. Saving needs `SANITY_API_WRITE_TOKEN` on the host (server-only).
 
 **Setup:** copy `.env.example` to `.env.local` and fill in `SMTP_HOST`, `SMTP_PORT`, `SMTP_SECURE`,
-`SMTP_USER`, `SMTP_PASS` and `MAIL_FROM` (comments in the file cover Google Workspace and Zoho). Until
-they are set the route answers 503 and the form shows an inline "not set up yet" error with the
-inbox address; it never crashes.
+`SMTP_USER`, `SMTP_PASS` and `MAIL_FROM` (comments in the file cover Google Workspace and Zoho), plus
+`SANITY_API_WRITE_TOKEN`. With only the token set, enquiries are stored but not emailed; with neither,
+the route answers 503 and the form shows an inline "not set up yet" error with the inbox address.
 
 **Spam protection:** a hidden honeypot field (`company`) must stay empty, the form must have been open
 for at least 3 seconds, and each IP gets 5 submissions per 10 minutes. Bots that trip the first two

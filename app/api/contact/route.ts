@@ -2,10 +2,13 @@ import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import { site } from '@/lib/site';
 import { getSettings, type SettingsContent } from '@/lib/cms';
+import { EnquiryStoreConfigError, saveEnquiry } from '@/lib/cms/enquiries';
 
 /**
  * POST /api/contact — receives the contact form, validates it, applies basic
- * spam protection and emails the enquiry to the division's inbox over SMTP.
+ * spam protection, saves the enquiry in Sanity (studio > Enquiries) and emails it
+ * to the division's inbox over SMTP. The visitor sees success when at least one of
+ * the two worked; each failure is logged.
  *
  * Spam protection (all three must pass):
  *  - honeypot: the hidden `company` field must be empty
@@ -15,7 +18,7 @@ import { getSettings, type SettingsContent } from '@/lib/cms';
  *
  * SMTP settings come from SMTP_HOST, SMTP_PORT, SMTP_SECURE, SMTP_USER,
  * SMTP_PASS and MAIL_FROM (see .env.example). Recipients come from the site settings
- * (content/settings.ts, editable in the studio).
+ * (content/settings.ts, editable in the studio). Storing needs SANITY_API_WRITE_TOKEN.
  */
 
 export const runtime = 'nodejs';
@@ -150,15 +153,34 @@ export async function POST(request: Request) {
   const { data, fields } = validate(body);
   if (!data) return fail(400, 'Please check the highlighted fields.', fields);
 
+  // 1. Email the division inbox.
+  let emailSent = false;
+  let mailConfigured = true;
   try {
     await deliver(data, settings);
+    emailSent = true;
   } catch (error) {
-    const inbox = divisions(settings)[data.division].to;
     if (error instanceof MailConfigError) {
+      mailConfigured = false;
       console.error(`[contact] mail is not configured: ${error.message}`);
-      return fail(503, `The contact form is not set up to send email yet. Please email us directly at ${inbox}.`);
+    } else {
+      console.error('[contact] delivery failed:', error);
     }
-    console.error('[contact] delivery failed:', error);
+  }
+
+  // 2. Keep a copy in the studio, recording whether the email went out.
+  let stored = false;
+  try {
+    await saveEnquiry({ ...data, emailSent });
+    stored = true;
+  } catch (error) {
+    if (error instanceof EnquiryStoreConfigError) console.error(`[contact] enquiries are not stored: ${error.message}`);
+    else console.error('[contact] could not store the enquiry:', error);
+  }
+
+  if (!emailSent && !stored) {
+    const inbox = divisions(settings)[data.division].to;
+    if (!mailConfigured) return fail(503, `The contact form is not set up yet. Please email us directly at ${inbox}.`);
     return fail(502, `We could not send your message right now. Please email us directly at ${inbox}.`);
   }
 
