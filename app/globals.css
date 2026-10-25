@@ -1566,31 +1566,24 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
 }
 .purpose__chip {
   position: absolute;
-  left: 1rem;
-  bottom: 1rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.9rem 0.5rem 0.75rem;
-  border-radius: 999px;
-  background: rgba(6, 16, 58, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  backdrop-filter: blur(10px) saturate(140%);
-  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  left: clamp(0.9rem, 1.6vw, 1.3rem);
+  bottom: clamp(0.8rem, 1.4vw, 1.1rem);
+  z-index: 1;
   color: #fff;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: clamp(1.3rem, 2vw, 1.9rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
   line-height: 1;
+  text-shadow: 0 2px 16px rgba(6, 16, 58, 0.5);
 }
-.purpose__chip::before {
+/* A soft fade at the foot of each photo keeps its heading readable. */
+.purpose__photo::after {
   content: '';
-  width: 0.42rem;
-  height: 0.42rem;
-  border-radius: 50%;
-  background: var(--gold-500);
-  box-shadow: 0 0 0 3px rgba(242, 189, 43, 0.22);
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(6, 16, 58, 0.55), rgba(6, 16, 58, 0));
+  pointer-events: none;
 }
 .purpose__paths {
   position: absolute;
@@ -1657,9 +1650,9 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
 }
 @media (max-width: 560px) {
   .purpose__chip {
-    left: 0.7rem;
+    left: 0.75rem;
     bottom: 0.7rem;
-    font-size: 0.64rem;
+    font-size: 1.15rem;
   }
   .purpose__photo--b {
     outline-width: 4px;
