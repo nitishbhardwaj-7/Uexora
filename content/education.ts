@@ -168,7 +168,6 @@ export const education = {
     ],
     link: 'Why choose Uexora Education',
     image: { src: '/images/sections/education-approach.jpg', alt: 'A student smiling as she writes in a notebook at a sunlit desk beside a computer and house plants' },
-    pill: 'Curiosity · Confidence · Growth',
     rows: [
       { title: 'Learn with purpose', text: 'Build a strong foundation with learning that connects to your goals.' },
       { title: 'Explore new possibilities', text: 'Discover new subjects, skills and opportunities for your future.' },
