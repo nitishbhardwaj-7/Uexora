@@ -165,10 +165,16 @@ export const education = {
     paragraphs: [
       "At Uexora Education, we believe learning is about more than grades and examinations. It's about discovering what you're good at, building confidence, developing useful skills and preparing for the opportunities ahead.",
       'Every learner is different. Some need extra support with their schoolwork, while others are preparing for competitive exams, planning to study abroad or exploring new areas like artificial intelligence and robotics. Some want to improve their communication skills, become more confident speakers or develop at their own pace with the right learning support.',
-      'We believe there should be a place for all these learning goals.',
-      "That's why we're building Uexora Education as a platform that brings different educational programmes and learning opportunities together in one place. Our aim is to make it easier for students and learners to find the right support, explore their interests and keep moving forward.",
     ],
     link: 'Why choose Uexora Education',
+    image: { src: '/images/sections/education-approach.jpg', alt: 'A student smiling as she writes in a notebook at a sunlit desk beside a computer and house plants' },
+    pill: 'Curiosity · Confidence · Growth',
+    rows: [
+      { title: 'Learn with purpose', text: 'Build a strong foundation with learning that connects to your goals.' },
+      { title: 'Explore new possibilities', text: 'Discover new subjects, skills and opportunities for your future.' },
+      { title: 'Find the right support', text: 'Get appropriate guidance at every stage of your learning journey.' },
+    ],
+    closing: 'A place to learn, grow and discover what comes next.',
   },
 
   programmesHeading: 'Learning for a brighter tomorrow.',

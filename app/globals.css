@@ -3067,7 +3067,7 @@ a.cdirect__value:hover {
   margin-top: clamp(1.2rem, 2vw, 1.7rem);
 }
 .approach__link .link-arrow {
-  color: var(--blue-700);
+  color: var(--accent);
   font-weight: 600;
   min-height: 44px;
   align-items: center;
@@ -3276,6 +3276,79 @@ a.cdirect__value:hover {
   color: var(--fg);
 }
 
+.approach__link .link-arrow:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+/* Outlined label beside the photo (Education). */
+.approach__pill {
+  position: absolute;
+  right: 3%;
+  top: clamp(-4rem, -6vw, -2.4rem);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  max-width: 13rem;
+  padding: 0.75rem 1.2rem 0.75rem 1rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--fg) 30%, transparent);
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: var(--fg);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+.approach__pill::before {
+  content: '';
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--gold-500);
+  box-shadow: 0 0 0 4px rgba(242, 189, 43, 0.18);
+}
+
+/* Dark tone (Education): cream type, gold accents, faint background curve. */
+.approach--dark {
+  position: relative;
+  isolation: isolate;
+}
+.approach--dark::before {
+  content: '';
+  position: absolute;
+  right: -18vw;
+  top: -10%;
+  z-index: -1;
+  width: 46vw;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, #fff 6%, transparent);
+  background: radial-gradient(circle at 30% 40%, color-mix(in srgb, #fff 4%, transparent), transparent 70%);
+  pointer-events: none;
+}
+/* Narrower measure: four lines, as in the Education reference. */
+.approach--dark .approach__title {
+  max-width: 11.9ch;
+}
+.approach--dark .approach__photo {
+  background: rgba(255, 255, 255, 0.05);
+}
+.approach--dark .approach__icon {
+  background: color-mix(in srgb, #fff 8%, transparent);
+  color: var(--cream);
+}
+.approach--dark .approach__row:hover .approach__icon {
+  background: var(--gold-500);
+  color: var(--navy-900);
+}
+.approach--dark .approach__row + .approach__row {
+  border-top-color: color-mix(in srgb, #fff 9%, transparent);
+}
+
 @media (max-width: 1100px) {
   .approach__grid {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
@@ -3314,6 +3387,13 @@ a.cdirect__value:hover {
     right: 0;
     top: -3.6rem;
     width: min(60%, 220px);
+  }
+  .approach__pill {
+    right: 0;
+    top: -3.2rem;
+  }
+  .approach--dark::before {
+    display: none;
   }
 }
 @media (max-width: 480px) {

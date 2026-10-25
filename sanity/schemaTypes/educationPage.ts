@@ -41,6 +41,10 @@ export const educationPage = defineType({
         defineField({ name: 'heading', title: 'Heading', type: 'string' }),
         paragraphs(),
         defineField({ name: 'link', title: 'Link label (to Why choose us)', type: 'string' }),
+        defineField({ name: 'image', title: 'Photo', type: 'picture', description: 'Landscape; it is cropped with a rounded right side.' }),
+        defineField({ name: 'pill', title: 'Label beside the photo', type: 'string', description: 'Short, e.g. "Curiosity · Confidence · Growth".' }),
+        defineField({ name: 'rows', title: 'Highlights', type: 'array', of: [defineArrayMember({ type: 'item' })], validation: (r) => r.max(3) }),
+        defineField({ name: 'closing', title: 'Closing statement', type: 'text', rows: 2 }),
       ],
     }),
 

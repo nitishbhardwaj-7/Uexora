@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import { BreadcrumbJsonLd } from '@/components/JsonLd';
 import PageHero from '@/components/sections/PageHero';
-import { SplitSection, Statement, WhyChoose } from '@/components/sections/Blocks';
+import Approach from '@/components/sections/Approach';
+import { Statement, WhyChoose } from '@/components/sections/Blocks';
 import ServiceCards from '@/components/sections/ServiceCards';
 import CtaBand from '@/components/sections/CtaBand';
 import Signpost from '@/components/sections/Signpost';
 import Faq from '@/components/sections/Faq';
-import { ArrowLink } from '@/components/ui/Button';
 import { getEducation } from '@/lib/cms';
 import { pageMetadata } from '@/lib/seo';
 
@@ -31,17 +31,17 @@ export default async function EducationPage() {
         chips={e.hero.chips}
       />
 
-      <SplitSection
+      <Approach
         id="about"
-        eyebrow="About us"
+        tone="dark"
         heading={e.about.heading}
         paragraphs={e.about.paragraphs}
-        tone="dark"
-        aside={
-          <div data-reveal>
-            <ArrowLink href="/education#why-choose-us">{e.about.link}</ArrowLink>
-          </div>
-        }
+        link={{ label: e.about.link, href: '/education#why-choose-us' }}
+        image={e.about.image}
+        pill={e.about.pill}
+        rows={e.about.rows}
+        icons={['book', 'bulb', 'people']}
+        closing={e.about.closing}
       />
 
       <ServiceCards

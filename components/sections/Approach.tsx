@@ -10,34 +10,49 @@ type Props = {
   image?: { src: string; alt: string };
   panel?: { kicker?: string; title?: string; text?: string };
   stamp?: string;
+  /** A light outlined label near the photo's upper right, used instead of the panel. */
+  pill?: string;
   rows?: Row[];
+  /** Icons for the rows, in order. */
+  icons?: IconName[];
   closing?: string;
   tone?: 'light' | 'dark';
 };
 
-/* Simple line icons, drawn in the brand blue; no icon library needed for three glyphs. */
-const icons = [
-  // analytics
-  <svg key="chart" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M4 20h16" />
-    <path d="M7 16v-4" />
-    <path d="M12 16V8" />
-    <path d="M17 16V5" />
-  </svg>,
-  // idea
-  <svg key="bulb" viewBox="0 0 24 24" aria-hidden="true">
-    <path d="M9 18h6" />
-    <path d="M10 21h4" />
-    <path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2V16h5.2v-.2c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z" />
-  </svg>,
-  // people
-  <svg key="people" viewBox="0 0 24 24" aria-hidden="true">
-    <circle cx="9" cy="8" r="3.2" />
-    <path d="M3.5 19.5c.7-3 3-4.8 5.5-4.8s4.8 1.8 5.5 4.8" />
-    <path d="M15.5 5.2a3 3 0 0 1 0 5.6" />
-    <path d="M17 14.9c1.8.5 3.1 2 3.5 4.6" />
-  </svg>,
-];
+type IconName = 'chart' | 'bulb' | 'people' | 'book';
+
+/* Simple line icons; no icon library needed for a handful of glyphs. */
+const ICONS: Record<IconName, React.ReactNode> = {
+  chart: (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4 20h16" />
+      <path d="M7 16v-4" />
+      <path d="M12 16V8" />
+      <path d="M17 16V5" />
+    </svg>
+  ),
+  bulb: (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M9 18h6" />
+      <path d="M10 21h4" />
+      <path d="M12 3a6 6 0 0 0-3.6 10.8c.6.5 1 1.2 1 2V16h5.2v-.2c0-.8.4-1.5 1-2A6 6 0 0 0 12 3Z" />
+    </svg>
+  ),
+  people: (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <circle cx="9" cy="8" r="3.2" />
+      <path d="M3.5 19.5c.7-3 3-4.8 5.5-4.8s4.8 1.8 5.5 4.8" />
+      <path d="M15.5 5.2a3 3 0 0 1 0 5.6" />
+      <path d="M17 14.9c1.8.5 3.1 2 3.5 4.6" />
+    </svg>
+  ),
+  book: (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 6.5C10 5 7.2 4.5 4 5v13c3.2-.5 6 0 8 1.5 2-1.5 4.8-2 8-1.5V5c-3.2-.5-6 0-8 1.5Z" />
+      <path d="M12 6.5v13" />
+    </svg>
+  ),
+};
 
 /**
  * Editorial "our approach" section: headline and link over a large photo with a
@@ -45,11 +60,11 @@ const icons = [
  * right, the introduction, three process steps and a closing statement.
  * Motion uses the site's reveal attributes (staged before paint, skipped under reduced motion).
  */
-export default function Approach({ id, heading, paragraphs, link, image, panel, stamp, rows = [], closing, tone = 'light' }: Props) {
+export default function Approach({ id, heading, paragraphs, link, image, panel, stamp, pill, rows = [], icons = ['chart', 'bulb', 'people'], closing, tone = 'light' }: Props) {
   const [lead, ...rest] = paragraphs;
   const stampId = `${id}-stamp-circle`;
   return (
-    <section id={id} className="section approach" data-tone={tone} aria-labelledby={`${id}-title`}>
+    <section id={id} className={['section approach', tone === 'dark' ? 'approach--dark' : ''].filter(Boolean).join(' ')} data-tone={tone} aria-labelledby={`${id}-title`}>
       <div className="container approach__grid">
         <div className="approach__left">
           <h2 id={`${id}-title`} className="approach__title" data-split data-split-delay="0.1">
@@ -72,6 +87,12 @@ export default function Approach({ id, heading, paragraphs, link, image, panel, 
                 <path d="M86 6 C 104 14, 104 44, 88 56 S 52 66, 30 63" vectorEffect="non-scaling-stroke" />
               </svg>
               <span className="approach__dot" aria-hidden="true" data-reveal data-reveal-delay="0.5" />
+
+              {pill ? (
+                <p className="approach__pill" data-reveal data-reveal-delay="0.35">
+                  {pill}
+                </p>
+              ) : null}
 
               {panel?.title ? (
                 <div className="approach__panel" data-reveal data-reveal-delay="0.35">
@@ -113,7 +134,7 @@ export default function Approach({ id, heading, paragraphs, link, image, panel, 
             <ol className="approach__rows" data-reveal-group data-stagger="0.14">
               {rows.map((r, i) => (
                 <li key={r.title} className="approach__row">
-                  <span className="approach__icon">{icons[i % icons.length]}</span>
+                  <span className="approach__icon">{ICONS[icons[i % icons.length]]}</span>
                   <div>
                     <h3 className="approach__row-title">{r.title}</h3>
                     <p className="approach__row-text">{r.text}</p>
