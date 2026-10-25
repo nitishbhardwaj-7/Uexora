@@ -538,7 +538,32 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
   border: 1px solid var(--rule);
 }
 .btn--ghost:hover {
-  border-color: var(--fg);
+  border-color: var(--btn-hover);
+}
+/* An outline button beside a filled one hovers to that button's colour. */
+.btn-row:has(.btn--blue) .btn--ghost {
+  --btn-hover: var(--blue-700);
+  --btn-hover-fg: #fff;
+}
+.btn-row:has(.btn--gold) .btn--ghost {
+  --btn-hover: var(--gold-500);
+  --btn-hover-fg: var(--navy-900);
+}
+.btn-row:has(.btn--light) .btn--ghost {
+  --btn-hover: #fff;
+  --btn-hover-fg: var(--navy-900);
+}
+.btn-row:has(.btn:not(.btn--blue, .btn--gold, .btn--light, .btn--ghost)) .btn--ghost {
+  --btn-hover: var(--navy-900);
+  --btn-hover-fg: #fff;
+}
+.btn-row:has(.btn--blue) .btn--ghost:hover .btn__icon,
+.btn-row:has(.btn:not(.btn--blue, .btn--gold, .btn--light, .btn--ghost)) .btn--ghost:hover .btn__icon {
+  background: rgba(255, 255, 255, 0.16);
+}
+.btn-row:has(.btn--gold) .btn--ghost:hover .btn__icon,
+.btn-row:has(.btn--light) .btn--ghost:hover .btn__icon {
+  background: rgba(6, 16, 58, 0.12);
 }
 .btn--ghost .btn__icon {
   background: var(--rule);
