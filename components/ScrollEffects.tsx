@@ -198,10 +198,19 @@ export default function ScrollEffects() {
           el.classList.add('is-typed');
           ScrollTrigger.create({
             trigger: el,
-            start: 'top 82%',
+            start: 'top 88%',
             once: true,
+            // Whole sentence in about 1.6 s, however long the text: the stagger spreads 1.1 s across all letters.
             onEnter: () =>
-              gsap.to(split.chars, { opacity: 1, filter: 'blur(0px)', yPercent: 0, duration: 0.75, ease: 'power2.out', stagger: 0.022, clearProps: 'filter' }),
+              gsap.to(split.chars, {
+                opacity: 1,
+                filter: 'blur(0px)',
+                yPercent: 0,
+                duration: 0.5,
+                ease: 'power2.out',
+                stagger: { amount: 1.1 },
+                clearProps: 'filter',
+              }),
           });
         });
       };
