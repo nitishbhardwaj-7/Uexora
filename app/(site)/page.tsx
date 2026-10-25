@@ -21,7 +21,11 @@ export default async function HomePage() {
       <Showcase content={h.showcase} />
       <Divisions content={h.divisions} />
       <Marquee items={h.marquee} tone="dark" />
-      <Purpose content={h.purpose} />
+      <Purpose
+        content={h.purpose}
+        education={h.divisions.panels.find((p) => p.key === 'education')?.image}
+        marketing={h.divisions.panels.find((p) => p.key === 'marketing')?.image}
+      />
       <CtaBand id="next-step" heading={h.cta.heading} paragraphs={h.cta.paragraphs} primary={h.cta.primary} secondary={h.cta.secondary} />
     </>
   );
