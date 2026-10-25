@@ -1,13 +1,28 @@
 import type { Metadata, Viewport } from 'next';
-import { Manrope } from 'next/font/google';
+import { Manrope, Poppins } from 'next/font/google';
 import './globals.css';
 import { site } from '@/lib/site';
 import { getSettings } from '@/lib/cms';
 
-const body = Manrope({
+/*
+ * Type roles (see the :root variables in globals.css):
+ *   headings     --font-heading  Black Mango once its licensed web files are added; Manrope until then
+ *   subheadings  --font-sub      Poppins
+ *   body         --font-body     Manifold once its licensed web files are added; Manrope until then
+ * To switch, put the .woff2 files in app/fonts/, load them with next/font/local here, and point
+ * --font-heading / --font-body at their variables.
+ */
+const manrope = Manrope({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-body',
+  variable: '--font-manrope',
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  display: 'swap',
+  variable: '--font-poppins',
 });
 
 export const viewport: Viewport = {
@@ -99,7 +114,7 @@ function structuredData(s: Awaited<ReturnType<typeof getSettings>>) {
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const s = await getSettings();
   return (
-    <html lang="en" className={body.variable} suppressHydrationWarning>
+    <html lang="en" className={`${manrope.variable} ${poppins.variable}`} suppressHydrationWarning>
       <head>
         {/* Lets CSS stage the hero entrances before hydration; without JavaScript everything stays visible. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />

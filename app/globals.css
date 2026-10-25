@@ -3,6 +3,11 @@
    ========================================================================== */
 
 :root {
+  /* Type roles. Black Mango (headings) and Manifold (body) need licensed web font files;
+     until they are added (see app/layout.tsx), both roles use Manrope. */
+  --font-heading: var(--font-manrope);
+  --font-sub: var(--font-poppins);
+  --font-body: var(--font-manrope);
   /* brand */
   --navy-950: #040a24;
   --navy-900: #06103a;
@@ -301,11 +306,29 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
 .h1,
 .h2,
 .h3 {
-  font-family: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1;
   text-wrap: balance;
+}
+/* Headings: h1/h2 and title classes take the heading face. */
+h1,
+h2 {
+  font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+}
+/* Subheadings: h3/h4 and programme or service names take Poppins. */
+h3,
+h4,
+.h3,
+.pindex__title,
+.qa__q,
+.signpost__name,
+.posts__title,
+.fmarquee__item,
+.approach__row-title,
+.door__title {
+  font-family: var(--font-sub), ui-sans-serif, system-ui, sans-serif;
 }
 .display {
   font-size: clamp(2.6rem, 7.6vw, 7.2rem);
