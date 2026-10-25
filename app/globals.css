@@ -1621,9 +1621,8 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
 }
 .purpose__seal-ring text {
   fill: currentColor;
-  font-size: 15.2px;
+  font-size: 17px;
   font-weight: 700;
-  letter-spacing: 0.16em;
 }
 .purpose__seal-mark {
   width: 34%;

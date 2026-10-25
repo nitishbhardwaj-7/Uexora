@@ -64,9 +64,10 @@ export default function Purpose({ content, education, marketing }: { content: Ho
                 <defs>
                   <path id="purpose-seal-circle" d="M100 100 m -74 0 a 74 74 0 1 1 148 0 a 74 74 0 1 1 -148 0" />
                 </defs>
+                {/* Once round the ring: textLength is the circle's circumference (2π × 74), so the phrase fits exactly. */}
                 <text>
-                  <textPath href="#purpose-seal-circle" startOffset="0">
-                    DIFFERENT PATHS · ONE PURPOSE · DIFFERENT PATHS · ONE PURPOSE ·
+                  <textPath href="#purpose-seal-circle" startOffset="0" textLength="464" lengthAdjust="spacing">
+                    DIFFERENT PATHS · ONE PURPOSE ·
                   </textPath>
                 </text>
               </svg>
