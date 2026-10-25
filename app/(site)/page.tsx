@@ -23,8 +23,8 @@ export default async function HomePage() {
       <Marquee items={h.marquee} tone="dark" />
       <Purpose
         content={h.purpose}
-        education={h.divisions.panels.find((p) => p.key === 'education')?.image}
-        marketing={h.divisions.panels.find((p) => p.key === 'marketing')?.image}
+        education={h.purpose.educationImage}
+        marketing={h.purpose.marketingImage}
       />
       <CtaBand id="next-step" heading={h.cta.heading} paragraphs={h.cta.paragraphs} primary={h.cta.primary} secondary={h.cta.secondary} />
     </>

@@ -87,6 +87,8 @@ export const homePage = defineType({
         defineField({ name: 'heading', title: 'Heading', type: 'string' }),
         paragraphs(),
         defineField({ name: 'button', title: 'Button', type: 'link' }),
+        defineField({ name: 'educationImage', title: 'Education photo', type: 'picture', description: 'Portrait works best; shown as a 4:5 card.' }),
+        defineField({ name: 'marketingImage', title: 'Marketing photo', type: 'picture', description: 'Portrait works best; shown as a 4:5 card.' }),
       ],
     }),
     defineField({ name: 'cta', title: 'Closing call to action', type: 'ctaBand', group: 'cta' }),

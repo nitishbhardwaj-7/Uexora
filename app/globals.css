@@ -1596,6 +1596,7 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
 }
 .purpose__photo-in img {
   object-fit: cover;
+  object-position: center 30%;
 }
 .purpose__chip {
   position: absolute;

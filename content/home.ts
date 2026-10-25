@@ -79,6 +79,9 @@ export const home = {
       'Whether you’re building your skills, exploring your next career move, or creating a brand with bigger ambitions, we bring together the knowledge, creativity, and expertise to help you take the next step.',
     ],
     button: { label: 'Start a conversation', href: '/contact' },
+    /** The two photos beside "Different paths. One purpose." (decorative; the division cards describe each division). */
+    educationImage: { src: '/images/sections/purpose-education.jpg', alt: 'A smiling student at a library desk with a stack of books and a laptop' },
+    marketingImage: { src: '/images/sections/purpose-marketing.jpg', alt: 'Two colleagues smiling as they review creative work on a laptop' },
   },
 
   cta: {
