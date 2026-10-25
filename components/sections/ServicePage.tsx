@@ -112,12 +112,7 @@ export default function ServicePage({ division, service: s, all, statement, cta 
         </section>
       ) : null}
 
-      <Statement id="approach" eyebrow={statement.heading} quote={statement.quote} paragraphs={statement.paragraphs.slice(0, 2)} tone={altTone}>
-        <div className="statement__foot" data-reveal>
-          <Monogram variant="mono" style={{ width: 28, color: 'var(--accent)' }} />
-          <span>{meta.name}</span>
-        </div>
-      </Statement>
+      <Statement id="approach" eyebrow={statement.heading} quote={statement.quote} paragraphs={statement.paragraphs.slice(0, 2)} tone={altTone} />
 
       {faqs.length ? (
         <section id="questions" className="section" data-tone={sectionTone} aria-labelledby="faq-title">

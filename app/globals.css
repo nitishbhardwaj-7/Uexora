@@ -2959,16 +2959,6 @@ a.cdirect__value:hover {
 }
 
 /* small sign-off inside a statement band */
-.statement__foot {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin-top: clamp(1.6rem, 3vw, 2.6rem);
-  font-size: 0.85rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--fg-muted);
-}
 
 /* --------------------------------------------------------------------------
    Programme / service index (editorial header + three-column grid)
