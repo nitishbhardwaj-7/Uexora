@@ -1296,12 +1296,35 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
   color: #ffc629;
   font-weight: 700;
 }
-@media (max-width: 600px) {
+/* Phones: a tall full-bleed crop cuts the billboard out of this wide photo, so the photo
+   sits in a 4:3 frame centred on the billboard and the statement follows on the navy. */
+@media (max-width: 760px) {
   .showcase {
-    min-height: 80svh;
+    min-height: 0;
+    display: block;
+  }
+  .showcase__bg {
+    position: relative;
+    inset: auto;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    transform: none !important;
   }
   .showcase__bg img {
-    object-position: 46% center;
+    object-position: 48.5% center;
+  }
+  .showcase__overlay {
+    inset: 0 0 auto 0;
+    aspect-ratio: 4 / 3;
+    background: linear-gradient(to top, var(--navy-900) 0%, rgba(6, 16, 58, 0) 28%);
+  }
+  .showcase__inner {
+    padding-top: clamp(1.4rem, 5vw, 2rem);
+    padding-bottom: clamp(3rem, 12vw, 4.5rem);
+  }
+  .showcase__statement {
+    font-size: clamp(1.15rem, 5vw, 1.4rem);
+    text-shadow: none;
   }
 }
 
