@@ -1800,10 +1800,123 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
   padding-top: clamp(56px, 6vw, 88px);
   overflow: hidden;
 }
+.footer {
+  padding-top: 0;
+}
+/* Service marquees across the top of the footer. */
+.fmarquee {
+  border-bottom: 1px solid var(--line-dark);
+  margin-bottom: clamp(3rem, 5vw, 4.5rem);
+}
+.fmarquee__row {
+  position: relative;
+  display: grid;
+  gap: 0.9rem;
+  padding-block: clamp(1.8rem, 3vw, 2.6rem);
+}
+.fmarquee__row + .fmarquee__row {
+  border-top: 1px solid var(--line-dark);
+}
+.fmarquee__label {
+  justify-self: start;
+  margin-left: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-500);
+  transition: color 0.3s;
+}
+.fmarquee__label:hover {
+  color: var(--cream);
+}
+.fmarquee__viewport {
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+}
+.fmarquee__track {
+  display: flex;
+  width: max-content;
+  animation: fmarquee-left var(--dur, 40s) linear infinite;
+}
+.fmarquee__row--marketing .fmarquee__track {
+  animation-name: fmarquee-right;
+}
+.fmarquee__row:hover .fmarquee__track,
+.fmarquee__row:focus-within .fmarquee__track {
+  animation-play-state: paused;
+}
+.fmarquee__set {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.fmarquee__set li {
+  display: flex;
+  align-items: center;
+}
+.fmarquee__set li::after {
+  content: '';
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-inline: clamp(1.4rem, 2.6vw, 2.4rem);
+  border-radius: 50%;
+  background: var(--gold-500);
+}
+.fmarquee__item {
+  font-size: clamp(1.6rem, 3.4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  white-space: nowrap;
+  color: rgba(246, 245, 240, 0.9);
+  transition: color 0.4s;
+}
+a.fmarquee__item:hover,
+a.fmarquee__item:focus-visible {
+  color: var(--gold-500);
+}
+a.fmarquee__item:focus-visible {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+@keyframes fmarquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes fmarquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .fmarquee__track {
+    animation: none;
+  }
+  .fmarquee__set--copy {
+    display: none;
+  }
+  .fmarquee__viewport {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
 .footer__top {
   display: grid;
-  /* Link columns are wide enough for one programme name per line at laptop widths and up. */
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) minmax(0, 1.25fr) minmax(0, 0.85fr);
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(2rem, 3.5vw, 3.5rem);
   padding-bottom: clamp(2.5rem, 4vw, 3.5rem);
 }

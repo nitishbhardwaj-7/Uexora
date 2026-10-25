@@ -2,16 +2,24 @@ import Link from 'next/link';
 import Logo from './brand/Logo';
 import Wordmark from './brand/Wordmark';
 import Tagline from './brand/Tagline';
+import FooterServices from './FooterServices';
 import { site } from '@/lib/site';
 import { getEducation, getMarketing, getSettings } from '@/lib/cms';
 import { servicePath } from '@/lib/cms/services';
 
-/** Footer: brand statement, every programme and service (one line each, so each page is one click from anywhere), contact details. */
+/**
+ * Footer: moving rows of programmes and services (real links; division pages show their own
+ * row), then the brand statement, links to both divisions and the contact details.
+ */
 export default async function Footer({ showBlog }: { showBlog?: boolean }) {
   const [s, e, m] = await Promise.all([getSettings(), getEducation(), getMarketing()]);
   const year = new Date().getFullYear();
   return (
     <footer className="footer" data-tone="dark">
+      <FooterServices
+        education={e.programmes.map((p) => ({ title: p.title, href: servicePath('education', p.slug) }))}
+        marketing={m.services.map((p) => ({ title: p.title, href: servicePath('marketing', p.slug) }))}
+      />
       <div className="container">
         <div className="footer__top">
           <div className="footer__brand">
@@ -23,28 +31,22 @@ export default async function Footer({ showBlog }: { showBlog?: boolean }) {
           </div>
 
           <div className="footer__col">
-            <p className="footer__heading">
-              <Link href="/education">Uexora Education</Link>
-            </p>
+            <p className="footer__heading">Explore</p>
             <ul>
-              {e.programmes.map((p) => (
-                <li key={p.slug}>
-                  <Link href={servicePath('education', p.slug)}>{p.title}</Link>
+              <li>
+                <Link href="/education">Uexora Education</Link>
+              </li>
+              <li>
+                <Link href="/marketing">Uexora Marketing Studio</Link>
+              </li>
+              {showBlog ? (
+                <li>
+                  <Link href="/blog">Blog</Link>
                 </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="footer__col">
-            <p className="footer__heading">
-              <Link href="/marketing">Uexora Marketing Studio</Link>
-            </p>
-            <ul>
-              {m.services.map((p) => (
-                <li key={p.slug}>
-                  <Link href={servicePath('marketing', p.slug)}>{p.title}</Link>
-                </li>
-              ))}
+              ) : null}
+              <li>
+                <Link href="/contact">Contact</Link>
+              </li>
             </ul>
           </div>
 
@@ -65,11 +67,6 @@ export default async function Footer({ showBlog }: { showBlog?: boolean }) {
               <li>
                 <Link href="/contact?division=marketing">Marketing enquiries</Link>
               </li>
-              {showBlog ? (
-                <li>
-                  <Link href="/blog">Blog</Link>
-                </li>
-              ) : null}
             </ul>
             <p>
               <strong>Hours</strong>
