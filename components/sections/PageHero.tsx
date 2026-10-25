@@ -15,8 +15,8 @@ type Props = {
   chips?: string[];
   /** Visible breadcrumb trail above the title (the last item is the current page's parent/kind). */
   crumbs?: { label: string; href?: string }[];
-  /** Image-led variant (division landing pages): a full-width photo behind the hero, the
-      `image` becomes a floating card, and `stat` sits in a frosted strip on that card. */
+  /** Image-led variant (division landing pages): a full-width photo behind the hero. With an
+      `image` as well, that becomes a floating card, with `stat` in a frosted strip on it. */
   background?: { src: string; alt: string };
   stat?: { value: string; label: string; text?: string };
 };
@@ -26,14 +26,24 @@ export default function PageHero({ eyebrow, title, lead, tone = 'light', primary
   const immersive = !!background;
   return (
     <section
-      className={['page-hero', image ? 'page-hero--full' : '', immersive ? 'page-hero--immersive' : ''].filter(Boolean).join(' ')}
+      className={['page-hero', image || immersive ? 'page-hero--full' : '', immersive ? 'page-hero--immersive' : ''].filter(Boolean).join(' ')}
       data-tone={tone}
       aria-labelledby="page-title"
     >
       {immersive ? (
         <>
           <div className="page-hero__bg" data-parallax="0.12">
-            <CmsImage src={background!.src} alt={background!.alt} fill sizes="100vw" quality={75} preload fetchPriority="high" />
+            {/* Cropped to fill the hero's full height, so it is drawn wider than the viewport:
+                ask for a larger file than 100vw or it looks soft. */}
+            <CmsImage
+              src={background!.src}
+              alt={background!.alt}
+              fill
+              sizes="(max-width: 900px) 300vw, 135vw"
+              quality={82}
+              preload
+              fetchPriority="high"
+            />
           </div>
           <div className="page-hero__veil" aria-hidden="true" />
         </>

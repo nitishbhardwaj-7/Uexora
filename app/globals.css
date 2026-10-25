@@ -1974,6 +1974,12 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
   inset: -6% 0;
   z-index: -2;
 }
+/* Desktop: start the photo a little in from the left so its people sit clear of the copy. */
+@media (min-width: 901px) {
+  .page-hero__bg {
+    left: 22%;
+  }
+}
 .page-hero__bg img {
   object-fit: cover;
   object-position: 70% center;

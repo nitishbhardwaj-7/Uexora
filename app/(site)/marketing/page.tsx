@@ -27,9 +27,7 @@ export default async function MarketingPage() {
         tone="light"
         primary={m.hero.primary}
         secondary={m.hero.secondary}
-        image={m.hero.image}
         background={m.hero.background}
-        stat={{ value: String(m.services.length), label: m.hero.stat.label, text: m.hero.stat.text }}
         chips={m.hero.chips}
       />
 
