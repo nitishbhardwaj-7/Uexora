@@ -1,34 +1,18 @@
 import type { Metadata, Viewport } from 'next';
-import { Fraunces, Poppins, Sora } from 'next/font/google';
+import { Manrope } from 'next/font/google';
 import './globals.css';
 import { site } from '@/lib/site';
 import { getSettings } from '@/lib/cms';
 
 /*
- * Type roles (see the :root variables in globals.css):
- *   headings     --font-heading  Fraunces  (free stand-in for Black Mango)
- *   subheadings  --font-sub      Poppins
- *   body         --font-body     Sora      (free stand-in for Manifold CF)
- * To use the licensed originals later, add their .woff2 files to app/fonts/, load them
- * with next/font/local here, and point --font-heading / --font-body at their variables.
+ * One typeface, Manrope, for every role. The role variables in globals.css
+ * (--font-heading, --font-sub, --font-body) all point at it, so a role can be given
+ * its own face later with a single change.
  */
-const fraunces = Fraunces({
+const manrope = Manrope({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-fraunces',
-});
-
-const sora = Sora({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-sora',
-});
-
-const poppins = Poppins({
-  subsets: ['latin'],
-  weight: ['500', '600', '700'],
-  display: 'swap',
-  variable: '--font-poppins',
+  variable: '--font-manrope',
 });
 
 export const viewport: Viewport = {
@@ -120,7 +104,7 @@ function structuredData(s: Awaited<ReturnType<typeof getSettings>>) {
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const s = await getSettings();
   return (
-    <html lang="en" className={`${fraunces.variable} ${sora.variable} ${poppins.variable}`} suppressHydrationWarning>
+    <html lang="en" className={manrope.variable} suppressHydrationWarning>
       <head>
         {/* Lets CSS stage the hero entrances before hydration; without JavaScript everything stays visible. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />

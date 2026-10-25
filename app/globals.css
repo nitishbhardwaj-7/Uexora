@@ -3,10 +3,10 @@
    ========================================================================== */
 
 :root {
-  /* Type roles: Fraunces stands in for Black Mango, Sora for Manifold CF (see app/layout.tsx). */
-  --font-heading: var(--font-fraunces);
-  --font-sub: var(--font-poppins);
-  --font-body: var(--font-sora);
+  /* Type roles: all Manrope (see app/layout.tsx). */
+  --font-heading: var(--font-manrope);
+  --font-sub: var(--font-manrope);
+  --font-body: var(--font-manrope);
   /* brand */
   --navy-950: #040a24;
   --navy-900: #06103a;
@@ -316,7 +316,7 @@ h1,
 h2 {
   font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
 }
-/* Subheadings: h3/h4 and programme or service names take Poppins. */
+/* Subheadings: h3/h4 and programme or service names take the subheading face. */
 h3,
 h4,
 .h3,
@@ -3481,7 +3481,7 @@ a.cdirect__value:hover {
 }
 /* Narrower measure: four lines, as in the Education reference. */
 .approach--dark .approach__title {
-  max-width: 11.55ch;
+  max-width: 11.9ch;
 }
 .approach--dark .approach__photo {
   background: rgba(255, 255, 255, 0.05);
