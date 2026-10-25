@@ -32,7 +32,8 @@ function finish() {
 }
 
 /**
- * Brand opening (about 3.7 s): the "U" draws on as a gold outline, fills with blue,
+ * Brand opening (about 3.7 s), in black and white on cream so the full-colour logo in the
+ * hero is the reveal: the "U" draws on as an outline, fills,
  * the gold swoosh sweeps in, the exact artwork settles, and the overlay wipes upward
  * while the hero's own entrance begins underneath. It plays on every page load.
  *
@@ -98,14 +99,15 @@ export default function Preloader() {
           <svg viewBox={`0 0 ${MONO.w} ${MONO.h}`} className="preloader__mark" xmlns="http://www.w3.org/2000/svg" shapeRendering="geometricPrecision">
             <defs>
               <linearGradient id="pl-blue" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stopColor="#2f63ff" />
-                <stop offset="0.45" stopColor="#1333b8" />
-                <stop offset="1" stopColor="#071a7a" />
+                {/* Monochrome on cream: the coloured logo is kept for the hero the loader reveals. */}
+                <stop offset="0" stopColor="#3d3d40" />
+                <stop offset="0.45" stopColor="#1c1c1f" />
+                <stop offset="1" stopColor="#0a0a0c" />
               </linearGradient>
               <linearGradient id="pl-gold" x1="0" y1="1" x2="1" y2="0">
-                <stop offset="0" stopColor="#d99306" />
-                <stop offset="0.5" stopColor="#f6c535" />
-                <stop offset="1" stopColor="#ffe58a" />
+                <stop offset="0" stopColor="#5c5c60" />
+                <stop offset="0.5" stopColor="#85858a" />
+                <stop offset="1" stopColor="#a9a9ad" />
               </linearGradient>
               {/* The liquid wobble lives only in the masks (the water line and the sweep's edge),
                   so the U and the swoosh keep their exact outlines while they fill. */}
@@ -124,7 +126,7 @@ export default function Preloader() {
                 </circle>
               </mask>
             </defs>
-            <path className="pl-outline" d={BODY} pathLength={1} fill="none" stroke="url(#pl-gold)" strokeWidth="5" strokeLinejoin="round" />
+            <path className="pl-outline" d={BODY} pathLength={1} fill="none" stroke="#141416" strokeWidth="5" strokeLinejoin="round" />
             <path d={BODY} fill="url(#pl-blue)" mask="url(#pl-fill)" />
             <g mask="url(#pl-sweep)">
               {MONO.gold.map((d, i) => (
@@ -135,7 +137,7 @@ export default function Preloader() {
           </svg>
           <Image className="preloader__exact" src={MONO_IMG.src} width={MONO_IMG.w} height={MONO_IMG.h} alt="" sizes="240px" preload fetchPriority="high" />
         </div>
-        <Wordmark className="preloader__word" tone="light" />
+        <Wordmark className="preloader__word" tone="dark" />
         <div className="preloader__bar">
           <span />
         </div>
