@@ -39,9 +39,25 @@ export const marketingPage = defineType({
       type: 'object',
       group: 'about',
       fields: [
+        defineField({ name: 'label', title: 'Small label above the heading', type: 'string' }),
         defineField({ name: 'heading', title: 'Heading', type: 'string' }),
         paragraphs(),
         defineField({ name: 'link', title: 'Link label (to Why choose us)', type: 'string' }),
+        defineField({ name: 'image', title: 'Photo', type: 'picture', description: 'Landscape; it is cropped with a rounded right side.' }),
+        defineField({
+          name: 'panel',
+          title: 'Panel on the photo',
+          type: 'object',
+          description: 'Use statements, not numbers the business cannot verify.',
+          fields: [
+            defineField({ name: 'kicker', title: 'Small line', type: 'string' }),
+            defineField({ name: 'title', title: 'Large line', type: 'string' }),
+            defineField({ name: 'text', title: 'Caption', type: 'string' }),
+          ],
+        }),
+        defineField({ name: 'stamp', title: 'Circular stamp text', type: 'string', description: 'Short, e.g. "Strategy · Creativity · Growth".' }),
+        defineField({ name: 'rows', title: 'Process steps', type: 'array', of: [defineArrayMember({ type: 'item' })], validation: (r) => r.max(3) }),
+        defineField({ name: 'closing', title: 'Closing statement', type: 'text', rows: 2 }),
       ],
     }),
 

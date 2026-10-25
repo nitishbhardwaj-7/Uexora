@@ -1,12 +1,12 @@
 import type { Metadata } from 'next';
 import { BreadcrumbJsonLd } from '@/components/JsonLd';
 import PageHero from '@/components/sections/PageHero';
+import Approach from '@/components/sections/Approach';
 import { SplitSection, Statement, Steps, WhyChoose } from '@/components/sections/Blocks';
 import ServiceCards from '@/components/sections/ServiceCards';
 import CtaBand from '@/components/sections/CtaBand';
 import Signpost from '@/components/sections/Signpost';
 import Faq from '@/components/sections/Faq';
-import { ArrowLink } from '@/components/ui/Button';
 import { getMarketing } from '@/lib/cms';
 import { pageMetadata } from '@/lib/seo';
 
@@ -31,17 +31,17 @@ export default async function MarketingPage() {
         chips={m.hero.chips}
       />
 
-      <SplitSection
+      <Approach
         id="about"
-        eyebrow="About us"
+        label={m.about.label}
         heading={m.about.heading}
         paragraphs={m.about.paragraphs}
-        tone="light"
-        aside={
-          <div data-reveal>
-            <ArrowLink href="/marketing#why-choose-us">{m.about.link}</ArrowLink>
-          </div>
-        }
+        link={{ label: m.about.link, href: '/marketing#why-choose-us' }}
+        image={m.about.image}
+        panel={m.about.panel}
+        stamp={m.about.stamp}
+        rows={m.about.rows}
+        closing={m.about.closing}
       />
 
       <ServiceCards

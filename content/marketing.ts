@@ -142,14 +142,24 @@ export const marketing = {
 
 
   about: {
+    label: 'Our approach',
     heading: 'Helping Businesses Grow in a Digital World.',
     paragraphs: [
-      "At Uexora, we believe good marketing is about more than getting likes, views or website traffic. It's about helping businesses reach the right people, communicate their value and create opportunities for growth.",
-      'Every business has different goals. Some are just getting started and need to build their online presence. Others want to generate more enquiries, reach new customers or make better use of their existing marketing efforts.',
-      'We work with businesses to understand these goals and find practical ways to move forward through digital marketing, creative thinking and technology.',
-      'Our approach is straightforward: understand the business first, build a strategy around its needs, and focus on marketing activities that support its objectives.',
+      'At Uexora, we bring strategy, creativity and technology together to help businesses build a stronger digital presence.',
+      'Every business has a different starting point. Some need to reach new audiences. Others want to generate enquiries, communicate their value more clearly or make better use of their existing marketing efforts.',
+      'Our approach begins with understanding your business, identifying what matters most and creating a focused way forward.',
     ],
     link: 'Why choose Uexora',
+    image: { src: '/images/sections/marketing-approach.jpg', alt: 'A sunlit desk by a large window with a laptop, a monitor and a water carafe' },
+    /** Small panel on the photo. Keep it to statements, not figures the business cannot back up. */
+    panel: { kicker: 'Strategic marketing for measurable growth', title: 'Strategy first', text: 'Every plan starts from your goals' },
+    stamp: 'Strategy · Creativity · Growth',
+    rows: [
+      { title: 'Understand your goals', text: 'We take time to learn about your business, audience and challenges.' },
+      { title: 'Create a focused strategy', text: 'We develop a clear plan built around your objectives and opportunities.' },
+      { title: 'Turn ideas into results', text: 'We put the strategy into action and support your growth throughout the journey.' },
+    ],
+    closing: "The goal isn't simply to be seen. It's to make your digital presence work harder for your business.",
   },
 
   servicesHeading: 'The digital services a business needs to establish, strengthen and grow.',
