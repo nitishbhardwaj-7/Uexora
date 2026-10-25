@@ -1588,7 +1588,10 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
   right: 0;
   bottom: 0;
   width: 50%;
-  outline: 6px solid var(--cream);
+}
+/* Keep heads in frame as the photo drifts with the parallax. */
+.purpose__photo--b .purpose__photo-in img {
+  object-position: center 12%;
 }
 .purpose__photo-in {
   position: absolute;
@@ -1686,9 +1689,6 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
     left: 0.75rem;
     bottom: 0.7rem;
     font-size: 1.15rem;
-  }
-  .purpose__photo--b {
-    outline-width: 4px;
   }
 }
 
