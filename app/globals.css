@@ -3049,6 +3049,12 @@ a.cdirect__value:hover {
 .approach {
   overflow: clip;
 }
+/* Sized to sit within one screen on desktop: lighter padding, scaled to the viewport height. */
+@media (min-width: 901px) {
+  .section.approach {
+    padding-block: clamp(56px, 7vh, 96px);
+  }
+}
 .approach__grid {
   display: grid;
   grid-template-columns: minmax(0, 1.12fr) minmax(0, 1fr);
@@ -3083,13 +3089,13 @@ a.cdirect__value:hover {
    at the lower left where the stamp sits. */
 .approach__media {
   position: relative;
-  margin-top: clamp(2.6rem, 5vw, 4.4rem);
+  margin-top: clamp(2.4rem, 4vw, 3.6rem);
   margin-left: clamp(-1.5rem, -2vw, 0rem);
 }
 .approach__photo {
   position: relative;
   margin: 0;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 2 / 1;
   overflow: hidden;
   border-radius: 22px 46% 46% 22px / 22px 50% 50% 22px;
   -webkit-mask-image: radial-gradient(circle at 0 100%, transparent 0 clamp(52px, 7vw, 92px), #000 calc(clamp(52px, 7vw, 92px) + 1px));
@@ -3192,39 +3198,39 @@ a.cdirect__value:hover {
 /* Right column */
 .approach__right {
   display: grid;
-  padding-top: clamp(0.4rem, 2.2vw, 1.6rem);
+  padding-top: clamp(0.4rem, 1.4vw, 1rem);
 }
 .approach__intro {
   display: grid;
-  gap: 1.15rem;
-  max-width: 34rem;
-  padding-bottom: clamp(1.6rem, 2.6vw, 2.2rem);
+  gap: 0.9rem;
+  max-width: 36rem;
+  padding-bottom: clamp(1.2rem, 1.8vw, 1.6rem);
   border-bottom: 1px solid var(--rule);
 }
 .approach__intro p {
   color: var(--fg-muted);
-  font-size: clamp(1rem, 1.12vw, 1.08rem);
-  line-height: 1.7;
+  font-size: clamp(0.98rem, 1.05vw, 1.04rem);
+  line-height: 1.62;
   text-wrap: pretty;
 }
 .approach__intro .approach__lead {
   color: var(--fg);
-  font-size: clamp(1.12rem, 1.4vw, 1.3rem);
+  font-size: clamp(1.1rem, 1.3vw, 1.22rem);
   font-weight: 600;
   line-height: 1.45;
   letter-spacing: -0.01em;
 }
 .approach__rows {
   list-style: none;
-  max-width: 34rem;
+  max-width: 36rem;
   border-bottom: 1px solid var(--rule);
 }
 .approach__row {
   display: grid;
   grid-template-columns: 3rem minmax(0, 1fr);
-  gap: 1.15rem;
+  gap: 1.1rem;
   align-items: start;
-  padding-block: clamp(1.1rem, 1.8vw, 1.45rem);
+  padding-block: clamp(0.85rem, 1.2vw, 1.05rem);
 }
 .approach__row + .approach__row {
   border-top: 1px solid color-mix(in srgb, var(--rule) 60%, transparent);
@@ -3232,8 +3238,8 @@ a.cdirect__value:hover {
 .approach__icon {
   display: grid;
   place-items: center;
-  width: 3rem;
-  height: 3rem;
+  width: 2.75rem;
+  height: 2.75rem;
   border-radius: 50%;
   background: color-mix(in srgb, var(--blue-700) 7%, transparent);
   color: var(--blue-700);
@@ -3259,13 +3265,13 @@ a.cdirect__value:hover {
   color: var(--fg);
 }
 .approach__row-text {
-  margin-top: 0.3rem;
-  font-size: 0.95rem;
-  line-height: 1.6;
+  margin-top: 0.2rem;
+  font-size: 0.93rem;
+  line-height: 1.5;
   color: var(--fg-muted);
 }
 .approach__closing {
-  margin: clamp(1.8rem, 3vw, 2.4rem) 0 0;
+  margin: clamp(1.3rem, 2vw, 1.7rem) 0 0;
   max-width: 30rem;
   padding: 0.15rem 0 0.15rem 1.4rem;
   border-left: 3px solid var(--gold-500);
@@ -3336,6 +3342,12 @@ a.cdirect__value:hover {
 }
 .approach--dark .approach__photo {
   background: rgba(255, 255, 255, 0.05);
+}
+/* Its headline runs to four lines, so the photo is a little wider on desktop to keep the section within one screen. */
+@media (min-width: 901px) {
+  .approach--dark .approach__photo {
+    aspect-ratio: 2.4 / 1;
+  }
 }
 .approach--dark .approach__icon {
   background: color-mix(in srgb, #fff 8%, transparent);
