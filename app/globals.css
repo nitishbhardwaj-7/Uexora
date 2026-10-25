@@ -3,11 +3,10 @@
    ========================================================================== */
 
 :root {
-  /* Type roles. Black Mango (headings) and Manifold (body) need licensed web font files;
-     until they are added (see app/layout.tsx), both roles use Manrope. */
-  --font-heading: var(--font-manrope);
+  /* Type roles: Fraunces stands in for Black Mango, Sora for Manifold CF (see app/layout.tsx). */
+  --font-heading: var(--font-fraunces);
   --font-sub: var(--font-poppins);
-  --font-body: var(--font-manrope);
+  --font-body: var(--font-sora);
   /* brand */
   --navy-950: #040a24;
   --navy-900: #06103a;
@@ -3482,7 +3481,7 @@ a.cdirect__value:hover {
 }
 /* Narrower measure: four lines, as in the Education reference. */
 .approach--dark .approach__title {
-  max-width: 11.9ch;
+  max-width: 11.55ch;
 }
 .approach--dark .approach__photo {
   background: rgba(255, 255, 255, 0.05);

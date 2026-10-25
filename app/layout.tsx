@@ -1,21 +1,27 @@
 import type { Metadata, Viewport } from 'next';
-import { Manrope, Poppins } from 'next/font/google';
+import { Fraunces, Poppins, Sora } from 'next/font/google';
 import './globals.css';
 import { site } from '@/lib/site';
 import { getSettings } from '@/lib/cms';
 
 /*
  * Type roles (see the :root variables in globals.css):
- *   headings     --font-heading  Black Mango once its licensed web files are added; Manrope until then
+ *   headings     --font-heading  Fraunces  (free stand-in for Black Mango)
  *   subheadings  --font-sub      Poppins
- *   body         --font-body     Manifold once its licensed web files are added; Manrope until then
- * To switch, put the .woff2 files in app/fonts/, load them with next/font/local here, and point
- * --font-heading / --font-body at their variables.
+ *   body         --font-body     Sora      (free stand-in for Manifold CF)
+ * To use the licensed originals later, add their .woff2 files to app/fonts/, load them
+ * with next/font/local here, and point --font-heading / --font-body at their variables.
  */
-const manrope = Manrope({
+const fraunces = Fraunces({
   subsets: ['latin'],
   display: 'swap',
-  variable: '--font-manrope',
+  variable: '--font-fraunces',
+});
+
+const sora = Sora({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-sora',
 });
 
 const poppins = Poppins({
@@ -114,7 +120,7 @@ function structuredData(s: Awaited<ReturnType<typeof getSettings>>) {
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const s = await getSettings();
   return (
-    <html lang="en" className={`${manrope.variable} ${poppins.variable}`} suppressHydrationWarning>
+    <html lang="en" className={`${fraunces.variable} ${sora.variable} ${poppins.variable}`} suppressHydrationWarning>
       <head>
         {/* Lets CSS stage the hero entrances before hydration; without JavaScript everything stays visible. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
