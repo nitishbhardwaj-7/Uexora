@@ -37,8 +37,6 @@ export default async function MarketingPage() {
         paragraphs={m.about.paragraphs}
         link={{ label: m.about.link, href: '/marketing#why-choose-us' }}
         image={m.about.image}
-        panel={m.about.panel}
-        stamp={m.about.stamp}
         rows={m.about.rows}
         closing={m.about.closing}
       />

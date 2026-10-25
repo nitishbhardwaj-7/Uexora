@@ -150,9 +150,6 @@ export const marketing = {
     ],
     link: 'Why choose Uexora',
     image: { src: '/images/sections/marketing-approach.jpg', alt: 'A sunlit desk by a large window with a laptop, a monitor and a water carafe' },
-    /** Small panel on the photo. Keep it to statements, not figures the business cannot back up. */
-    panel: { kicker: 'Strategic marketing for measurable growth', title: 'Strategy first', text: 'Every plan starts from your goals' },
-    stamp: 'Strategy · Creativity · Growth',
     rows: [
       { title: 'Understand your goals', text: 'We take time to learn about your business, audience and challenges.' },
       { title: 'Create a focused strategy', text: 'We develop a clear plan built around your objectives and opportunities.' },

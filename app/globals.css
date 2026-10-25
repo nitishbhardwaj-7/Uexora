@@ -3099,9 +3099,12 @@ a.cdirect__value:hover {
   aspect-ratio: 2 / 1;
   overflow: hidden;
   border-radius: 22px 46% 46% 22px / 22px 50% 50% 22px;
+  background: rgba(10, 16, 48, 0.06);
+}
+/* A circular notch at the lower left, only when a stamp sits there. */
+.approach__photo--notch {
   -webkit-mask-image: radial-gradient(circle at 0 100%, transparent 0 clamp(52px, 7vw, 92px), #000 calc(clamp(52px, 7vw, 92px) + 1px));
   mask-image: radial-gradient(circle at 0 100%, transparent 0 clamp(52px, 7vw, 92px), #000 calc(clamp(52px, 7vw, 92px) + 1px));
-  background: rgba(10, 16, 48, 0.06);
 }
 .approach__photo img {
   object-fit: cover;

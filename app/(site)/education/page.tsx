@@ -39,6 +39,7 @@ export default async function EducationPage() {
         link={{ label: e.about.link, href: '/education#why-choose-us' }}
         image={e.about.image}
         pill={e.about.pill}
+        dot
         rows={e.about.rows}
         icons={['book', 'bulb', 'people']}
         closing={e.about.closing}

@@ -12,6 +12,8 @@ type Props = {
   stamp?: string;
   /** A light outlined label near the photo's upper right, used instead of the panel. */
   pill?: string;
+  /** Small gold dot where the curve ends. */
+  dot?: boolean;
   rows?: Row[];
   /** Icons for the rows, in order. */
   icons?: IconName[];
@@ -60,7 +62,7 @@ const ICONS: Record<IconName, React.ReactNode> = {
  * right, the introduction, three process steps and a closing statement.
  * Motion uses the site's reveal attributes (staged before paint, skipped under reduced motion).
  */
-export default function Approach({ id, heading, paragraphs, link, image, panel, stamp, pill, rows = [], icons = ['chart', 'bulb', 'people'], closing, tone = 'light' }: Props) {
+export default function Approach({ id, heading, paragraphs, link, image, panel, stamp, pill, dot = false, rows = [], icons = ['chart', 'bulb', 'people'], closing, tone = 'light' }: Props) {
   const [lead, ...rest] = paragraphs;
   const stampId = `${id}-stamp-circle`;
   return (
@@ -78,7 +80,7 @@ export default function Approach({ id, heading, paragraphs, link, image, panel, 
 
           {image ? (
             <div className="approach__media">
-              <figure className="approach__photo" data-reveal="mask">
+              <figure className={['approach__photo', stamp ? 'approach__photo--notch' : ''].filter(Boolean).join(' ')} data-reveal="mask">
                 <CmsImage src={image.src} alt={image.alt} fill sizes="(max-width: 900px) 92vw, 46vw" quality={82} />
               </figure>
 
@@ -86,7 +88,7 @@ export default function Approach({ id, heading, paragraphs, link, image, panel, 
               <svg className="approach__curve" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true" data-draw-scroll>
                 <path d="M86 6 C 104 14, 104 44, 88 56 S 52 66, 30 63" vectorEffect="non-scaling-stroke" />
               </svg>
-              <span className="approach__dot" aria-hidden="true" data-reveal data-reveal-delay="0.5" />
+              {dot ? <span className="approach__dot" aria-hidden="true" data-reveal data-reveal-delay="0.5" /> : null}
 
               {pill ? (
                 <p className="approach__pill" data-reveal data-reveal-delay="0.35">
