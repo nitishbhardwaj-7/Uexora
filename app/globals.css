@@ -1353,6 +1353,14 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
   }
 }
 
+/* Letters of the writing effect keep words intact on one line. */
+.type-word {
+  white-space: nowrap;
+}
+.type-char {
+  will-change: opacity, filter, transform;
+}
+
 /* --------------------------------------------------------------------------
    Home — divisions
    -------------------------------------------------------------------------- */
@@ -4830,6 +4838,10 @@ a.cdirect__value:hover {
     opacity: 1;
     translate: none;
     clip-path: inset(0 0 100% 0);
+  }
+  /* Writing effect: hidden until its letters are split and staged. */
+  html.js [data-type]:not(.is-typed) {
+    opacity: 0;
   }
   html.js [data-reveal='wipe']:not(.is-in) {
     opacity: 1;

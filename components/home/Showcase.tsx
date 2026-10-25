@@ -13,7 +13,7 @@ export default function Showcase({ content }: { content: HomeContent['showcase']
       </div>
       <div className="showcase__overlay" aria-hidden="true" />
       <div className="container showcase__inner">
-        <p className="showcase__statement" data-reveal>
+        <p className="showcase__statement" data-type>
           {content.statement} <span className="gold">{content.highlight}</span>
         </p>
       </div>

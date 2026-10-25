@@ -20,6 +20,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
  *  data-draw-scroll       SVG strokes draw in step with scroll progress
  *  data-parallax="0.15"   restrained vertical parallax (halved on small screens)
  *  data-draw              SVG glyphs fade in one by one
+ *  data-type              text writes itself letter by letter, each letter sharpening from a blur
  *  data-tone="dark|light" section tone; the header adopts the tone of the section under it
  *
  * Nothing is hidden before this runs: elements already on screen are marked visible first,
@@ -182,8 +183,34 @@ export default function ScrollEffects() {
         });
         ScrollTrigger.refresh();
       };
-      if (document.fonts?.ready) document.fonts.ready.then(armSplits);
-      else armSplits();
+      // Writing effect: letters fade in from a soft blur in reading order once the text is in view.
+      const typeEls = gsap.utils.toArray<HTMLElement>('[data-type]');
+      const armType = () => {
+        typeEls.forEach((el) => {
+          let split: SplitText;
+          try {
+            split = new SplitText(el, { type: 'words,chars', wordsClass: 'type-word', charsClass: 'type-char', aria: 'auto' });
+          } catch {
+            el.classList.add('is-typed');
+            return;
+          }
+          gsap.set(split.chars, { opacity: 0, filter: 'blur(10px)', yPercent: 25 });
+          el.classList.add('is-typed');
+          ScrollTrigger.create({
+            trigger: el,
+            start: 'top 82%',
+            once: true,
+            onEnter: () =>
+              gsap.to(split.chars, { opacity: 1, filter: 'blur(0px)', yPercent: 0, duration: 0.75, ease: 'power2.out', stagger: 0.022, clearProps: 'filter' }),
+          });
+        });
+      };
+      const arm = () => {
+        armSplits();
+        armType();
+      };
+      if (document.fonts?.ready) document.fonts.ready.then(arm);
+      else arm();
     });
 
     const refresh = () => ScrollTrigger.refresh();
