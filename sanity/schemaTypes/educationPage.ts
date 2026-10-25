@@ -26,7 +26,18 @@ export const educationPage = defineType({
       group: 'hero',
       fields: [
         strings('chips', 'Keywords'),
-        defineField({ name: 'image', title: 'Photo', type: 'picture' }),
+        defineField({ name: 'image', title: 'Card photo', type: 'picture', description: 'The floating photo card on the right of the hero.' }),
+        defineField({ name: 'background', title: 'Background photo', type: 'picture', description: 'Full-width photo behind the hero; people work best, with the subject towards the right.' }),
+        defineField({
+          name: 'stat',
+          title: 'Card fact strip',
+          type: 'object',
+          description: 'The number is counted automatically from the list of programmes or services.',
+          fields: [
+            defineField({ name: 'label', title: 'Word after the number', type: 'string' }),
+            defineField({ name: 'text', title: 'Short line', type: 'string' }),
+          ],
+        }),
         defineField({ name: 'primary', title: 'Primary button', type: 'link' }),
         defineField({ name: 'secondary', title: 'Secondary button', type: 'link' }),
       ],

@@ -28,6 +28,8 @@ export default async function EducationPage() {
         primary={e.hero.primary}
         secondary={e.hero.secondary}
         image={e.hero.image}
+        background={e.hero.background}
+        stat={{ value: String(e.programmes.length), label: e.hero.stat.label, text: e.hero.stat.text }}
         chips={e.hero.chips}
       />
 

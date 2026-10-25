@@ -1964,6 +1964,128 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
   }
 }
 
+/* Image-led hero (division landing pages): a people photo across the whole hero, a veil
+   in the page colour behind the copy, and the second photo as a floating card. */
+.page-hero--immersive {
+  isolation: isolate;
+}
+.page-hero__bg {
+  position: absolute;
+  inset: -6% 0;
+  z-index: -2;
+}
+.page-hero__bg img {
+  object-fit: cover;
+  object-position: 70% center;
+  animation: hero-bg-settle 2.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes hero-bg-settle {
+  from {
+    scale: 1.12;
+    opacity: 0.4;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+.page-hero__veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(
+      90deg,
+      var(--bg) 0%,
+      color-mix(in srgb, var(--bg) 96%, transparent) 36%,
+      color-mix(in srgb, var(--bg) 72%, transparent) 54%,
+      color-mix(in srgb, var(--bg) 18%, transparent) 76%,
+      transparent 100%
+    ),
+    linear-gradient(to top, var(--bg) 0%, transparent 22%);
+}
+.page-hero--immersive .page-hero__grid {
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+}
+.page-hero--immersive .page-hero__media {
+  justify-self: end;
+  width: min(100%, 440px);
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 40px 80px -40px rgba(6, 16, 58, 0.6);
+  outline: 8px solid color-mix(in srgb, #fff 18%, transparent);
+  outline-offset: 0;
+  translate: 0 4vh;
+}
+.page-hero--immersive .page-hero__media .monogram {
+  top: 6%;
+  bottom: auto;
+  width: 18%;
+}
+/* Facts strip on the card: only figures the site can stand behind (the programme count). */
+.page-hero__stat {
+  position: absolute;
+  left: 5%;
+  right: 5%;
+  bottom: 5%;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  column-gap: 0.9rem;
+  row-gap: 0.15rem;
+  padding: 0.9rem 1.1rem;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(14px) saturate(150%);
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  color: var(--navy-900);
+  box-shadow: 0 16px 30px -18px rgba(6, 16, 58, 0.45);
+}
+.page-hero__stat strong {
+  grid-row: span 2;
+  font-size: clamp(2rem, 3vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  color: var(--blue-700);
+}
+.page-hero__stat-label {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.page-hero__stat-text {
+  font-size: 0.82rem;
+  line-height: 1.35;
+  color: var(--ink-700);
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-hero__bg img {
+    animation: none;
+  }
+}
+@media (max-width: 900px) {
+  .page-hero__veil {
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--bg) 70%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 86%, transparent) 45%,
+      var(--bg) 85%
+    );
+  }
+  .page-hero--immersive .page-hero__grid {
+    grid-template-columns: 1fr;
+  }
+  .page-hero--immersive .page-hero__media {
+    justify-self: start;
+    width: min(100%, 420px);
+    aspect-ratio: 4 / 3;
+    translate: none;
+  }
+  .page-hero--immersive .page-hero__media .monogram {
+    display: none;
+  }
+}
+
 .chip {
   display: inline-flex;
   align-items: center;

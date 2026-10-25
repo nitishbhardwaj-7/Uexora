@@ -154,7 +154,9 @@ export const education = {
     'From academic success and future-ready skills to confidence, communication and personal growth, we bring more opportunities to learn and develop. Because, U matter.',
   hero: {
     chips: ['School tuition', 'JEE & NEET', 'IELTS · PTE · TOEFL', 'AI & robotics', 'Public speaking'],
-    image: { src: '/images/uexora-education-card.jpg', alt: 'A robotics arm on a desk beside books and a laptop in a bright classroom' },
+    image: { src: '/images/heroes/education-hero-card.jpg', alt: 'A tutor and a smiling student working through a task on a laptop in a library' },
+    background: { src: '/images/heroes/education-hero-bg.jpg', alt: 'Two students studying together at a table in a bright classroom' },
+    stat: { label: 'programmes', text: 'From school support to career-ready skills' },
     primary: { label: 'Explore the programmes', href: '/education#programmes' },
     secondary: { label: 'Speak with our education team', href: '/contact?division=education' },
   },

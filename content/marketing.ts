@@ -135,7 +135,9 @@ export const marketing = {
     "Great brands don't just show up. They stand out, connect, and grow. We bring strategy, creativity, design, and digital expertise together to help businesses build a stronger presence and turn attention into meaningful growth.",
   hero: {
     chips: ['Strategy', 'SEO', 'Paid ads', 'Social', 'Web', 'AI'],
-    image: { src: '/images/uexora-marketing-card.jpg', alt: 'A laptop showing a marketing dashboard in a city office at sunset' },
+    image: { src: '/images/heroes/marketing-hero-card.jpg', alt: 'A smiling small business owner at her packing table with parcels and a clothing rail' },
+    background: { src: '/images/heroes/marketing-hero-bg.jpg', alt: 'A creative team reviewing colour swatches together around laptops' },
+    stat: { label: 'services', text: 'From strategy and SEO to AI-powered marketing' },
     primary: { label: 'Explore our approach', href: '/marketing#how-we-work' },
     secondary: { label: 'Discuss your requirements', href: '/contact?division=marketing' },
   },
