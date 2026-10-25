@@ -33,7 +33,6 @@ export default async function MarketingPage() {
 
       <Approach
         id="about"
-        label={m.about.label}
         heading={m.about.heading}
         paragraphs={m.about.paragraphs}
         link={{ label: m.about.link, href: '/marketing#why-choose-us' }}

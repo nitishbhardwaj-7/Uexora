@@ -39,7 +39,6 @@ export const marketingPage = defineType({
       type: 'object',
       group: 'about',
       fields: [
-        defineField({ name: 'label', title: 'Small label above the heading', type: 'string' }),
         defineField({ name: 'heading', title: 'Heading', type: 'string' }),
         paragraphs(),
         defineField({ name: 'link', title: 'Link label (to Why choose us)', type: 'string' }),

@@ -4,7 +4,6 @@ import { ArrowLink } from '@/components/ui/Button';
 type Row = { title: string; text: string };
 type Props = {
   id: string;
-  label?: string;
   heading: string;
   paragraphs: string[];
   link?: { label: string; href: string };
@@ -41,23 +40,18 @@ const icons = [
 ];
 
 /**
- * Editorial "our approach" section: label, headline and link over a large photo with a
+ * Editorial "our approach" section: headline and link over a large photo with a
  * rounded right side, a small statement panel, a stamp and a thin gold curve; on the
  * right, the introduction, three process steps and a closing statement.
  * Motion uses the site's reveal attributes (staged before paint, skipped under reduced motion).
  */
-export default function Approach({ id, label, heading, paragraphs, link, image, panel, stamp, rows = [], closing, tone = 'light' }: Props) {
+export default function Approach({ id, heading, paragraphs, link, image, panel, stamp, rows = [], closing, tone = 'light' }: Props) {
   const [lead, ...rest] = paragraphs;
   const stampId = `${id}-stamp-circle`;
   return (
     <section id={id} className="section approach" data-tone={tone} aria-labelledby={`${id}-title`}>
       <div className="container approach__grid">
         <div className="approach__left">
-          {label ? (
-            <p className="approach__label" data-reveal>
-              {label}
-            </p>
-          ) : null}
           <h2 id={`${id}-title`} className="approach__title" data-split data-split-delay="0.1">
             {heading}
           </h2>

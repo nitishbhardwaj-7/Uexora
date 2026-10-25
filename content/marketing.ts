@@ -142,7 +142,6 @@ export const marketing = {
 
 
   about: {
-    label: 'Our approach',
     heading: 'Helping Businesses Grow in a Digital World.',
     paragraphs: [
       'At Uexora, we bring strategy, creativity and technology together to help businesses build a stronger digital presence.',
