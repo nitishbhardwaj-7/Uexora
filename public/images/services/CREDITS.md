@@ -7,7 +7,6 @@ Re-encoded to JPEG, max 1600 px, by scripts in the project history. Replace any 
 | --- | --- |
 | `communication-public-speaking-and-confidence-building.jpg` | https://unsplash.com/photos/u6RJY5F3yM8 |
 | `special-needs-students-programme.jpg` | https://unsplash.com/photos/qubcvHi6DBk |
-| `ai-powered-marketing-solutions.jpg` | https://unsplash.com/photos/_HnJfS6WhA8 |
 
 Added later from Pexels, under the Pexels License:
 
@@ -24,3 +23,4 @@ Added later from Pexels, under the Pexels License:
 | `paid-advertising-ad-spend.jpg` | https://www.pexels.com/photo/6476805/ | Mikael Blomkvist |
 | `social-media-marketing-desk.jpg` | https://www.pexels.com/photo/15555796/ | Walls.io |
 | `website-design-responsive.jpg` | https://www.pexels.com/photo/40057911/ | Wolf Art |
+| `ai-powered-marketing-laptop.jpg` | https://www.pexels.com/photo/3584998/ | cottonbro studio |

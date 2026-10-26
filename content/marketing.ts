@@ -111,7 +111,7 @@ const services: Service[] = [
     slug: 'ai-powered-marketing-solutions',
     promise: 'Practical uses of artificial intelligence that save time and help your marketing work smarter.',
     seo: { description: 'AI-powered marketing solutions: practical uses of artificial intelligence to support marketing, improve efficiency and help your business work smarter.' },
-    image: { src: '/images/services/ai-powered-marketing-solutions.jpg', alt: 'Abstract blue and pink 3D cubes representing artificial intelligence' },
+    image: { src: '/images/services/ai-powered-marketing-laptop.jpg', alt: 'A person working on a laptop browsing a grid of visual content' },
     heroImage: { src: '/images/heroes/services/ai-powered-marketing-solutions.jpg', alt: 'Two people working with transparent digital screens in violet light' },
     highlights: ['Practical uses of AI', 'Improved efficiency', 'Working smarter', 'Solutions fitted to the problem'],
     whoFor: 'Businesses exploring how artificial intelligence could support their marketing and help them work smarter.',
