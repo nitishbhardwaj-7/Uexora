@@ -7,10 +7,6 @@ Re-encoded to JPEG, max 1600 px, by scripts in the project history. Replace any 
 | --- | --- |
 | `communication-public-speaking-and-confidence-building.jpg` | https://unsplash.com/photos/u6RJY5F3yM8 |
 | `special-needs-students-programme.jpg` | https://unsplash.com/photos/qubcvHi6DBk |
-| `search-engine-optimisation.jpg` | https://unsplash.com/photos/JKUTrJ4vK00 |
-| `paid-advertising-and-lead-generation.jpg` | https://unsplash.com/photos/yqaskj8lQBE |
-| `social-media-marketing.jpg` | https://unsplash.com/photos/Jrz9YXN1Vwc |
-| `website-design-and-development.jpg` | https://unsplash.com/photos/FvpVY7TpwNY |
 | `ai-powered-marketing-solutions.jpg` | https://unsplash.com/photos/_HnJfS6WhA8 |
 
 Added later from Pexels, under the Pexels License:
@@ -24,3 +20,7 @@ Added later from Pexels, under the Pexels License:
 | `overseas-english-grammar.jpg` | https://www.pexels.com/photo/5676740/ | Ivan S |
 | `ai-coding-pair-programming.jpg` | https://www.pexels.com/photo/12899191/ | Mizuno K |
 | `digital-marketing-strategy-team.jpg` | https://www.pexels.com/photo/6476260/ | Mikael Blomkvist |
+| `search-engine-optimisation-charts.jpg` | https://www.pexels.com/photo/669615/ | Lukas Blazek |
+| `paid-advertising-ad-spend.jpg` | https://www.pexels.com/photo/6476805/ | Mikael Blomkvist |
+| `social-media-marketing-desk.jpg` | https://www.pexels.com/photo/15555796/ | Walls.io |
+| `website-design-responsive.jpg` | https://www.pexels.com/photo/40057911/ | Wolf Art |
