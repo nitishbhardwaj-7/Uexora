@@ -5458,12 +5458,22 @@ a.cdirect__value:hover {
   position: relative;
   height: clamp(270px, 26vw, 360px);
 }
-.pcta__stack::before {
-  content: '';
+.pcta__ring {
   position: absolute;
-  inset: 2% 12%;
-  border: 1px solid color-mix(in srgb, var(--gold-500) 60%, transparent);
-  border-radius: 50%;
+  left: 12%;
+  top: 2%;
+  width: 76%;
+  height: 96%;
+  overflow: visible;
+  transition: scale 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pcta__ring ellipse {
+  fill: none;
+  stroke: color-mix(in srgb, var(--gold-500) 60%, transparent);
+  stroke-width: 1;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1.6s cubic-bezier(0.65, 0, 0.35, 1) 0.15s;
 }
 .pcta__photo {
   position: absolute;
@@ -5474,6 +5484,11 @@ a.cdirect__value:hover {
   overflow: hidden;
   background: var(--navy-900);
   box-shadow: 0 30px 60px -28px rgba(6, 16, 58, 0.55);
+  transition:
+    translate 1.25s cubic-bezier(0.16, 1, 0.3, 1),
+    rotate 1.25s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.6s ease-out,
+    box-shadow 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .pcta__photo img {
   object-fit: cover;
@@ -5496,6 +5511,59 @@ a.cdirect__value:hover {
   z-index: 2;
   translate: 0 -42%;
   rotate: 8deg;
+}
+@media (prefers-reduced-motion: no-preference) {
+  /* Entrance: everything starts gathered behind the centre photo, low and unrotated; the
+     centre photo rises first, then the side photos slide out into the fan while the ring
+     draws round them. Staged only when JavaScript runs, so nothing is hidden without it. */
+  html.js .pcta__stack:not(.is-in) .pcta__photo {
+    opacity: 0;
+    rotate: 0deg;
+  }
+  html.js .pcta__stack:not(.is-in) .pcta__photo--1 {
+    translate: 60% -28%;
+  }
+  html.js .pcta__stack:not(.is-in) .pcta__photo--2 {
+    translate: 0 -34%;
+  }
+  html.js .pcta__stack:not(.is-in) .pcta__photo--3 {
+    translate: -70% -26%;
+  }
+  html.js .pcta__stack:not(.is-in) .pcta__ring ellipse {
+    stroke-dashoffset: 1;
+  }
+  .pcta__stack.is-in:not(.is-done) .pcta__photo--1,
+  .pcta__stack.is-in:not(.is-done) .pcta__photo--3 {
+    transition-delay: 0.32s;
+  }
+
+  /* Hover (pointer devices, once the entrance has played): the fan opens wider and the
+     centre photo lifts; the photos themselves never zoom. */
+  @media (hover: hover) and (pointer: fine) {
+    .pcta__stack.is-done:hover .pcta__photo--1 {
+      translate: -16% -46%;
+      rotate: -12deg;
+    }
+    .pcta__stack.is-done:hover .pcta__photo--2 {
+      translate: 0 -61%;
+      rotate: 0deg;
+      box-shadow: 0 44px 80px -30px rgba(6, 16, 58, 0.6);
+    }
+    .pcta__stack.is-done:hover .pcta__photo--3 {
+      translate: 16% -40%;
+      rotate: 13deg;
+    }
+    .pcta__stack.is-done:hover .pcta__ring {
+      scale: 1.06;
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pcta__photo,
+  .pcta__ring,
+  .pcta__ring ellipse {
+    transition: none;
+  }
 }
 @media (max-width: 900px) {
   .pcta {

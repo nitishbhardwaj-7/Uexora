@@ -1,5 +1,6 @@
 import Button from '@/components/ui/Button';
 import CmsImage from '@/components/ui/CmsImage';
+import FanStack from '@/components/sections/FanStack';
 import Highlight from '@/components/ui/Highlight';
 import ServiceIndexList from '@/components/sections/ServiceIndexList';
 import type { Service } from '@/content/types';
@@ -80,13 +81,13 @@ export default function ServiceCards({ id, division, heading, highlight, intro, 
               </div>
             </div>
             {photos.length ? (
-              <div className="pcta__stack" aria-hidden="true">
+              <FanStack>
                 {photos.map((p, i) => (
                   <span key={p.src} className={`pcta__photo pcta__photo--${i + 1}`}>
                     <CmsImage src={p.src} alt="" fill sizes="(max-width: 900px) 45vw, 260px" quality={75} />
                   </span>
                 ))}
-              </div>
+              </FanStack>
             ) : null}
           </div>
         ) : null}
