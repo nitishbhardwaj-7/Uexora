@@ -1473,6 +1473,48 @@ h4,
 .division-panel__photo {
   object-fit: cover;
 }
+/* Rotating photos: the incoming one wipes in from the right over the previous one and
+   settles from a slight zoom (a change of photo, not a hover effect). */
+.panel-slides,
+.panel-slides__slide {
+  position: absolute;
+  inset: 0;
+}
+.panel-slides__slide {
+  opacity: 0;
+}
+.panel-slides__slide.is-prev {
+  opacity: 1;
+  z-index: 1;
+}
+.panel-slides__slide.is-active {
+  opacity: 1;
+  z-index: 2;
+}
+.panel-slides__slide.is-entering {
+  animation: panel-wipe 1.15s cubic-bezier(0.76, 0, 0.24, 1) both;
+}
+/* As specific as the mask reveal's image rule (which otherwise keeps its own animation). */
+.panel-slides__slide.is-entering img,
+html.reveal-ready [data-reveal='mask'].is-in .panel-slides__slide.is-entering img {
+  animation: panel-settle 1.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes panel-wipe {
+  from {
+    clip-path: inset(0 0 0 100%);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes panel-settle {
+  from {
+    scale: 1.1;
+  }
+  to {
+    scale: 1;
+  }
+}
 .division-panel__media::after {
   content: '';
   position: absolute;
