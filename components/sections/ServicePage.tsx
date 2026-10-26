@@ -67,7 +67,7 @@ export default function ServicePage({ division, service: s, all, statement, cta 
         tone={heroTone}
         primary={{ label: enquire, href: contact }}
         secondary={{ label: `All ${meta.units}`, href: meta.listAnchor }}
-        image={s.image}
+        background={s.heroImage || s.image}
         chips={s.highlights}
         crumbs={[{ label: meta.name, href: meta.path }, { label: unitCap }]}
       />

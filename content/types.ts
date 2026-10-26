@@ -15,7 +15,9 @@ export type Service = {
   details: string[];
   /** Questions and answers shown on the detail page; also emitted as FAQPage structured data. */
   faqs?: { q: string; a: string }[];
-  /** Optional photo for the card and the detail page hero. */
+  /** Optional photo for the card in the index and the footer rows. */
   image?: { src: string; alt: string };
+  /** Wide photo behind the detail page hero (landscape, around 3000 px); falls back to `image`. */
+  heroImage?: { src: string; alt: string };
   seo?: { title?: string; description?: string };
 };

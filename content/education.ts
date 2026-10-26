@@ -12,6 +12,7 @@ const programmes: Service[] = [
     promise: 'Understand your subjects rather than memorise them, with support shaped around how you learn.',
     seo: { description: 'Academic support and school tuition from Uexora Education: help understanding subjects, working through difficult concepts and building confidence in studies.' },
     image: { src: '/images/services/academic-support-and-school-tuition.jpg', alt: 'A student studying at a desk with open books' },
+    heroImage: { src: '/images/heroes/services/academic-support-and-school-tuition.jpg', alt: 'A tutor helping a teenage student with her homework at a desk' },
     highlights: ['Subject understanding', 'Working through difficult concepts', 'Confidence in studies', 'Guidance that fits each student'],
     whoFor: 'School students who want extra guidance with their subjects, from everyday schoolwork to the concepts they find hardest.',
     details: [
@@ -31,6 +32,7 @@ const programmes: Service[] = [
     promise: 'Prepare for JEE and NEET with focused learning, concept building and regular practice.',
     seo: { description: 'JEE and NEET preparation with Uexora Education: focused learning, concept building and regular practice for students preparing for competitive exams.' },
     image: { src: '/images/services/competitive-exam-preparation.jpg', alt: 'A student writing notes in a notebook with coloured pens' },
+    heroImage: { src: '/images/heroes/services/competitive-exam-preparation.jpg', alt: 'A smiling student studying with books and a laptop in a library' },
     highlights: ['JEE and NEET', 'Focused learning', 'Concept building', 'Regular practice'],
     whoFor: 'Students preparing for competitive examinations such as JEE and NEET who want a clear, structured approach to the subjects involved.',
     details: [
@@ -50,6 +52,7 @@ const programmes: Service[] = [
     promise: 'Prepare for IELTS, PTE or TOEFL, and get clear first guidance on studying abroad.',
     seo: { description: 'IELTS, PTE and TOEFL preparation and initial overseas education counselling to help students explore university options and study abroad with clarity.' },
     image: { src: '/images/services/english-language-and-overseas-education.jpg', alt: 'A globe on a desk in a study' },
+    heroImage: { src: '/images/heroes/services/english-language-and-overseas-education.jpg', alt: 'Three students resting on stacks of language dictionaries in a library' },
     highlights: ['IELTS, PTE and TOEFL preparation', 'Overseas education counselling', 'Exploring university options', 'The steps to study internationally'],
     whoFor: 'Students planning to study abroad or improve their English language proficiency, and families exploring university options overseas.',
     details: [
@@ -69,6 +72,7 @@ const programmes: Service[] = [
     promise: 'Explore AI, coding and robotics by building, testing and improving real projects.',
     seo: { description: 'AI, coding and robotics programmes for students: explore new concepts, experiment with ideas and build problem-solving skills through practical activities.' },
     image: { src: '/images/services/ai-coding-and-robotics.jpg', alt: 'A small robot car built from a kit, with wheels and wires' },
+    heroImage: { src: '/images/heroes/services/ai-coding-and-robotics.jpg', alt: 'Students building robots together while their teacher looks on' },
     highlights: ['Artificial intelligence', 'Coding', 'Robotics', 'Hands-on problem solving'],
     whoFor: 'Learners from an early age who want to understand the technology shaping almost every field, through practical activities rather than theory alone.',
     details: [
@@ -88,6 +92,7 @@ const programmes: Service[] = [
     promise: 'Learn to share your ideas clearly and speak with confidence, in the classroom and beyond.',
     seo: { description: 'Communication, public speaking and confidence programme: learn to share ideas, speak in front of others and present yourself clearly and confidently.' },
     image: { src: '/images/services/communication-public-speaking-and-confidence.jpg', alt: 'A woman speaking into a microphone on a stage' },
+    heroImage: { src: '/images/heroes/services/communication-public-speaking-and-confidence.jpg', alt: 'A schoolboy presenting his drawings to his classmates' },
     highlights: ['Public speaking', 'Clear communication', 'Presenting with confidence', 'Interview readiness'],
     whoFor: 'Learners who know their subject but want to share their ideas, speak in front of others and present themselves with more confidence.',
     details: [
@@ -107,6 +112,7 @@ const programmes: Service[] = [
     promise: 'Build the practical skills, critical thinking and confidence that reach beyond academic subjects.',
     seo: { description: 'Practical skills and personal development: life skills, critical thinking, communication and the confidence to apply learning beyond the classroom.' },
     image: { src: '/images/services/practical-skills-and-personal-development.jpg', alt: 'A tidy desk with a notebook, headphones and a potted plant' },
+    heroImage: { src: '/images/heroes/services/practical-skills-and-personal-development.jpg', alt: 'Students working together with laptops in a makerspace workshop' },
     highlights: ['Useful life skills', 'Critical thinking', 'Communicating with others', 'Approaching challenges with confidence'],
     whoFor: 'Learners who want to apply what they know beyond the classroom and build skills for everyday life, education and their future careers.',
     details: [
@@ -126,6 +132,7 @@ const programmes: Service[] = [
     promise: 'Learning support shaped around each student’s abilities, needs and pace, with patience and respect.',
     seo: { description: 'Inclusive and specialised learning support with individualised teaching, additional support and qualified educators for different abilities, needs and paces.' },
     image: { src: '/images/services/inclusive-and-specialised-learning-support.jpg', alt: 'A teacher helping a young student with maths homework' },
+    heroImage: { src: '/images/heroes/services/inclusive-and-specialised-learning-support.jpg', alt: 'A teacher sitting beside a young boy and helping him write' },
     highlights: ['Individualised teaching approaches', 'Additional learning support', 'Different abilities, needs and paces', 'Qualified educators'],
     whoFor: 'Students who benefit from more individualised teaching, additional support and a learning pace that suits them, with understanding, patience and respect.',
     details: [
