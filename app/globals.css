@@ -1907,7 +1907,32 @@ h4,
   border-radius: 50%;
   background: var(--gold-500);
 }
+.fmarquee__thumb {
+  position: relative;
+  flex: none;
+  width: clamp(4.2rem, 6.4vw, 6.6rem);
+  aspect-ratio: 4 / 3;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+  transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out);
+}
+.fmarquee__thumb img {
+  object-fit: cover;
+  transition: scale 1s var(--ease-out);
+}
+a.fmarquee__item:hover .fmarquee__thumb {
+  transform: rotate(-3deg);
+  box-shadow: 0 0 0 2px var(--gold-500);
+}
+a.fmarquee__item:hover .fmarquee__thumb img {
+  scale: 1.08;
+}
 .fmarquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(0.9rem, 1.6vw, 1.4rem);
   font-size: clamp(1.6rem, 3.4vw, 3.2rem);
   font-weight: 700;
   letter-spacing: -0.03em;

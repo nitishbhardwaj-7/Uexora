@@ -2,8 +2,19 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import CmsImage from '@/components/ui/CmsImage';
 
-type Item = { title: string; href: string };
+type Item = { title: string; href: string; image?: string };
+
+/* Small decorative photo before each name; the name beside it says what it is. */
+function Thumb({ src }: { src?: string }) {
+  if (!src) return null;
+  return (
+    <span className="fmarquee__thumb" aria-hidden="true">
+      <CmsImage src={src} alt="" fill sizes="120px" quality={70} loading="lazy" />
+    </span>
+  );
+}
 type Row = { key: 'education' | 'marketing'; label: string; href: string; items: Item[] };
 
 /**
@@ -33,6 +44,7 @@ export default function FooterServices({ education, marketing }: { education: It
                 {row.items.map((it) => (
                   <li key={it.href}>
                     <Link href={it.href} className="fmarquee__item">
+                      <Thumb src={it.image} />
                       {it.title}
                     </Link>
                   </li>
@@ -41,7 +53,10 @@ export default function FooterServices({ education, marketing }: { education: It
               <ul className="fmarquee__set fmarquee__set--copy" aria-hidden="true" data-nosnippet>
                 {row.items.map((it) => (
                   <li key={it.href}>
-                    <span className="fmarquee__item">{it.title}</span>
+                    <span className="fmarquee__item">
+                      <Thumb src={it.image} />
+                      {it.title}
+                    </span>
                   </li>
                 ))}
               </ul>

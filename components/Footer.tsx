@@ -17,8 +17,8 @@ export default async function Footer({ showBlog }: { showBlog?: boolean }) {
   return (
     <footer className="footer" data-tone="dark">
       <FooterServices
-        education={e.programmes.map((p) => ({ title: p.title, href: servicePath('education', p.slug) }))}
-        marketing={m.services.map((p) => ({ title: p.title, href: servicePath('marketing', p.slug) }))}
+        education={e.programmes.map((p) => ({ title: p.title, href: servicePath('education', p.slug), image: p.image?.src }))}
+        marketing={m.services.map((p) => ({ title: p.title, href: servicePath('marketing', p.slug), image: p.image?.src }))}
       />
       <div className="container">
         <div className="footer__top">
