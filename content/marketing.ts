@@ -135,7 +135,7 @@ export const marketing = {
     "Great brands don't just show up. They stand out, connect, and grow. We bring strategy, creativity, design, and digital expertise together to help businesses build a stronger presence and turn attention into meaningful growth.",
   hero: {
     chips: ['Strategy', 'SEO', 'Paid ads', 'Social', 'Web', 'AI'],
-    background: { src: '/images/heroes/marketing-hero-bg.jpg', alt: 'A creative team reviewing colour swatches together around laptops' },
+    background: { src: '/images/heroes/marketing-hero-bg.jpg', alt: 'A team reviewing printed charts and a laptop together around a white table' },
     primary: { label: 'Explore our approach', href: '/marketing#how-we-work' },
     secondary: { label: 'Discuss your requirements', href: '/contact?division=marketing' },
   },
