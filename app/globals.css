@@ -747,7 +747,11 @@ h4,
   z-index: 1000;
   display: grid;
   place-items: center;
-  background: var(--cream);
+  /* Warm ivory with soft gold light in the top-right and bottom-left corners. */
+  background:
+    radial-gradient(46vmax 46vmax at 90% 8%, rgba(242, 189, 43, 0.24), rgba(242, 189, 43, 0) 70%),
+    radial-gradient(52vmax 52vmax at 6% 96%, rgba(242, 189, 43, 0.22), rgba(242, 189, 43, 0) 70%),
+    #f8f2e3;
   color: var(--ink);
   overflow: hidden;
   clip-path: inset(0 0 0 0);
@@ -759,7 +763,8 @@ h4,
   width: 70vmax;
   height: 70vmax;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(10, 16, 48, 0.07), rgba(10, 16, 48, 0));
+  /* a gentle warm-white lift behind the mark */
+  background: radial-gradient(closest-side, rgba(255, 252, 244, 0.75), rgba(255, 252, 244, 0));
   filter: blur(30px);
   opacity: 0;
   animation: pl-fade-in 1.4s ease-out 0s both;
