@@ -84,7 +84,9 @@ export default function ServiceCards({ id, division, heading, highlight, intro, 
               <FanStack>
                 {photos.map((p, i) => (
                   <span key={p.src} className={`pcta__photo pcta__photo--${i + 1}`}>
-                    <CmsImage src={p.src} alt="" fill sizes="(max-width: 900px) 45vw, 260px" quality={75} />
+                    {/* A landscape photo filling a 4:5 card is drawn about 1.9x the card's width,
+                        and the tilt needs some headroom, so ask for that rather than the card size. */}
+                    <CmsImage src={p.src} alt="" fill sizes="(max-width: 900px) 90vw, 520px" quality={82} />
                   </span>
                 ))}
               </FanStack>
