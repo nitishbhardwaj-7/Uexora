@@ -2398,25 +2398,29 @@ a.fmarquee__card:focus-visible {
   }
 }
 @media (max-width: 900px) {
-  /* Phones and tablets: the photo as a clear band under the header that fades into the page
-     colour, with the copy starting below it. The fade is a mask on the photo itself, so it
-     moves with the parallax and never shows an edge. */
+  /* Phones and tablets: the copy starts straight under the header, and the photo sits below it
+     at full width in its own 3:2 shape (so it scales with the screen rather than being cropped
+     to a sliver). Its top and bottom edges fade into the page colour; the fade is a mask on the
+     photo itself, so it moves with the parallax and never shows an edge. */
   .page-hero--immersive {
+    --hero-photo-h: calc(100vw * 2 / 3);
+    min-height: 0;
     align-content: start;
-    padding-top: calc(var(--header-h) + 40svh);
+    padding-top: calc(var(--header-h) + clamp(28px, 6vw, 56px));
+    padding-bottom: calc(var(--hero-photo-h) + 1rem);
   }
   .page-hero__bg {
-    inset: 0 0 auto;
-    height: calc(var(--header-h) + 52svh);
-    -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
-    mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
+    inset: auto 0 0;
+    height: var(--hero-photo-h);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 82%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 82%, transparent 100%);
   }
   .page-hero__bg img {
-    object-position: 62% center;
+    object-position: center;
   }
-  /* Only a light tint at the top, so the logo and menu stay readable over the photo. */
-  .page-hero__veil {
-    background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 55%, transparent) 0, transparent calc(var(--header-h) + 8svh));
+  .page-hero__veil,
+  .page-hero--immersive .page-hero__copy::before {
+    display: none;
   }
   .page-hero--immersive .page-hero__grid {
     grid-template-columns: 1fr;
