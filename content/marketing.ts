@@ -11,7 +11,7 @@ const services: Service[] = [
     slug: 'digital-marketing-strategy',
     promise: 'A clear marketing direction before you spend: goals, audience and a plan that fits your budget.',
     seo: { description: 'Digital marketing strategy from Uexora Marketing Studio: clear goals, audience understanding and a plan built around your priorities and budget.' },
-    image: { src: '/images/services/digital-marketing-strategy.jpg', alt: 'Two colleagues planning at a whiteboard covered in sticky notes' },
+    image: { src: '/images/services/digital-marketing-strategy-team.jpg', alt: 'A team planning a marketing strategy around laptops, charts and reports' },
     heroImage: { src: '/images/heroes/services/digital-marketing-strategy.jpg', alt: 'A team planning a marketing board of sticky notes on a flip chart' },
     highlights: ['Clear goals', 'Understanding the audience', 'Priorities and budget', 'A plan before investing'],
     whoFor: 'Businesses that want a clear direction for their marketing before they invest in it.',
