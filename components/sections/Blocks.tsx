@@ -205,9 +205,10 @@ export function Steps({
             ))}
           </div>
         </div>
-        <ol className="steps" data-reveal-group data-stagger="0.12">
+        {/* .steps--seq: each step builds in turn (rule, accent, number, title, text); --i sets its place in the sequence. */}
+        <ol className="steps steps--seq" data-reveal-group>
           {steps.map((s, i) => (
-            <li key={s.title} className="step">
+            <li key={s.title} className="step" style={{ '--i': i } as React.CSSProperties}>
               <span className="step__num" aria-hidden="true">
                 {String(i + 1).padStart(2, '0')}
               </span>

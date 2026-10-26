@@ -2753,6 +2753,8 @@ a.fmarquee__card:focus-visible {
   padding-top: 1.4rem;
   border-top: 1px solid var(--rule);
   display: grid;
+  /* rows sit at the top, so titles line up across steps whose texts differ in length */
+  align-content: start;
   gap: 0.7rem;
 }
 .step::before {
@@ -5572,5 +5574,100 @@ a.cdirect__value:hover {
   .pcta__stack {
     width: min(100%, 440px);
     height: clamp(220px, 60vw, 300px);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   How-we-work steps: a left-to-right build. When the list enters view each step,
+   in turn, draws its top rule, extends its accent bar, lifts its number out of a
+   soft blur, then brings in its title and text. Staged only once the reveal script
+   is ready (html.reveal-ready), so nothing is hidden without it or under reduced motion.
+   -------------------------------------------------------------------------- */
+.steps--seq .step {
+  border-top-color: transparent;
+}
+.steps--seq .step::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--rule);
+}
+.steps--seq .step::before {
+  z-index: 1;
+  transform-origin: left center;
+}
+.steps--seq .step::after {
+  transform-origin: left center;
+}
+/* The group reveal would fade each whole step; here the parts animate instead. */
+html.reveal-ready .steps--seq:not(.is-in) > *,
+html.reveal-ready .steps--seq.is-in > * {
+  opacity: 1;
+  translate: none;
+  animation: none;
+}
+html.reveal-ready .steps--seq:not(.is-in) .step::after,
+html.reveal-ready .steps--seq:not(.is-in) .step::before {
+  scale: 0 1;
+}
+html.reveal-ready .steps--seq:not(.is-in) .step__num {
+  opacity: 0;
+  translate: 0 0.45em;
+  filter: blur(8px);
+}
+html.reveal-ready .steps--seq:not(.is-in) .step h3,
+html.reveal-ready .steps--seq:not(.is-in) .step p {
+  opacity: 0;
+  translate: 0 18px;
+}
+html.reveal-ready .steps--seq.is-in .step {
+  --t: calc(var(--i, 0) * 0.17s);
+}
+html.reveal-ready .steps--seq.is-in .step::after {
+  animation: step-line 0.9s cubic-bezier(0.65, 0, 0.35, 1) var(--t) both;
+}
+html.reveal-ready .steps--seq.is-in .step::before {
+  animation: step-line 0.85s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--t) + 0.4s) both;
+}
+html.reveal-ready .steps--seq.is-in .step__num {
+  animation: step-num 1s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--t) + 0.22s) both;
+}
+html.reveal-ready .steps--seq.is-in .step h3 {
+  animation: step-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--t) + 0.38s) both;
+}
+html.reveal-ready .steps--seq.is-in .step p {
+  animation: step-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--t) + 0.5s) both;
+}
+@keyframes step-line {
+  from {
+    scale: 0 1;
+  }
+  to {
+    scale: 1 1;
+  }
+}
+@keyframes step-num {
+  from {
+    opacity: 0;
+    translate: 0 0.45em;
+    filter: blur(8px);
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    filter: blur(0);
+  }
+}
+@keyframes step-rise {
+  from {
+    opacity: 0;
+    translate: 0 18px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
   }
 }
