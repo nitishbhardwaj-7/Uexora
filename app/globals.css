@@ -2277,12 +2277,6 @@ a.fmarquee__card:focus-visible {
   inset: -6% 0;
   z-index: -2;
 }
-/* Desktop: start the photo a little in from the left so its people sit clear of the copy. */
-@media (min-width: 901px) {
-  .page-hero__bg {
-    left: 22%;
-  }
-}
 .page-hero__bg img {
   object-fit: cover;
   object-position: 70% center;
@@ -2302,20 +2296,50 @@ a.fmarquee__card:focus-visible {
   position: absolute;
   inset: 0;
   z-index: -1;
-  /* Solid behind the copy, then clearing quickly so the photo's people read at full strength. */
+  /* The photo runs the full width; a partial tint behind the copy keeps it readable while the
+     photo still shows through on the left, then clears so the people read at full strength. */
   background:
     linear-gradient(
       90deg,
-      var(--bg) 0%,
-      color-mix(in srgb, var(--bg) 94%, transparent) 32%,
-      color-mix(in srgb, var(--bg) 66%, transparent) 46%,
-      color-mix(in srgb, var(--bg) 22%, transparent) 60%,
-      transparent 74%
+      color-mix(in srgb, var(--bg) 80%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 70%, transparent) 30%,
+      color-mix(in srgb, var(--bg) 42%, transparent) 48%,
+      color-mix(in srgb, var(--bg) 10%, transparent) 66%,
+      transparent 80%
     ),
+    linear-gradient(to bottom, color-mix(in srgb, var(--bg) 55%, transparent) 0, transparent calc(var(--header-h) + 6vh)),
     linear-gradient(to top, var(--bg) 0%, transparent 16%);
 }
 .page-hero--immersive .page-hero__grid {
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+}
+/* Readability over the photo without hiding it: a soft pool of the page colour behind the
+   copy only, a faint glow around the type, and frosted chips and outline button. */
+.page-hero--immersive .page-hero__copy {
+  position: relative;
+}
+.page-hero--immersive .page-hero__copy::before {
+  content: '';
+  position: absolute;
+  inset: -14% -22% -14% -40%;
+  z-index: -1;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--bg) 62%, transparent), transparent);
+  pointer-events: none;
+}
+.page-hero--immersive .lead {
+  color: var(--fg);
+  text-shadow: 0 0 22px color-mix(in srgb, var(--bg) 70%, transparent), 0 0 2px color-mix(in srgb, var(--bg) 45%, transparent);
+}
+.page-hero--immersive .chip {
+  background: color-mix(in srgb, var(--bg) 72%, transparent);
+}
+.page-hero--immersive .btn--ghost {
+  --btn-bg: color-mix(in srgb, var(--bg) 72%, transparent);
+}
+.page-hero--immersive .chip,
+.page-hero--immersive .btn--ghost {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .page-hero--immersive .page-hero__media {
   justify-self: end;
