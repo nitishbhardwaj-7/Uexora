@@ -7,13 +7,12 @@ import { isReducedMotion } from '@/lib/motion';
 type Photo = { src: string; alt: string };
 
 /**
- * Photos for a home division panel, changing every `interval` ms: the incoming photo wipes in
- * from the right over the previous one and settles from a slight zoom. `offset` delays the
- * first change so neighbouring panels alternate. Runs only while the panel is on screen and
+ * Photos for a home division panel, changing every `interval` ms: the incoming photo fades in
+ * over the previous one. `offset` delays the first change so neighbouring panels alternate. Runs only while the panel is on screen and
  * the tab is visible; stays on the first photo under prefers-reduced-motion. Only the visible
  * photo is exposed to assistive technology.
  */
-export default function PanelSlideshow({ photos, interval = 2000, offset = 0 }: { photos: Photo[]; interval?: number; offset?: number }) {
+export default function PanelSlideshow({ photos, interval = 4000, offset = 0 }: { photos: Photo[]; interval?: number; offset?: number }) {
   const [{ active, prev }, setShow] = useState<{ active: number; prev: number | null }>({ active: 0, prev: null });
   const root = useRef<HTMLDivElement>(null);
 

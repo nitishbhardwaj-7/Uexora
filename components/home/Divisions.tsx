@@ -23,8 +23,8 @@ export default function Divisions({ content, photos = {} }: { content: HomeConte
             <Link key={p.key} href={p.href} className={`division-panel is-${p.key}`} data-cursor aria-label={p.cta}>
               <div className="division-panel__media" data-reveal="mask">
                 {/* The panel's own photo first, then its division's programme or service photos;
-                    the second panel runs a second behind so the two alternate. */}
-                <PanelSlideshow photos={[p.image, ...(photos[p.key] || []).filter((x) => x.src !== p.image.src)]} offset={i * 1000} />
+                    the second panel runs half a cycle behind so the two alternate. */}
+                <PanelSlideshow photos={[p.image, ...(photos[p.key] || []).filter((x) => x.src !== p.image.src)]} offset={i * 2000} />
                 {/* Division name top left, the monogram top right, on one centre line */}
                 <div className="division-panel__top">
                   <span className="division-panel__label">
