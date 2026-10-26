@@ -1489,7 +1489,9 @@ h4,
 .division-panel__photo {
   object-fit: cover;
 }
-/* Rotating photos: the incoming one fades in over the previous one; no movement. */
+/* Rotating photos, "silk sweep": the incoming photo is revealed by a soft feathered edge
+   travelling from right to left over the previous one, coming into focus from a slight blur
+   as it goes. No zoom or movement. */
 .panel-slides,
 .panel-slides__slide {
   position: absolute;
@@ -1512,14 +1514,34 @@ h4,
   z-index: 2;
 }
 .panel-slides__slide.is-entering {
-  animation: panel-fade 1.4s ease-in-out both;
+  /* A mask 2.5x the panel's width, solid on its right half and clear on its left with a
+     feathered band between; sliding it across moves that soft edge over the photo. */
+  -webkit-mask-image: linear-gradient(90deg, transparent 42%, #000 58%);
+  mask-image: linear-gradient(90deg, transparent 42%, #000 58%);
+  -webkit-mask-size: 250% 100%;
+  mask-size: 250% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  animation:
+    silk-sweep-x 1.7s cubic-bezier(0.65, 0, 0.35, 1) both,
+    silk-focus 1.7s cubic-bezier(0.33, 1, 0.68, 1) both;
 }
-@keyframes panel-fade {
+@keyframes silk-sweep-x {
   from {
-    opacity: 0;
+    -webkit-mask-position: 0% 0;
+    mask-position: 0% 0;
   }
   to {
-    opacity: 1;
+    -webkit-mask-position: 100% 0;
+    mask-position: 100% 0;
+  }
+}
+@keyframes silk-focus {
+  from {
+    filter: blur(10px) brightness(1.12);
+  }
+  to {
+    filter: blur(0) brightness(1);
   }
 }
 .division-panel__media::after {
@@ -5820,10 +5842,10 @@ html.reveal-ready .steps--seq.is-in .step p {
 }
 
 /* --------------------------------------------------------------------------
-   Programme / service list photo frame: curtain change. The incoming photo is
-   revealed from below when moving down the list (from above when moving up)
-   while it and the outgoing photo drift slightly in the same direction; the
-   caption rises in just after. No zoom, no double-exposure crossfade.
+   Programme / service list photo frame: the incoming photo is revealed by a soft
+   feathered edge rising from below when moving down the list (falling from above
+   when moving up), coming into focus as it goes, while it and the outgoing photo
+   drift slightly the same way; the caption rises in just after. No zoom.
    Placed last so it overrides the earlier frame rules.
    -------------------------------------------------------------------------- */
 .pindex__slide {
@@ -5844,23 +5866,59 @@ html.reveal-ready .steps--seq.is-in .step p {
   z-index: 3;
   overflow: hidden;
 }
+/* Silk sweep, vertical: a feathered edge rises from below (moving down the list) or falls
+   from above (moving up), the photo coming into focus from a slight blur as it is revealed. */
+.pindex__slide.is-entering {
+  -webkit-mask-size: 100% 250%;
+  mask-size: 100% 250%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
 .pindex__frame.is-down .pindex__slide.is-entering {
-  animation: pindex-curtain-up 0.95s cubic-bezier(0.77, 0, 0.175, 1) both;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 42%, #000 58%);
+  mask-image: linear-gradient(to bottom, transparent 42%, #000 58%);
+  animation:
+    silk-sweep-rise 1.3s cubic-bezier(0.65, 0, 0.35, 1) both,
+    silk-focus 1.3s cubic-bezier(0.33, 1, 0.68, 1) both;
 }
 .pindex__frame.is-up .pindex__slide.is-entering {
-  animation: pindex-curtain-down 0.95s cubic-bezier(0.77, 0, 0.175, 1) both;
+  -webkit-mask-image: linear-gradient(to top, transparent 42%, #000 58%);
+  mask-image: linear-gradient(to top, transparent 42%, #000 58%);
+  animation:
+    silk-sweep-fall 1.3s cubic-bezier(0.65, 0, 0.35, 1) both,
+    silk-focus 1.3s cubic-bezier(0.33, 1, 0.68, 1) both;
 }
 .pindex__frame.is-down .pindex__slide.is-entering img {
-  animation: pindex-drift-in-up 0.95s cubic-bezier(0.77, 0, 0.175, 1) both;
+  animation: pindex-drift-in-up 1.3s cubic-bezier(0.65, 0, 0.35, 1) both;
 }
 .pindex__frame.is-up .pindex__slide.is-entering img {
-  animation: pindex-drift-in-down 0.95s cubic-bezier(0.77, 0, 0.175, 1) both;
+  animation: pindex-drift-in-down 1.3s cubic-bezier(0.65, 0, 0.35, 1) both;
 }
 .pindex__frame.is-down .pindex__slide.is-prev img {
-  animation: pindex-drift-out-up 0.95s cubic-bezier(0.77, 0, 0.175, 1) both;
+  animation: pindex-drift-out-up 1.3s cubic-bezier(0.65, 0, 0.35, 1) both;
 }
 .pindex__frame.is-up .pindex__slide.is-prev img {
-  animation: pindex-drift-out-down 0.95s cubic-bezier(0.77, 0, 0.175, 1) both;
+  animation: pindex-drift-out-down 1.3s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+@keyframes silk-sweep-rise {
+  from {
+    -webkit-mask-position: 0 0%;
+    mask-position: 0 0%;
+  }
+  to {
+    -webkit-mask-position: 0 100%;
+    mask-position: 0 100%;
+  }
+}
+@keyframes silk-sweep-fall {
+  from {
+    -webkit-mask-position: 0 100%;
+    mask-position: 0 100%;
+  }
+  to {
+    -webkit-mask-position: 0 0%;
+    mask-position: 0 0%;
+  }
 }
 .pindex__caption .is-new {
   display: inline-block;
@@ -5868,22 +5926,6 @@ html.reveal-ready .steps--seq.is-in .step p {
 }
 .pindex__caption .pindex__caption-title.is-new {
   animation-delay: 0.38s;
-}
-@keyframes pindex-curtain-up {
-  from {
-    clip-path: inset(100% 0 0 0);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
-}
-@keyframes pindex-curtain-down {
-  from {
-    clip-path: inset(0 0 100% 0);
-  }
-  to {
-    clip-path: inset(0 0 0 0);
-  }
 }
 @keyframes pindex-drift-in-up {
   from {
@@ -5933,5 +5975,10 @@ html.reveal-ready .steps--seq.is-in .step p {
   .pindex__slide.is-prev img,
   .pindex__caption .is-new {
     animation: none;
+  }
+  /* without the sweep, the mask would leave the photo hidden at its start position */
+  .pindex__frame .pindex__slide.is-entering {
+    -webkit-mask-image: none;
+    mask-image: none;
   }
 }

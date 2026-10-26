@@ -21,9 +21,10 @@ type Props = {
 /**
  * Numbered rows, each a link to the service's page, beside one sticky photo frame.
  * The frame changes to the row under the pointer, or, while scrolling without a pointer,
- * to the row crossing the middle of the viewport: the new photo is revealed like a curtain
- * (from below when moving down the list, from above when moving up) while both photos drift
- * slightly, and the caption rises in after it.
+ * to the row crossing the middle of the viewport: the new photo is revealed by a soft
+ * feathered edge (rising from below when moving down the list, falling from above when moving
+ * up) and comes into focus as it goes, while both photos drift slightly; the caption rises in
+ * after it.
  */
 export default function ServiceIndexList({ division, items, all, compact }: Props) {
   // `prev` stays visible under the incoming photo while it is revealed; `dir` sets which way.
