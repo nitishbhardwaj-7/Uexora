@@ -2302,16 +2302,17 @@ a.fmarquee__card:focus-visible {
   position: absolute;
   inset: 0;
   z-index: -1;
+  /* Solid behind the copy, then clearing quickly so the photo's people read at full strength. */
   background:
     linear-gradient(
       90deg,
       var(--bg) 0%,
-      color-mix(in srgb, var(--bg) 96%, transparent) 36%,
-      color-mix(in srgb, var(--bg) 72%, transparent) 54%,
-      color-mix(in srgb, var(--bg) 18%, transparent) 76%,
-      transparent 100%
+      color-mix(in srgb, var(--bg) 94%, transparent) 32%,
+      color-mix(in srgb, var(--bg) 66%, transparent) 46%,
+      color-mix(in srgb, var(--bg) 22%, transparent) 60%,
+      transparent 74%
     ),
-    linear-gradient(to top, var(--bg) 0%, transparent 22%);
+    linear-gradient(to top, var(--bg) 0%, transparent 16%);
 }
 .page-hero--immersive .page-hero__grid {
   grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
@@ -2373,13 +2374,25 @@ a.fmarquee__card:focus-visible {
   }
 }
 @media (max-width: 900px) {
+  /* Phones and tablets: the photo as a clear band under the header that fades into the page
+     colour, with the copy starting below it. The fade is a mask on the photo itself, so it
+     moves with the parallax and never shows an edge. */
+  .page-hero--immersive {
+    align-content: start;
+    padding-top: calc(var(--header-h) + 40svh);
+  }
+  .page-hero__bg {
+    inset: 0 0 auto;
+    height: calc(var(--header-h) + 52svh);
+    -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 40%, transparent 100%);
+  }
+  .page-hero__bg img {
+    object-position: 62% center;
+  }
+  /* Only a light tint at the top, so the logo and menu stay readable over the photo. */
   .page-hero__veil {
-    background: linear-gradient(
-      to bottom,
-      color-mix(in srgb, var(--bg) 70%, transparent) 0%,
-      color-mix(in srgb, var(--bg) 86%, transparent) 45%,
-      var(--bg) 85%
-    );
+    background: linear-gradient(to bottom, color-mix(in srgb, var(--bg) 55%, transparent) 0, transparent calc(var(--header-h) + 8svh));
   }
   .page-hero--immersive .page-hero__grid {
     grid-template-columns: 1fr;

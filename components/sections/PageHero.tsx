@@ -39,7 +39,7 @@ export default function PageHero({ eyebrow, title, lead, tone = 'light', primary
               src={background!.src}
               alt={background!.alt}
               fill
-              sizes="(max-width: 900px) 300vw, 135vw"
+              sizes="(max-width: 900px) 200vw, 135vw"
               quality={82}
               preload
               fetchPriority="high"
