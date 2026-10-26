@@ -24,7 +24,7 @@ export default function Divisions({ content, photos = {} }: { content: HomeConte
               <div className="division-panel__media" data-reveal="mask">
                 {/* The panel's own photo first, then its division's programme or service photos;
                     the second panel runs half a cycle behind so the two alternate. */}
-                <PanelSlideshow photos={[p.image, ...(photos[p.key] || []).filter((x) => x.src !== p.image.src)]} offset={i * 2000} />
+                <PanelSlideshow photos={[p.image, ...(photos[p.key] || []).filter((x) => x.src !== p.image.src)]} offset={i * 1250} />
                 {/* Division name top left, the monogram top right, on one centre line */}
                 <div className="division-panel__top">
                   <span className="division-panel__label">
