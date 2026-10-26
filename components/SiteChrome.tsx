@@ -5,6 +5,7 @@ import Footer from '@/components/Footer';
 import Preloader from '@/components/Preloader';
 import Enhancements from '@/components/Enhancements';
 import PageTransition from '@/components/PageTransition';
+import PrefetchRoutes from '@/components/PrefetchRoutes';
 
 /**
  * Everything around a page: intro loader, header, footer and the scroll enhancements.
@@ -24,6 +25,7 @@ export default async function SiteChrome({ children }: { children: React.ReactNo
       </main>
       <Footer showBlog={blog} />
       <Enhancements />
+      <PrefetchRoutes />
     </>
   );
 }
