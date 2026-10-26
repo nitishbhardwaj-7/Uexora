@@ -21,6 +21,11 @@
   --gold-500: #f2bd2b;
   --gold-400: #f7cf52;
   --gold-100: #fff2c7;
+  /* Marketing Studio accent: takes the place of gold on Marketing pages. */
+  --orange-600: #d9701a;
+  --orange-500: #f28a2e;
+  --orange-400: #f6a65c;
+  --orange-100: #fde4cc;
 
   /* neutrals */
   --cream: #f6f5f0;
@@ -461,6 +466,20 @@ h4,
   .split__aside {
     position: static;
   }
+}
+
+/* --------------------------------------------------------------------------
+   Division accents: Education keeps the brand yellow, Marketing uses orange.
+   Remapping the gold tokens recolours every accent on Marketing pages at once
+   (highlights, rules, dots, curves, labels, gold buttons). The logo is an image
+   and keeps its own colours.
+   -------------------------------------------------------------------------- */
+[data-division='marketing'],
+.fmarquee__row--marketing {
+  --gold-600: var(--orange-600);
+  --gold-500: var(--orange-500);
+  --gold-400: var(--orange-400);
+  --gold-100: var(--orange-100);
 }
 
 /* --------------------------------------------------------------------------
