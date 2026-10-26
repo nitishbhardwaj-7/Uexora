@@ -116,14 +116,19 @@ export function Statement({
   children?: React.ReactNode;
 }) {
   return (
-    <section id={id} className="section statement" data-tone={tone} aria-label={eyebrow}>
-      <Monogram className="statement__mark" variant="mono" style={{ color: tone === 'dark' ? '#fff' : 'var(--blue-700)' }} />
+    // data-seq: the section gets .is-in when its quote enters view, which draws the accent bar,
+    // fades in the column dividers and settles the background mark (see globals.css).
+    <section id={id} className="section statement" data-tone={tone} aria-label={eyebrow} data-seq>
+      <span className="statement__mark-wrap" aria-hidden="true" data-parallax="0.25">
+        <Monogram className="statement__mark" variant="mono" style={{ color: tone === 'dark' ? '#fff' : 'var(--blue-700)' }} />
+      </span>
       <div className="container">
         <div className="statement__inner">
           <h2 className="h3 statement__title" data-reveal>
             {eyebrow}
           </h2>
-          <p className="statement__quote" data-split>
+          {/* data-words: the quote arrives word by word, each lifting and sharpening from a soft blur */}
+          <p className="statement__quote" data-words data-words-delay="0.25">
             {quote}
           </p>
           <div className="statement__text" data-reveal-group>

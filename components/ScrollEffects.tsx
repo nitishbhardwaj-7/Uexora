@@ -21,6 +21,7 @@ gsap.registerPlugin(ScrollTrigger, SplitText);
  *  data-parallax="0.15"   restrained vertical parallax (halved on small screens)
  *  data-draw              SVG glyphs fade in one by one
  *  data-type              text writes itself letter by letter, each letter sharpening from a blur
+ *  data-words             words lift and sharpen from a blur in turn; marks the nearest [data-seq] .is-in
  *  data-tone="dark|light" section tone; the header adopts the tone of the section under it
  *
  * Nothing is hidden before this runs: elements already on screen are marked visible first,
@@ -214,9 +215,47 @@ export default function ScrollEffects() {
           });
         });
       };
+      // Ink effect: words lift and sharpen from a soft blur in reading order once the text is in
+      // view; the nearest [data-seq] ancestor gets .is-in at the same moment so its CSS parts
+      // (accent lines, background mark) play alongside.
+      const wordEls = gsap.utils.toArray<HTMLElement>('[data-words]');
+      const armWords = () => {
+        wordEls.forEach((el) => {
+          const seq = el.closest<HTMLElement>('[data-seq]');
+          let split: SplitText;
+          try {
+            split = new SplitText(el, { type: 'words', wordsClass: 'ink-word', aria: 'auto' });
+          } catch {
+            el.classList.add('is-worded');
+            seq?.classList.add('is-in');
+            return;
+          }
+          gsap.set(split.words, { opacity: 0, yPercent: 45, filter: 'blur(8px)' });
+          el.classList.add('is-worded');
+          ScrollTrigger.create({
+            trigger: el,
+            start: 'top 85%',
+            once: true,
+            onEnter: () => {
+              seq?.classList.add('is-in');
+              gsap.to(split.words, {
+                opacity: 1,
+                yPercent: 0,
+                filter: 'blur(0px)',
+                duration: 1.1,
+                ease: 'expo.out',
+                stagger: 0.045,
+                delay: parseFloat(el.dataset.wordsDelay || '0'),
+                clearProps: 'filter',
+              });
+            },
+          });
+        });
+      };
       const arm = () => {
         armSplits();
         armType();
+        armWords();
       };
       if (document.fonts?.ready) document.fonts.ready.then(arm);
       else arm();

@@ -2798,19 +2798,75 @@ a.fmarquee__card:focus-visible {
   border-radius: 2px;
   margin-bottom: 1.6rem;
 }
+/* The paragraphs flow as one text across balanced columns, so every column ends on the same
+   line however long each paragraph is. Hairline dividers sit between the columns. */
 .statement__text {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem 3rem;
+  columns: 3 16rem;
+  column-gap: 3rem;
+  column-rule: 1px solid var(--rule);
   color: var(--fg-muted);
 }
-.statement__mark {
+.statement__text p {
+  margin: 0;
+}
+.statement__text p + p {
+  margin-top: 1em;
+}
+.statement__mark-wrap {
   position: absolute;
   right: -10%;
   bottom: -14%;
   width: clamp(300px, 42vw, 680px);
   opacity: 0.07;
   pointer-events: none;
+}
+.statement__mark {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.statement__quote::before {
+  transform-origin: left center;
+}
+/* Staged only when the reveal script runs with motion allowed; .is-in comes from [data-words].
+   The transitions apply only once .is-in is set, so the staging itself takes effect instantly. */
+html.reveal-ready [data-words]:not(.is-worded) {
+  opacity: 0;
+}
+html.reveal-ready .statement[data-seq]:not(.is-in) .statement__quote::before {
+  scale: 0 1;
+}
+html.reveal-ready .statement[data-seq]:not(.is-in) .statement__text {
+  column-rule-color: transparent;
+}
+/* opacity on the wrapper; the drift on the mark inside, since the wrapper's scroll parallax
+   (GSAP) writes its own translate and rotate */
+html.reveal-ready .statement[data-seq]:not(.is-in) .statement__mark-wrap {
+  opacity: 0;
+}
+html.reveal-ready .statement[data-seq]:not(.is-in) .statement__mark {
+  translate: 8% 10%;
+  rotate: -7deg;
+}
+/* The accent bar draws in from the left, the column dividers fade in as the columns rise,
+   and the background mark settles into place (its scroll parallax runs on transform). */
+html.reveal-ready .statement[data-seq].is-in .statement__quote::before {
+  transition: scale 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.1s;
+}
+html.reveal-ready .statement[data-seq].is-in .statement__text {
+  transition: column-rule-color 1.6s ease 0.6s;
+}
+html.reveal-ready .statement[data-seq].is-in .statement__mark-wrap {
+  transition: opacity 2s ease-out;
+}
+html.reveal-ready .statement[data-seq].is-in .statement__mark {
+  transition:
+    translate 2.6s cubic-bezier(0.16, 1, 0.3, 1),
+    rotate 2.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.ink-word {
+  display: inline-block;
+  will-change: transform, opacity, filter;
 }
 
 /* skill chips list */
