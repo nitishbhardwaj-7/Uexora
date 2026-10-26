@@ -1927,14 +1927,10 @@ h4,
 }
 .fmarquee__thumb img {
   object-fit: cover;
-  transition: scale 1s var(--ease-out);
 }
 a.fmarquee__item:hover .fmarquee__thumb {
   transform: rotate(-3deg);
   box-shadow: 0 0 0 2px var(--gold-500);
-}
-a.fmarquee__item:hover .fmarquee__thumb img {
-  scale: 1.08;
 }
 .fmarquee__item {
   display: inline-flex;
@@ -1985,7 +1981,6 @@ a.fmarquee__item:focus-visible {
 }
 .fmarquee__card-media img {
   object-fit: cover;
-  transition: scale 1.2s var(--ease-out);
 }
 .fmarquee__card-title {
   font-family: var(--font-sub), ui-sans-serif, system-ui, sans-serif;
@@ -1999,9 +1994,6 @@ a.fmarquee__item:focus-visible {
 a.fmarquee__card:hover .fmarquee__card-media {
   transform: translateY(-6px);
   box-shadow: 0 26px 50px -24px rgba(0, 0, 0, 0.7), 0 0 0 2px var(--gold-500);
-}
-a.fmarquee__card:hover .fmarquee__card-media img {
-  scale: 1.06;
 }
 a.fmarquee__card:hover .fmarquee__card-title,
 a.fmarquee__card:focus-visible .fmarquee__card-title {
