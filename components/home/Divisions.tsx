@@ -24,7 +24,10 @@ export default function Divisions({ content }: { content: HomeContent['divisions
                 <CmsImage src={p.image.src} alt={p.image.alt} fill sizes="(max-width: 900px) 100vw, 50vw" className="division-panel__photo" />
                 {/* Division name top left, the monogram top right, on one centre line */}
                 <div className="division-panel__top">
-                  <span className="division-panel__label">{LABELS[p.key] ?? p.key}</span>
+                  <span className="division-panel__label">
+                    <span className="division-panel__kicker">Uexora</span>
+                    <span className="division-panel__name">{LABELS[p.key] ?? p.key}</span>
+                  </span>
                   <Monogram className="division-panel__mark" />
                 </div>
               </div>

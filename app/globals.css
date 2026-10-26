@@ -1492,12 +1492,57 @@ h4,
   pointer-events: none;
 }
 .division-panel__label {
+  display: grid;
+  gap: 0.45rem;
   color: #fff;
-  font-size: clamp(1.9rem, 3.2vw, 3rem);
-  font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 1;
   text-shadow: 0 2px 18px rgba(6, 16, 58, 0.45);
+}
+/* Each card carries its division's accent: yellow for Education, orange for Marketing. */
+.division-panel.is-marketing {
+  --gold-500: var(--orange-500);
+}
+.division-panel__kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: var(--gold-500);
+  text-shadow: 0 1px 10px rgba(6, 16, 58, 0.6);
+}
+.division-panel__kicker::before {
+  content: '';
+  width: 1.6rem;
+  height: 1px;
+  background: currentColor;
+}
+.division-panel__name {
+  position: relative;
+  justify-self: start;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: clamp(2.4rem, 3.8vw, 3.6rem);
+  font-weight: 400;
+  letter-spacing: -0.005em;
+  line-height: 1;
+  padding-bottom: 0.35rem;
+}
+/* A short accent line under the name that runs the full width on hover. */
+.division-panel__name::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 2.2rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--gold-500);
+  transition: width 0.7s var(--ease-out);
+}
+.division-panel:hover .division-panel__name::after,
+.division-panel:focus-visible .division-panel__name::after {
+  width: 100%;
 }
 /* A soft fade at the top of the photo keeps the heading readable on bright images. */
 .division-panel__media::before {
