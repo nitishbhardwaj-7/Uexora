@@ -58,7 +58,7 @@ const ICONS: Record<IconName, React.ReactNode> = {
 
 /**
  * Editorial "our approach" section: headline and link over a large photo with a
- * rounded right side, a small statement panel, a stamp and a thin gold curve; on the
+ * rounded right side, with an optional statement panel and stamp; on the
  * right, the introduction, three process steps and a closing statement.
  * Motion uses the site's reveal attributes (staged before paint, skipped under reduced motion).
  */
@@ -83,11 +83,6 @@ export default function Approach({ id, heading, paragraphs, link, image, panel, 
               <figure className={['approach__photo', stamp ? 'approach__photo--notch' : ''].filter(Boolean).join(' ')} data-reveal="mask">
                 <CmsImage src={image.src} alt={image.alt} fill sizes="(max-width: 900px) 92vw, 46vw" quality={82} />
               </figure>
-
-              {/* Thin gold line from the panel around the photo, drawn with the scroll. */}
-              <svg className="approach__curve" viewBox="0 0 100 60" preserveAspectRatio="none" aria-hidden="true" data-draw-scroll>
-                <path d="M86 6 C 104 14, 104 44, 88 56 S 52 66, 30 63" vectorEffect="non-scaling-stroke" />
-              </svg>
               {dot ? <span className="approach__dot" aria-hidden="true" data-reveal data-reveal-delay="0.5" /> : null}
 
               {pill ? (

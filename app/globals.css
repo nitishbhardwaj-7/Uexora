@@ -3577,20 +3577,6 @@ a.cdirect__value:hover {
   object-fit: cover;
   object-position: 60% center;
 }
-.approach__curve {
-  position: absolute;
-  inset: -4% -7% -9% 0;
-  width: 107%;
-  height: 113%;
-  overflow: visible;
-  pointer-events: none;
-}
-.approach__curve path {
-  fill: none;
-  stroke: var(--gold-500);
-  stroke-width: 1.6;
-  stroke-linecap: round;
-}
 .approach__dot {
   position: absolute;
   right: -3.4%;
@@ -3857,7 +3843,6 @@ a.cdirect__value:hover {
     aspect-ratio: 4 / 3;
     border-radius: 18px 40% 40% 18px / 18px 50% 50% 18px;
   }
-  .approach__curve,
   .approach__dot {
     display: none;
   }
