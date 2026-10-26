@@ -79,6 +79,14 @@ export const marketingPage = defineType({
         defineField({ name: 'title', title: 'Heading', type: 'string' }),
         paragraphs(),
         strings('stages', 'Business stages'),
+        defineField({
+          name: 'stageImages',
+          title: 'Stage photos',
+          type: 'array',
+          of: [defineArrayMember({ type: 'picture' })],
+          description: 'One photo per business stage, in the same order. Portrait photos work best (shown at 4:5).',
+          validation: (r) => r.max(3),
+        }),
       ],
     }),
 

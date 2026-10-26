@@ -2,7 +2,8 @@ import type { Metadata } from 'next';
 import { BreadcrumbJsonLd } from '@/components/JsonLd';
 import PageHero from '@/components/sections/PageHero';
 import Approach from '@/components/sections/Approach';
-import { SplitSection, Statement, Steps, WhyChoose } from '@/components/sections/Blocks';
+import { Statement, Steps, WhyChoose } from '@/components/sections/Blocks';
+import Audience from '@/components/sections/Audience';
 import ServiceCards from '@/components/sections/ServiceCards';
 import CtaBand from '@/components/sections/CtaBand';
 import Signpost from '@/components/sections/Signpost';
@@ -57,22 +58,7 @@ export default async function MarketingPage() {
 
       <Steps id="how-we-work" eyebrow={m.how.heading} heading={m.how.title} intro={m.how.intro} steps={m.how.steps} outro={m.how.outro} tone="light" />
 
-      <SplitSection
-        id="who"
-        eyebrow={m.who.heading}
-        heading={m.who.title}
-        paragraphs={m.who.paragraphs}
-        tone="light"
-        aside={
-          <ul className="chips" data-reveal-group data-stagger="0.05" style={{ marginTop: '0.5rem' }}>
-            {m.who.stages.map((s) => (
-              <li key={s} className="chip">
-                {s}
-              </li>
-            ))}
-          </ul>
-        }
-      />
+      <Audience id="who" heading={m.who.title} paragraphs={m.who.paragraphs} stages={m.who.stages} images={m.who.stageImages} tone="light" />
 
       <Statement id="philosophy" eyebrow={m.philosophy.heading} quote={m.philosophy.quote} paragraphs={m.philosophy.paragraphs} tone="dark" />
 

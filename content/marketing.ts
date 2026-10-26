@@ -201,6 +201,12 @@ export const marketing = {
       'Whether you need help building a website, improving search visibility, managing advertising campaigns or bringing your digital marketing activities together, we want to understand what your business needs before recommending a solution.',
     ],
     stages: ['Startups establishing their presence', 'Growing businesses generating enquiries', 'Established companies improving their marketing'],
+    /** One photo per stage, in the same order. */
+    stageImages: [
+      { src: '/images/sections/stages/startups.jpg', alt: 'A young startup team brainstorming at a table in front of a whiteboard' },
+      { src: '/images/sections/stages/growing-businesses.jpg', alt: 'A shop owner taking a customer call with a tablet in hand' },
+      { src: '/images/sections/stages/established-companies.jpg', alt: 'A team meeting on a balcony inside a modern glass office building' },
+    ],
   },
 
   philosophy: {
