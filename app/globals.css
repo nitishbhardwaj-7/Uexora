@@ -3,10 +3,10 @@
    ========================================================================== */
 
 :root {
-  /* Type roles: all Manrope (see app/layout.tsx). */
-  --font-heading: var(--font-manrope);
-  --font-sub: var(--font-manrope);
-  --font-body: var(--font-manrope);
+  /* Type roles (see app/layout.tsx): Black Mango, Poppins, Manifold CF. */
+  --font-heading: var(--font-black-mango);
+  --font-sub: var(--font-poppins);
+  --font-body: var(--font-manifold);
   /* brand */
   --navy-950: #040a24;
   --navy-900: #06103a;
@@ -316,10 +316,17 @@ html:not(:has(.studio-root)) *::-webkit-scrollbar {
   line-height: 1;
   text-wrap: balance;
 }
-/* Headings: h1/h2 and title classes take the heading face. */
+/* Headings: h1/h2 and title classes take the heading face. Black Mango has a single
+   weight, so headings render it as drawn (no synthetic bold) with its natural spacing. */
 h1,
-h2 {
-  font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+h2,
+.display,
+.h1,
+.h2 {
+  font-family: var(--font-heading), Georgia, serif;
+  font-weight: 400 !important;
+  font-synthesis-weight: none;
+  letter-spacing: -0.005em !important;
 }
 /* Subheadings: h3/h4 and programme or service names take the subheading face. */
 h3,
@@ -3251,7 +3258,8 @@ a.cdirect__value:hover {
   line-height: 1.02;
   letter-spacing: -0.035em;
   color: var(--fg);
-  max-width: 15ch;
+  /* Tuned to the heading face so it breaks as Helping / Businesses Grow / in a Digital World. */
+  max-width: 11.9ch;
 }
 .approach__link {
   margin-top: clamp(1.2rem, 2vw, 1.7rem);
@@ -3525,7 +3533,7 @@ a.cdirect__value:hover {
 }
 /* Narrower measure: four lines, as in the Education reference. */
 .approach--dark .approach__title {
-  max-width: 11.9ch;
+  max-width: 11.38ch;
 }
 .approach--dark .approach__photo {
   background: rgba(255, 255, 255, 0.05);

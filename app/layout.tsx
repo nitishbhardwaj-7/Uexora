@@ -1,18 +1,37 @@
 import type { Metadata, Viewport } from 'next';
-import { Manrope } from 'next/font/google';
+import localFont from 'next/font/local';
+import { Poppins } from 'next/font/google';
 import './globals.css';
 import { site } from '@/lib/site';
 import { getSettings } from '@/lib/cms';
 
 /*
- * One typeface, Manrope, for every role. The role variables in globals.css
- * (--font-heading, --font-sub, --font-body) all point at it, so a role can be given
- * its own face later with a single change.
+ * Type roles (see the :root variables in globals.css):
+ *   headings     --font-heading  Black Mango (Kadek Mahardika), Regular only
+ *   subheadings  --font-sub      Poppins (Google Fonts, Open Font License)
+ *   body         --font-body     Manifold CF (Connary Fagen), Regular only
+ * Black Mango and Manifold CF are commercial typefaces: confirm a web licence before
+ * deploying them. Files live in app/fonts/.
  */
-const manrope = Manrope({
-  subsets: ['latin'],
+const blackMango = localFont({
+  src: './fonts/black-mango-regular.ttf',
+  weight: '400',
   display: 'swap',
-  variable: '--font-manrope',
+  variable: '--font-black-mango',
+});
+
+const manifold = localFont({
+  src: './fonts/manifold-cf-regular.ttf',
+  weight: '400',
+  display: 'swap',
+  variable: '--font-manifold',
+});
+
+const poppins = Poppins({
+  subsets: ['latin'],
+  weight: ['500', '600', '700'],
+  display: 'swap',
+  variable: '--font-poppins',
 });
 
 export const viewport: Viewport = {
@@ -104,7 +123,7 @@ function structuredData(s: Awaited<ReturnType<typeof getSettings>>) {
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   const s = await getSettings();
   return (
-    <html lang="en" className={manrope.variable} suppressHydrationWarning>
+    <html lang="en" className={`${blackMango.variable} ${manifold.variable} ${poppins.variable}`} suppressHydrationWarning>
       <head>
         {/* Lets CSS stage the hero entrances before hydration; without JavaScript everything stays visible. */}
         <script dangerouslySetInnerHTML={{ __html: "document.documentElement.classList.add('js')" }} />
