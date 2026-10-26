@@ -1472,11 +1472,6 @@ h4,
 }
 .division-panel__photo {
   object-fit: cover;
-  transform: scale(1.04);
-  transition: transform 1.4s var(--ease-out);
-}
-.division-panel:hover .division-panel__photo {
-  transform: scale(1);
 }
 .division-panel__media::after {
   content: '';
@@ -3056,10 +3051,6 @@ a.cdirect__value:hover {
 }
 .posts__thumb img {
   object-fit: cover;
-  transition: scale 1.2s var(--ease-out);
-}
-.posts__link:hover .posts__thumb img {
-  scale: 1.06;
 }
 .posts__arrow {
   display: inline-grid;
