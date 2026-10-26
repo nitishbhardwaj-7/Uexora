@@ -1523,8 +1523,8 @@ h4,
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
   animation:
-    silk-sweep-x 1.7s cubic-bezier(0.65, 0, 0.35, 1) both,
-    silk-focus 1.7s cubic-bezier(0.33, 1, 0.68, 1) both;
+    silk-sweep-x 1s cubic-bezier(0.25, 1, 0.5, 1) both,
+    silk-focus 0.9s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 @keyframes silk-sweep-x {
   from {
@@ -5878,27 +5878,27 @@ html.reveal-ready .steps--seq.is-in .step p {
   -webkit-mask-image: linear-gradient(to bottom, transparent 42%, #000 58%);
   mask-image: linear-gradient(to bottom, transparent 42%, #000 58%);
   animation:
-    silk-sweep-rise 1.3s cubic-bezier(0.65, 0, 0.35, 1) both,
-    silk-focus 1.3s cubic-bezier(0.33, 1, 0.68, 1) both;
+    silk-sweep-rise 0.8s cubic-bezier(0.25, 1, 0.5, 1) both,
+    silk-focus 0.7s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 .pindex__frame.is-up .pindex__slide.is-entering {
   -webkit-mask-image: linear-gradient(to top, transparent 42%, #000 58%);
   mask-image: linear-gradient(to top, transparent 42%, #000 58%);
   animation:
-    silk-sweep-fall 1.3s cubic-bezier(0.65, 0, 0.35, 1) both,
-    silk-focus 1.3s cubic-bezier(0.33, 1, 0.68, 1) both;
+    silk-sweep-fall 0.8s cubic-bezier(0.25, 1, 0.5, 1) both,
+    silk-focus 0.7s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 .pindex__frame.is-down .pindex__slide.is-entering img {
-  animation: pindex-drift-in-up 1.3s cubic-bezier(0.65, 0, 0.35, 1) both;
+  animation: pindex-drift-in-up 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 .pindex__frame.is-up .pindex__slide.is-entering img {
-  animation: pindex-drift-in-down 1.3s cubic-bezier(0.65, 0, 0.35, 1) both;
+  animation: pindex-drift-in-down 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 .pindex__frame.is-down .pindex__slide.is-prev img {
-  animation: pindex-drift-out-up 1.3s cubic-bezier(0.65, 0, 0.35, 1) both;
+  animation: pindex-drift-out-up 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 .pindex__frame.is-up .pindex__slide.is-prev img {
-  animation: pindex-drift-out-down 1.3s cubic-bezier(0.65, 0, 0.35, 1) both;
+  animation: pindex-drift-out-down 0.8s cubic-bezier(0.25, 1, 0.5, 1) both;
 }
 @keyframes silk-sweep-rise {
   from {
@@ -5922,10 +5922,10 @@ html.reveal-ready .steps--seq.is-in .step p {
 }
 .pindex__caption .is-new {
   display: inline-block;
-  animation: pindex-caption-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+  animation: pindex-caption-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
 }
 .pindex__caption .pindex__caption-title.is-new {
-  animation-delay: 0.38s;
+  animation-delay: 0.18s;
 }
 @keyframes pindex-drift-in-up {
   from {
