@@ -1969,7 +1969,6 @@ h4,
   object-fit: cover;
 }
 a.fmarquee__item:hover .fmarquee__thumb {
-  transform: rotate(-3deg);
   box-shadow: 0 0 0 2px var(--gold-500);
 }
 .fmarquee__item {
@@ -2017,7 +2016,7 @@ a.fmarquee__item:focus-visible {
   overflow: hidden;
   background: rgba(255, 255, 255, 0.06);
   box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.6);
-  transition: transform 0.7s var(--ease-out), box-shadow 0.7s var(--ease-out);
+  transition: box-shadow 0.5s var(--ease-out);
 }
 .fmarquee__card-media img {
   object-fit: cover;
@@ -2032,8 +2031,7 @@ a.fmarquee__item:focus-visible {
   transition: color 0.4s;
 }
 a.fmarquee__card:hover .fmarquee__card-media {
-  transform: translateY(-6px);
-  box-shadow: 0 26px 50px -24px rgba(0, 0, 0, 0.7), 0 0 0 2px var(--gold-500);
+  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.6), 0 0 0 2px var(--gold-500);
 }
 a.fmarquee__card:hover .fmarquee__card-title,
 a.fmarquee__card:focus-visible .fmarquee__card-title {
