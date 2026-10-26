@@ -154,7 +154,7 @@ export const education = {
     'From academic success and future-ready skills to confidence, communication and personal growth, we bring more opportunities to learn and develop. Because, U matter.',
   hero: {
     chips: ['School tuition', 'JEE & NEET', 'IELTS · PTE · TOEFL', 'AI & robotics', 'Public speaking'],
-    background: { src: '/images/heroes/education-hero-bg.jpg', alt: 'Two students studying together at a table in a bright classroom' },
+    background: { src: '/images/heroes/education-hero-bg.jpg', alt: 'Two smiling students at their desks in a classroom, one reading a textbook' },
     primary: { label: 'Explore the programmes', href: '/education#programmes' },
     secondary: { label: 'Speak with our education team', href: '/contact?division=education' },
   },

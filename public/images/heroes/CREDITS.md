@@ -5,5 +5,5 @@ Re-encoded with metadata removed at 2400px wide.
 
 | File | Photo | Photographer |
 | --- | --- | --- |
-| education-hero-bg.jpg | https://www.pexels.com/photo/6238046/ | Monstera Production |
+| education-hero-bg.jpg | https://www.pexels.com/photo/5676733/ | Ivan S |
 | marketing-hero-bg.jpg | https://www.pexels.com/photo/39190477/ | Vitaly Gariev |
