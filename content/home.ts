@@ -62,6 +62,8 @@ export const home = {
     'JEE & NEET preparation',
     'IELTS · PTE · TOEFL',
     'AI, coding & robotics',
+    'AI for professionals',
+    'Project-based learning',
     'Public speaking',
     'Overseas education',
     'Digital strategy',
