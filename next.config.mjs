@@ -31,6 +31,12 @@ const nextConfig = {
       // "Why choose us" now lives as a section on each division page.
       { source: '/education/why-choose-us', destination: '/education#why-choose-us', permanent: true },
       { source: '/marketing/why-choose-us', destination: '/marketing#why-choose-us', permanent: true },
+      // Education programmes renamed or retired; old addresses keep working.
+      { source: '/education/english-language-and-overseas-education', destination: '/education/overseas-education-and-english-language', permanent: true },
+      { source: '/education/ai-coding-and-robotics', destination: '/education/ai-coding-and-robotics-for-students', permanent: true },
+      { source: '/education/communication-public-speaking-and-confidence', destination: '/education/communication-public-speaking-and-confidence-building', permanent: true },
+      { source: '/education/inclusive-and-specialised-learning-support', destination: '/education/special-needs-students-programme', permanent: true },
+      { source: '/education/practical-skills-and-personal-development', destination: '/education#programmes', permanent: true },
     ];
   },
   async headers() {

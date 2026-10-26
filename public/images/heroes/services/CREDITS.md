@@ -7,11 +7,12 @@ Re-encoded with metadata removed at 3200px wide. Replace any of them from the st
 | --- | --- | --- |
 | academic-support-and-school-tuition.jpg | https://www.pexels.com/photo/7692546/ | Kaboompics.com |
 | competitive-exam-preparation.jpg | https://www.pexels.com/photo/8199555/ | Yan Krukau |
-| english-language-and-overseas-education.jpg | https://www.pexels.com/photo/8199602/ | Yan Krukau |
-| ai-coding-and-robotics.jpg | https://www.pexels.com/photo/7869086/ | Vanessa Loring |
-| communication-public-speaking-and-confidence.jpg | https://www.pexels.com/photo/8423048/ | Pavel Danilyuk |
-| practical-skills-and-personal-development.jpg | https://www.pexels.com/photo/19895774/ | ThisIsEngineering |
-| inclusive-and-specialised-learning-support.jpg | https://www.pexels.com/photo/35745336/ | Ahmet Kurt |
+| overseas-education-and-english-language.jpg | https://www.pexels.com/photo/8199602/ | Yan Krukau |
+| ai-coding-and-robotics-for-students.jpg | https://www.pexels.com/photo/7869086/ | Vanessa Loring |
+| ai-for-professionals-and-educators.jpg | https://www.pexels.com/photo/9159042/ | Mikhail Nilov |
+| communication-public-speaking-and-confidence-building.jpg | https://www.pexels.com/photo/8423048/ | Pavel Danilyuk |
+| special-needs-students-programme.jpg | https://www.pexels.com/photo/35745336/ | Ahmet Kurt |
+| corporate-trainings.jpg | https://www.pexels.com/photo/8134067/ | Alena Darmel |
 | digital-marketing-strategy.jpg | https://www.pexels.com/photo/7710074/ | Alena Darmel |
 | search-engine-optimisation.jpg | https://www.pexels.com/photo/7947999/ | RDNE Stock project |
 | paid-advertising-and-lead-generation.jpg | https://www.pexels.com/photo/8117438/ | Ivan S |
