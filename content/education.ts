@@ -169,7 +169,7 @@ export const education = {
   eyebrow: 'Uexora Education',
   title: 'Learn With Purpose. Grow With Confidence.',
   lead:
-    'From academic success and future-ready skills to confidence, communication and personal growth, we bring more opportunities to learn and develop. Because, U matter.',
+    'From academic success and future-ready skills to confidence, communication and personal growth, we bring more opportunities to learn and develop. Because, you matter.',
   hero: {
     chips: ['School tuition', 'JEE & NEET', 'IELTS · PTE · TOEFL', 'AI & robotics', 'Public speaking'],
     background: { src: '/images/heroes/education-hero-bg.jpg', alt: 'Two smiling students at their desks in a classroom, one reading a textbook' },
