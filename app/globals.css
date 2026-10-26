@@ -5423,7 +5423,7 @@ a.cdirect__value:hover {
 /* --------------------------------------------------------------------------
    Closing call to action under the programme / service list: an editorial
    split with a large heading, and three of the division's photos fanned
-   like prints around a thin accent circle. No box, no hover movement.
+   like prints. No box.
    -------------------------------------------------------------------------- */
 .pcta {
   display: grid;
@@ -5459,23 +5459,6 @@ a.cdirect__value:hover {
 .pcta__stack {
   position: relative;
   height: clamp(270px, 26vw, 360px);
-}
-.pcta__ring {
-  position: absolute;
-  left: 12%;
-  top: 2%;
-  width: 76%;
-  height: 96%;
-  overflow: visible;
-  transition: scale 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.pcta__ring ellipse {
-  fill: none;
-  stroke: color-mix(in srgb, var(--gold-500) 60%, transparent);
-  stroke-width: 1;
-  stroke-dasharray: 1;
-  stroke-dashoffset: 0;
-  transition: stroke-dashoffset 1.6s cubic-bezier(0.65, 0, 0.35, 1) 0.15s;
 }
 .pcta__photo {
   position: absolute;
@@ -5531,9 +5514,6 @@ a.cdirect__value:hover {
   html.js .pcta__stack:not(.is-in) .pcta__photo--3 {
     translate: -70% -26%;
   }
-  html.js .pcta__stack:not(.is-in) .pcta__ring ellipse {
-    stroke-dashoffset: 1;
-  }
   .pcta__stack.is-in:not(.is-done) .pcta__photo--1,
   .pcta__stack.is-in:not(.is-done) .pcta__photo--3 {
     transition-delay: 0.32s;
@@ -5555,15 +5535,10 @@ a.cdirect__value:hover {
       translate: 16% -40%;
       rotate: 13deg;
     }
-    .pcta__stack.is-done:hover .pcta__ring {
-      scale: 1.06;
-    }
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .pcta__photo,
-  .pcta__ring,
-  .pcta__ring ellipse {
+  .pcta__photo {
     transition: none;
   }
 }
