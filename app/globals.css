@@ -328,6 +328,22 @@ h2,
   font-synthesis-weight: none;
   letter-spacing: -0.005em !important;
 }
+/* Bolder headings. Black Mango ships one (regular) weight, so instead of the browser's smeared
+   faux bold, every heading set in it gets a thin outline in its own colour, painted under the
+   fill so only the outer half shows: strokes thicken evenly and counters stay open. Swap this
+   for a real Bold file if a licensed one becomes available. */
+h1,
+h2,
+.display,
+.h1,
+.h2,
+.division-panel__name,
+.pcta__title,
+.hero-slides__caption,
+.audience__label {
+  -webkit-text-stroke: 0.045em currentColor;
+  paint-order: stroke fill;
+}
 /* Subheadings: h3/h4 and programme or service names take the subheading face. */
 h3,
 h4,
