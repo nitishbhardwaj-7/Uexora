@@ -71,7 +71,19 @@ export const educationPage = defineType({
       title: 'Preparing for more than the classroom',
       type: 'object',
       group: 'beyond',
-      fields: [defineField({ name: 'heading', title: 'Heading', type: 'string' }), paragraphs(), strings('skills', 'Skills')],
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        paragraphs(),
+        strings('skills', 'Skills'),
+        defineField({
+          name: 'skillImages',
+          title: 'Skill photos',
+          type: 'array',
+          of: [defineArrayMember({ type: 'picture' })],
+          description: 'One photo per skill, in the same order (shown at 4:3).',
+          validation: (r) => r.max(6),
+        }),
+      ],
     }),
 
     defineField({

@@ -343,6 +343,8 @@ h2,
 .audience__label {
   -webkit-text-stroke: 0.045em currentColor;
   paint-order: stroke fill;
+  /* the outline thickens each letter outwards, so open the spacing a touch to keep them apart */
+  letter-spacing: 0.012em !important;
 }
 /* Subheadings: h3/h4 and programme or service names take the subheading face. */
 h3,
@@ -1678,7 +1680,8 @@ h4,
   align-content: center;
 }
 .purpose .display {
-  font-size: clamp(2.4rem, 5.2vw, 5rem);
+  /* sized so "Different paths. / One purpose." keeps to two lines with the bold headings' spacing */
+  font-size: clamp(2.3rem, 4.9vw, 4.7rem);
 }
 .purpose__text {
   display: grid;
@@ -3529,8 +3532,10 @@ a.cdirect__value:hover {
   line-height: 1.02;
   letter-spacing: -0.035em;
   color: var(--fg);
-  /* Tuned to the heading face so it breaks as Helping / Businesses Grow / in a Digital World. */
-  max-width: 11.9ch;
+  /* Tuned to the heading face so it breaks as Helping / Businesses Grow / in a Digital World.
+     A little less letter-spacing than other bold headings: "Businesses Grow" only just fits. */
+  max-width: 12.3ch;
+  letter-spacing: 0.004em !important;
 }
 .approach__link {
   margin-top: clamp(1.2rem, 2vw, 1.7rem);
@@ -5980,5 +5985,116 @@ html.reveal-ready .steps--seq.is-in .step p {
   .pindex__frame .pindex__slide.is-entering {
     -webkit-mask-image: none;
     mask-image: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Preparing for more than the classroom: heading beside the opening line,
+   a mosaic of photo tiles naming each skill, then the supporting text and a
+   closing line.
+   -------------------------------------------------------------------------- */
+.skills__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: end;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+.skills__title {
+  max-width: 14ch;
+  text-wrap: balance;
+}
+.skills__lead {
+  max-width: 34rem;
+  color: var(--fg);
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+.skills__grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.8rem, 1.6vw, 1.4rem);
+}
+.skills__tile {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--navy-800);
+  isolation: isolate;
+}
+.skills__tile img {
+  object-fit: cover;
+}
+.skills__tile::after {
+  content: '';
+  position: absolute;
+  inset: 40% 0 0;
+  z-index: 1;
+  background: linear-gradient(to bottom, transparent, rgba(6, 16, 58, 0.85));
+  pointer-events: none;
+}
+.skills__name {
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  bottom: 8%;
+  z-index: 2;
+  color: #fff;
+  font-family: var(--font-heading), Georgia, serif;
+  font-weight: 400;
+  font-synthesis-weight: none;
+  font-size: clamp(1.4rem, 2.1vw, 2.1rem);
+  line-height: 1.05;
+  letter-spacing: 0.01em;
+  -webkit-text-stroke: 0.04em currentColor;
+  paint-order: stroke fill;
+  text-shadow: 0 2px 18px rgba(6, 16, 58, 0.45);
+}
+.skills__foot {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: start;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+.skills__body {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.2rem, 3vw, 2.5rem);
+}
+.skills__body p {
+  color: var(--fg-muted);
+  font-size: clamp(0.98rem, 1.05vw, 1.05rem);
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+.skills__closing {
+  max-width: 30rem;
+  padding: 0.15rem 0 0.15rem 1.4rem;
+  border-left: 3px solid var(--gold-500);
+  color: var(--fg);
+  font-size: clamp(1.1rem, 1.45vw, 1.32rem);
+  line-height: 1.45;
+}
+@media (max-width: 1100px) {
+  .skills__head,
+  .skills__foot {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .skills__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 600px) {
+  .skills__body {
+    grid-template-columns: 1fr;
+  }
+  .skills__tile {
+    aspect-ratio: 1;
+    border-radius: 16px;
   }
 }

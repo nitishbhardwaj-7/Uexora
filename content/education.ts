@@ -226,6 +226,15 @@ export const education = {
       "We don't promise overnight success. We believe in consistent effort, the right guidance and the value of taking one step forward at a time.",
     ],
     skills: ['Communication', 'Creativity', 'Problem-solving', 'Confidence', 'Adaptability', 'Curiosity'],
+    /** One photo per skill, in the same order. */
+    skillImages: [
+      { src: '/images/sections/skills/communication.jpg', alt: 'Two students in a lively discussion in a classroom' },
+      { src: '/images/sections/skills/creativity.jpg', alt: 'A teenager concentrating on a painting at an easel in an art class' },
+      { src: '/images/sections/skills/problem-solving.jpg', alt: 'A child working through maths equations on a classroom whiteboard' },
+      { src: '/images/sections/skills/confidence.jpg', alt: 'A student raising her hand to answer a question in class' },
+      { src: '/images/sections/skills/adaptability.jpg', alt: 'A young girl learning on a tablet with a stylus' },
+      { src: '/images/sections/skills/curiosity.jpg', alt: 'A girl looking into a microscope during a science lesson' },
+    ],
   },
 
   choose: {

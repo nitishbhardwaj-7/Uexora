@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { BreadcrumbJsonLd } from '@/components/JsonLd';
 import PageHero from '@/components/sections/PageHero';
 import Approach from '@/components/sections/Approach';
+import SkillsMosaic from '@/components/sections/SkillsMosaic';
 import { Statement, WhyChoose } from '@/components/sections/Blocks';
 import ServiceCards from '@/components/sections/ServiceCards';
 import CtaBand from '@/components/sections/CtaBand';
@@ -59,27 +60,7 @@ export default async function EducationPage() {
 
       <Statement id="approach" eyebrow={e.approach.heading} quote={e.approach.quote} paragraphs={e.approach.paragraphs} tone="light" />
 
-      <section id="beyond" className="section" data-tone="dark" aria-labelledby="beyond-title">
-        <div className="container two-up">
-          <div className="section-head" style={{ marginBottom: 0 }}>
-            <h2 id="beyond-title" className="h2" data-split>
-              {e.beyond.heading}
-            </h2>
-            <div className="chips" data-reveal-group data-stagger="0.05">
-              {e.beyond.skills.map((s) => (
-                <span key={s} className="chip chip--solid">
-                  {s}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="split__body" data-reveal-group>
-            {e.beyond.paragraphs.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
-          </div>
-        </div>
-      </section>
+      <SkillsMosaic id="beyond" heading={e.beyond.heading} paragraphs={e.beyond.paragraphs} skills={e.beyond.skills} images={e.beyond.skillImages} tone="dark" />
 
       <Signpost id="choose" division="education" heading={e.choose.heading} intro={e.choose.intro} rows={e.choose.rows} services={e.programmes} tone="light" />
 
