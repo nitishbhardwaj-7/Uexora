@@ -5,7 +5,6 @@ Re-encoded to JPEG, max 1600 px, by scripts in the project history. Replace any 
 
 | File | Unsplash photo |
 | --- | --- |
-| `ai-coding-and-robotics-for-students.jpg` | https://unsplash.com/photos/mVJzfw2Zm7Y |
 | `communication-public-speaking-and-confidence-building.jpg` | https://unsplash.com/photos/u6RJY5F3yM8 |
 | `special-needs-students-programme.jpg` | https://unsplash.com/photos/qubcvHi6DBk |
 | `digital-marketing-strategy.jpg` | https://unsplash.com/photos/wODKtuRipCA |
@@ -24,3 +23,4 @@ Added later from Pexels, under the Pexels License:
 | `academic-support-study-together.jpg` | https://www.pexels.com/photo/5538633/ | Zen Chung |
 | `competitive-exam-study-session.jpg` | https://www.pexels.com/photo/7092515/ | RDNE Stock project |
 | `overseas-english-grammar.jpg` | https://www.pexels.com/photo/5676740/ | Ivan S |
+| `ai-coding-pair-programming.jpg` | https://www.pexels.com/photo/12899191/ | Mizuno K |

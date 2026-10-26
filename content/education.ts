@@ -71,7 +71,7 @@ const programmes: Service[] = [
     slug: 'ai-coding-and-robotics-for-students',
     promise: 'Explore AI, coding and robotics by building, testing and improving real projects.',
     seo: { description: 'AI, coding and robotics programmes for students: explore new concepts, experiment with ideas and build problem-solving skills through practical activities.' },
-    image: { src: '/images/services/ai-coding-and-robotics-for-students.jpg', alt: 'A small robot car built from a kit, with wheels and wires' },
+    image: { src: '/images/services/ai-coding-pair-programming.jpg', alt: 'Two people working through code together on a laptop' },
     heroImage: { src: '/images/heroes/services/ai-coding-and-robotics-for-students.jpg', alt: 'Students building robots together while their teacher looks on' },
     highlights: ['Artificial intelligence', 'Coding', 'Robotics', 'Hands-on problem solving'],
     whoFor: 'Learners from an early age who want to understand the technology shaping almost every field, through practical activities rather than theory alone.',
