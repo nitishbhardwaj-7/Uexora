@@ -51,7 +51,7 @@ const programmes: Service[] = [
     slug: 'overseas-education-and-english-language',
     promise: 'Get clear first guidance on studying abroad, and prepare for IELTS, PTE or TOEFL.',
     seo: { description: 'Overseas education counselling and IELTS, PTE and TOEFL preparation to help students explore university options and study abroad with clarity.' },
-    image: { src: '/images/services/overseas-education-and-english-language.jpg', alt: 'A globe on a desk in a study' },
+    image: { src: '/images/services/overseas-english-grammar.jpg', alt: 'An English grammar book and a laptop on a wooden desk' },
     heroImage: { src: '/images/heroes/services/overseas-education-and-english-language.jpg', alt: 'Three students resting on stacks of language dictionaries in a library' },
     highlights: ['Overseas education counselling', 'Exploring university options', 'IELTS, PTE and TOEFL preparation', 'The steps to study internationally'],
     whoFor: 'Students planning to study abroad or improve their English language proficiency, and families exploring university options overseas.',
