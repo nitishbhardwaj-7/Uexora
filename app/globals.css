@@ -5602,6 +5602,19 @@ a.cdirect__value:hover {
 .steps--seq .step::after {
   transform-origin: left center;
 }
+/* Photo under the top rule; the rule keeps reading as one timeline across the steps. */
+.step__photo {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  margin-bottom: 0.5rem;
+  border-radius: 16px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--fg) 8%, transparent);
+}
+.step__photo img {
+  object-fit: cover;
+}
 /* The group reveal would fade each whole step; here the parts animate instead. */
 html.reveal-ready .steps--seq:not(.is-in) > *,
 html.reveal-ready .steps--seq.is-in > * {
@@ -5618,6 +5631,9 @@ html.reveal-ready .steps--seq:not(.is-in) .step__num {
   translate: 0 0.45em;
   filter: blur(8px);
 }
+html.reveal-ready .steps--seq:not(.is-in) .step__photo {
+  clip-path: inset(100% 0 0 0 round 16px);
+}
 html.reveal-ready .steps--seq:not(.is-in) .step h3,
 html.reveal-ready .steps--seq:not(.is-in) .step p {
   opacity: 0;
@@ -5632,14 +5648,36 @@ html.reveal-ready .steps--seq.is-in .step::after {
 html.reveal-ready .steps--seq.is-in .step::before {
   animation: step-line 0.85s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--t) + 0.4s) both;
 }
+html.reveal-ready .steps--seq.is-in .step__photo {
+  animation: step-photo 1.15s cubic-bezier(0.76, 0, 0.24, 1) calc(var(--t) + 0.15s) both;
+}
+html.reveal-ready .steps--seq.is-in .step__photo img {
+  animation: step-photo-settle 1.6s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--t) + 0.15s) both;
+}
 html.reveal-ready .steps--seq.is-in .step__num {
-  animation: step-num 1s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--t) + 0.22s) both;
+  animation: step-num 1s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--t) + 0.5s) both;
 }
 html.reveal-ready .steps--seq.is-in .step h3 {
-  animation: step-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--t) + 0.38s) both;
+  animation: step-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--t) + 0.64s) both;
 }
 html.reveal-ready .steps--seq.is-in .step p {
-  animation: step-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--t) + 0.5s) both;
+  animation: step-rise 0.85s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--t) + 0.76s) both;
+}
+@keyframes step-photo {
+  from {
+    clip-path: inset(100% 0 0 0 round 16px);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 16px);
+  }
+}
+@keyframes step-photo-settle {
+  from {
+    scale: 1.14;
+  }
+  to {
+    scale: 1;
+  }
 }
 @keyframes step-line {
   from {

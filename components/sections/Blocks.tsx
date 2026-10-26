@@ -1,5 +1,6 @@
 import Monogram from '@/components/brand/Monogram';
 import Button from '@/components/ui/Button';
+import CmsImage from '@/components/ui/CmsImage';
 
 /* ------------------------------------------------------------------ */
 /* Sticky-heading + prose                                              */
@@ -184,7 +185,7 @@ export function Steps({
   eyebrow: string;
   heading: string;
   intro: string[];
-  steps: { title: string; text: string }[];
+  steps: { title: string; text: string; image?: { src: string; alt: string } }[];
   outro?: string;
   tone?: 'light' | 'dark';
 }) {
@@ -209,6 +210,11 @@ export function Steps({
         <ol className="steps steps--seq" data-reveal-group>
           {steps.map((s, i) => (
             <li key={s.title} className="step" style={{ '--i': i } as React.CSSProperties}>
+              {s.image ? (
+                <span className="step__photo">
+                  <CmsImage src={s.image.src} alt={s.image.alt} fill sizes="(max-width: 520px) 92vw, (max-width: 900px) 46vw, 24vw" quality={75} />
+                </span>
+              ) : null}
               <span className="step__num" aria-hidden="true">
                 {String(i + 1).padStart(2, '0')}
               </span>

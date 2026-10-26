@@ -64,7 +64,7 @@ export const marketingPage = defineType({
         defineField({ name: 'heading', title: 'Small heading', type: 'string' }),
         defineField({ name: 'title', title: 'Heading', type: 'string' }),
         paragraphs('intro', 'Intro paragraphs'),
-        items('steps', 'Steps'),
+        defineField({ name: 'steps', title: 'Steps', type: 'array', of: [defineArrayMember({ type: 'step' })] }),
         defineField({ name: 'outro', title: 'Closing line', type: 'text', rows: 2 }),
       ],
     }),

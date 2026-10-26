@@ -1,4 +1,4 @@
-import { ctaBand, ctaCard, faq, item, link, picture, seo, service, signpost } from './objects';
+import { ctaBand, ctaCard, faq, item, link, picture, seo, service, signpost, step } from './objects';
 import { siteSettings } from './siteSettings';
 import { homePage } from './homePage';
 import { educationPage } from './educationPage';
@@ -7,7 +7,7 @@ import { contactPage } from './contactPage';
 import { blogPage, category, post } from './blog';
 import { enquiry } from './enquiry';
 
-export const schemaTypes = [link, item, picture, seo, faq, signpost, service, ctaCard, ctaBand, siteSettings, homePage, educationPage, marketingPage, contactPage, blogPage, category, post, enquiry];
+export const schemaTypes = [link, item, step, picture, seo, faq, signpost, service, ctaCard, ctaBand, siteSettings, homePage, educationPage, marketingPage, contactPage, blogPage, category, post, enquiry];
 
 /** One document each; created by the seed script and edited in place. */
 export const singletons = [

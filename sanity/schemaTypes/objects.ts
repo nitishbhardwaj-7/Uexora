@@ -30,6 +30,19 @@ export const item = defineType({
   preview: { select: { title: 'title', subtitle: 'text' } },
 });
 
+/** A how-we-work step: title, text and an optional photo shown above it. */
+export const step = defineType({
+  name: 'step',
+  title: 'Step',
+  type: 'object',
+  fields: [
+    defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+    defineField({ name: 'text', title: 'Text', type: 'text', rows: 4, validation: (r) => r.required() }),
+    defineField({ name: 'image', title: 'Photo', type: 'picture', description: 'Landscape; shown at 4:3 above the step.' }),
+  ],
+  preview: { select: { title: 'title', subtitle: 'text', media: 'image' } },
+});
+
 export const picture = defineType({
   name: 'picture',
   title: 'Image',
