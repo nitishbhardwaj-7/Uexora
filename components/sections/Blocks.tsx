@@ -131,7 +131,9 @@ export function Statement({
           <p className="statement__quote" data-words data-words-delay="0.25">
             {quote}
           </p>
-          <div className="statement__text" data-reveal-group>
+          {/* Long text flows across two balanced columns; shorter text reads as one column, so
+              neither ends with one column a line longer than the other. */}
+          <div className={['statement__text', paragraphs.join(' ').length >= 600 ? 'statement__text--cols' : ''].filter(Boolean).join(' ')} data-reveal-group>
             {paragraphs.map((p, i) => (
               <p key={i}>{p}</p>
             ))}

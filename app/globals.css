@@ -2801,16 +2801,25 @@ a.fmarquee__card:focus-visible {
 /* The paragraphs flow as one text across balanced columns, so every column ends on the same
    line however long each paragraph is. Hairline dividers sit between the columns. */
 .statement__text {
-  columns: 3 16rem;
-  column-gap: 3rem;
-  column-rule: 1px solid var(--rule);
+  max-width: 46rem;
   color: var(--fg-muted);
 }
+/* Long text: two balanced columns with a hairline divider (three cannot balance this text). */
+.statement__text--cols {
+  max-width: none;
+  columns: 2 22rem;
+  column-gap: 3rem;
+  column-rule: 1px solid var(--rule);
+}
+/* No space between paragraphs (a new one starts with an indent, as in print) and a paragraph
+   may break at any line, so the columns can balance to within a line. */
 .statement__text p {
   margin: 0;
+  orphans: 1;
+  widows: 1;
 }
 .statement__text p + p {
-  margin-top: 1em;
+  text-indent: 1.6em;
 }
 .statement__mark-wrap {
   position: absolute;
@@ -5480,11 +5489,24 @@ a.cdirect__value:hover {
 }
 .signpost__link {
   display: grid;
-  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  grid-template-columns: auto minmax(0, 6fr) minmax(0, 5fr);
   align-items: center;
   gap: clamp(1rem, 3vw, 3rem);
   padding-block: clamp(1.1rem, 1.9vw, 1.6rem);
   color: inherit;
+}
+/* the destination's photo leading each row */
+.signpost__thumb {
+  position: relative;
+  display: block;
+  width: clamp(96px, 9vw, 140px);
+  aspect-ratio: 3 / 2;
+  border-radius: 14px;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--fg) 8%, transparent);
+}
+.signpost__thumb img {
+  object-fit: cover;
 }
 .signpost__need {
   font-size: clamp(1.05rem, 1.4vw, 1.3rem);
@@ -5548,8 +5570,15 @@ a.cdirect__value:hover {
 }
 @media (max-width: 760px) {
   .signpost__link {
-    grid-template-columns: 1fr;
-    gap: 0.5rem;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 1rem;
+    row-gap: 0.5rem;
+  }
+  .signpost__thumb {
+    grid-row: span 2;
+    align-self: start;
+    width: 84px;
+    border-radius: 12px;
   }
   .signpost__to {
     justify-content: space-between;

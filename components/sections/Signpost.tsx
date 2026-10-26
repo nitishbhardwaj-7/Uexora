@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import CmsImage from '@/components/ui/CmsImage';
 import { Arrow } from '@/components/ui/Button';
 import type { Service } from '@/content/types';
 import { servicePath, type Division } from '@/lib/cms/services';
@@ -17,8 +18,8 @@ type Props = {
 
 /**
  * "Start from the goal": each row pairs a visitor's situation with the programme or
- * service that answers it. Rows are links; hovering reveals the destination's name
- * sliding in from the right, so the mapping reads as a quiet two-column table.
+ * service that answers it, led by a small photo of that destination. Rows are links;
+ * hovering reveals the destination's name sliding in from the right.
  */
 export default function Signpost({ id, division, heading, intro, rows, services, tone = 'light' }: Props) {
   const byslug = new Map(services.map((s) => [s.slug, s]));
@@ -40,19 +41,26 @@ export default function Signpost({ id, division, heading, intro, rows, services,
           ) : null}
         </div>
         <ol className="signpost" data-reveal-group data-stagger="0.06">
-          {list.map((r) => (
-            <li key={r.slug} className="signpost__row">
-              <Link href={servicePath(division, r.slug)} className="signpost__link" data-cursor>
-                <span className="signpost__need">{r.need}</span>
-                <span className="signpost__to">
-                  <span className="signpost__name">{r.service!.title}</span>
-                  <span className="signpost__arrow" aria-hidden="true">
-                    <Arrow />
+          {list.map((r) => {
+            // the destination's own photo: its hero photo, or its card photo if it has none
+            const photo = r.service!.heroImage || r.service!.image;
+            return (
+              <li key={r.slug} className="signpost__row">
+                <Link href={servicePath(division, r.slug)} className="signpost__link" data-cursor>
+                  <span className="signpost__thumb" aria-hidden="true">
+                    {photo ? <CmsImage src={photo.src} alt="" fill sizes="(max-width: 760px) 84px, 140px" quality={75} /> : null}
                   </span>
-                </span>
-              </Link>
-            </li>
-          ))}
+                  <span className="signpost__need">{r.need}</span>
+                  <span className="signpost__to">
+                    <span className="signpost__name">{r.service!.title}</span>
+                    <span className="signpost__arrow" aria-hidden="true">
+                      <Arrow />
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
         </ol>
       </div>
     </section>
