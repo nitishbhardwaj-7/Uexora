@@ -19,8 +19,8 @@ Added later from Pexels, under the Pexels License:
 | `overseas-english-grammar.jpg` | https://www.pexels.com/photo/5676740/ | Ivan S |
 | `ai-coding-pair-programming.jpg` | https://www.pexels.com/photo/12899191/ | Mizuno K |
 | `digital-marketing-strategy-team.jpg` | https://www.pexels.com/photo/6476260/ | Mikael Blomkvist |
-| `search-engine-optimisation-charts.jpg` | https://www.pexels.com/photo/669615/ | Lukas Blazek |
 | `paid-advertising-ad-spend.jpg` | https://www.pexels.com/photo/6476805/ | Mikael Blomkvist |
 | `social-media-marketing-desk.jpg` | https://www.pexels.com/photo/15555796/ | Walls.io |
 | `website-design-responsive.jpg` | https://www.pexels.com/photo/40057911/ | Wolf Art |
 | `ai-powered-marketing-laptop.jpg` | https://www.pexels.com/photo/3584998/ | cottonbro studio |
+| `search-engine-optimisation-dashboard.jpg` | https://www.pexels.com/photo/7013100/ | Firmbee.com |

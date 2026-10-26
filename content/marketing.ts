@@ -31,7 +31,7 @@ const services: Service[] = [
     slug: 'search-engine-optimisation',
     promise: 'Be found by people already searching for what you offer, and keep that visibility over time.',
     seo: { description: 'SEO services that improve search visibility through relevant content, website optimisation and practices that support long-term organic discovery.' },
-    image: { src: '/images/services/search-engine-optimisation-charts.jpg', alt: 'Printed performance charts beside a laptop while notes are taken' },
+    image: { src: '/images/services/search-engine-optimisation-dashboard.jpg', alt: 'A person reviewing an analytics dashboard on a laptop beside a cup of coffee' },
     heroImage: { src: '/images/heroes/services/search-engine-optimisation.jpg', alt: 'A person reviewing a website analytics dashboard on a laptop' },
     highlights: ['Search visibility', 'Relevant content', 'Website optimisation', 'Long-term organic discovery'],
     whoFor: 'Businesses that want to be found in search engines and build visibility that lasts.',
