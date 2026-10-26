@@ -27,7 +27,6 @@ export default function HeroSlideshow({ slides, interval = 2000 }: { slides: Her
   }, [slides.length, interval]);
 
   if (!slides.length) return null;
-  const current = slides[active];
   const hold = () => (paused.current = true);
   const release = () => (paused.current = false);
 
@@ -44,14 +43,22 @@ export default function HeroSlideshow({ slides, interval = 2000 }: { slides: Her
           </div>
         ))}
       </div>
-      <Link href={current.href} className="hero-slides__caption">
-        <span key={active} className="hero-slides__label">
-          {current.label}
-        </span>
-        <svg viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M5 12h14M13 6l6 6-6 6" />
-        </svg>
-      </Link>
+      {/* One caption per photo, stacked and crossfaded with the same class and timing as the
+          photos, so name and picture change together. Only the visible one is a working link. */}
+      {slides.map((s, i) => (
+        <Link
+          key={s.href}
+          href={s.href}
+          className={['hero-slides__caption', i === active ? 'is-active' : ''].filter(Boolean).join(' ')}
+          aria-hidden={i !== active}
+          tabIndex={i === active ? undefined : -1}
+        >
+          <span className="hero-slides__label">{s.label}</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </Link>
+      ))}
     </div>
   );
 }
