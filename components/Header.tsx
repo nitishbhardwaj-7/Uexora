@@ -7,6 +7,7 @@ import Logo from './brand/Logo';
 import Monogram from './brand/Monogram';
 import { nav as baseNav, blogNav, menu } from '@/lib/site';
 import { Arrow } from './ui/Button';
+import { contactHref } from '@/lib/cms/services';
 
 type Props = { email: string; tagline: string; /** True once the blog has a published post. */ showBlog?: boolean };
 
@@ -57,7 +58,8 @@ export default function Header({ email, tagline, showBlog }: Props) {
                 </li>
               ))}
             </ul>
-            <Link href="/contact" className="btn btn--gold header__cta">
+            {/* On a division's pages this opens that division's form; elsewhere the general one. */}
+            <Link href={contactHref(pathname)} className="btn btn--gold header__cta">
               <span className="btn__label">Get in touch</span>
               <span className="btn__icon">
                 <Arrow />

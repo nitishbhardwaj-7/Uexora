@@ -32,6 +32,9 @@ export default function ContactForm({
   note?: string;
 }) {
   const [division, setDivision] = useState<Division>(initialDivision);
+  // Arriving from a division's pages opens that division's form straight away; the choice of
+  // division is shown only for a general visit (home page, menu) or when asked to change it.
+  const [choosing, setChoosing] = useState(initialDivision === 'general');
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
@@ -88,7 +91,15 @@ export default function ContactForm({
 
   return (
     <form id="enquiry-form" className="form" onSubmit={send} noValidate={false}>
-      <fieldset className="field" style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}>
+      {!choosing ? (
+        <p className="form__division">
+          <span>Enquiry for</span> <strong>{LABELS[division]}</strong>
+          <button type="button" className="form__change" onClick={() => setChoosing(true)}>
+            Change
+          </button>
+        </p>
+      ) : null}
+      <fieldset className="field" style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }} hidden={!choosing}>
         <legend>I&rsquo;m interested in</legend>
         <div className="segmented">
           {(

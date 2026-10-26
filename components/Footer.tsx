@@ -3,6 +3,7 @@ import Logo from './brand/Logo';
 import Wordmark from './brand/Wordmark';
 import Tagline from './brand/Tagline';
 import FooterServices from './FooterServices';
+import ContactLink from './ContactLink';
 import { site } from '@/lib/site';
 import { getEducation, getMarketing, getSettings } from '@/lib/cms';
 import { servicePath } from '@/lib/cms/services';
@@ -45,7 +46,7 @@ export default async function Footer({ showBlog }: { showBlog?: boolean }) {
                 </li>
               ) : null}
               <li>
-                <Link href="/contact">Contact</Link>
+                <ContactLink>Contact</ContactLink>
               </li>
             </ul>
           </div>

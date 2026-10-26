@@ -13,6 +13,16 @@ export const divisionMeta: Record<
 
 export const servicePath = (division: Division, slug: string) => `${divisionMeta[division].path}/${slug}`;
 
+/** The division a path belongs to (its landing page or any of its programme / service pages). */
+export const divisionOf = (pathname: string | null | undefined): Division | undefined =>
+  pathname?.startsWith('/education') ? 'education' : pathname?.startsWith('/marketing') ? 'marketing' : undefined;
+
+/** Contact link for the page you are on: opens that division's form, or the general one elsewhere. */
+export const contactHref = (pathname: string | null | undefined) => {
+  const division = divisionOf(pathname);
+  return division ? `/contact?division=${division}` : '/contact';
+};
+
 export const findService = (list: Service[], slug: string) => list.find((s) => s.slug === slug);
 
 /** Photos for the rotating card in a division hero: each programme or service's hero photo, linked to its page. */

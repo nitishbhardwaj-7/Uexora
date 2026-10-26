@@ -65,7 +65,8 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
             <h2 id="enquire-title" className="contact__form-title">
               {c.formHeading}
             </h2>
-            <ContactForm initialDivision={initial} email={s.email} note={c.formNote} />
+            {/* keyed so moving between contact links (e.g. menu after a division page) starts afresh */}
+            <ContactForm key={initial} initialDivision={initial} email={s.email} note={c.formNote} />
           </div>
         </div>
       </section>
