@@ -1957,6 +1957,61 @@ a.fmarquee__item:focus-visible {
   outline-offset: 4px;
   border-radius: 4px;
 }
+/* Card strip (division pages): photo cards with the name beneath, as in a project reel. */
+.fmarquee--cards .fmarquee__row {
+  gap: 1.4rem;
+}
+.fmarquee--cards .fmarquee__set li::after {
+  display: none;
+}
+.fmarquee--cards .fmarquee__set li {
+  padding-inline: clamp(0.7rem, 1.2vw, 1.1rem);
+}
+.fmarquee__card {
+  display: grid;
+  gap: 0.85rem;
+  width: clamp(200px, 21vw, 300px);
+  color: rgba(246, 245, 240, 0.72);
+}
+.fmarquee__card-media {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.6);
+  transition: transform 0.7s var(--ease-out), box-shadow 0.7s var(--ease-out);
+}
+.fmarquee__card-media img {
+  object-fit: cover;
+  transition: scale 1.2s var(--ease-out);
+}
+.fmarquee__card-title {
+  font-family: var(--font-sub), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.92rem;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.4s;
+}
+a.fmarquee__card:hover .fmarquee__card-media {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 50px -24px rgba(0, 0, 0, 0.7), 0 0 0 2px var(--gold-500);
+}
+a.fmarquee__card:hover .fmarquee__card-media img {
+  scale: 1.06;
+}
+a.fmarquee__card:hover .fmarquee__card-title,
+a.fmarquee__card:focus-visible .fmarquee__card-title {
+  color: var(--gold-500);
+}
+a.fmarquee__card:focus-visible {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 6px;
+  border-radius: 16px;
+}
 @keyframes fmarquee-left {
   from {
     transform: translateX(0);

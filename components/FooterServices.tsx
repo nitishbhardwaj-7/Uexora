@@ -22,6 +22,7 @@ type Row = { key: 'education' | 'marketing'; label: string; href: string; items:
  * show only their own row. The first copy of each row is real, crawlable links; the second
  * copy only completes the loop, so it is plain text hidden from search engines and screen
  * readers. Under reduced motion the row stands still and can be scrolled.
+ * With a single row (division pages) each item is a photo card with its name beneath.
  */
 export default function FooterServices({ education, marketing }: { education: Item[]; marketing: Item[] }) {
   const pathname = usePathname() || '/';
@@ -31,8 +32,10 @@ export default function FooterServices({ education, marketing }: { education: It
   ];
   const visible = pathname.startsWith('/education') ? rows.filter((r) => r.key === 'education') : pathname.startsWith('/marketing') ? rows.filter((r) => r.key === 'marketing') : rows;
 
+  const cards = visible.length === 1;
+
   return (
-    <div className="fmarquee">
+    <div className={['fmarquee', cards ? 'fmarquee--cards' : ''].filter(Boolean).join(' ')}>
       {visible.map((row) => (
         <nav key={row.key} className={`fmarquee__row fmarquee__row--${row.key}`} aria-label={`${row.label} services`}>
           <Link href={row.href} className="fmarquee__label">
@@ -43,20 +46,38 @@ export default function FooterServices({ education, marketing }: { education: It
               <ul className="fmarquee__set">
                 {row.items.map((it) => (
                   <li key={it.href}>
-                    <Link href={it.href} className="fmarquee__item">
-                      <Thumb src={it.image} />
-                      {it.title}
-                    </Link>
+                    {cards ? (
+                      <Link href={it.href} className="fmarquee__card">
+                        <span className="fmarquee__card-media" aria-hidden="true">
+                          {it.image ? <CmsImage src={it.image} alt="" fill sizes="(max-width: 700px) 60vw, 300px" quality={75} loading="lazy" /> : null}
+                        </span>
+                        <span className="fmarquee__card-title">{it.title}</span>
+                      </Link>
+                    ) : (
+                      <Link href={it.href} className="fmarquee__item">
+                        <Thumb src={it.image} />
+                        {it.title}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
               <ul className="fmarquee__set fmarquee__set--copy" aria-hidden="true" data-nosnippet>
                 {row.items.map((it) => (
                   <li key={it.href}>
-                    <span className="fmarquee__item">
-                      <Thumb src={it.image} />
-                      {it.title}
-                    </span>
+                    {cards ? (
+                      <span className="fmarquee__card">
+                        <span className="fmarquee__card-media">
+                          {it.image ? <CmsImage src={it.image} alt="" fill sizes="(max-width: 700px) 60vw, 300px" quality={75} loading="lazy" /> : null}
+                        </span>
+                        <span className="fmarquee__card-title">{it.title}</span>
+                      </span>
+                    ) : (
+                      <span className="fmarquee__item">
+                        <Thumb src={it.image} />
+                        {it.title}
+                      </span>
+                    )}
                   </li>
                 ))}
               </ul>
