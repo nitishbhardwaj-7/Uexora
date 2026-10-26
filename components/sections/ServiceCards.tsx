@@ -1,4 +1,5 @@
 import Button from '@/components/ui/Button';
+import CmsImage from '@/components/ui/CmsImage';
 import Highlight from '@/components/ui/Highlight';
 import ServiceIndexList from '@/components/sections/ServiceIndexList';
 import type { Service } from '@/content/types';
@@ -40,6 +41,8 @@ const Arcs = () => (
  */
 export default function ServiceCards({ id, division, heading, highlight, intro, aside, items, tone = 'light', cta, exclude, compact }: Props) {
   const list = exclude ? items.filter((s) => s.slug !== exclude) : items;
+  // Three of the division's own photos, fanned beside the closing call to action.
+  const photos = list.flatMap((s) => (s.image ? [s.image] : [])).slice(0, 3);
 
   return (
     <section id={id} className={['section prog', compact ? 'section--tight' : ''].filter(Boolean).join(' ')} data-tone={tone} aria-labelledby={`${id}-title`}>
@@ -66,14 +69,25 @@ export default function ServiceCards({ id, division, heading, highlight, intro, 
         <ServiceIndexList division={division} items={list} all={items} compact={compact} />
 
         {cta && !compact ? (
-          <div className="pindex__cta" data-reveal>
-            <div>
-              <p className="pindex__cta-title">{cta.heading}</p>
-              <p>{cta.text}</p>
+          <div className="pcta" data-reveal-group data-stagger="0.15">
+            <div className="pcta__copy">
+              <h3 className="pcta__title">{cta.heading}</h3>
+              <p className="pcta__text">{cta.text}</p>
+              <div className="pcta__action">
+                <Button href={cta.href} variant={tone === 'dark' ? 'gold' : 'blue'}>
+                  {cta.label}
+                </Button>
+              </div>
             </div>
-            <Button href={cta.href} variant={tone === 'dark' ? 'gold' : 'blue'}>
-              {cta.label}
-            </Button>
+            {photos.length ? (
+              <div className="pcta__stack" aria-hidden="true">
+                {photos.map((p, i) => (
+                  <span key={p.src} className={`pcta__photo pcta__photo--${i + 1}`}>
+                    <CmsImage src={p.src} alt="" fill sizes="(max-width: 900px) 45vw, 260px" quality={75} />
+                  </span>
+                ))}
+              </div>
+            ) : null}
           </div>
         ) : null}
       </div>
