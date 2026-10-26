@@ -149,7 +149,7 @@ export const education = {
   },
 
   eyebrow: 'Uexora Education',
-  title: 'Your Potential, Unlocked.',
+  title: 'Learn With Purpose. Grow With Confidence.',
   lead:
     'From academic success and future-ready skills to confidence, communication and personal growth, we bring more opportunities to learn and develop. Because, U matter.',
   hero: {

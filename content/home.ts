@@ -40,7 +40,7 @@ export const home = {
     panels: [
       {
         key: 'education',
-        title: ['Your Potential,', 'Unlocked.'],
+        title: ['Learn With Purpose.', 'Grow With Confidence.'],
         text: education.lead,
         cta: 'Explore Uexora Education',
         href: '/education',
