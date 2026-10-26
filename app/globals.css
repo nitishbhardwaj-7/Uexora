@@ -1480,6 +1480,11 @@ h4,
   position: absolute;
   inset: 0;
 }
+/* Its own layer, so the slides' stacking stays inside it and the panel's top fade and its
+   blend into the panel colour at the foot stay above the photos as before. */
+.panel-slides {
+  z-index: 0;
+}
 .panel-slides__slide {
   opacity: 0;
 }
