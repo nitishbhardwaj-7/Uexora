@@ -3150,24 +3150,6 @@ a.cdirect__value:hover {
   font-weight: 600;
   color: var(--ink);
 }
-.form__change {
-  padding: 0;
-  border: 0;
-  background: none;
-  font: inherit;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--blue-700);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  cursor: pointer;
-}
-.form__change:hover {
-  color: var(--ink);
-}
-.form fieldset[hidden] {
-  display: none;
-}
 .form__success {
   display: grid;
   gap: 0.8rem;

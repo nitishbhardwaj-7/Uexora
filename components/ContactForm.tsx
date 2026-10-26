@@ -32,9 +32,9 @@ export default function ContactForm({
   note?: string;
 }) {
   const [division, setDivision] = useState<Division>(initialDivision);
-  // Arriving from a division's pages opens that division's form straight away; the choice of
-  // division is shown only for a general visit (home page, menu) or when asked to change it.
-  const [choosing, setChoosing] = useState(initialDivision === 'general');
+  // Arriving from a division's pages opens that division's form only, with no choice of
+  // division; the choice is shown for a general visit (home page, menu).
+  const choosing = initialDivision === 'general';
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
@@ -94,29 +94,27 @@ export default function ContactForm({
       {!choosing ? (
         <p className="form__division">
           <span>Enquiry for</span> <strong>{LABELS[division]}</strong>
-          <button type="button" className="form__change" onClick={() => setChoosing(true)}>
-            Change
-          </button>
         </p>
-      ) : null}
-      <fieldset className="field" style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }} hidden={!choosing}>
-        <legend>I&rsquo;m interested in</legend>
-        <div className="segmented">
-          {(
-            [
-              ['education', 'Uexora Education'],
-              ['marketing', 'Uexora Marketing Studio'],
-              ['general', 'Something else'],
-            ] as [Division, string][]
-          ).map(([value, label]) => (
-            <label key={value}>
-              <input type="radio" name="division" value={value} checked={division === value} onChange={() => setDivision(value)} />
-              {label}
-            </label>
-          ))}
-        </div>
-        {fieldError('division')}
-      </fieldset>
+      ) : (
+        <fieldset className="field" style={{ border: 0, padding: 0, margin: 0, minWidth: 0 }}>
+          <legend>I&rsquo;m interested in</legend>
+          <div className="segmented">
+            {(
+              [
+                ['education', 'Uexora Education'],
+                ['marketing', 'Uexora Marketing Studio'],
+                ['general', 'Something else'],
+              ] as [Division, string][]
+            ).map(([value, label]) => (
+              <label key={value}>
+                <input type="radio" name="division" value={value} checked={division === value} onChange={() => setDivision(value)} />
+                {label}
+              </label>
+            ))}
+          </div>
+          {fieldError('division')}
+        </fieldset>
+      )}
 
       <div className="form__row">
         <div className="field">
