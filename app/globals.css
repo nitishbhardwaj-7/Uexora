@@ -5818,3 +5818,120 @@ html.reveal-ready .steps--seq.is-in .step p {
     aspect-ratio: 5 / 4;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Programme / service list photo frame: curtain change. The incoming photo is
+   revealed from below when moving down the list (from above when moving up)
+   while it and the outgoing photo drift slightly in the same direction; the
+   caption rises in just after. No zoom, no double-exposure crossfade.
+   Placed last so it overrides the earlier frame rules.
+   -------------------------------------------------------------------------- */
+.pindex__slide {
+  opacity: 0;
+  transform: none;
+  transition: none;
+}
+.pindex__slide.is-prev {
+  opacity: 1;
+  z-index: 1;
+}
+.pindex__slide.is-active {
+  opacity: 1;
+  transform: none;
+  z-index: 2;
+}
+.pindex__caption {
+  z-index: 3;
+  overflow: hidden;
+}
+.pindex__frame.is-down .pindex__slide.is-entering {
+  animation: pindex-curtain-up 0.95s cubic-bezier(0.77, 0, 0.175, 1) both;
+}
+.pindex__frame.is-up .pindex__slide.is-entering {
+  animation: pindex-curtain-down 0.95s cubic-bezier(0.77, 0, 0.175, 1) both;
+}
+.pindex__frame.is-down .pindex__slide.is-entering img {
+  animation: pindex-drift-in-up 0.95s cubic-bezier(0.77, 0, 0.175, 1) both;
+}
+.pindex__frame.is-up .pindex__slide.is-entering img {
+  animation: pindex-drift-in-down 0.95s cubic-bezier(0.77, 0, 0.175, 1) both;
+}
+.pindex__frame.is-down .pindex__slide.is-prev img {
+  animation: pindex-drift-out-up 0.95s cubic-bezier(0.77, 0, 0.175, 1) both;
+}
+.pindex__frame.is-up .pindex__slide.is-prev img {
+  animation: pindex-drift-out-down 0.95s cubic-bezier(0.77, 0, 0.175, 1) both;
+}
+.pindex__caption .is-new {
+  display: inline-block;
+  animation: pindex-caption-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+.pindex__caption .pindex__caption-title.is-new {
+  animation-delay: 0.38s;
+}
+@keyframes pindex-curtain-up {
+  from {
+    clip-path: inset(100% 0 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes pindex-curtain-down {
+  from {
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes pindex-drift-in-up {
+  from {
+    translate: 0 8%;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+@keyframes pindex-drift-in-down {
+  from {
+    translate: 0 -8%;
+  }
+  to {
+    translate: 0 0;
+  }
+}
+@keyframes pindex-drift-out-up {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 -6%;
+  }
+}
+@keyframes pindex-drift-out-down {
+  from {
+    translate: 0 0;
+  }
+  to {
+    translate: 0 6%;
+  }
+}
+@keyframes pindex-caption-in {
+  from {
+    opacity: 0;
+    translate: 0 0.8em;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pindex__slide.is-entering,
+  .pindex__slide.is-entering img,
+  .pindex__slide.is-prev img,
+  .pindex__caption .is-new {
+    animation: none;
+  }
+}
