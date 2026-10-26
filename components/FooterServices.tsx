@@ -19,9 +19,9 @@ type Row = { key: 'education' | 'marketing'; label: string; href: string; items:
 
 /**
  * Footer service marquees. Education scrolls left, Marketing scrolls right; division pages
- * show only their own row. The first copy of each row is real, crawlable links; the second
- * copy only completes the loop, so it is plain text hidden from search engines and screen
- * readers. Under reduced motion the row stands still and can be scrolled.
+ * show only their own row. Both copies of a row are links, so whatever is on screen can be
+ * clicked; the second copy (which completes the loop) is skipped by keyboard and screen
+ * readers and kept out of search snippets. Under reduced motion the row stands still and can be scrolled.
  * With a single row (division pages) each item is a photo card with its name beneath.
  */
 export default function FooterServices({ education, marketing }: { education: Item[]; marketing: Item[] }) {
@@ -65,18 +65,19 @@ export default function FooterServices({ education, marketing }: { education: It
               <ul className="fmarquee__set fmarquee__set--copy" aria-hidden="true" data-nosnippet>
                 {row.items.map((it) => (
                   <li key={it.href}>
+                    {/* Clickable like the first copy, but skipped by keyboard and screen readers. */}
                     {cards ? (
-                      <span className="fmarquee__card">
+                      <Link href={it.href} className="fmarquee__card" tabIndex={-1}>
                         <span className="fmarquee__card-media">
                           {it.image ? <CmsImage src={it.image} alt="" fill sizes="(max-width: 700px) 60vw, 300px" quality={75} loading="lazy" /> : null}
                         </span>
                         <span className="fmarquee__card-title">{it.title}</span>
-                      </span>
+                      </Link>
                     ) : (
-                      <span className="fmarquee__item">
+                      <Link href={it.href} className="fmarquee__item" tabIndex={-1}>
                         <Thumb src={it.image} />
                         {it.title}
-                      </span>
+                      </Link>
                     )}
                   </li>
                 ))}
