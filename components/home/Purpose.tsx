@@ -52,6 +52,35 @@ export default function Purpose({ content, education, marketing }: { content: Ho
               <span className="purpose__chip">Marketing</span>
             </figure>
 
+            {/* Growth chart in the space under the Education photo: bars grow up in turn and a gold
+                trend line draws with the scroll. Decorative only, so no figures or labels. */}
+            <div className="purpose__chart" data-reveal data-reveal-delay="0.3">
+              <svg viewBox="0 0 280 180">
+                <g className="purpose__chart-grid">
+                  <line x1="0" y1="170" x2="280" y2="170" />
+                  <line x1="0" y1="122" x2="280" y2="122" />
+                  <line x1="0" y1="74" x2="280" y2="74" />
+                  <line x1="0" y1="26" x2="280" y2="26" />
+                </g>
+                {[40, 62, 86, 112, 144].map((h, i, all) => (
+                  <rect
+                    key={i}
+                    className={['purpose__chart-bar', i === all.length - 1 ? 'purpose__chart-bar--now' : ''].filter(Boolean).join(' ')}
+                    x={18 + i * 52}
+                    y={170 - h}
+                    width="32"
+                    height={h}
+                    rx="7"
+                    style={{ '--i': i } as React.CSSProperties}
+                  />
+                ))}
+              </svg>
+              <svg className="purpose__chart-trend" viewBox="0 0 280 180" data-draw-scroll>
+                <path d="M34 118 C 62 108, 80 98, 86 96 S 128 76, 138 72 S 178 50, 190 44 S 226 18, 242 12" />
+              </svg>
+              <span className="purpose__chart-dot" />
+            </div>
+
             {/* Two paths drawn with the scroll, meeting at the seal and continuing as one. */}
             <svg className="purpose__paths" viewBox="0 0 600 640" data-draw-scroll>
               <path d="M336 232 C 370 232, 392 218, 426 198" />
