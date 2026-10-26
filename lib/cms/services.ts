@@ -15,6 +15,13 @@ export const servicePath = (division: Division, slug: string) => `${divisionMeta
 
 export const findService = (list: Service[], slug: string) => list.find((s) => s.slug === slug);
 
+/** Photos for the rotating card in a division hero: each programme or service's hero photo, linked to its page. */
+export const heroSlides = (division: Division, list: Service[]) =>
+  list.flatMap((s) => {
+    const photo = s.heroImage || s.image;
+    return photo ? [{ src: photo.src, alt: photo.alt, label: s.title, href: servicePath(division, s.slug) }] : [];
+  });
+
 /** Meta description: the editor's text if set, otherwise the intro trimmed to a sentence boundary near 155 characters. */
 export function serviceDescription(s: Service): string {
   if (s.seo?.description) return s.seo.description;

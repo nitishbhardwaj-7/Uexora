@@ -3,6 +3,7 @@ import Link from 'next/link';
 import Monogram from '@/components/brand/Monogram';
 import Button from '@/components/ui/Button';
 import PageHeroMotion from '@/components/sections/PageHeroMotion';
+import HeroSlideshow, { type HeroSlide } from '@/components/sections/HeroSlideshow';
 
 type Props = {
   eyebrow: string;
@@ -19,14 +20,16 @@ type Props = {
       `image` as well, that becomes a floating card, with `stat` in a frosted strip on it. */
   background?: { src: string; alt: string };
   stat?: { value: string; label: string; text?: string };
+  /** Image-led variant only: photos that take turns in a floating card on the right. */
+  slides?: HeroSlide[];
 };
 
-export default function PageHero({ eyebrow, title, lead, tone = 'light', primary, secondary, image, chips, crumbs, background, stat }: Props) {
+export default function PageHero({ eyebrow, title, lead, tone = 'light', primary, secondary, image, chips, crumbs, background, stat, slides }: Props) {
   const dark = tone === 'dark';
   const immersive = !!background;
   return (
     <section
-      className={['page-hero', image || immersive ? 'page-hero--full' : '', immersive ? 'page-hero--immersive' : ''].filter(Boolean).join(' ')}
+      className={['page-hero', image || immersive ? 'page-hero--full' : '', immersive ? 'page-hero--immersive' : '', immersive && !image && slides?.length ? 'page-hero--slides' : ''].filter(Boolean).join(' ')}
       data-tone={tone}
       aria-labelledby="page-title"
     >
@@ -111,6 +114,10 @@ export default function PageHero({ eyebrow, title, lead, tone = 'light', primary
                 {stat.text ? <span className="page-hero__stat-text">{stat.text}</span> : null}
               </div>
             ) : null}
+          </div>
+        ) : immersive && slides?.length ? (
+          <div className="page-hero__media page-hero__media--slides">
+            <HeroSlideshow slides={slides} />
           </div>
         ) : null}
       </PageHeroMotion>

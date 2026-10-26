@@ -8,6 +8,7 @@ import CtaBand from '@/components/sections/CtaBand';
 import Signpost from '@/components/sections/Signpost';
 import Faq from '@/components/sections/Faq';
 import { getEducation } from '@/lib/cms';
+import { heroSlides } from '@/lib/cms/services';
 import { pageMetadata } from '@/lib/seo';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -28,6 +29,7 @@ export default async function EducationPage() {
         primary={e.hero.primary}
         secondary={e.hero.secondary}
         background={e.hero.background}
+        slides={heroSlides('education', e.programmes)}
         chips={e.hero.chips}
       />
 

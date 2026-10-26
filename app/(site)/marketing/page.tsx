@@ -8,6 +8,7 @@ import CtaBand from '@/components/sections/CtaBand';
 import Signpost from '@/components/sections/Signpost';
 import Faq from '@/components/sections/Faq';
 import { getMarketing } from '@/lib/cms';
+import { heroSlides } from '@/lib/cms/services';
 import { pageMetadata } from '@/lib/seo';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -28,6 +29,7 @@ export default async function MarketingPage() {
         primary={m.hero.primary}
         secondary={m.hero.secondary}
         background={m.hero.background}
+        slides={heroSlides('marketing', m.services)}
         chips={m.hero.chips}
       />
 

@@ -20,7 +20,8 @@ const nextConfig = {
     remotePatterns: [{ protocol: 'https', hostname: 'cdn.sanity.io' }],
     qualities: [70, 75, 82],
     formats: ['image/avif', 'image/webp'],
-    deviceSizes: [360, 414, 640, 768, 1024, 1280, 1536, 1920],
+    // Up to 3200 so full-width hero photos stay sharp on high-density screens.
+    deviceSizes: [360, 414, 640, 768, 1024, 1280, 1536, 1920, 2560, 3200],
     imageSizes: [48, 64, 96, 128, 192, 256, 320, 384, 520],
     minimumCacheTTL: 60 * 60 * 24 * 30,
   },
