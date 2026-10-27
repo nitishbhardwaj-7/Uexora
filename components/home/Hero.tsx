@@ -76,7 +76,11 @@ export default function Hero({ content }: Props) {
         el.classList.add('is-live');
       }
 
-      const breathe = () => gsap.to(mark, { y: -10, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+      // Idle float: the wordmark moves like the monogram, a beat behind it.
+      const breathe = () => {
+        gsap.to(mark, { y: -10, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+        gsap.to(word, { y: -10, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1, delay: 0.35 });
+      };
 
       const play = (fromOpening = false) => {
         if (reduced) return;
@@ -127,12 +131,17 @@ export default function Hero({ content }: Props) {
     if (!reduced && isFinePointer() && !isNarrow()) {
       const tiltX = gsap.quickTo(q('.hero__mark')[0], 'rotateY', { duration: 1.2, ease: 'power3.out' });
       const tiltY = gsap.quickTo(q('.hero__mark')[0], 'rotateX', { duration: 1.2, ease: 'power3.out' });
-      gsap.set(q('.hero__mark'), { transformPerspective: 900 });
+      // The wordmark tilts the same way, on its own inner layer (its box carries the float).
+      const wordTiltX = gsap.quickTo(q('.hero__word-tilt')[0], 'rotateY', { duration: 1.2, ease: 'power3.out' });
+      const wordTiltY = gsap.quickTo(q('.hero__word-tilt')[0], 'rotateX', { duration: 1.2, ease: 'power3.out' });
+      gsap.set(q('.hero__mark, .hero__word-tilt'), { transformPerspective: 900 });
       move = (e: MouseEvent) => {
         const dx = (e.clientX / window.innerWidth - 0.5) * 2;
         const dy = (e.clientY / window.innerHeight - 0.5) * 2;
         tiltX(dx * 7);
         tiltY(-dy * 5);
+        wordTiltX(dx * 7);
+        wordTiltY(-dy * 5);
         ctx.add(() => {
           gsap.to(q('.hero__glow'), { x: dx * -36, y: dy * -26, duration: 1.6, ease: 'power3.out' });
           gsap.to(q('.hero__ring'), { x: dx * -16, y: dy * -10, duration: 1.4, ease: 'power3.out', stagger: 0.05 });
@@ -163,7 +172,9 @@ export default function Hero({ content }: Props) {
         <div className="hero__mark-wrap">
           <Monogram className="hero__mark" priority />
         </div>
-        <Wordmark className="hero__word" tone="light" title="UEXORA" priority />
+        <span className="hero__word-tilt">
+          <Wordmark className="hero__word" tone="light" title="UEXORA" priority />
+        </span>
 
         <h1 id="hero-title" className="display hero__title">
           {content.lines.map((text, i) => (
@@ -171,7 +182,7 @@ export default function Hero({ content }: Props) {
               <span className="line">
                 <Line text={text} highlight={content.highlight} />
               </span>
-              {/* keeps the accessible name "Technology that puts you first" as one sentence */}
+              {/* keeps the accessible name of a multi-line headline as one sentence */}
               {i < content.lines.length - 1 ? ' ' : ''}
             </span>
           ))}

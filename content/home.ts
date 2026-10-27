@@ -14,7 +14,7 @@ export const home = {
 
   hero: {
     /** One entry per line of the headline. */
-    lines: ['Technology that', 'puts you first'],
+    lines: ['Focused on you'],
     /** A word or phrase from the headline to render in gold. */
     highlight: 'you',
     sub: 'Two distinct divisions. One shared belief:',
