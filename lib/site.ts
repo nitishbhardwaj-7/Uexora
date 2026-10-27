@@ -23,6 +23,8 @@ export const menu = [
   {
     heading: 'Uexora Education',
     href: '/education',
+    /** Shown beside the links when Education is hovered in the menu (decorative). */
+    image: '/images/uexora-education-card.webp',
     links: [
       { label: 'About', href: '/education#about' },
       { label: 'What we do', href: '/education#programmes' },
@@ -33,6 +35,7 @@ export const menu = [
   {
     heading: 'Uexora Marketing Studio',
     href: '/marketing',
+    image: '/images/uexora-marketing-card.webp',
     links: [
       { label: 'About', href: '/marketing#about' },
       { label: 'What we do', href: '/marketing#services' },
