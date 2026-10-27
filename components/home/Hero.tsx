@@ -101,10 +101,11 @@ export default function Hero({ content }: Props) {
             },
             { once: true },
           );
-          tl.to(words, { yPercent: 0, duration: 1.2, stagger: motion.stagger.words }, 0.75)
-            .to(hl, { '--hl': '100%', duration: 0.9, ease: motion.ease.travel }, 1.4)
-            .to(sub, { opacity: 1, y: 0, duration: 0.9 }, 1.3)
-            .to(actions, { opacity: 1, y: 0, duration: 0.9, stagger: 0.1 }, 1.4);
+          // The headline rises into the space the logo leaves as it lifts.
+          tl.to(words, { yPercent: 0, duration: 1.2, stagger: motion.stagger.words }, 0.45)
+            .to(hl, { '--hl': '100%', duration: 0.9, ease: motion.ease.travel }, 1.15)
+            .to(sub, { opacity: 1, y: 0, duration: 0.9 }, 1.0)
+            .to(actions, { opacity: 1, y: 0, duration: 0.9, stagger: 0.1 }, 1.15);
           return;
         }
 
