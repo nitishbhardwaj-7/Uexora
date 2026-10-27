@@ -2355,7 +2355,7 @@ a.fmarquee__card:focus-visible {
   width: clamp(220px, 34vw, 520px);
   height: auto;
 }
-/* A soft light that crosses the letters once the wipe has finished. */
+/* A soft light that crosses the letters once the wipe has finished, then again every 3 s. */
 .footer__word-in::after {
   content: '';
   position: absolute;
@@ -2366,11 +2366,22 @@ a.fmarquee__card:focus-visible {
   pointer-events: none;
 }
 .footer__word.is-in:not(.no-anim) .footer__word-in::after {
-  animation: word-shine 1.6s cubic-bezier(0.65, 0, 0.35, 1) 1.2s both;
+  animation: word-shine 3s 1.2s infinite both;
 }
+/* The sweep takes the first 1.6 s of each 3 s cycle; the rest is a pause off to the right. */
 @keyframes word-shine {
-  to {
+  0% {
+    transform: translateX(-110%);
+    animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  53%,
+  100% {
     transform: translateX(110%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .footer__word.is-in .footer__word-in::after {
+    animation: none;
   }
 }
 @media (max-width: 900px) {
