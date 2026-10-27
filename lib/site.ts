@@ -37,8 +37,8 @@ export const menu = [
   {
     heading: 'Uexora Marketing Studio',
     href: '/marketing',
-    image: '/images/sections/purpose-marketing.jpg',
-    imagePosition: '50% 18%',
+    image: '/images/sections/menu-marketing.jpg',
+    imagePosition: '50% 50%',
     links: [
       { label: 'About', href: '/marketing#about' },
       { label: 'What we do', href: '/marketing#services' },
