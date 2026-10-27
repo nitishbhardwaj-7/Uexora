@@ -2,7 +2,10 @@ import { TAGLINE } from './logo-paths';
 
 type Props = { className?: string; style?: React.CSSProperties };
 
-/** "FOCUSED ON YOU" — the original vector glyphs from the master logo. Fill via currentColor. */
+/** Glyphs from here on spell "YOU", drawn in gold. */
+const YOU_FROM = 9;
+
+/** "FOCUSED ON YOU" — the original vector glyphs from the master logo. Fill via currentColor, with "YOU" in gold. */
 export default function Tagline({ className, style }: Props) {
   return (
     <svg
@@ -15,7 +18,7 @@ export default function Tagline({ className, style }: Props) {
       <g fill="currentColor">
         {TAGLINE.map((g, i) => (
           <g key={i} transform={`translate(${g.x},${g.y})`}>
-            <path className="tagline-glyph" d={g.d} />
+            <path className="tagline-glyph" d={g.d} fill={i >= YOU_FROM ? 'var(--gold-500)' : undefined} />
           </g>
         ))}
       </g>
