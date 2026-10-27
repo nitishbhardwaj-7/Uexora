@@ -8,9 +8,9 @@ import Wordmark from './brand/Wordmark';
 
 const BODY = MONO.base.reduce((a, b) => (a.length > b.length ? a : b));
 
-/** Milliseconds from first paint: the exit starts once the bar and the logo have taken their
- *  colours (keep in sync with the CSS); the CSS-only fade (no script) starts at FALLBACK_AT_MS. */
-const EXIT_AT_MS = 3150;
+/** Milliseconds from first paint: the exit starts once the line has taken its colours (keep in
+ *  sync with the CSS); the CSS-only fade (no script) starts at FALLBACK_AT_MS. */
+const EXIT_AT_MS = 2900;
 const FLIGHT_MS = 1150;
 const FALLBACK_AT_MS = 4200;
 
@@ -72,11 +72,11 @@ function finish() {
 }
 
 /**
- * Brand opening (about 4.3 s) on white: the "U" draws on as an outline in black and white,
+ * Brand opening (about 4 s) on white: the "U" draws on as an outline in black and white,
  * fills, the swoosh sweeps in and the wordmark rises while the line fills. Once full, the line
- * runs blue to gold and the logo and wordmark take on their colours. Then the white dissolves
- * into the page; on the home page the logo and wordmark glide onto the hero's own (which take
- * over at the end), elsewhere they fade. It plays on every page load.
+ * runs blue to gold. Then the white dissolves into the page while the logo and wordmark take on
+ * their colours; on the home page they glide onto the hero's own as they do (which take over
+ * at the end), elsewhere they fade. It plays on every page load.
  *
  * Up to the exit the sequence is CSS keyframes + SMIL in the server-rendered markup, so it
  * starts at first paint without JavaScript; the exit needs measurements, so React runs it.

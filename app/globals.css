@@ -806,9 +806,9 @@ h4,
 
 /* --------------------------------------------------------------------------
    Preloader — CSS/SMIL driven up to the exit so it starts at first paint (timings in
-   Preloader.tsx). In black and white, the bar fills, then turns blue-gold; the logo and
-   wordmark take on their colours; then the white dissolves into the page while (on the home
-   page) the logo and wordmark glide onto the hero's own, which take over seamlessly.
+   Preloader.tsx). In black and white, the bar fills, then turns blue-gold; then the white
+   dissolves into the page while the logo and wordmark take on their colours and (on the home
+   page) glide onto the hero's own, which take over seamlessly.
    -------------------------------------------------------------------------- */
 .preloader {
   position: fixed;
@@ -886,8 +886,13 @@ h4,
   height: 100%;
   object-fit: contain;
   opacity: 0;
-  /* fades in as the drawn mark hands over, then takes on its colours once the bar is full */
-  animation: pl-fade-in 0.55s ease-in-out 1.35s both, pl-colour 0.8s cubic-bezier(0.45, 0, 0.25, 1) 2.4s both;
+  /* fades in as the drawn mark hands over; takes on its colours as it glides into the page */
+  animation: pl-fade-in 0.55s ease-in-out 1.35s both;
+  transition: filter 1s cubic-bezier(0.45, 0, 0.25, 1);
+}
+.preloader.is-leaving .preloader__exact,
+.preloader.is-leaving .preloader__word-brand {
+  filter: grayscale(0) contrast(1) brightness(1);
 }
 .preloader__word {
   position: relative;
@@ -904,15 +909,14 @@ h4,
 }
 .preloader__word-brand {
   filter: grayscale(1) contrast(1.15) brightness(0.92);
-  animation: pl-colour 0.8s cubic-bezier(0.45, 0, 0.25, 1) 2.5s both;
-  transition: opacity 0.8s ease 0.15s;
+  transition: filter 0.6s cubic-bezier(0.45, 0, 0.25, 1), opacity 0.8s ease 0.3s;
 }
 /* White letters for the dark hero, faded in while the white dissolves. */
 .preloader__word .preloader__word-light {
   position: absolute;
   inset: 0;
   opacity: 0;
-  transition: opacity 0.8s ease 0.15s;
+  transition: opacity 0.8s ease 0.3s;
 }
 .preloader.is-leaving .preloader__word-light {
   opacity: 1;
@@ -997,11 +1001,6 @@ h4,
 @keyframes pl-bar {
   to {
     transform: scaleX(1);
-  }
-}
-@keyframes pl-colour {
-  to {
-    filter: grayscale(0) contrast(1) brightness(1);
   }
 }
 @keyframes pl-gone {
