@@ -5,6 +5,7 @@ import { Statement } from '@/components/sections/Blocks';
 import CtaBand from '@/components/sections/CtaBand';
 import Faq from '@/components/sections/Faq';
 import Monogram from '@/components/brand/Monogram';
+import CmsImage from '@/components/ui/CmsImage';
 import { ArrowLink } from '@/components/ui/Button';
 import { site } from '@/lib/site';
 import type { Service } from '@/content/types';
@@ -33,8 +34,12 @@ export default function ServicePage({ division, service: s, all, statement, cta 
   const url = `${site.url}${servicePath(division, s.slug)}`;
   const contact = `/contact?division=${division}`;
   const unitCap = meta.unit.charAt(0).toUpperCase() + meta.unit.slice(1);
-  // Hero carries the one-line promise; the overview opens with the full intro, then audience and detail.
-  const body = [s.promise ? s.text : '', s.whoFor, ...(s.details || [])].filter(Boolean);
+  // Hero carries the one-line promise; the overview opens with the full intro, then audience and
+  // detail. Detail paragraphs that repeat the intro or the audience line are left out.
+  const intro = s.promise ? s.text : '';
+  const same = (a: string, b: string) => a.replace(/\s+/g, ' ').trim() === b.replace(/\s+/g, ' ').trim();
+  const details = (s.details || []).filter((d) => d && !same(d, intro) && !same(d, s.whoFor || ''));
+  const overviewPhoto = s.image || s.heroImage;
   const enquire = division === 'education' ? 'Speak with our education team' : 'Discuss your requirements';
   const faqs = s.faqs?.filter((f) => f.q && f.a) || [];
   const imageUrl = s.image ? (s.image.src.startsWith('http') ? s.image.src : `${site.url}${s.image.src}`) : null;
@@ -81,11 +86,33 @@ export default function ServicePage({ division, service: s, all, statement, cta 
             <div data-reveal>
               <ArrowLink href={contact}>Ask about this {meta.unit}</ArrowLink>
             </div>
+            {overviewPhoto ? (
+              <figure className="split__photo" data-reveal="mask" data-reveal-delay="0.15">
+                <div className="split__photo-in" data-parallax="0.15">
+                  <CmsImage src={overviewPhoto.src} alt={overviewPhoto.alt} fill sizes="(max-width: 900px) 92vw, 40vw" quality={82} />
+                </div>
+              </figure>
+            ) : null}
           </div>
-          <div className="split__body" data-reveal-group>
-            {body.map((p, i) => (
-              <p key={i}>{p}</p>
-            ))}
+          <div className="split__body">
+            {/* The intro arrives word by word, sharpening from a soft blur; the rest rises in. */}
+            {intro ? (
+              <p className="split__lead" data-words data-words-delay="0.1">
+                {intro}
+              </p>
+            ) : null}
+            {s.whoFor ? (
+              <p className="split__who" data-reveal data-reveal-delay="0.2">
+                {s.whoFor}
+              </p>
+            ) : null}
+            {details.length ? (
+              <div className="split__more" data-reveal-group data-stagger="0.12">
+                {details.map((p, i) => (
+                  <p key={i}>{p}</p>
+                ))}
+              </div>
+            ) : null}
           </div>
         </div>
       </section>
