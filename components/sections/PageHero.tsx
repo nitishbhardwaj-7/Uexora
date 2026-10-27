@@ -2,6 +2,7 @@ import CmsImage from '@/components/ui/CmsImage';
 import Link from 'next/link';
 import Monogram from '@/components/brand/Monogram';
 import Button from '@/components/ui/Button';
+import { becauseYou } from '@/components/ui/BecauseYou';
 import PageHeroMotion from '@/components/sections/PageHeroMotion';
 import HeroSlideshow, { type HeroSlide } from '@/components/sections/HeroSlideshow';
 
@@ -71,7 +72,7 @@ export default function PageHero({ eyebrow, title, lead, tone = 'light', primary
             {title}
           </h1>
           <p className="lead">
-            {lead}
+            {becauseYou(lead)}
           </p>
           <div className="btn-row">
             <Button href={primary.href} variant={dark ? 'gold' : 'blue'}>

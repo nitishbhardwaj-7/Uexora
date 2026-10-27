@@ -2,6 +2,7 @@ import Link from 'next/link';
 import PanelSlideshow from '@/components/home/PanelSlideshow';
 import Monogram from '@/components/brand/Monogram';
 import { Arrow } from '@/components/ui/Button';
+import { becauseYou } from '@/components/ui/BecauseYou';
 import type { HomeContent } from '@/content/home';
 
 const LABELS: Record<string, string> = { education: 'Education', marketing: 'Marketing' };
@@ -41,7 +42,7 @@ export default function Divisions({ content, photos = {} }: { content: HomeConte
                     </span>
                   ))}
                 </h3>
-                <p>{p.text}</p>
+                <p>{becauseYou(p.text)}</p>
                 <span className="link-arrow">
                   <span>{p.cta}</span>
                   <Arrow />
