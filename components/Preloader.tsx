@@ -10,9 +10,9 @@ const BODY = MONO.base.reduce((a, b) => (a.length > b.length ? a : b));
 
 /** Milliseconds from first paint: the exit starts once the line has taken its colours (keep in
  *  sync with the CSS); the CSS-only fade (no script) starts at FALLBACK_AT_MS. */
-const EXIT_AT_MS = 2900;
+const EXIT_AT_MS = 3800;
 const FLIGHT_MS = 1150;
-const FALLBACK_AT_MS = 4200;
+const FALLBACK_AT_MS = 5100;
 
 /** Where an image's artwork is actually drawn inside its box (object-fit: contain). */
 function drawn(img: HTMLImageElement) {
@@ -72,7 +72,7 @@ function finish() {
 }
 
 /**
- * Brand opening (about 4 s) on white: the "U" draws on as an outline in black and white,
+ * Brand opening (about 5 s) on white: the "U" draws on as an outline in black and white,
  * fills, the swoosh sweeps in and the wordmark rises while the line fills. Once full, the line
  * runs blue to gold. Then the white dissolves into the page while the logo and wordmark take on
  * their colours; on the home page they glide onto the hero's own as they do (which take over
@@ -174,7 +174,7 @@ export default function Preloader() {
               <filter id="pl-liquid" filterUnits="userSpaceOnUse" x="-400" y="-400" width="2400" height="2400">
                 <feTurbulence type="fractalNoise" baseFrequency="0.005 0.009" numOctaves="1" seed="7" result="noise" />
                 <feDisplacementMap in="SourceGraphic" in2="noise" scale="48" xChannelSelector="R" yChannelSelector="G">
-                  <animate attributeName="scale" from="48" to="0" begin="0.5s" dur="1.1s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1" />
+                  <animate attributeName="scale" from="48" to="0" begin="0.7s" dur="1.55s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1" />
                 </feDisplacementMap>
               </filter>
               <mask id="pl-fill" maskUnits="userSpaceOnUse" x="0" y="0" width={MONO.w} height={MONO.h}>
@@ -182,7 +182,7 @@ export default function Preloader() {
               </mask>
               <mask id="pl-sweep" maskUnits="userSpaceOnUse" x="0" y="0" width={MONO.w} height={MONO.h}>
                 <circle className="pl-liquid" cx="560" cy="900" r="0" fill="#fff" filter="url(#pl-liquid)">
-                  <animate attributeName="r" from="0" to="1400" begin="0.8s" dur="0.9s" fill="freeze" calcMode="spline" keySplines="0.65 0 0.35 1" />
+                  <animate attributeName="r" from="0" to="1400" begin="1.1s" dur="1.25s" fill="freeze" calcMode="spline" keySplines="0.65 0 0.35 1" />
                 </circle>
               </mask>
             </defs>
