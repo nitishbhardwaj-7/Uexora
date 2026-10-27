@@ -35,10 +35,19 @@ export default function ServicePage({ division, service: s, all, statement, cta 
   const contact = `/contact?division=${division}`;
   const unitCap = meta.unit.charAt(0).toUpperCase() + meta.unit.slice(1);
   // Hero carries the one-line promise; the overview opens with the full intro, then audience and
-  // detail. Detail paragraphs that repeat the intro or the audience line are left out.
+  // detail. A detail paragraph that mostly restates the intro or the audience line (80% or more of
+  // its words in common) is left out, so the section never reads the same point twice.
   const intro = s.promise ? s.text : '';
-  const same = (a: string, b: string) => a.replace(/\s+/g, ' ').trim() === b.replace(/\s+/g, ' ').trim();
-  const details = (s.details || []).filter((d) => d && !same(d, intro) && !same(d, s.whoFor || ''));
+  const wordsOf = (t: string) => new Set(t.toLowerCase().match(/[a-z]+/g) || []);
+  const restates = (a: string, b: string) => {
+    if (!a || !b) return false;
+    const x = wordsOf(a);
+    const y = wordsOf(b);
+    let common = 0;
+    x.forEach((w) => y.has(w) && common++);
+    return common / Math.max(1, Math.min(x.size, y.size)) >= 0.8;
+  };
+  const details = (s.details || []).filter((d) => d && !restates(d, intro) && !restates(d, s.whoFor || ''));
   const overviewPhoto = s.image || s.heroImage;
   const enquire = division === 'education' ? 'Speak with our education team' : 'Discuss your requirements';
   const faqs = s.faqs?.filter((f) => f.q && f.a) || [];
@@ -78,14 +87,17 @@ export default function ServicePage({ division, service: s, all, statement, cta 
       />
 
       <section id="overview" className="section" data-tone={sectionTone} aria-labelledby="overview-title">
-        <div className="container split">
-          <div className="split__aside">
+        <div className="container">
+          {/* Heading row on top; below it the photo and the text start and end on the same lines. */}
+          <div className="overview-head">
             <h2 id="overview-title" className="h2" data-split>
               {division === 'education' ? 'What it offers, and who it’s for' : 'What it covers, and who it’s for'}
             </h2>
             <div data-reveal>
               <ArrowLink href={contact}>Ask about this {meta.unit}</ArrowLink>
             </div>
+          </div>
+          <div className={['split', 'split--overview', overviewPhoto ? '' : 'split--overview-text'].filter(Boolean).join(' ')}>
             {overviewPhoto ? (
               <figure className="split__photo" data-reveal="mask" data-reveal-delay="0.15">
                 <div className="split__photo-in" data-parallax="0.15">
@@ -93,26 +105,26 @@ export default function ServicePage({ division, service: s, all, statement, cta 
                 </div>
               </figure>
             ) : null}
-          </div>
-          <div className="split__body">
-            {/* The intro arrives word by word, sharpening from a soft blur; the rest rises in. */}
-            {intro ? (
-              <p className="split__lead" data-words data-words-delay="0.1">
-                {intro}
-              </p>
-            ) : null}
-            {s.whoFor ? (
-              <p className="split__who" data-reveal data-reveal-delay="0.2">
-                {s.whoFor}
-              </p>
-            ) : null}
-            {details.length ? (
-              <div className="split__more" data-reveal-group data-stagger="0.12">
-                {details.map((p, i) => (
-                  <p key={i}>{p}</p>
-                ))}
-              </div>
-            ) : null}
+            <div className="split__body">
+              {/* The intro arrives word by word, sharpening from a soft blur; the rest rises in. */}
+              {intro ? (
+                <p className="split__lead" data-words data-words-delay="0.1">
+                  {intro}
+                </p>
+              ) : null}
+              {s.whoFor ? (
+                <p className="split__who" data-reveal data-reveal-delay="0.2">
+                  {s.whoFor}
+                </p>
+              ) : null}
+              {details.length ? (
+                <div className="split__more" data-reveal-group data-stagger="0.12">
+                  {details.map((p, i) => (
+                    <p key={i}>{p}</p>
+                  ))}
+                </div>
+              ) : null}
+            </div>
           </div>
         </div>
       </section>

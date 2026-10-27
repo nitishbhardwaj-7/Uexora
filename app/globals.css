@@ -499,6 +499,40 @@ h4,
   position: absolute;
   inset: -10% 0;
 }
+/* Overview: heading row on top, then the photo beside the text. The row takes the text's height
+   and the photo stretches to it, so both start and end on the same lines. */
+.overview-head {
+  display: grid;
+  gap: 1.25rem;
+  justify-items: start;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+.overview-head .h2 {
+  max-width: 18ch;
+}
+.split--overview {
+  align-items: stretch;
+}
+.split--overview .split__photo {
+  margin: 0;
+  aspect-ratio: auto;
+  height: 100%;
+  min-height: 240px;
+}
+.split--overview .split__body {
+  align-content: start;
+}
+.split--overview-text {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 48rem;
+}
+@media (max-width: 900px) {
+  .split--overview .split__photo {
+    height: auto;
+    aspect-ratio: 5 / 4;
+    min-height: 0;
+  }
+}
 .split__photo-in img {
   object-fit: cover;
 }
