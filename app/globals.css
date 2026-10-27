@@ -2828,7 +2828,20 @@ a.fmarquee__card:focus-visible {
   width: min(100%, 400px);
   aspect-ratio: 4 / 5;
   box-shadow: 0 40px 80px -40px rgba(6, 16, 58, 0.6);
-  translate: 0 4vh;
+}
+/* Desktop: the card takes the copy's height, so the two start and end on the same lines. */
+@media (min-width: 901px) {
+  .page-hero--immersive .page-hero__grid {
+    align-items: stretch;
+  }
+  .page-hero--immersive .page-hero__media {
+    /* widens on large screens so the taller card keeps close to its 4:5 shape */
+    width: min(100%, clamp(400px, 27vw, 520px));
+    aspect-ratio: auto;
+    height: auto;
+    max-height: none;
+    min-height: 360px;
+  }
 }
 /* With the card on the right, the background photo moves left so its people sit between
    the copy and the card, and its right edge fades into the page colour behind the card. */
