@@ -154,7 +154,7 @@ export default function Header({ email, tagline, showBlog }: Props) {
                             </Link>
                           </div>
                           <figure className="menu__sub-photo" aria-hidden="true">
-                            <CmsImage src={sub.image} alt="" fill sizes="(max-width: 1400px) 36vw, 30vw" quality={82} />
+                            <CmsImage src={sub.image} alt="" fill sizes="(max-width: 1400px) 36vw, 30vw" quality={82} style={{ objectPosition: sub.imagePosition }} />
                           </figure>
                         </div>
                       </div>

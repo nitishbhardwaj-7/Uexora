@@ -3,6 +3,7 @@ import { hasPosts } from '@/lib/cms/blog';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Preloader from '@/components/Preloader';
+import Announcement from '@/components/Announcement';
 import Enhancements from '@/components/Enhancements';
 import PageTransition from '@/components/PageTransition';
 import PrefetchRoutes from '@/components/PrefetchRoutes';
@@ -21,6 +22,7 @@ export default async function SiteChrome({ children }: { children: React.ReactNo
       <Preloader />
       <Header email={s.email} tagline={s.tagline} showBlog={blog} />
       <main id="main">
+        <Announcement on={s.announcementOn} items={s.announcements} />
         <PageTransition>{children}</PageTransition>
       </main>
       <Footer showBlog={blog} />

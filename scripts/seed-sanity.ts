@@ -43,6 +43,7 @@ const arrayTypes: Record<string, string> = {
   panels: 'panel',
   faqs: 'faq',
   rows: 'signpost',
+  announcements: 'announcement',
 };
 
 const assetCache = new Map<string, string>();

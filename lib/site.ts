@@ -24,7 +24,9 @@ export const menu = [
     heading: 'Uexora Education',
     href: '/education',
     /** Shown beside the links when Education is hovered in the menu (decorative). */
-    image: '/images/uexora-education-card.webp',
+    image: '/images/sections/purpose-education.jpg',
+    /** Crop focus for the landscape frame (the photo is portrait). */
+    imagePosition: '50% 30%',
     links: [
       { label: 'About', href: '/education#about' },
       { label: 'What we do', href: '/education#programmes' },
@@ -35,7 +37,8 @@ export const menu = [
   {
     heading: 'Uexora Marketing Studio',
     href: '/marketing',
-    image: '/images/uexora-marketing-card.webp',
+    image: '/images/sections/purpose-marketing.jpg',
+    imagePosition: '50% 18%',
     links: [
       { label: 'About', href: '/marketing#about' },
       { label: 'What we do', href: '/marketing#services' },
