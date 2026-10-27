@@ -8,11 +8,11 @@ import Wordmark from './brand/Wordmark';
 
 const BODY = MONO.base.reduce((a, b) => (a.length > b.length ? a : b));
 
-/** Milliseconds from first paint: the exit starts once the logo has taken its colours on the
- *  blue (keep in sync with the CSS); the CSS-only fade (no script) starts at FALLBACK_AT_MS. */
-const EXIT_AT_MS = 5750;
-const FLIGHT_MS = 1200;
-const FALLBACK_AT_MS = 6850;
+/** Milliseconds from first paint: the exit starts once the line has taken its colours (keep in
+ *  sync with the CSS); the CSS-only fade (no script) starts at FALLBACK_AT_MS. */
+const EXIT_AT_MS = 2900;
+const FLIGHT_MS = 1150;
+const FALLBACK_AT_MS = 4200;
 
 /** Where an image's artwork is actually drawn inside its box (object-fit: contain). */
 function drawn(img: HTMLImageElement) {
@@ -72,12 +72,11 @@ function finish() {
 }
 
 /**
- * Brand opening (about 7 s). On white, in black and white, the pieces of the "U" glide
- * together, then the wordmark rises. Only then does the line appear and fill, turning blue to
- * gold. The white becomes the hero's blue and the logo takes on its colours. Finally the blue
- * opens onto the page: on the home page the logo and wordmark lift onto the hero's own (which
- * take over at the end) and the headline appears beneath; elsewhere they fade. It plays on
- * every page load.
+ * Brand opening (about 4 s) on white: the "U" draws on as an outline in black and white,
+ * fills, the swoosh sweeps in and the wordmark rises while the line fills. Once full, the line
+ * runs blue to gold. Then the white dissolves into the page while the logo and wordmark take on
+ * their colours; on the home page they glide onto the hero's own as they do (which take over
+ * at the end), elsewhere they fade. It plays on every page load.
  *
  * Up to the exit the sequence is CSS keyframes + SMIL in the server-rendered markup, so it
  * starts at first paint without JavaScript; the exit needs measurements, so React runs it.
@@ -170,13 +169,31 @@ export default function Preloader() {
                 <stop offset="0.5" stopColor="#85858a" />
                 <stop offset="1" stopColor="#a9a9ad" />
               </linearGradient>
+              {/* The liquid wobble lives only in the masks (the water line and the sweep's edge),
+                  so the U and the swoosh keep their exact outlines while they fill. */}
+              <filter id="pl-liquid" filterUnits="userSpaceOnUse" x="-400" y="-400" width="2400" height="2400">
+                <feTurbulence type="fractalNoise" baseFrequency="0.005 0.009" numOctaves="1" seed="7" result="noise" />
+                <feDisplacementMap in="SourceGraphic" in2="noise" scale="48" xChannelSelector="R" yChannelSelector="G">
+                  <animate attributeName="scale" from="48" to="0" begin="0.5s" dur="1.1s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1" />
+                </feDisplacementMap>
+              </filter>
+              <mask id="pl-fill" maskUnits="userSpaceOnUse" x="0" y="0" width={MONO.w} height={MONO.h}>
+                <path className="pl-wave pl-liquid" d="M-300 0 C -50 -70 150 70 400 0 S 850 -70 1100 0 S 1400 40 1600 0 L 1600 1500 L -300 1500 Z" fill="#fff" filter="url(#pl-liquid)" />
+              </mask>
+              <mask id="pl-sweep" maskUnits="userSpaceOnUse" x="0" y="0" width={MONO.w} height={MONO.h}>
+                <circle className="pl-liquid" cx="560" cy="900" r="0" fill="#fff" filter="url(#pl-liquid)">
+                  <animate attributeName="r" from="0" to="1400" begin="0.8s" dur="0.9s" fill="freeze" calcMode="spline" keySplines="0.65 0 0.35 1" />
+                </circle>
+              </mask>
             </defs>
-            {/* The pieces of the "U" glide together from apart: the body, the inner sweep, the
-                long swoosh, then the dot (offsets and timings in the CSS). */}
-            <path className="pl-piece pl-piece--body" d={BODY} fill="url(#pl-blue)" />
-            <path className="pl-piece pl-piece--sweep" d={MONO.gold[0]} fill="url(#pl-gold)" />
-            <path className="pl-piece pl-piece--swoosh" d={MONO.gold[1]} fill="url(#pl-gold)" />
-            <circle className="pl-piece pl-piece--dot" cx={MONO.dot.cx} cy={MONO.dot.cy} r={MONO.dot.r} fill="url(#pl-gold)" />
+            <path className="pl-outline" d={BODY} pathLength={1} fill="none" stroke="#141416" strokeWidth="5" strokeLinejoin="round" />
+            <path d={BODY} fill="url(#pl-blue)" mask="url(#pl-fill)" />
+            <g mask="url(#pl-sweep)">
+              {MONO.gold.map((d, i) => (
+                <path key={i} d={d} fill="url(#pl-gold)" />
+              ))}
+            </g>
+            <circle className="pl-dot" cx={MONO.dot.cx} cy={MONO.dot.cy} r={MONO.dot.r} fill="url(#pl-gold)" />
           </svg>
           <Image className="preloader__exact" src={MONO_IMG.src} width={MONO_IMG.w} height={MONO_IMG.h} alt="" sizes="240px" preload fetchPriority="high" />
         </div>
