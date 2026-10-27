@@ -36,7 +36,7 @@ export const home = {
   divisions: {
     heading: 'Choose your path.',
     intro:
-      'Two divisions, one company. Uexora Education supports learners from school tuition to AI and robotics; Uexora Marketing Studio helps businesses build a stronger digital presence. Both start with the same question: what are you working towards?',
+      'Two divisions, one company. UEXORA EDUCATION supports learners from school tuition to AI and robotics; UEXORA MARKETING STUDIO helps businesses build a stronger digital presence. Both start with the same question: what are you working towards?',
     panels: [
       {
         key: 'education',
