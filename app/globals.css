@@ -583,6 +583,15 @@ h4,
    -------------------------------------------------------------------------- */
 /* Every button hovers to its opposite brand colour: gold <-> white, navy/blue -> gold,
    outline -> filled. --btn-hover is the fill that wipes up, --btn-hover-fg its text. */
+/* Everything you click to act (buttons, arrow links, the main navigation) is set in Poppins. */
+.btn,
+.link-arrow,
+.header__links a,
+.menu-btn,
+.menu__sub ul a {
+  font-family: var(--font-sub), ui-sans-serif, system-ui, sans-serif;
+  letter-spacing: 0;
+}
 .btn {
   --btn-bg: var(--navy-900);
   --btn-fg: #fff;
