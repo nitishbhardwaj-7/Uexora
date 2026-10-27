@@ -32,7 +32,7 @@ function finish() {
 }
 
 /**
- * Brand opening (about 3.7 s), in black and white on cream so the full-colour logo in the
+ * Brand opening (about 3.7 s), in black and white on white so the full-colour logo in the
  * hero is the reveal: the "U" draws on as an outline, fills,
  * the gold swoosh sweeps in, the exact artwork settles, and the overlay wipes upward
  * while the hero's own entrance begins underneath. It plays on every page load.
@@ -93,13 +93,12 @@ export default function Preloader() {
 
   return (
     <div ref={root} className="preloader" aria-hidden="true">
-      <div className="preloader__glow" />
       <div className="preloader__inner">
         <div className="preloader__mark-wrap">
           <svg viewBox={`0 0 ${MONO.w} ${MONO.h}`} className="preloader__mark" xmlns="http://www.w3.org/2000/svg" shapeRendering="geometricPrecision">
             <defs>
               <linearGradient id="pl-blue" x1="0" y1="0" x2="1" y2="1">
-                {/* Monochrome on cream: the coloured logo is kept for the hero the loader reveals. */}
+                {/* Monochrome on white: the coloured logo is kept for the hero the loader reveals. */}
                 <stop offset="0" stopColor="#3d3d40" />
                 <stop offset="0.45" stopColor="#1c1c1f" />
                 <stop offset="1" stopColor="#0a0a0c" />
