@@ -8,9 +8,49 @@ import Wordmark from './brand/Wordmark';
 
 const BODY = MONO.base.reduce((a, b) => (a.length > b.length ? a : b));
 
-/** Milliseconds (from first paint) at which the overlay starts its exit wipe. Keep in sync with the CSS. */
-const EXIT_AT_MS = 2600;
-const TOTAL_MS = 3700;
+/** Milliseconds from first paint: the exit starts once the bar and the logo have taken their
+ *  colours (keep in sync with the CSS); the CSS-only fade (no script) starts at FALLBACK_AT_MS. */
+const EXIT_AT_MS = 3150;
+const FLIGHT_MS = 1150;
+const FALLBACK_AT_MS = 4200;
+
+/** Where an image's artwork is actually drawn inside its box (object-fit: contain). */
+function drawn(img: HTMLImageElement) {
+  const r = img.getBoundingClientRect();
+  const iw = img.naturalWidth || r.width;
+  const ih = img.naturalHeight || r.height;
+  const s = Math.min(r.width / iw, r.height / ih);
+  return { x: r.left + (r.width - iw * s) / 2, y: r.top + (r.height - ih * s) / 2, w: iw * s, h: ih * s };
+}
+
+/**
+ * Glides the loader's logo and wordmark onto the home hero's (same artwork), so the hero's
+ * own take over without a visible change. Returns no animations when there is no hero to land on.
+ */
+function fly(el: HTMLElement): Animation[] {
+  const pairs = [
+    [el.querySelector('.preloader__mark-wrap'), el.querySelector('.preloader__exact'), document.querySelector('.hero__mark')],
+    [el.querySelector('.preloader__word'), el.querySelector('.preloader__word-brand'), document.querySelector('.hero__word')],
+  ] as [HTMLElement | null, HTMLImageElement | null, HTMLImageElement | null][];
+  if (pairs.some(([w, s, t]) => !w || !s || !t || t.getBoundingClientRect().bottom <= 0)) return [];
+  return pairs.map(([wrap, src, target], i) => {
+    const w = wrap!.getBoundingClientRect();
+    const s = drawn(src!);
+    const t = drawn(target!);
+    const k = t.w / s.w;
+    // Scaling about the wrapper's centre, then moving the artwork's centre onto the target's.
+    const wx = w.left + w.width / 2;
+    const wy = w.top + w.height / 2;
+    const dx = t.x + t.w / 2 - (wx + k * (s.x + s.w / 2 - wx));
+    const dy = t.y + t.h / 2 - (wy + k * (s.y + s.h / 2 - wy));
+    if (i === 0) el.style.setProperty('--pl-k', String(k));
+    return wrap!.animate([{ transform: 'none' }, { transform: `translate(${dx}px, ${dy}px) scale(${k})` }], {
+      duration: FLIGHT_MS,
+      easing: 'cubic-bezier(0.65, 0, 0.35, 1)',
+      fill: 'forwards',
+    });
+  });
+}
 
 declare global {
   interface Window {
@@ -32,13 +72,14 @@ function finish() {
 }
 
 /**
- * Brand opening (about 3.7 s), in black and white on white so the full-colour logo in the
- * hero is the reveal: the "U" draws on as an outline, fills,
- * the gold swoosh sweeps in, the exact artwork settles, and the overlay wipes upward
- * while the hero's own entrance begins underneath. It plays on every page load.
+ * Brand opening (about 4.3 s) on white: the "U" draws on as an outline in black and white,
+ * fills, the swoosh sweeps in and the wordmark rises while the line fills. Once full, the line
+ * runs blue to gold and the logo and wordmark take on their colours. Then the white dissolves
+ * into the page; on the home page the logo and wordmark glide onto the hero's own (which take
+ * over at the end), elsewhere they fade. It plays on every page load.
  *
- * The sequence is CSS keyframes + SMIL in the server-rendered markup, so it starts at
- * first paint without JavaScript. React only waits for the wipe to end.
+ * Up to the exit the sequence is CSS keyframes + SMIL in the server-rendered markup, so it
+ * starts at first paint without JavaScript; the exit needs measurements, so React runs it.
  */
 export default function Preloader() {
   const root = useRef<HTMLDivElement>(null);
@@ -64,23 +105,43 @@ export default function Preloader() {
     });
     window.__lenis?.stop();
 
-    const wipe = el.getAnimations({ subtree: false }).find((a) => (a as CSSAnimation).animationName === 'pl-wipe');
-    const elapsed = wipe ? Number(wipe.currentTime ?? 0) : 0;
+    // The bar's fill started at first paint, so its clock says how far the opening has got.
+    const bar = el.querySelector('.preloader__bar span')?.getAnimations()[0];
+    const elapsed = bar ? Number(bar.currentTime ?? 0) : 0;
     let cancelled = false;
-    // As the wipe begins, the page beneath becomes visible so the hero entrances that start
-    // now are actually seen; it stays inert until the overlay has gone (finish()).
-    const exitTimer = setTimeout(() => {
-      document.body.classList.remove('is-loading');
-      window.dispatchEvent(new CustomEvent('uexora:exit'));
-    }, Math.max(0, EXIT_AT_MS - elapsed));
+    let endTimer: ReturnType<typeof setTimeout> | undefined;
     const end = () => {
       if (cancelled) return;
       setDone(true);
       finish();
     };
-    let endTimer: ReturnType<typeof setTimeout> | undefined;
-    if (wipe) wipe.finished.then(end, end);
-    else endTimer = setTimeout(end, Math.max(0, TOTAL_MS - elapsed));
+
+    // Scripts arrived after the CSS-only fade began: let it finish and start the page.
+    if (elapsed >= FALLBACK_AT_MS) {
+      document.body.classList.remove('is-loading');
+      window.dispatchEvent(new CustomEvent('uexora:exit'));
+      endTimer = setTimeout(end, 800);
+      return () => {
+        cancelled = true;
+        clearTimeout(endTimer);
+      };
+    }
+    el.classList.add('is-js');
+
+    // The page beneath becomes visible as the white dissolves, so the hero entrances that start
+    // now are seen; it stays inert until the overlay has gone (finish()). The hero sets its logo
+    // to its resting place on 'uexora:exit', so it is measured just after.
+    const exitTimer = setTimeout(() => {
+      document.body.classList.remove('is-loading');
+      window.dispatchEvent(new CustomEvent('uexora:exit'));
+      const flights = fly(el);
+      el.classList.add('is-leaving');
+      if (flights.length) Promise.all(flights.map((a) => a.finished)).then(end, end);
+      else {
+        el.classList.add('is-fade');
+        endTimer = setTimeout(end, FLIGHT_MS);
+      }
+    }, Math.max(0, EXIT_AT_MS - elapsed));
 
     return () => {
       cancelled = true;
@@ -136,7 +197,10 @@ export default function Preloader() {
           </svg>
           <Image className="preloader__exact" src={MONO_IMG.src} width={MONO_IMG.w} height={MONO_IMG.h} alt="" sizes="240px" preload fetchPriority="high" />
         </div>
-        <Wordmark className="preloader__word" tone="dark" />
+        <span className="preloader__word">
+          <Wordmark className="preloader__word-brand" tone="brand" priority />
+          <Wordmark className="preloader__word-light" tone="light" />
+        </span>
         <div className="preloader__bar">
           <span />
         </div>

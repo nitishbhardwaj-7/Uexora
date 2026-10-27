@@ -68,22 +68,43 @@ export default function Hero({ content }: Props) {
         gsap.set(glows, { opacity: 0, scale: 0.9 });
       };
 
-      // After the opening, the overlay wipes upward for 0.9 s; the mark and headline sit in the
-      // middle, so the entrance holds briefly and then plays as the overlay clears them.
-      // CSS has kept the hero staged (hidden) since first paint; GSAP takes over the same
+      // After the opening, its white dissolves into the hero while its logo and wordmark glide
+      // onto these (see play). CSS has kept the hero staged (hidden) since first paint; GSAP takes over the same
       // values here, in one synchronous step, so no static frame is ever shown.
       if (!reduced) {
         hide();
         el.classList.add('is-live');
       }
 
+      const breathe = () => gsap.to(mark, { y: -10, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+
       const play = (fromOpening = false) => {
         if (reduced) return;
-        const tl = gsap.timeline({ delay: fromOpening ? 0.45 : 0, defaults: { ease: motion.ease.out, duration: motion.duration.base } });
-        tl.to(glows, { opacity: 1, scale: 1, duration: 2.2, ease: motion.ease.soft }, 0)
-          .to(grid, { opacity: 1, duration: 2, ease: 'none' }, 0.2)
-          .to(mark, { clipPath: 'circle(75% at 50% 58%)', scale: 1, y: 0, duration: 1.4 }, 0.05)
-          .to(rings, { scale: 1, opacity: 1, duration: 2.2, stagger: 0.14 }, 0.1)
+        const tl = gsap.timeline({ defaults: { ease: motion.ease.out, duration: motion.duration.base } });
+        tl.to(glows, { opacity: 1, scale: 1, duration: 2.2, ease: motion.ease.soft }, 0).to(grid, { opacity: 1, duration: 2, ease: 'none' }, 0.2).to(rings, { scale: 1, opacity: 1, duration: 2.2, stagger: 0.14 }, 0.1);
+
+        if (fromOpening) {
+          // The opening's logo and wordmark glide onto these as the white dissolves: they wait,
+          // invisible at their resting place (where the opening measures them), and appear
+          // the moment those land.
+          gsap.set(mark, { clipPath: 'none', scale: 1, y: 0, opacity: 0 });
+          gsap.set(word, { y: 0, opacity: 0 });
+          window.addEventListener(
+            'uexora:ready',
+            () => {
+              gsap.set([mark, word], { opacity: 1 });
+              breathe();
+            },
+            { once: true },
+          );
+          tl.to(words, { yPercent: 0, duration: 1.2, stagger: motion.stagger.words }, 0.75)
+            .to(hl, { '--hl': '100%', duration: 0.9, ease: motion.ease.travel }, 1.4)
+            .to(sub, { opacity: 1, y: 0, duration: 0.9 }, 1.3)
+            .to(actions, { opacity: 1, y: 0, duration: 0.9, stagger: 0.1 }, 1.4);
+          return;
+        }
+
+        tl.to(mark, { clipPath: 'circle(75% at 50% 58%)', scale: 1, y: 0, duration: 1.4 }, 0.05)
           .to(word, { opacity: 1, y: 0 }, 0.45)
           .to(words, { yPercent: 0, duration: 1.2, stagger: motion.stagger.words }, 0.55)
           .to(hl, { '--hl': '100%', duration: 0.9, ease: motion.ease.travel }, 1.15)
@@ -92,7 +113,7 @@ export default function Hero({ content }: Props) {
           .add(() => {
             gsap.set(mark, { clearProps: 'clipPath' });
             // idle breathing on the monogram once it has settled
-            gsap.to(mark, { y: -10, duration: 3.4, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+            breathe();
           }, 1.6);
       };
 
