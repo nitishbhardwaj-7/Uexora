@@ -30,5 +30,5 @@ export default async function EducationServicePage({ params }: Params) {
   const e = await getEducation();
   const s = findService(e.programmes, slug);
   if (!s) notFound();
-  return <ServicePage division="education" service={s} all={e.programmes} statement={e.approach} cta={e.cta} />;
+  return <ServicePage division="education" service={s} statement={e.approach} cta={e.cta} />;
 }

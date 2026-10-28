@@ -30,5 +30,5 @@ export default async function MarketingServicePage({ params }: Params) {
   const m = await getMarketing();
   const s = findService(m.services, slug);
   if (!s) notFound();
-  return <ServicePage division="marketing" service={s} all={m.services} statement={m.philosophy} cta={m.cta} />;
+  return <ServicePage division="marketing" service={s} statement={m.philosophy} cta={m.cta} />;
 }

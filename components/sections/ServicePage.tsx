@@ -1,6 +1,5 @@
 import { JsonLd, BreadcrumbJsonLd } from '@/components/JsonLd';
 import PageHero from '@/components/sections/PageHero';
-import ServiceCards from '@/components/sections/ServiceCards';
 import { Statement } from '@/components/sections/Blocks';
 import CtaBand from '@/components/sections/CtaBand';
 import Faq from '@/components/sections/Faq';
@@ -18,7 +17,6 @@ import { divisionMeta, serviceDescription, servicePath, type Division } from '@/
 type Props = {
   division: Division;
   service: Service;
-  all: Service[];
   /** Pull quote and paragraphs from the division's approach / philosophy section. */
   statement: { heading: string; quote: string; paragraphs: string[]; points?: { title: string; subtitle?: string; text?: string; image?: { src: string; alt: string } }[] };
   cta: { heading: string; paragraphs: string[]; signoff?: string; primary: { label: string; href: string }; secondary?: { label: string; href: string } };
@@ -26,10 +24,11 @@ type Props = {
 
 /**
  * Detail page for one programme (Education) or service (Marketing):
- * hero, who it's for + detail, questions, approach, other items, call to action.
+ * hero, who it's for + detail, approach, questions, call to action. (The other programmes or
+ * services are listed in the footer's sliders, so the page does not repeat them.)
  * Education pages follow the blue theme (dark sections), Marketing the cream theme.
  */
-export default function ServicePage({ division, service: s, all, statement, cta }: Props) {
+export default function ServicePage({ division, service: s, statement, cta }: Props) {
   const meta = divisionMeta[division];
   const dark = division === 'education';
   const heroTone = dark ? 'dark' : 'light';
@@ -251,7 +250,6 @@ export default function ServicePage({ division, service: s, all, statement, cta 
         </section>
       ) : null}
 
-      <ServiceCards id={`other-${meta.units}`} division={division} heading={`Other ${meta.units}`} items={all} exclude={s.slug} tone={sectionTone} compact />
 
       <CtaBand id="next-step" heading={cta.heading} paragraphs={cta.paragraphs} signoff={cta.signoff} primary={cta.primary} secondary={cta.secondary} />
     </>
