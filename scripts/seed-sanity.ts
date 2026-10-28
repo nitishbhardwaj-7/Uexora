@@ -44,6 +44,8 @@ const arrayTypes: Record<string, string> = {
   faqs: 'faq',
   rows: 'signpost',
   announcements: 'announcement',
+  stages: 'gradeStage',
+  boards: 'curriculum',
 };
 
 const assetCache = new Map<string, string>();

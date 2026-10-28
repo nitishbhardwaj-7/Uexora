@@ -564,6 +564,131 @@ h4,
   }
 }
 
+/* Programme pages: support by school stage and the curricula supported, under the overview. */
+.grades,
+.curricula {
+  margin-top: clamp(3.5rem, 7vw, 6rem);
+}
+.grades__head {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 46rem;
+  margin-bottom: clamp(2rem, 4vw, 3.25rem);
+}
+.grades__head p {
+  color: var(--fg-muted);
+  line-height: 1.65;
+}
+/* One step per stage, each set a little higher than the one before, like a rising stair. */
+.grades__steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr));
+  gap: clamp(1.25rem, 3vw, 2.75rem);
+  align-items: end;
+}
+.grades__step {
+  margin-bottom: calc(var(--i, 0) * clamp(1.4rem, 2.6vw, 2.4rem));
+}
+.grades__range {
+  display: grid;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+.grades__label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.grades__num {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: clamp(2.6rem, 4.4vw, 4rem);
+  line-height: 1;
+  color: var(--fg);
+}
+.grades__title {
+  font-size: 1.12rem;
+  margin-bottom: 0.5rem;
+}
+.grades__text {
+  color: var(--fg-muted);
+  font-size: 0.98rem;
+  line-height: 1.6;
+}
+/* Curricula: a round seal for each board, its short name inside (or the board's logo). */
+.curricula__list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: clamp(1.75rem, 3vw, 2.5rem) clamp(1rem, 2vw, 2rem);
+}
+.curricula__item {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 1rem;
+  text-align: center;
+}
+.curricula__mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: clamp(96px, 8.5vw, 118px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--accent) 60%, transparent);
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 14%, transparent), transparent);
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: clamp(1.25rem, 1.7vw, 1.55rem);
+  letter-spacing: 0.02em;
+  color: var(--fg);
+  transition: border-color 0.4s, background-color 0.4s;
+}
+.curricula__mark::after {
+  content: '';
+  position: absolute;
+  inset: 7px;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--fg) 14%, transparent);
+  pointer-events: none;
+}
+.curricula__item:hover .curricula__mark {
+  border-color: var(--accent);
+}
+.curricula__mark--logo {
+  overflow: hidden;
+  background: #fff;
+}
+.curricula__mark--logo img {
+  object-fit: contain;
+  padding: 18%;
+}
+.curricula__name {
+  max-width: 16ch;
+  font-size: 0.92rem;
+  line-height: 1.45;
+  color: var(--fg-muted);
+}
+@media (max-width: 900px) {
+  .grades__steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+  .grades__step {
+    margin-bottom: 0;
+  }
+}
+@media (max-width: 560px) {
+  .grades__steps {
+    grid-template-columns: 1fr;
+  }
+  .curricula__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 /* --------------------------------------------------------------------------
    Division accents: Education keeps the brand yellow, Marketing uses orange.
    Remapping the gold tokens recolours every accent on Marketing pages at once

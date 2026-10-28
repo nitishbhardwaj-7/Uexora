@@ -49,6 +49,8 @@ export default function ServicePage({ division, service: s, all, statement, cta 
   };
   const details = (s.details || []).filter((d) => d && !restates(d, intro) && !restates(d, s.whoFor || ''));
   const overviewPhoto = s.image || s.heroImage;
+  const grades = (s.gradeSupport?.stages || []).filter((g) => g?.grades && g?.title);
+  const boards = (s.curricula?.boards || []).filter((b) => b?.short);
   const enquire = division === 'education' ? 'Speak with our education team' : 'Discuss your requirements';
   const faqs = s.faqs?.filter((f) => f.q && f.a) || [];
   const imageUrl = s.image ? (s.image.src.startsWith('http') ? s.image.src : `${site.url}${s.image.src}`) : null;
@@ -126,6 +128,60 @@ export default function ServicePage({ division, service: s, all, statement, cta 
               ) : null}
             </div>
           </div>
+
+          {/* Support by school stage: one rising step per stage, each a little higher than the last. */}
+          {grades.length ? (
+            <div className="grades" aria-labelledby="grades-title">
+              <div className="grades__head">
+                <h3 id="grades-title" className="h3" data-reveal>
+                  {s.gradeSupport!.heading}
+                </h3>
+                {s.gradeSupport!.text ? (
+                  <p data-reveal data-reveal-delay="0.1">
+                    {s.gradeSupport!.text}
+                  </p>
+                ) : null}
+              </div>
+              <ol className="grades__steps" data-reveal-group data-stagger="0.14" style={{ '--n': grades.length } as React.CSSProperties}>
+                {grades.map((g, i) => (
+                  <li key={g.grades + i} className="grades__step" style={{ '--i': i } as React.CSSProperties}>
+                    <p className="grades__range">
+                      <span className="grades__label">Grades</span>
+                      <span className="grades__num">{g.grades}</span>
+                    </p>
+                    <h4 className="grades__title">{g.title}</h4>
+                    {g.text ? <p className="grades__text">{g.text}</p> : null}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          ) : null}
+
+          {/* Curricula: a mark for each board (an uploaded logo where the client has one). */}
+          {boards.length ? (
+            <div className="curricula" aria-labelledby="curricula-title">
+              <div className="grades__head">
+                <h3 id="curricula-title" className="h3" data-reveal>
+                  {s.curricula!.heading}
+                </h3>
+                {s.curricula!.text ? (
+                  <p data-reveal data-reveal-delay="0.1">
+                    {s.curricula!.text}
+                  </p>
+                ) : null}
+              </div>
+              <ul className="curricula__list" data-reveal-group data-stagger="0.1">
+                {boards.map((b, i) => (
+                  <li key={b.short + i} className="curricula__item">
+                    <span className={['curricula__mark', b.logo ? 'curricula__mark--logo' : ''].filter(Boolean).join(' ')} aria-hidden={b.logo ? undefined : true}>
+                      {b.logo ? <CmsImage src={b.logo.src} alt={b.logo.alt || b.name} fill sizes="120px" quality={82} /> : b.short}
+                    </span>
+                    <span className="curricula__name">{b.name || b.short}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
         </div>
       </section>
 

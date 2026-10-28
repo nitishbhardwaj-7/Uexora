@@ -15,10 +15,28 @@ const programmes: Service[] = [
     heroImage: { src: '/images/heroes/services/academic-support-and-school-tuition-2.jpg', alt: 'A young student taking notes during a one-to-one online lesson with her tutor on a laptop' },
     highlights: ['Subject understanding', 'Working through difficult concepts', 'Confidence in studies', 'Guidance that fits each student'],
     whoFor: 'School students who want extra guidance with their subjects, from everyday schoolwork to the concepts they find hardest.',
-    details: [
-      'Our academic support is built around how each student actually learns. Rather than repeating the classroom, we focus on the subjects and topics a student finds difficult, work through the underlying concepts and build the understanding that makes the next lesson easier.',
-      'The aim is confidence as much as marks: a student who understands their subjects can approach schoolwork, tests and examinations with more confidence and independence.',
-    ],
+    details: [],
+    gradeSupport: {
+      heading: 'Grade-specific assistance, Grade 1 to 12',
+      text: 'What a student needs changes as they move through school, so our support changes with them: strong foundations in the early years, deeper understanding in middle school, and focused preparation for board examinations in the senior years.',
+      stages: [
+        { grades: '1–5', title: 'Primary years', text: 'Reading, writing and number skills, curiosity and good study habits, built patiently so that learning feels enjoyable.' },
+        { grades: '6–8', title: 'Middle school', text: 'A firmer grasp of core subjects as topics become more demanding, with help organising work and thinking independently.' },
+        { grades: '9–10', title: 'Secondary', text: 'Clear concepts across subjects, regular practice and steady preparation for board examinations.' },
+        { grades: '11–12', title: 'Senior secondary', text: 'Focused support in the chosen stream, from difficult concepts to revision and board examination preparation.' },
+      ],
+    },
+    curricula: {
+      heading: 'Curricula we support',
+      text: 'We support students across the main school curricula, keeping our sessions in step with what they are taught in class and how they are assessed.',
+      boards: [
+        { short: 'CBSE', name: 'Central Board of Secondary Education' },
+        { short: 'ICSE', name: 'ICSE and ISC (CISCE)' },
+        { short: 'State', name: 'State Boards' },
+        { short: 'IB', name: 'International Baccalaureate' },
+        { short: 'IGCSE', name: 'Cambridge IGCSE, AS and A Level' },
+      ],
+    },
     faqs: [
       { q: 'Who is academic support and school tuition for?', a: 'School students who want extra guidance with their subjects, whether that is keeping up with everyday schoolwork or working through concepts they find hard.' },
       { q: 'Which subjects are covered?', a: 'Support is arranged around the subjects a student needs help with. Tell us about the learner and their goals and we will help you find the right programme.' },

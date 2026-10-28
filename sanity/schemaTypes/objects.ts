@@ -142,6 +142,68 @@ export const service = defineType({
     }),
     defineField({ name: 'whoFor', title: 'Who it is for', type: 'text', rows: 2 }),
     defineField({ name: 'details', title: 'More detail', type: 'array', of: [defineArrayMember({ type: 'text', rows: 4 })], description: 'Further paragraphs for the page. Leave empty to hide the section.' }),
+    defineField({
+      name: 'gradeSupport',
+      title: 'Support by grade',
+      type: 'object',
+      description: 'Optional. Shown under the introduction as rising steps, one per school stage. Leave the stages empty to hide it.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'text', title: 'Paragraph', type: 'text', rows: 3 }),
+        defineField({
+          name: 'stages',
+          title: 'Stages',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'gradeStage',
+              fields: [
+                defineField({ name: 'grades', title: 'Grades', type: 'string', description: 'e.g. 1–5', validation: (r) => r.required() }),
+                defineField({ name: 'title', title: 'Stage name', type: 'string', description: 'e.g. Primary years', validation: (r) => r.required() }),
+                defineField({ name: 'text', title: 'Text', type: 'text', rows: 2 }),
+              ],
+              preview: { select: { title: 'title', subtitle: 'grades' }, prepare: ({ title, subtitle }) => ({ title, subtitle: subtitle ? `Grades ${subtitle}` : '' }) },
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
+      name: 'curricula',
+      title: 'Curricula',
+      type: 'object',
+      description: 'Optional. The school curricula this supports, shown as a row of marks. Leave the boards empty to hide it.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'text', title: 'Paragraph', type: 'text', rows: 3 }),
+        defineField({
+          name: 'boards',
+          title: 'Curricula',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'curriculum',
+              fields: [
+                defineField({ name: 'short', title: 'Short name', type: 'string', description: 'Shown large in the mark, e.g. CBSE', validation: (r) => r.required().max(12) }),
+                defineField({ name: 'name', title: 'Full name', type: 'string' }),
+                defineField({
+                  name: 'logo',
+                  title: 'Logo (optional)',
+                  type: 'picture',
+                  description:
+                    'Only upload an official logo you have permission to use; some boards (e.g. IB, Cambridge) restrict their logos to authorised schools and centres. Without a logo, the short name is shown.',
+                }),
+              ],
+              preview: { select: { title: 'short', subtitle: 'name', media: 'logo' } },
+            }),
+          ],
+        }),
+      ],
+    }),
     defineField({ name: 'faqs', title: 'Questions and answers', type: 'array', of: [defineArrayMember({ type: 'faq' })], description: 'Shown on the page and sent to search engines as FAQ data. Keep answers to what the business actually offers.' }),
     defineField({ name: 'image', title: 'Photo', type: 'picture', description: 'Shown on the card in the index and in the footer. A photo around 1200 px wide works best.' }),
     defineField({

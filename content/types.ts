@@ -13,6 +13,10 @@ export type Service = {
   whoFor: string;
   /** Optional further paragraphs for the detail page; the section is hidden when empty. */
   details: string[];
+  /** Optional support by school stage, shown under the introduction as rising steps. */
+  gradeSupport?: { heading: string; text: string; stages: { grades: string; title: string; text: string }[] };
+  /** Optional curricula supported, shown as a row of marks (an uploaded logo replaces the short name). */
+  curricula?: { heading: string; text: string; boards: { short: string; name: string; logo?: { src: string; alt: string } }[] };
   /** Questions and answers shown on the detail page; also emitted as FAQPage structured data. */
   faqs?: { q: string; a: string }[];
   /** Optional photo for the card in the index and the footer rows. */
