@@ -29,6 +29,9 @@
   /* The third brand colour has one job everywhere: the lines that draw in or appear on hover
      (nav and link underlines, tab and question rules). Yellow keeps highlights and buttons. */
   --accent-line: var(--orange-500);
+  /* Orange as a second accent for labels, taglines and small marks: deeper on cream so small
+     text stays readable, the brand orange on dark sections. */
+  --accent-2: var(--orange-600);
 
   /* neutrals */
   --cream: #f6f5f0;
@@ -71,6 +74,7 @@ body:has(.announce) {
   --fg-muted: var(--muted-light);
   --rule: var(--line-dark);
   --accent: var(--gold-500);
+  --accent-2: var(--orange-500);
 }
 
 /* --------------------------------------------------------------------------
@@ -603,7 +607,7 @@ h4,
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-2);
 }
 .grades__num {
   font-family: var(--font-heading), Georgia, serif;
@@ -779,7 +783,7 @@ h4,
 .ptabs__tagline {
   font-family: var(--font-sub), ui-sans-serif, system-ui, sans-serif;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--accent-2);
 }
 .ptabs__text {
   color: var(--fg-muted);
@@ -1022,7 +1026,7 @@ h4,
   font-family: var(--font-sub), ui-sans-serif, system-ui, sans-serif;
   font-weight: 600;
   font-size: 0.98rem;
-  color: var(--accent);
+  color: var(--accent-2);
 }
 .approach9__text {
   color: var(--fg-muted);
@@ -1722,7 +1726,7 @@ h4,
 .menu__more {
   display: inline-grid;
   width: 0.42em;
-  color: var(--gold-500);
+  color: var(--orange-500);
   opacity: 0;
   translate: -0.35em 0;
   transition: opacity 0.4s var(--ease-out), translate 0.6s var(--ease-out);
@@ -1783,7 +1787,7 @@ h4,
   font-size: 0.78rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gold-500);
+  color: var(--orange-500);
   margin-bottom: 1.3rem;
   font-weight: 700;
 }
@@ -2586,7 +2590,7 @@ h4,
 }
 .purpose__chart-trend path {
   fill: none;
-  stroke: var(--gold-500);
+  stroke: var(--orange-500);
   stroke-width: 3;
   stroke-linecap: round;
 }
@@ -2599,7 +2603,7 @@ h4,
   height: 14px;
   translate: -50% -50%;
   border-radius: 50%;
-  background: var(--gold-500);
+  background: var(--orange-500);
   box-shadow: 0 0 0 4px var(--cream), 0 6px 14px -4px rgba(6, 16, 58, 0.35);
 }
 /* Bars grow up in turn and the dot pops in once the chart enters view. */
@@ -2726,6 +2730,9 @@ html.reveal-ready .purpose__chart.is-in .purpose__chart-dot {
   border-radius: 50%;
   background: var(--gold-500);
 }
+.announce__track li:nth-child(even)::after {
+  background: var(--orange-500);
+}
 .announce__text {
   font-family: var(--font-body), sans-serif;
   font-weight: 700;
@@ -2782,6 +2789,9 @@ a.announce__text:focus-visible {
   border-radius: 50%;
   background: var(--gold-500);
 }
+.marquee__item:nth-child(even)::after {
+  background: var(--orange-500);
+}
 @keyframes marquee {
   to {
     transform: translateX(-50%);
@@ -2815,7 +2825,7 @@ a.announce__text:focus-visible {
   font-family: var(--font-body), sans-serif;
   font-weight: 700;
   font-size: clamp(1.3rem, 2.2vw, 1.9rem);
-  color: var(--gold-500);
+  color: var(--orange-500);
   letter-spacing: -0.01em;
 }
 .cta-band__mark {
@@ -2874,7 +2884,7 @@ a.announce__text:focus-visible {
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--gold-500);
+  color: var(--orange-500);
   transition: color 0.3s;
 }
 .fmarquee__label:hover {
@@ -2915,6 +2925,9 @@ a.announce__text:focus-visible {
   margin-inline: clamp(1.4rem, 2.6vw, 2.4rem);
   border-radius: 50%;
   background: var(--gold-500);
+}
+.fmarquee__set li:nth-child(even)::after {
+  background: var(--orange-500);
 }
 .fmarquee__thumb {
   position: relative;
@@ -3075,7 +3088,7 @@ a.fmarquee__card:focus-visible {
   font-size: 0.75rem;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--gold-500);
+  color: var(--orange-500);
   margin-bottom: 1.2rem;
   font-weight: 700;
 }
@@ -3422,7 +3435,7 @@ a.fmarquee__card:focus-visible {
   height: 1.5rem;
   margin-bottom: 0.2em;
   fill: none;
-  stroke: var(--gold-500);
+  stroke: var(--orange-500);
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
@@ -3718,7 +3731,7 @@ a.fmarquee__card:focus-visible {
   display: block;
   width: 56px;
   height: 4px;
-  background: var(--accent);
+  background: var(--accent-line);
   border-radius: 2px;
   margin-bottom: 1.6rem;
 }
@@ -3884,7 +3897,7 @@ html.reveal-ready .statement[data-seq].is-in .statement__mark {
   font-weight: 700;
   font-size: clamp(1.8rem, 3vw, 2.6rem);
   line-height: 1;
-  color: var(--accent);
+  color: var(--accent-2);
   transition: transform 0.5s var(--ease-out), opacity 0.3s;
 }
 
@@ -4458,7 +4471,7 @@ a.cdirect__value:hover {
 .prose blockquote {
   margin: 2em 0;
   padding: 0.2em 0 0.2em 1.4em;
-  border-left: 2px solid var(--gold-500);
+  border-left: 2px solid var(--accent-line);
   font-size: 1.15em;
   font-weight: 600;
   letter-spacing: -0.01em;
@@ -4745,7 +4758,7 @@ a.cdirect__value:hover {
   margin: clamp(1.3rem, 2vw, 1.7rem) 0 0;
   max-width: 30rem;
   padding: 0.15rem 0 0.15rem 1.4rem;
-  border-left: 3px solid var(--gold-500);
+  border-left: 3px solid var(--accent-line);
   font-size: clamp(1.1rem, 1.45vw, 1.32rem);
   font-weight: 600;
   line-height: 1.45;
@@ -7079,7 +7092,7 @@ html.reveal-ready .steps--seq.is-in .step p {
 .skills__closing {
   max-width: 30rem;
   padding: 0.15rem 0 0.15rem 1.4rem;
-  border-left: 3px solid var(--gold-500);
+  border-left: 3px solid var(--accent-line);
   color: var(--fg);
   font-size: clamp(1.1rem, 1.45vw, 1.32rem);
   line-height: 1.45;
