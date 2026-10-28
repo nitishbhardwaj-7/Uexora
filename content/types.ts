@@ -17,6 +17,11 @@ export type Service = {
   gradeSupport?: { heading: string; text: string; stages: { grades: string; title: string; text: string }[] };
   /** Optional curricula supported, shown as a row of marks (an uploaded logo replaces the short name). */
   curricula?: { heading: string; text: string; boards: { short: string; name: string; logo?: { src: string; alt: string } }[] };
+  /** Optional numbered list of what the programme includes; a feature with `options` shows them as tabs. */
+  offerings?: {
+    heading: string;
+    features: { title: string; text?: string; options?: { ratio: string; title: string; tagline: string; text: string }[] }[];
+  };
   /** Questions and answers shown on the detail page; also emitted as FAQPage structured data. */
   faqs?: { q: string; a: string }[];
   /** Optional photo for the card in the index and the footer rows. */

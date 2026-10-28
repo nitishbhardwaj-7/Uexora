@@ -37,6 +37,43 @@ const programmes: Service[] = [
         { short: 'IGCSE', name: 'Cambridge IGCSE, AS and A Level' },
       ],
     },
+    offerings: {
+      heading: 'What the programme includes',
+      features: [
+        {
+          title: 'Personalised Teaching Programmes',
+          options: [
+            {
+              ratio: '1:1',
+              title: '1:1 Learning Programme',
+              tagline: 'One Teacher. One Student. Complete Attention.',
+              text: 'Individualised teaching focused entirely on your child’s learning needs, pace, strengths, and areas for improvement.',
+            },
+            {
+              ratio: '1:6',
+              title: '1:6 Learning Programme',
+              tagline: 'One Teacher. Six Students. Focused Support.',
+              text: 'Small-group learning that combines individual guidance with peer interaction, collaborative activities, and shared learning experiences.',
+            },
+            {
+              ratio: '1:20',
+              title: '1:20 Learning Programme',
+              tagline: 'One Teacher. Twenty Students. Learning Together.',
+              text: 'A larger-group learning experience that encourages participation, discussion, collaboration, and learning alongside peers.',
+            },
+          ],
+        },
+        { title: 'Step-by-Step Learning Assistance', text: 'Personalised, step-by-step explanations that help students understand difficult concepts and solve problems independently.' },
+        { title: 'Real-Time Subject Quizzes & Unlimited Practice', text: 'Reinforce learning with interactive quizzes based on your subjects and continuous practice opportunities.' },
+        { title: 'Dedicated Exam Preparation', text: 'Structured revision, mock tests, and targeted practice to help students prepare confidently for examinations.' },
+        {
+          title: 'Tutor Assistance Within 15 Minutes',
+          text: 'Get academic guidance when you’re stuck, with tutor assistance within 15 minutes, subject to your service availability and operating hours.',
+        },
+        { title: 'Student-Choice Revision', text: 'Choose the topics you want to revise and focus your extra learning time where you need it most.' },
+        { title: 'Live Progress Tracking for Parents', text: 'Give parents visibility into their child’s learning progress, performance, strengths, and areas requiring improvement.' },
+      ],
+    },
     faqs: [
       { q: 'Who is academic support and school tuition for?', a: 'School students who want extra guidance with their subjects, whether that is keeping up with everyday schoolwork or working through concepts they find hard.' },
       { q: 'Which subjects are covered?', a: 'Support is arranged around the subjects a student needs help with. Tell us about the learner and their goals and we will help you find the right programme.' },

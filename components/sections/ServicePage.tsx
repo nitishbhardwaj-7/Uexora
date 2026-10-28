@@ -4,6 +4,7 @@ import ServiceCards from '@/components/sections/ServiceCards';
 import { Statement } from '@/components/sections/Blocks';
 import CtaBand from '@/components/sections/CtaBand';
 import Faq from '@/components/sections/Faq';
+import ProgrammeTabs from '@/components/sections/ProgrammeTabs';
 import Monogram from '@/components/brand/Monogram';
 import CmsImage from '@/components/ui/CmsImage';
 import { ArrowLink } from '@/components/ui/Button';
@@ -51,6 +52,9 @@ export default function ServicePage({ division, service: s, all, statement, cta 
   const overviewPhoto = s.image || s.heroImage;
   const grades = (s.gradeSupport?.stages || []).filter((g) => g?.grades && g?.title);
   const boards = (s.curricula?.boards || []).filter((b) => b?.short);
+  const features = (s.offerings?.features || [])
+    .filter((f) => f?.title)
+    .map((f) => ({ ...f, options: (f.options || []).filter((o) => o?.ratio && o?.title) }));
   const enquire = division === 'education' ? 'Speak with our education team' : 'Discuss your requirements';
   const faqs = s.faqs?.filter((f) => f.q && f.a) || [];
   const imageUrl = s.image ? (s.image.src.startsWith('http') ? s.image.src : `${site.url}${s.image.src}`) : null;
@@ -180,6 +184,29 @@ export default function ServicePage({ division, service: s, all, statement, cta 
                   </li>
                 ))}
               </ul>
+            </div>
+          ) : null}
+
+          {/* What the programme includes: numbered; a feature with options shows them as tabs. */}
+          {features.length ? (
+            <div className="offer" aria-labelledby="offer-title">
+              <div className="grades__head">
+                <h3 id="offer-title" className="h3" data-reveal>
+                  {s.offerings!.heading}
+                </h3>
+              </div>
+              <ol className="offer__list" data-reveal-group data-stagger="0.1">
+                {features.map((f, i) => (
+                  <li key={f.title + i} className={['offer__item', f.options?.length ? 'offer__item--tabs' : ''].filter(Boolean).join(' ')}>
+                    <span className="offer__num" aria-hidden="true">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <h4 className="offer__title">{f.title}</h4>
+                    {f.text ? <p className="offer__text">{f.text}</p> : null}
+                    {f.options?.length ? <ProgrammeTabs options={f.options} idBase={`offer-${i}`} label={f.title} /> : null}
+                  </li>
+                ))}
+              </ol>
             </div>
           ) : null}
         </div>

@@ -171,6 +171,50 @@ export const service = defineType({
       ],
     }),
     defineField({
+      name: 'offerings',
+      title: 'What the programme includes',
+      type: 'object',
+      description: 'Optional. A numbered list shown after the curricula. A feature with options shows them as small tabs (e.g. 1:1, 1:6, 1:20).',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({
+          name: 'features',
+          title: 'Features',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'offering',
+              fields: [
+                defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+                defineField({ name: 'text', title: 'Text', type: 'text', rows: 3 }),
+                defineField({
+                  name: 'options',
+                  title: 'Options (shown as tabs)',
+                  type: 'array',
+                  of: [
+                    defineArrayMember({
+                      type: 'object',
+                      name: 'offeringOption',
+                      fields: [
+                        defineField({ name: 'ratio', title: 'Tab label', type: 'string', description: 'Short, e.g. 1:6', validation: (r) => r.required().max(10) }),
+                        defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+                        defineField({ name: 'tagline', title: 'Tagline', type: 'string' }),
+                        defineField({ name: 'text', title: 'Text', type: 'text', rows: 3 }),
+                      ],
+                      preview: { select: { title: 'title', subtitle: 'tagline' } },
+                    }),
+                  ],
+                }),
+              ],
+              preview: { select: { title: 'title', subtitle: 'text' } },
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: 'curricula',
       title: 'Curricula',
       type: 'object',
