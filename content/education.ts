@@ -1,4 +1,5 @@
 import type { Service } from './types.ts';
+import { examTracks } from './exams.ts';
 
 /**
  * Default content for the Education page. This is the fallback (and the seed) for the
@@ -130,11 +131,14 @@ const programmes: Service[] = [
   {
     title: 'Competitive Exam Preparation',
     slug: 'competitive-exam-preparation',
-    promise: 'Prepare for JEE and NEET with focused learning, concept building and regular practice.',
-    seo: { description: 'JEE and NEET preparation with Uexora Education: focused learning, concept building and regular practice for students preparing for competitive exams.' },
+    promise: 'Prepare for NEET, JEE Main, JEE Advanced and Olympiads with live online classes, concept building and regular practice.',
+    seo: { description: 'NEET, JEE Main, JEE Advanced and Olympiad preparation with Uexora Education: live online classes in 1:6, 1:15 and 1:30 batches, concept building, practice and revision.' },
     image: { src: '/images/services/competitive-exam-study-session.jpg', alt: 'A student working through exam papers beside a laptop in a classroom' },
     heroImage: { src: '/images/heroes/services/competitive-exam-preparation.jpg', alt: 'A smiling student studying with books and a laptop in a library' },
-    highlights: ['JEE and NEET', 'Focused learning', 'Concept building', 'Regular practice'],
+    highlights: ['NEET', 'JEE Main', 'JEE Advanced', 'Olympiad'],
+    tracksHeading: 'Choose your exam',
+    tracksText: 'Four live online programmes, each with 1:6, 1:15 and 1:30 batches. Choose an exam to see how we prepare for it.',
+    tracks: examTracks,
     whoFor: 'Students preparing for competitive examinations such as JEE and NEET who want a clear, structured approach to the subjects involved.',
     details: [
       'Competitive examinations such as JEE and NEET reward a clear understanding of the subjects as much as hard work. Our preparation combines focused learning on the syllabus, concept building that connects topics together, and regular practice so that students become familiar with the format and pace of the exam.',

@@ -50,6 +50,10 @@ const arrayTypes: Record<string, string> = {
   options: 'offeringOption',
   points: 'approachPoint',
   lines: 'comparisonRow',
+  tracks: 'examTrack',
+  batchList: 'examBatch',
+  trackSteps: 'examStep',
+  whyList: 'examWhy',
 };
 
 const assetCache = new Map<string, string>();

@@ -27,6 +27,13 @@ export type Service = {
       options?: { ratio: string; title: string; tagline: string; text: string; image?: { src: string; alt: string } }[];
     }[];
   };
+  /**
+   * Optional exam tracks (e.g. NEET, JEE Main): a picker of cards near the top that jump to a
+   * full section per track. When present, the page's own tracks replace the division approach.
+   */
+  tracksHeading?: string;
+  tracksText?: string;
+  tracks?: ExamTrack[];
   /** Optional side-by-side comparison shown before the questions (e.g. against typical home tuition). */
   comparison?: { heading: string; text?: string; them: string; us: string; lines: { label: string; them: string; us: string }[] };
   /** Heading above the questions; "Common questions" when empty. */
@@ -38,4 +45,29 @@ export type Service = {
   /** Wide photo behind the detail page hero (landscape, around 3000 px); falls back to `image`. */
   heroImage?: { src: string; alt: string };
   seo?: { title?: string; description?: string };
+};
+
+type Img = { src: string; alt: string };
+
+/** One exam on a competitive-exam programme page, shown as its own section. */
+export type ExamTrack = {
+  /** Anchor on the page, e.g. neet (the section is #neet). */
+  slug: string;
+  /** Short name for the picker and the sticky exam bar, e.g. NEET. */
+  name: string;
+  title: string;
+  tagline: string;
+  intro: string[];
+  /** Optional short tags under the intro, e.g. Critical Thinking. */
+  tags?: string[];
+  /** Wide photo behind the track's opening. */
+  image: Img;
+  /** Upright photo for the picker card; falls back to `image`. */
+  cardImage?: Img;
+  journey: { heading: string; paragraphs: string[]; pull?: string; image?: Img };
+  batchHeading: string;
+  batchList: { number: string; name: string; ratio: string; tagline: string; text: string; points: string[]; bestFor?: string; image?: Img }[];
+  approach: { heading: string; subheading: string; text: string; trackSteps: { title: string; text: string }[]; image?: Img };
+  why?: { heading: string; subheading: string; whyList: { title: string; text: string }[] };
+  closing: { heading: string; paragraphs: string[]; primary?: { label: string; href: string }; secondary?: { label: string; href: string } };
 };

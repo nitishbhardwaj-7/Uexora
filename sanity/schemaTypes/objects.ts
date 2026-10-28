@@ -250,6 +250,133 @@ export const service = defineType({
         }),
       ],
     }),
+    defineField({ name: 'tracksHeading', title: 'Exam picker heading', type: 'string', description: 'Only used when the programme has exam tracks, e.g. Choose your exam.' }),
+    defineField({ name: 'tracksText', title: 'Exam picker intro', type: 'text', rows: 2 }),
+    defineField({
+      name: 'tracks',
+      title: 'Exam tracks',
+      type: 'array',
+      description:
+        'Optional. Each exam (e.g. NEET, JEE Main) gets a card in the picker near the top of the page and its own section. When set, these replace the division approach on this page.',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'examTrack',
+          fields: [
+            defineField({
+              name: 'slug',
+              title: 'Page anchor',
+              type: 'string',
+              description: 'Lowercase letters and hyphens, e.g. jee-main. The section is reached at #jee-main.',
+              validation: (r) => r.required().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, { name: 'anchor' }),
+            }),
+            defineField({ name: 'name', title: 'Short name', type: 'string', description: 'For the picker and the exam bar, e.g. JEE Main.', validation: (r) => r.required() }),
+            defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+            defineField({ name: 'tagline', title: 'Tagline', type: 'string' }),
+            defineField({ name: 'intro', title: 'Intro paragraphs', type: 'array', of: [defineArrayMember({ type: 'text', rows: 3 })] }),
+            defineField({ name: 'tags', title: 'Tags (optional)', type: 'array', of: [defineArrayMember({ type: 'string' })], options: { layout: 'tags' } }),
+            defineField({ name: 'image', title: 'Opening photo', type: 'picture', description: 'Wide, around 2400 px, with the subject to the right.' }),
+            defineField({ name: 'cardImage', title: 'Picker card photo (optional)', type: 'picture', description: 'Upright photo for the card; the opening photo is used when empty.' }),
+            defineField({
+              name: 'journey',
+              title: 'Learning journey',
+              type: 'object',
+              fields: [
+                defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+                defineField({ name: 'paragraphs', title: 'Paragraphs', type: 'array', of: [defineArrayMember({ type: 'text', rows: 3 })] }),
+                defineField({ name: 'pull', title: 'Pull line (optional)', type: 'text', rows: 2 }),
+                defineField({ name: 'image', title: 'Photo', type: 'picture' }),
+              ],
+            }),
+            defineField({ name: 'batchHeading', title: 'Batches heading', type: 'string' }),
+            defineField({
+              name: 'batchList',
+              title: 'Batches',
+              type: 'array',
+              of: [
+                defineArrayMember({
+                  type: 'object',
+                  name: 'examBatch',
+                  fields: [
+                    defineField({ name: 'number', title: 'Number', type: 'string', description: 'e.g. 01' }),
+                    defineField({ name: 'name', title: 'Name', type: 'string', validation: (r) => r.required() }),
+                    defineField({ name: 'ratio', title: 'Batch size', type: 'string', description: 'e.g. 1:6' }),
+                    defineField({ name: 'tagline', title: 'Tagline', type: 'string' }),
+                    defineField({ name: 'text', title: 'Description', type: 'text', rows: 2 }),
+                    defineField({ name: 'points', title: 'Points', type: 'array', of: [defineArrayMember({ type: 'string' })] }),
+                    defineField({ name: 'bestFor', title: 'Best for (optional)', type: 'string' }),
+                    defineField({ name: 'image', title: 'Photo', type: 'picture' }),
+                  ],
+                  preview: { select: { title: 'name', subtitle: 'ratio', media: 'image' } },
+                }),
+              ],
+            }),
+            defineField({
+              name: 'approach',
+              title: 'Approach',
+              type: 'object',
+              fields: [
+                defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+                defineField({ name: 'subheading', title: 'Subheading', type: 'string' }),
+                defineField({ name: 'text', title: 'Intro', type: 'text', rows: 3 }),
+                defineField({
+                  name: 'trackSteps',
+                  title: 'Steps',
+                  type: 'array',
+                  of: [
+                    defineArrayMember({
+                      type: 'object',
+                      name: 'examStep',
+                      fields: [
+                        defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+                        defineField({ name: 'text', title: 'Text', type: 'text', rows: 3 }),
+                      ],
+                    }),
+                  ],
+                }),
+                defineField({ name: 'image', title: 'Photo', type: 'picture' }),
+              ],
+            }),
+            defineField({
+              name: 'why',
+              title: 'Why choose us (optional)',
+              type: 'object',
+              fields: [
+                defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+                defineField({ name: 'subheading', title: 'Subheading', type: 'string' }),
+                defineField({
+                  name: 'whyList',
+                  title: 'Reasons',
+                  type: 'array',
+                  of: [
+                    defineArrayMember({
+                      type: 'object',
+                      name: 'examWhy',
+                      fields: [
+                        defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+                        defineField({ name: 'text', title: 'Text', type: 'text', rows: 2 }),
+                      ],
+                    }),
+                  ],
+                }),
+              ],
+            }),
+            defineField({
+              name: 'closing',
+              title: 'Closing',
+              type: 'object',
+              fields: [
+                defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+                defineField({ name: 'paragraphs', title: 'Paragraphs', type: 'array', of: [defineArrayMember({ type: 'text', rows: 2 })] }),
+                defineField({ name: 'primary', title: 'Main button', type: 'link' }),
+                defineField({ name: 'secondary', title: 'Second link (optional)', type: 'link' }),
+              ],
+            }),
+          ],
+          preview: { select: { title: 'title', subtitle: 'tagline', media: 'image' } },
+        }),
+      ],
+    }),
     defineField({
       name: 'comparison',
       title: 'Comparison',

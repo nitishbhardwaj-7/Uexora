@@ -7,6 +7,7 @@ import Faq from '@/components/sections/Faq';
 import ProgrammeTabs from '@/components/sections/ProgrammeTabs';
 import ApproachGrid from '@/components/sections/ApproachGrid';
 import CompareTable from '@/components/sections/CompareTable';
+import ExamTracks from '@/components/sections/ExamTracks';
 import Monogram from '@/components/brand/Monogram';
 import CmsImage from '@/components/ui/CmsImage';
 import { ArrowLink } from '@/components/ui/Button';
@@ -219,8 +220,12 @@ export default function ServicePage({ division, service: s, all, statement, cta 
         </div>
       </section>
 
-      {/* With approach points (Education), they replace the quote and paragraphs. */}
-      {statement.points?.filter((p) => p?.title).length ? (
+      {/* Exam tracks (Competitive Exam Preparation): the picker and a section per exam. */}
+      {s.tracks?.length ? <ExamTracks heading={s.tracksHeading || 'Choose your exam'} text={s.tracksText} tracks={s.tracks} /> : null}
+
+      {/* With approach points (Education), they replace the quote and paragraphs; a page with its
+          own exam tracks carries each exam's approach instead. */}
+      {s.tracks?.length ? null : statement.points?.filter((p) => p?.title).length ? (
         <ApproachGrid id="approach" heading={statement.heading} quote={statement.quote} points={statement.points.filter((p) => p?.title)} tone={altTone} />
       ) : (
         <Statement id="approach" eyebrow={statement.heading} quote={statement.quote} paragraphs={statement.paragraphs.slice(0, 2)} tone={altTone} />
