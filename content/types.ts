@@ -27,6 +27,8 @@ export type Service = {
       options?: { ratio: string; title: string; tagline: string; text: string; image?: { src: string; alt: string } }[];
     }[];
   };
+  /** Heading above the questions; "Common questions" when empty. */
+  faqHeading?: string;
   /** Questions and answers shown on the detail page; also emitted as FAQPage structured data. */
   faqs?: { q: string; a: string }[];
   /** Optional photo for the card in the index and the footer rows. */

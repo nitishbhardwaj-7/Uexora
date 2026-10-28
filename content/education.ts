@@ -78,10 +78,32 @@ const programmes: Service[] = [
         { title: 'Live Progress Tracking for Parents', image: { src: '/images/programmes/parent-progress-tracking.jpg', alt: 'A parent and child smiling as they look at a tablet together' }, text: 'Give parents visibility into their child’s learning progress, performance, strengths, and areas requiring improvement.' },
       ],
     },
+    faqHeading: 'Common Questions From Parents',
     faqs: [
-      { q: 'Who is academic support and school tuition for?', a: 'School students who want extra guidance with their subjects, whether that is keeping up with everyday schoolwork or working through concepts they find hard.' },
-      { q: 'Which subjects are covered?', a: 'Support is arranged around the subjects a student needs help with. Tell us about the learner and their goals and we will help you find the right programme.' },
-      { q: 'How is this different from classroom teaching?', a: 'The focus is on the individual student: understanding where they are starting from, working through difficult concepts at their pace and recognising progress along the way.' },
+      {
+        q: 'Will my child understand subjects they currently struggle with?',
+        a: 'That is the aim. We focus on the topics your child finds difficult and explain why concepts work, step by step, rather than asking them to memorise answers. Guided practice and revisiting difficult concepts help that understanding last.',
+      },
+      {
+        q: 'Will someone identify why my child is falling behind?',
+        a: 'Yes. Learning gap identification is part of the programme: we look at where your child’s understanding breaks down and help them focus on the concepts that need attention.',
+      },
+      {
+        q: 'Will my child receive help when they get stuck?',
+        a: 'Yes. Tutor assistance is available within 15 minutes, subject to service availability and operating hours, and step-by-step explanations help your child work through the problem.',
+      },
+      {
+        q: 'Will my child become confident enough to solve problems independently?',
+        a: 'That is what we work towards. Students learn to analyse questions, explore solutions and reason things through, with step-by-step guidance that gradually gives way to solving problems on their own.',
+      },
+      {
+        q: 'Will my child learn something beyond what school already teaches?',
+        a: 'Yes. Students see how what they learn connects to the real world, and explore AI, robotics and emerging technologies through practical activities and hands-on projects.',
+      },
+      {
+        q: 'How will I know whether my child is improving?',
+        a: 'Live progress tracking gives you visibility into your child’s learning progress, performance, strengths and the areas that need more attention.',
+      },
     ],
     text: 'Every student learns differently, and sometimes a little extra guidance can make a real difference. Our academic support programmes aim to help students understand their subjects, work through difficult concepts and become more confident in their studies.',
   },

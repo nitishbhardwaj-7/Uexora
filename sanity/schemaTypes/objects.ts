@@ -250,6 +250,7 @@ export const service = defineType({
         }),
       ],
     }),
+    defineField({ name: 'faqHeading', title: 'Questions heading', type: 'string', description: 'Heading above the questions, e.g. Common Questions From Parents. Leave empty for "Common questions".' }),
     defineField({ name: 'faqs', title: 'Questions and answers', type: 'array', of: [defineArrayMember({ type: 'faq' })], description: 'Shown on the page and sent to search engines as FAQ data. Keep answers to what the business actually offers.' }),
     defineField({ name: 'image', title: 'Photo', type: 'picture', description: 'Shown on the card in the index and in the footer. A photo around 1200 px wide works best.' }),
     defineField({

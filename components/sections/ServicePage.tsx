@@ -230,7 +230,7 @@ export default function ServicePage({ division, service: s, all, statement, cta 
           <div className="container">
             <div className="section-head">
               <h2 id="faq-title" className="h2" data-split>
-                Common questions
+                {s.faqHeading || 'Common questions'}
               </h2>
               <p className="lead" data-reveal>
                 Straight answers about this {meta.unit}, in the words we would use in person.
