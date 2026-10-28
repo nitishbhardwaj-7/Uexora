@@ -1592,7 +1592,7 @@ h4,
   right: 0;
   bottom: 0;
   height: 2px;
-  background: var(--gold-500);
+  background: var(--orange-500);
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.45s var(--ease-out);
