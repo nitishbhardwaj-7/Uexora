@@ -219,7 +219,7 @@ export const examTracks: ExamTrack[] = [
       'JEE Advanced demands more than knowing the formulas. It challenges students to connect concepts, analyse unfamiliar problems, and think beyond conventional approaches.',
       'At Uexora, our live online classes help aspiring engineers strengthen their understanding of Physics, Chemistry, and Mathematics, develop advanced problem-solving skills, and prepare for the challenges of JEE Advanced through structured learning and purposeful practice.',
     ],
-    image: { src: '/images/exams/jee-advanced-hero.jpg', alt: 'A student working through a long derivation on a chalkboard full of equations' },
+    image: { src: '/images/exams/jee-advanced-hero-2.jpg', alt: 'A student concentrating on an exam paper and answer sheet in a quiet examination hall' },
     journey: {
       heading: 'The Difference Is Not Just What You Know. It’s How You Think.',
       paragraphs: [
@@ -323,8 +323,7 @@ export const examTracks: ExamTrack[] = [
       'At Uexora, our live online Olympiad preparation classes help students strengthen their conceptual understanding, develop logical reasoning, and build the confidence to take on academic challenges through structured learning and purposeful practice.',
     ],
     tags: ['Critical Thinking', 'Concept-Based Learning'],
-    image: { src: '/images/exams/olympiad-hero.jpg', alt: 'Two children watching a science experiment with wide eyes as vapour rises' },
-    cardImage: { src: '/images/exams/olympiad-card.jpg', alt: 'A girl looking closely through a microscope' },
+    image: { src: '/images/exams/olympiad-hero-2.jpg', alt: 'Schoolgirls in a library pointing out places on a globe together' },
     journey: {
       heading: 'Learning Goes Beyond the Textbook.',
       paragraphs: [
