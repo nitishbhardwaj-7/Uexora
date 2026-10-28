@@ -63,6 +63,25 @@ export const educationPage = defineType({
         defineField({ name: 'heading', title: 'Heading', type: 'string' }),
         defineField({ name: 'quote', title: 'Pull quote', type: 'text', rows: 2 }),
         paragraphs(),
+        defineField({
+          name: 'points',
+          title: 'Approach points',
+          type: 'array',
+          description: 'Shown on every programme page as a grid of three per row, with a photo each. Nine fills three rows.',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'approachPoint',
+              fields: [
+                defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+                defineField({ name: 'subtitle', title: 'Subtitle (optional)', type: 'string' }),
+                defineField({ name: 'text', title: 'Text', type: 'text', rows: 3 }),
+                defineField({ name: 'image', title: 'Photo', type: 'picture', description: 'Landscape, around 1400 px wide.' }),
+              ],
+              preview: { select: { title: 'title', subtitle: 'subtitle', media: 'image' } },
+            }),
+          ],
+        }),
       ],
     }),
 

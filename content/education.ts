@@ -274,6 +274,57 @@ export const education = {
       'We want learning to feel approachable, engaging and useful. That means encouraging questions, learning from mistakes, practising new skills and recognising progress along the way.',
       "We also understand that parents want to know their children are receiving the right guidance and making meaningful progress. We aim to build that confidence through clear communication, supportive teaching and a focus on each learner's needs.",
     ],
+    /** Shown on each programme page as a three-by-three grid (in place of the quote and paragraphs). */
+    points: [
+      {
+        title: 'Interactive Learning That Keeps Them Curious',
+        text: 'Interactive lessons and engaging activities encourage students to participate, ask questions, and enjoy discovering new ideas.',
+        image: { src: '/images/approach/interactive-learning.jpg', alt: 'Children raising their hands as their teacher leads a lively lesson' },
+      },
+      {
+        title: 'Understanding Before Memorising',
+        text: 'We help students understand why concepts work, so they can apply their knowledge beyond memorised answers.',
+        image: { src: '/images/approach/understanding-concepts.jpg', alt: 'A girl watching closely as her teacher demonstrates a science concept' },
+      },
+      {
+        title: 'Connect Learning to the Real World',
+        text: 'Students explore how classroom concepts relate to everyday situations, practical challenges, and real-world applications.',
+        image: { src: '/images/approach/real-world-learning.jpg', alt: 'Two children carrying out a science experiment in a classroom laboratory' },
+      },
+      {
+        title: 'Make Complex Ideas Easier to Understand',
+        text: 'We use relatable stories, examples, and explanations to help students connect new concepts with what they already know.',
+        image: { src: '/images/approach/stories-and-examples.jpg', alt: 'A teacher reading a story to a group of young children' },
+      },
+      {
+        title: 'Learning That Adapts to the Student',
+        text: 'Learning support is tailored to each student’s current understanding, individual needs, and pace of progress.',
+        image: { src: '/images/approach/learning-that-adapts.jpg', alt: 'A teacher pointing to a pupil’s exercise book as she works at her desk' },
+      },
+      {
+        title: 'Build Strong Foundations, One Concept at a Time',
+        text: 'Students strengthen their understanding through guided practice and revisit difficult concepts before progressing.',
+        image: { src: '/images/approach/strong-foundations.jpg', alt: 'A child carefully building a structure from wooden blocks' },
+      },
+      {
+        title: 'Learning Gap Identification',
+        subtitle: 'Understand Where Learning Breaks Down',
+        text: 'We identify areas where students need additional support and help them focus on the concepts that require attention.',
+        image: { src: '/images/approach/learning-gap-identification.jpg', alt: 'A teacher looking over a student’s work at her desk' },
+      },
+      {
+        title: 'Critical Thinking & Problem Solving',
+        subtitle: 'Teach them how to think, not just what to answer',
+        text: 'Students develop reasoning and problem-solving skills by analysing questions, exploring solutions, and learning to think independently.',
+        image: { src: '/images/approach/critical-thinking.jpg', alt: 'A boy thinking hard as he works on a Rubik’s cube' },
+      },
+      {
+        title: 'Future-Ready Skills',
+        subtitle: 'Go Beyond Textbooks. Explore What’s Next.',
+        text: 'Students discover AI, robotics, and emerging technologies through practical activities and hands-on projects.',
+        image: { src: '/images/approach/future-ready-skills.jpg', alt: 'Children building a robotics project together in class' },
+      },
+    ] as { title: string; subtitle?: string; text: string; image?: { src: string; alt: string } }[],
   },
 
   beyond: {

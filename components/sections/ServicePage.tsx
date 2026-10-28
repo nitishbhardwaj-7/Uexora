@@ -5,6 +5,7 @@ import { Statement } from '@/components/sections/Blocks';
 import CtaBand from '@/components/sections/CtaBand';
 import Faq from '@/components/sections/Faq';
 import ProgrammeTabs from '@/components/sections/ProgrammeTabs';
+import ApproachGrid from '@/components/sections/ApproachGrid';
 import Monogram from '@/components/brand/Monogram';
 import CmsImage from '@/components/ui/CmsImage';
 import { ArrowLink } from '@/components/ui/Button';
@@ -17,7 +18,7 @@ type Props = {
   service: Service;
   all: Service[];
   /** Pull quote and paragraphs from the division's approach / philosophy section. */
-  statement: { heading: string; quote: string; paragraphs: string[] };
+  statement: { heading: string; quote: string; paragraphs: string[]; points?: { title: string; subtitle?: string; text?: string; image?: { src: string; alt: string } }[] };
   cta: { heading: string; paragraphs: string[]; signoff?: string; primary: { label: string; href: string }; secondary?: { label: string; href: string } };
 };
 
@@ -217,7 +218,12 @@ export default function ServicePage({ division, service: s, all, statement, cta 
         </div>
       </section>
 
-      <Statement id="approach" eyebrow={statement.heading} quote={statement.quote} paragraphs={statement.paragraphs.slice(0, 2)} tone={altTone} />
+      {/* With approach points (Education), they replace the quote and paragraphs. */}
+      {statement.points?.filter((p) => p?.title).length ? (
+        <ApproachGrid id="approach" heading={statement.heading} quote={statement.quote} points={statement.points.filter((p) => p?.title)} tone={altTone} />
+      ) : (
+        <Statement id="approach" eyebrow={statement.heading} quote={statement.quote} paragraphs={statement.paragraphs.slice(0, 2)} tone={altTone} />
+      )}
 
       {faqs.length ? (
         <section id="questions" className="section" data-tone={sectionTone} aria-labelledby="faq-title">
