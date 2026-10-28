@@ -7286,9 +7286,6 @@ html.reveal-ready .steps--seq.is-in .step p {
 .xnav__link[aria-current]::after {
   transform: scaleX(1);
 }
-.xtrack {
-  scroll-margin-top: calc(var(--header-h) + 56px);
-}
 
 /* Opening band: the exam's photo across the band, the copy on the left over a navy veil. */
 .xtrack__hero {

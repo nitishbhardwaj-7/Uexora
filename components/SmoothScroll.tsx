@@ -16,6 +16,31 @@ gsap.registerPlugin(ScrollTrigger);
 
 const HEADER_OFFSET = -72;
 
+/**
+ * How far below the top of the screen a section should land: under the fixed header, and under
+ * the exam bar too when the section sits in the exam tracks (where that bar stays stuck).
+ */
+function offsetFor(el: HTMLElement) {
+  const bar = el.closest('.xtracks__body') ? document.querySelector<HTMLElement>('.xnav')?.offsetHeight || 0 : 0;
+  return HEADER_OFFSET - bar;
+}
+
+/**
+ * Smooth scroll to a section, then check where it actually landed and glide the rest of the way.
+ * The target is measured when the scroll starts, but on a long page the content above can still
+ * grow on the way (headings split into lines as they are reached), which left the section short.
+ */
+function glideTo(lenis: Lenis, el: HTMLElement, corrections = 2) {
+  lenis.scrollTo(el, {
+    offset: offsetFor(el),
+    duration: corrections === 2 ? undefined : 0.6,
+    onComplete: () => {
+      const miss = el.getBoundingClientRect().top + offsetFor(el);
+      if (corrections > 0 && Math.abs(miss) > 4) glideTo(lenis, el, corrections - 1);
+    },
+  });
+}
+
 /** Cancels any scroll still in flight (Lenis keeps easing towards its target after a fast wheel flick). */
 function haltMomentum(lenis: Lenis) {
   lenis.scrollTo(lenis.animatedScroll, { immediate: true, force: true });
@@ -47,7 +72,7 @@ export default function SmoothScroll() {
     const place = () => {
       const l = window.__lenis;
       if (target) {
-        if (l) l.scrollTo(target, { offset: HEADER_OFFSET, immediate: true, force: true });
+        if (l) l.scrollTo(target, { offset: offsetFor(target), immediate: true, force: true });
         else target.scrollIntoView();
       } else if (l) l.scrollTo(0, { immediate: true, force: true });
       else window.scrollTo(0, 0);
@@ -122,7 +147,7 @@ export default function SmoothScroll() {
       if (!target) return;
       e.preventDefault();
       history.pushState(null, '', url.hash);
-      lenis.scrollTo(target as HTMLElement, { offset: HEADER_OFFSET });
+      glideTo(lenis, target as HTMLElement);
     };
     // Capture phase, so momentum stops before Next.js handles the link.
     document.addEventListener('click', onClick, true);
