@@ -26,6 +26,9 @@
   --orange-500: #f28a2e;
   --orange-400: #f6a65c;
   --orange-100: #fde4cc;
+  /* The third brand colour has one job everywhere: the lines that draw in or appear on hover
+     (nav and link underlines, tab and question rules). Yellow keeps highlights and buttons. */
+  --accent-line: var(--orange-500);
 
   /* neutrals */
   --cream: #f6f5f0;
@@ -152,7 +155,7 @@ ol {
 }
 
 ::selection {
-  background: var(--gold-500);
+  background: var(--accent-line);
   color: var(--navy-900);
 }
 
@@ -548,7 +551,7 @@ h4,
 }
 .split__who {
   padding-left: 1.2rem;
-  border-left: 3px solid var(--accent);
+  border-left: 3px solid var(--accent-line);
   color: var(--fg) !important;
 }
 .split__more {
@@ -707,7 +710,7 @@ h4,
   flex-wrap: wrap;
   gap: 0.4rem 2rem;
 }
-/* The chosen tab is underlined in the accent; no pills or boxes. */
+/* The chosen tab is underlined in orange; no pills or boxes. */
 .ptabs__tab {
   position: relative;
   padding: 0.45rem 0;
@@ -725,7 +728,7 @@ h4,
   bottom: 0;
   height: 2px;
   border-radius: 2px;
-  background: var(--accent);
+  background: var(--accent-line);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.5s var(--ease-out);
@@ -1242,14 +1245,14 @@ h4,
   transform: translateX(0.3rem);
 }
 .link-arrow span {
-  background-image: linear-gradient(currentColor, currentColor);
-  background-size: 0% 1px;
+  background-image: linear-gradient(var(--accent-line), var(--accent-line));
+  background-size: 0% 2px;
   background-repeat: no-repeat;
   background-position: left bottom;
   transition: background-size 0.5s var(--ease-out);
 }
 .link-arrow:hover span {
-  background-size: 100% 1px;
+  background-size: 100% 2px;
 }
 
 /* --------------------------------------------------------------------------
@@ -1592,7 +1595,7 @@ h4,
   right: 0;
   bottom: 0;
   height: 2px;
-  background: var(--orange-500);
+  background: var(--accent-line);
   transform: scaleX(0);
   transform-origin: right;
   transition: transform 0.45s var(--ease-out);
@@ -5258,7 +5261,7 @@ a.cdirect__value:hover {
   color: var(--fg-muted);
   transition: color 0.45s ease;
 }
-/* gold marker on the index line: grows down from the top when the question is chosen */
+/* orange marker on the index line: grows down from the top when the question is chosen */
 .qa__tab::before {
   content: '';
   position: absolute;
@@ -5266,7 +5269,7 @@ a.cdirect__value:hover {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: var(--gold-500);
+  background: var(--accent-line);
   transform: scaleY(0);
   transform-origin: top center;
   transition: transform 0.6s var(--ease-in-out);
@@ -5724,7 +5727,7 @@ a.cdirect__value:hover {
   border-radius: 14px;
   transition: background-color 0.6s var(--ease-in-out);
 }
-/* a gold hairline draws along the row's base on hover and stays while it is open */
+/* an orange hairline draws along the row's base on hover and stays while it is open */
 .faq__item::after {
   content: '';
   position: absolute;
@@ -5732,7 +5735,7 @@ a.cdirect__value:hover {
   right: 0;
   bottom: -1px;
   height: 1px;
-  background: var(--gold-500);
+  background: var(--accent-line);
   transform: scaleX(0);
   transform-origin: left center;
   transition: transform 0.7s var(--ease-in-out);
