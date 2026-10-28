@@ -91,7 +91,7 @@ export default function ServicePage({ division, service: s, all, statement, cta 
           {/* Heading row on top; below it the photo and the text start and end on the same lines. */}
           <div className="overview-head">
             <h2 id="overview-title" className="h2" data-split>
-              {division === 'education' ? 'What it offers, and who it’s for' : 'What it covers, and who it’s for'}
+              {division === 'education' ? 'Who it’s for, and what it offers' : 'Who it’s for, and what it covers'}
             </h2>
             <div data-reveal>
               <ArrowLink href={contact}>Ask about this {meta.unit}</ArrowLink>
