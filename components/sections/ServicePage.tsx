@@ -23,7 +23,7 @@ type Props = {
 
 /**
  * Detail page for one programme (Education) or service (Marketing):
- * hero, who it's for + detail, at a glance, questions, approach, other items, call to action.
+ * hero, who it's for + detail, questions, approach, other items, call to action.
  * Education pages follow the blue theme (dark sections), Marketing the cream theme.
  */
 export default function ServicePage({ division, service: s, all, statement, cta }: Props) {
@@ -211,28 +211,6 @@ export default function ServicePage({ division, service: s, all, statement, cta 
           ) : null}
         </div>
       </section>
-
-      {s.highlights?.length ? (
-        <section id="at-a-glance" className="section section--flush-top" data-tone={sectionTone} aria-labelledby="glance-title">
-          <div className="container">
-            <div className="section-head">
-              <h2 id="glance-title" className="h3" data-reveal>
-                At a glance
-              </h2>
-            </div>
-            <ol className="reasons reasons--compact">
-              {s.highlights.map((h, i) => (
-                <li key={h} className="reason reason--compact" data-reveal>
-                  <span className="reason__num" aria-hidden="true">
-                    {String(i + 1).padStart(2, '0')}
-                  </span>
-                  <h3 className="h3">{h}</h3>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-      ) : null}
 
       <Statement id="approach" eyebrow={statement.heading} quote={statement.quote} paragraphs={statement.paragraphs.slice(0, 2)} tone={altTone} />
 

@@ -138,7 +138,7 @@ export const service = defineType({
       type: 'array',
       of: [defineArrayMember({ type: 'string' })],
       options: { layout: 'tags' },
-      description: 'Three or four short phrases, shown as chips and in the "at a glance" list.',
+      description: 'Three or four short phrases, shown as chips in the page hero.',
     }),
     defineField({ name: 'whoFor', title: 'Who it is for', type: 'text', rows: 2 }),
     defineField({ name: 'details', title: 'More detail', type: 'array', of: [defineArrayMember({ type: 'text', rows: 4 })], description: 'Further paragraphs for the page. Leave empty to hide the section.' }),

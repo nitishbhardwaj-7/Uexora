@@ -4692,20 +4692,6 @@ a.cdirect__value:hover {
   color: var(--accent);
 }
 
-/* "at a glance" list on service pages: number + title only */
-.reason--compact {
-  grid-template-columns: 6rem 1fr;
-  padding-block: clamp(1.2rem, 2vw, 1.8rem);
-}
-.reason--compact h3 {
-  font-size: clamp(1.15rem, 1.6vw, 1.5rem);
-}
-@media (max-width: 800px) {
-  .reason--compact {
-    grid-template-columns: 4rem 1fr;
-  }
-}
-
 /* small sign-off inside a statement band */
 
 /* --------------------------------------------------------------------------

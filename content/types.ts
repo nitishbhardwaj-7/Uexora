@@ -7,7 +7,7 @@ export type Service = {
   promise?: string;
   /** Intro paragraph: shown in the index row and as the first paragraph of the page. */
   text: string;
-  /** Three or four short phrases, shown as chips on the page and in the "at a glance" list. */
+  /** Three or four short phrases, shown as chips in the page hero. */
   highlights: string[];
   /** One or two sentences on who this is for. */
   whoFor: string;
