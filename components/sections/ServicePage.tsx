@@ -148,7 +148,8 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
                   </p>
                 ) : null}
               </div>
-              <ol className="grades__steps" data-reveal-group data-stagger="0.14" style={{ '--n': grades.length } as React.CSSProperties}>
+              {/* Rises as a staircase once in view: the columns grow in turn, then each stage's text. */}
+              <ol className="grades__steps" data-reveal style={{ '--n': grades.length } as React.CSSProperties}>
                 {grades.map((g, i) => (
                   <li key={g.grades + i} className="grades__step" style={{ '--i': i } as React.CSSProperties}>
                     <p className="grades__range">
@@ -176,9 +177,10 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
                   </p>
                 ) : null}
               </div>
-              <ul className="curricula__list" data-reveal-group data-stagger="0.1">
+              {/* Each seal's ring draws round in turn once in view, then its name settles in. */}
+              <ul className="curricula__list" data-reveal>
                 {boards.map((b, i) => (
-                  <li key={b.short + i} className="curricula__item">
+                  <li key={b.short + i} className="curricula__item" style={{ '--k': i } as React.CSSProperties}>
                     <span className={['curricula__mark', b.logo ? 'curricula__mark--logo' : ''].filter(Boolean).join(' ')} aria-hidden={b.logo ? undefined : true}>
                       {b.logo ? <CmsImage src={b.logo.src} alt={b.logo.alt || b.name} fill sizes="120px" quality={82} /> : b.short}
                     </span>
