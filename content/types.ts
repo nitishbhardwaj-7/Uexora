@@ -27,6 +27,8 @@ export type Service = {
       options?: { ratio: string; title: string; tagline: string; text: string; image?: { src: string; alt: string } }[];
     }[];
   };
+  /** Optional side-by-side comparison shown before the questions (e.g. against typical home tuition). */
+  comparison?: { heading: string; text?: string; them: string; us: string; lines: { label: string; them: string; us: string }[] };
   /** Heading above the questions; "Common questions" when empty. */
   faqHeading?: string;
   /** Questions and answers shown on the detail page; also emitted as FAQPage structured data. */

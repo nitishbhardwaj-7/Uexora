@@ -250,6 +250,36 @@ export const service = defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'comparison',
+      title: 'Comparison',
+      type: 'object',
+      description: 'Optional. A side-by-side table shown before the questions. Leave the rows empty to hide it. Keep claims to what the business actually offers.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'text', title: 'Intro', type: 'text', rows: 2 }),
+        defineField({ name: 'them', title: 'Left column name', type: 'string', description: 'e.g. Teacher next door' }),
+        defineField({ name: 'us', title: 'Right column name', type: 'string', description: 'e.g. UEXORA' }),
+        defineField({
+          name: 'lines',
+          title: 'Rows',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'comparisonRow',
+              fields: [
+                defineField({ name: 'label', title: 'What is compared', type: 'string', validation: (r) => r.required() }),
+                defineField({ name: 'them', title: 'Left column', type: 'string' }),
+                defineField({ name: 'us', title: 'Right column', type: 'string' }),
+              ],
+              preview: { select: { title: 'label', subtitle: 'us' } },
+            }),
+          ],
+        }),
+      ],
+    }),
     defineField({ name: 'faqHeading', title: 'Questions heading', type: 'string', description: 'Heading above the questions, e.g. Common Questions From Parents. Leave empty for "Common questions".' }),
     defineField({ name: 'faqs', title: 'Questions and answers', type: 'array', of: [defineArrayMember({ type: 'faq' })], description: 'Shown on the page and sent to search engines as FAQ data. Keep answers to what the business actually offers.' }),
     defineField({ name: 'image', title: 'Photo', type: 'picture', description: 'Shown on the card in the index and in the footer. A photo around 1200 px wide works best.' }),

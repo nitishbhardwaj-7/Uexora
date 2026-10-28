@@ -78,6 +78,26 @@ const programmes: Service[] = [
         { title: 'Live Progress Tracking for Parents', image: { src: '/images/programmes/parent-progress-tracking.jpg', alt: 'A parent and child smiling as they look at a tablet together' }, text: 'Give parents visibility into their child’s learning progress, performance, strengths, and areas requiring improvement.' },
       ],
     },
+    comparison: {
+      heading: 'How is UEXORA different from the teacher next door?',
+      text: 'Local tuition can help with homework. Our programmes are built to do more, with support around the student and visibility for parents.',
+      them: 'Teacher next door',
+      us: 'UEXORA',
+      lines: [
+        {
+          label: 'Personal attention',
+          them: 'Usually one format, at one pace for everyone in the room',
+          us: 'Personalised attention to each student’s needs, pace and strengths, in 1:1, 1:6 or 1:20 programmes',
+        },
+        { label: 'Teachers', them: 'Depends on one person’s subjects and availability', us: 'Highly qualified teachers across subjects and grades' },
+        { label: 'Progress for parents', them: 'Shared informally, when you ask', us: 'Live progress tracking: performance, strengths and areas to improve' },
+        { label: 'Finding learning gaps', them: 'Mostly homework help and repeating the lesson', us: 'Learning gaps identified, so effort goes where it is needed most' },
+        { label: 'Help when stuck', them: 'Only during the tuition hour', us: 'Tutor assistance within 15 minutes, subject to service availability and operating hours' },
+        { label: 'Practice', them: 'Limited to worksheets and homework', us: 'Real-time subject quizzes and unlimited practice' },
+        { label: 'Curricula', them: 'Often familiar with one board', us: 'Support across CBSE, ICSE and ISC, State Boards, IB and Cambridge' },
+        { label: 'Beyond the syllabus', them: 'Focused on the school syllabus', us: 'Future-ready skills: AI, robotics and emerging technologies' },
+      ],
+    },
     faqHeading: 'Common Questions From Parents',
     faqs: [
       {

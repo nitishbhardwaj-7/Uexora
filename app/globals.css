@@ -840,6 +840,137 @@ h4,
     font-size: 3.2rem;
   }
 }
+/* Comparison table (e.g. UEXORA against the teacher next door). The UEXORA column carries a
+   soft accent tint and a check on every row; the other column is muted with a dash. */
+.compare__table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+}
+.compare__table th:first-child {
+  width: 24%;
+}
+.compare__table .compare__them {
+  width: 33%;
+}
+.compare__table thead th {
+  padding: 1.3rem 1.5rem 1.1rem;
+  text-align: left;
+  font-family: var(--font-sub), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+.compare__table thead .compare__us {
+  color: var(--accent);
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+}
+.compare__table tbody th {
+  padding: 1.35rem 1.5rem 1.35rem 0;
+  text-align: left;
+  vertical-align: top;
+  font-family: var(--font-sub), ui-sans-serif, system-ui, sans-serif;
+  font-size: 1.02rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: var(--fg);
+}
+.compare__table td {
+  position: relative;
+  padding: 1.35rem 1.5rem 1.35rem 3.2rem;
+  vertical-align: top;
+  line-height: 1.55;
+}
+.compare__table tbody tr + tr > * {
+  border-top: 1px solid color-mix(in srgb, var(--fg) 9%, transparent);
+}
+.compare__them {
+  color: var(--fg-muted);
+}
+.compare__us {
+  color: var(--fg);
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+}
+.compare__table thead .compare__us {
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.compare__table tbody tr:last-child .compare__us {
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+.compare__icon {
+  position: absolute;
+  left: 1.5rem;
+  top: 1.55rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  fill: none;
+  stroke: color-mix(in srgb, var(--fg) 40%, transparent);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.compare__us .compare__icon {
+  stroke: var(--accent);
+  stroke-width: 2.4;
+}
+/* Phones: each row becomes a short stack, the column names shown above each answer. */
+@media (max-width: 720px) {
+  .compare__table,
+  .compare__table tbody,
+  .compare__table tr,
+  .compare__table th,
+  .compare__table td {
+    display: block;
+    width: auto !important;
+  }
+  .compare__table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+  .compare__table tbody tr {
+    padding-block: 1.25rem;
+  }
+  .compare__table tbody tr + tr > * {
+    border-top: 0;
+  }
+  .compare__table tbody tr + tr {
+    border-top: 1px solid color-mix(in srgb, var(--fg) 9%, transparent);
+  }
+  .compare__table tbody th {
+    padding: 0 0 0.75rem;
+  }
+  .compare__table td {
+    padding: 0.85rem 1rem 0.85rem 2.9rem;
+  }
+  .compare__table td::before {
+    content: attr(data-label);
+    display: block;
+    margin-bottom: 0.2rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+  }
+  .compare__table .compare__us::before {
+    color: var(--accent);
+  }
+  .compare__table tbody .compare__us,
+  .compare__table tbody tr:last-child .compare__us {
+    border-radius: var(--radius);
+  }
+  .compare__icon {
+    left: 1rem;
+    top: 1.95rem;
+  }
+}
 /* "Our Approach to Learning" on programme pages: three points to a row, each with a photo. */
 .approach9__head {
   display: grid;

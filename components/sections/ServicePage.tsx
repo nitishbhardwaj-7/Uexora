@@ -6,6 +6,7 @@ import CtaBand from '@/components/sections/CtaBand';
 import Faq from '@/components/sections/Faq';
 import ProgrammeTabs from '@/components/sections/ProgrammeTabs';
 import ApproachGrid from '@/components/sections/ApproachGrid';
+import CompareTable from '@/components/sections/CompareTable';
 import Monogram from '@/components/brand/Monogram';
 import CmsImage from '@/components/ui/CmsImage';
 import { ArrowLink } from '@/components/ui/Button';
@@ -224,6 +225,8 @@ export default function ServicePage({ division, service: s, all, statement, cta 
       ) : (
         <Statement id="approach" eyebrow={statement.heading} quote={statement.quote} paragraphs={statement.paragraphs.slice(0, 2)} tone={altTone} />
       )}
+
+      {s.comparison?.lines?.length ? <CompareTable id="compare" data={s.comparison} tone={sectionTone} /> : null}
 
       {faqs.length ? (
         <section id="questions" className="section" data-tone={sectionTone} aria-labelledby="faq-title">

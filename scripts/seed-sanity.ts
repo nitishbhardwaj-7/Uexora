@@ -49,6 +49,7 @@ const arrayTypes: Record<string, string> = {
   features: 'offering',
   options: 'offeringOption',
   points: 'approachPoint',
+  lines: 'comparisonRow',
 };
 
 const assetCache = new Map<string, string>();
