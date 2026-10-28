@@ -12,7 +12,7 @@ const programmes: Service[] = [
     promise: 'Understand your subjects rather than memorise them, with support shaped around how you learn.',
     seo: { description: 'Academic support and school tuition from Uexora Education: help understanding subjects, working through difficult concepts and building confidence in studies.' },
     image: { src: '/images/services/academic-support-study-together.jpg', alt: 'Two students working through an assignment together outdoors' },
-    heroImage: { src: '/images/heroes/services/academic-support-and-school-tuition.jpg', alt: 'A tutor helping a teenage student with her homework at a desk' },
+    heroImage: { src: '/images/heroes/services/academic-support-and-school-tuition-2.jpg', alt: 'A young student taking notes during a one-to-one online lesson with her tutor on a laptop' },
     highlights: ['Subject understanding', 'Working through difficult concepts', 'Confidence in studies', 'Guidance that fits each student'],
     whoFor: 'School students who want extra guidance with their subjects, from everyday schoolwork to the concepts they find hardest.',
     details: [

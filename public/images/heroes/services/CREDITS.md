@@ -5,7 +5,7 @@ Re-encoded with metadata removed at 3200px wide. Replace any of them from the st
 
 | File | Photo | Photographer |
 | --- | --- | --- |
-| academic-support-and-school-tuition.jpg | https://www.pexels.com/photo/7692546/ | Kaboompics.com |
+| academic-support-and-school-tuition-2.jpg | https://www.pexels.com/photo/5905714/ | (not confirmed; see the Pexels page) |
 | competitive-exam-preparation.jpg | https://www.pexels.com/photo/8199555/ | Yan Krukau |
 | overseas-education-and-english-language.jpg | https://www.pexels.com/photo/8199602/ | Yan Krukau |
 | ai-coding-and-robotics-for-students.jpg | https://www.pexels.com/photo/7869086/ | Vanessa Loring |
