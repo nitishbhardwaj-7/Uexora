@@ -783,16 +783,56 @@ h4,
   line-height: 1.65;
   max-width: 44rem;
 }
+/* With a photo, the panel runs full width: ratio, text, then the photo, which wipes in from
+   the right each time its tab is chosen. */
+.ptabs__panel:has(.ptabs__photo) {
+  grid-template-columns: minmax(7ch, auto) minmax(0, 1fr) minmax(0, 0.95fr);
+  max-width: none;
+}
+.ptabs__photo,
+.offer__photo {
+  position: relative;
+  margin: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: color-mix(in srgb, var(--fg) 8%, transparent);
+  box-shadow: 0 30px 60px -36px rgba(6, 16, 58, 0.55);
+}
+.ptabs__photo img,
+.offer__photo img {
+  object-fit: cover;
+}
+.ptabs__photo {
+  aspect-ratio: 4 / 3;
+  clip-path: inset(0 0 0 35% round var(--radius));
+  transition: clip-path 0.4s var(--ease-in-out);
+}
+.ptabs__panel.is-active .ptabs__photo {
+  clip-path: inset(0 0 0 0 round var(--radius));
+  transition: clip-path 1.1s var(--ease-out) 0.1s;
+}
+.offer__photo {
+  aspect-ratio: 3 / 2;
+  margin-bottom: 0.6rem;
+}
 @media (max-width: 900px) {
   .offer__list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ptabs__panel:has(.ptabs__photo) {
+    grid-template-columns: minmax(7ch, auto) minmax(0, 1fr);
+  }
+  .ptabs__photo {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 9;
   }
 }
 @media (max-width: 560px) {
   .offer__list {
     grid-template-columns: 1fr;
   }
-  .ptabs__panel {
+  .ptabs__panel,
+  .ptabs__panel:has(.ptabs__photo) {
     grid-template-columns: 1fr;
     gap: 0.75rem;
   }

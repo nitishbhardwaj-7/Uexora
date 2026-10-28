@@ -198,6 +198,11 @@ export default function ServicePage({ division, service: s, all, statement, cta 
               <ol className="offer__list" data-reveal-group data-stagger="0.1">
                 {features.map((f, i) => (
                   <li key={f.title + i} className={['offer__item', f.options?.length ? 'offer__item--tabs' : ''].filter(Boolean).join(' ')}>
+                    {f.image && !f.options?.length ? (
+                      <figure className="offer__photo">
+                        <CmsImage src={f.image.src} alt={f.image.alt} fill sizes="(max-width: 560px) 92vw, (max-width: 900px) 46vw, 30vw" quality={82} />
+                      </figure>
+                    ) : null}
                     <span className="offer__num" aria-hidden="true">
                       {String(i + 1).padStart(2, '0')}
                     </span>

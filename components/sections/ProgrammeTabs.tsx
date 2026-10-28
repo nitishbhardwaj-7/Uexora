@@ -1,8 +1,9 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import CmsImage from '@/components/ui/CmsImage';
 
-type Option = { ratio: string; title: string; tagline: string; text: string };
+type Option = { ratio: string; title: string; tagline: string; text: string; image?: { src: string; alt: string } };
 
 /**
  * Small tabs for the options of one programme feature (e.g. 1:1, 1:6, 1:20). Every panel is
@@ -66,6 +67,11 @@ export default function ProgrammeTabs({ options, idBase, label }: { options: Opt
               {o.tagline ? <p className="ptabs__tagline">{o.tagline}</p> : null}
               {o.text ? <p className="ptabs__text">{o.text}</p> : null}
             </div>
+            {o.image ? (
+              <figure className="ptabs__photo">
+                <CmsImage src={o.image.src} alt={o.image.alt} fill sizes="(max-width: 900px) 92vw, 30vw" quality={82} />
+              </figure>
+            ) : null}
           </div>
         ))}
       </div>

@@ -20,7 +20,12 @@ export type Service = {
   /** Optional numbered list of what the programme includes; a feature with `options` shows them as tabs. */
   offerings?: {
     heading: string;
-    features: { title: string; text?: string; options?: { ratio: string; title: string; tagline: string; text: string }[] }[];
+    features: {
+      title: string;
+      text?: string;
+      image?: { src: string; alt: string };
+      options?: { ratio: string; title: string; tagline: string; text: string; image?: { src: string; alt: string } }[];
+    }[];
   };
   /** Questions and answers shown on the detail page; also emitted as FAQPage structured data. */
   faqs?: { q: string; a: string }[];
