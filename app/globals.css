@@ -803,19 +803,39 @@ html.reveal-ready .curricula__list:not(.is-in) .curricula__name {
   margin-top: 0.6rem;
 }
 .ptabs__list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr));
+  gap: clamp(0.6rem, 1.4vw, 1rem);
+  max-width: 56rem;
 }
-/* The chosen tab is underlined in orange; no pills or boxes. */
+/* Large tabs: the ratio set big with the first beats of its tagline. The chosen one is lit with
+   a gold edge and a soft tint, with an orange bar along its foot; the others stay quiet. */
 .ptabs__tab {
   position: relative;
-  padding: 0.45rem 0;
-  font-family: var(--font-sub), ui-sans-serif, system-ui, sans-serif;
-  font-size: 1.05rem;
-  font-weight: 600;
+  display: grid;
+  justify-items: start;
+  gap: 0.35rem;
+  padding: clamp(1rem, 1.8vw, 1.35rem) clamp(1rem, 1.8vw, 1.5rem) clamp(1.1rem, 2vw, 1.45rem);
+  border: 1px solid color-mix(in srgb, var(--fg) 16%, transparent);
+  border-radius: 18px;
+  overflow: hidden;
+  text-align: left;
   color: var(--fg-muted);
-  transition: color 0.3s;
+  background: color-mix(in srgb, var(--fg) 3%, transparent);
+  transition: border-color 0.4s, background-color 0.4s, color 0.4s;
+}
+.ptabs__tab-ratio {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  line-height: 1;
+  color: var(--fg);
+  transition: color 0.4s;
+}
+.ptabs__tab-sub {
+  font-family: var(--font-sub), ui-sans-serif, system-ui, sans-serif;
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.35;
 }
 .ptabs__tab::after {
   content: '';
@@ -823,19 +843,30 @@ html.reveal-ready .curricula__list:not(.is-in) .curricula__name {
   left: 0;
   right: 0;
   bottom: 0;
-  height: 2px;
-  border-radius: 2px;
+  height: 3px;
   background: var(--accent-line);
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform 0.5s var(--ease-out);
+  transition: transform 0.6s var(--ease-out);
 }
-.ptabs__tab:hover,
-.ptabs__tab.is-active {
+.ptabs__tab:hover {
+  border-color: color-mix(in srgb, var(--fg) 34%, transparent);
   color: var(--fg);
+}
+.ptabs__tab.is-active {
+  border-color: color-mix(in srgb, var(--gold-500) 80%, transparent);
+  background: color-mix(in srgb, var(--gold-500) 10%, transparent);
+  color: var(--fg);
+}
+.ptabs__tab.is-active .ptabs__tab-ratio {
+  color: var(--gold-500);
 }
 .ptabs__tab.is-active::after {
   transform: scaleX(1);
+}
+.ptabs__tab:focus-visible {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 3px;
 }
 /* Panels share one grid cell; the chosen one fades and rises in. */
 .ptabs__panels {
@@ -845,7 +876,7 @@ html.reveal-ready .curricula__list:not(.is-in) .curricula__name {
 .ptabs__panel {
   grid-area: 1 / 1;
   display: grid;
-  grid-template-columns: minmax(7ch, auto) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(1.5rem, 4vw, 3.5rem);
   align-items: center;
   max-width: 62rem;
@@ -859,12 +890,6 @@ html.reveal-ready .curricula__list:not(.is-in) .curricula__name {
   visibility: visible;
   translate: 0 0;
   transition: opacity 0.6s ease 0.1s, translate 0.8s var(--ease-out) 0.1s, visibility 0s;
-}
-.ptabs__ratio {
-  font-family: var(--font-heading), Georgia, serif;
-  font-size: clamp(3.5rem, 7vw, 6.5rem);
-  line-height: 1;
-  color: var(--accent);
 }
 .ptabs__body {
   display: grid;
@@ -886,7 +911,7 @@ html.reveal-ready .curricula__list:not(.is-in) .curricula__name {
 /* With a photo, the panel runs full width: ratio, text, then the photo, which wipes in from
    the right each time its tab is chosen. */
 .ptabs__panel:has(.ptabs__photo) {
-  grid-template-columns: minmax(7ch, auto) minmax(0, 1fr) minmax(0, 0.95fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
   max-width: none;
 }
 .ptabs__photo,
@@ -920,10 +945,9 @@ html.reveal-ready .curricula__list:not(.is-in) .curricula__name {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .ptabs__panel:has(.ptabs__photo) {
-    grid-template-columns: minmax(7ch, auto) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr);
   }
   .ptabs__photo {
-    grid-column: 1 / -1;
     aspect-ratio: 16 / 9;
   }
 }
@@ -936,8 +960,14 @@ html.reveal-ready .curricula__list:not(.is-in) .curricula__name {
     grid-template-columns: 1fr;
     gap: 0.75rem;
   }
-  .ptabs__ratio {
-    font-size: 3.2rem;
+  /* Three tabs still fit side by side on a phone: ratio only, a little smaller. */
+  .ptabs__tab {
+    justify-items: center;
+    padding: 0.85rem 0.5rem 1rem;
+    text-align: center;
+  }
+  .ptabs__tab-sub {
+    display: none;
   }
 }
 /* Comparison table (e.g. UEXORA against the teacher next door). The UEXORA column carries a

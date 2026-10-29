@@ -6,7 +6,8 @@ import CmsImage from '@/components/ui/CmsImage';
 type Option = { ratio: string; title: string; tagline: string; text: string; image?: { src: string; alt: string } };
 
 /**
- * Small tabs for the options of one programme feature (e.g. 1:1, 1:6, 1:20). Every panel is
+ * Large tabs for the options of one programme feature (e.g. 1:1, 1:6, 1:20), each with its ratio
+ * set big and the first beats of its tagline. Every panel is
  * rendered, so all the text is in the page; only the chosen one is shown. Arrow keys, Home and
  * End move between tabs, as in any tab list.
  */
@@ -45,7 +46,9 @@ export default function ProgrammeTabs({ options, idBase, label }: { options: Opt
             className={['ptabs__tab', i === active ? 'is-active' : ''].filter(Boolean).join(' ')}
             onClick={() => setActive(i)}
           >
-            {o.ratio}
+            <span className="ptabs__tab-ratio">{o.ratio}</span>
+            {/* The first two beats of the tagline, e.g. "One Teacher. Six Students." */}
+            {o.tagline ? <span className="ptabs__tab-sub">{o.tagline.split(/(?<=\.)\s+/).slice(0, 2).join(' ')}</span> : null}
           </button>
         ))}
       </div>
@@ -59,9 +62,6 @@ export default function ProgrammeTabs({ options, idBase, label }: { options: Opt
             className={['ptabs__panel', i === active ? 'is-active' : ''].filter(Boolean).join(' ')}
             tabIndex={i === active ? 0 : -1}
           >
-            <span className="ptabs__ratio" aria-hidden="true">
-              {o.ratio}
-            </span>
             <div className="ptabs__body">
               <h5 className="ptabs__title">{o.title}</h5>
               {o.tagline ? <p className="ptabs__tagline">{o.tagline}</p> : null}
