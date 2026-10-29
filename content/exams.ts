@@ -9,7 +9,7 @@ import type { ExamTrack } from './types.ts';
 const contact = '/contact?division=education';
 
 /** The three batch photos are shared by all four tracks: live online classes at each size. */
-const batchPhotos = {
+export const batchPhotos = {
   small: { src: '/images/exams/batch-small-group.jpg', alt: 'A small group of students on a video call during a live online class' },
   guided: { src: '/images/exams/batch-guided.jpg', alt: 'A teacher explaining a lesson to camera during a live online class' },
   collaborative: { src: '/images/exams/batch-collaborative.jpg', alt: 'A student with headphones following a live online class on his laptop' },

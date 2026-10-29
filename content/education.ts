@@ -1,5 +1,6 @@
 import type { Service } from './types.ts';
 import { examApproach, examBatches, examTracks } from './exams.ts';
+import { englishApproach, englishBatches, englishTracks } from './english.ts';
 
 /**
  * Default content for the Education page. This is the fallback (and the seed) for the
@@ -161,6 +162,11 @@ const programmes: Service[] = [
     image: { src: '/images/services/overseas-english-grammar.jpg', alt: 'An English grammar book and a laptop on a wooden desk' },
     heroImage: { src: '/images/heroes/services/overseas-education-and-english-language.jpg', alt: 'Three students resting on stacks of language dictionaries in a library' },
     highlights: ['Overseas education counselling', 'Exploring university options', 'IELTS, PTE and TOEFL preparation', 'The steps to study internationally'],
+    tracksHeading: 'Choose your test',
+    tracksText: 'Four English test preparation programmes, each with 1:6, 1:15 and 1:30 batches. Choose a test to see how we prepare for it.',
+    tracks: englishTracks,
+    examBatches: englishBatches,
+    examApproach: englishApproach,
     whoFor: 'Students planning to study abroad or improve their English language proficiency, and families exploring university options overseas.',
     details: [
       'For students planning to study abroad, two things usually come first: proving language proficiency and understanding the path to a university place. We provide preparation pathways for IELTS, PTE and TOEFL, and initial overseas education counselling to help students explore university options.',
