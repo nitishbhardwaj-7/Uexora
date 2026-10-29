@@ -24,7 +24,7 @@ type Props = {
 
 /**
  * Detail page for one programme (Education) or service (Marketing):
- * hero, who it's for + detail, approach, questions, call to action. (The other programmes or
+ * hero, who it is for + detail, approach, questions, call to action. (The other programmes or
  * services are listed in the footer's sliders, so the page does not repeat them.)
  * Education pages follow the blue theme (dark sections), Marketing the cream theme.
  */
@@ -99,7 +99,7 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
           {/* Heading row on top; below it the photo and the text start and end on the same lines. */}
           <div className="overview-head">
             <h2 id="overview-title" className="h2" data-split>
-              {division === 'education' ? 'Who it’s for, and what it offers' : 'Who it’s for, and what it covers'}
+              {division === 'education' ? 'Who it is for, and what it offers' : 'Who it is for, and what it covers'}
             </h2>
             <div data-reveal>
               <ArrowLink href={contact}>Ask about this {meta.unit}</ArrowLink>
