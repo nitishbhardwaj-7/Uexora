@@ -33,7 +33,7 @@ const programmes: Service[] = [
       boards: [
         { short: 'CBSE', name: 'Central Board of Secondary Education' },
         { short: 'ICSE', name: 'ICSE and ISC (CISCE)' },
-        { short: 'State', name: 'State Boards' },
+        { short: 'US', name: 'American Curriculum' },
         { short: 'IB', name: 'International Baccalaureate' },
         { short: 'IGCSE', name: 'Cambridge IGCSE, AS and A Level' },
       ],
@@ -95,7 +95,7 @@ const programmes: Service[] = [
         { label: 'Finding learning gaps', them: 'Mostly homework help and repeating the lesson', us: 'Learning gaps identified, so effort goes where it is needed most' },
         { label: 'Help when stuck', them: 'Only during the tuition hour', us: 'Tutor assistance within 15 minutes, subject to service availability and operating hours' },
         { label: 'Practice', them: 'Limited to worksheets and homework', us: 'Real-time subject quizzes and unlimited practice' },
-        { label: 'Curricula', them: 'Often familiar with one board', us: 'Support across CBSE, ICSE and ISC, State Boards, IB and Cambridge' },
+        { label: 'Curricula', them: 'Often familiar with one board', us: 'Support across CBSE, ICSE and ISC, IB, Cambridge and the American curriculum' },
         { label: 'Beyond the syllabus', them: 'Focused on the school syllabus', us: 'Future-ready skills: AI, robotics and emerging technologies' },
       ],
     },
