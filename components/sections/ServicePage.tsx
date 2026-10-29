@@ -18,7 +18,7 @@ type Props = {
   division: Division;
   service: Service;
   /** Pull quote and paragraphs from the division's approach / philosophy section. */
-  statement: { heading: string; quote: string; paragraphs: string[]; points?: { title: string; subtitle?: string; text?: string; image?: { src: string; alt: string } }[] };
+  statement: { heading: string; quote: string; paragraphs: string[]; points?: { title: string; subtitle?: string; text?: string; icon?: string; image?: { src: string; alt: string } }[] };
   cta: { heading: string; paragraphs: string[]; signoff?: string; primary: { label: string; href: string }; secondary?: { label: string; href: string } };
 };
 
