@@ -34,6 +34,9 @@ export type Service = {
   tracksHeading?: string;
   tracksText?: string;
   tracks?: ExamTrack[];
+  /** With exam tracks: the batch formats and the approach, shown once after the exams. */
+  examBatches?: { heading: string; text?: string; batchRows: ExamBatch[] };
+  examApproach?: { heading: string; subheading: string; text: string; approachSteps: { title: string; text: string }[]; image?: { src: string; alt: string } };
   /** Optional side-by-side comparison shown before the questions (e.g. against typical home tuition). */
   comparison?: { heading: string; text?: string; them: string; us: string; lines: { label: string; them: string; us: string }[] };
   /** Heading above the questions; "Common questions" when empty. */
@@ -48,6 +51,9 @@ export type Service = {
 };
 
 type Img = { src: string; alt: string };
+
+/** One batch format (e.g. 1:6) on a competitive-exam programme page. */
+export type ExamBatch = { number: string; name: string; ratio: string; tagline: string; text: string; points: string[]; bestFor?: string; image?: Img };
 
 /** One exam on a competitive-exam programme page, shown as its own section. */
 export type ExamTrack = {
@@ -65,9 +71,6 @@ export type ExamTrack = {
   /** Upright photo for the picker card; falls back to `image`. */
   cardImage?: Img;
   journey: { heading: string; paragraphs: string[]; pull?: string; image?: Img };
-  batchHeading: string;
-  batchList: { number: string; name: string; ratio: string; tagline: string; text: string; points: string[]; bestFor?: string; image?: Img }[];
-  approach: { heading: string; subheading: string; text: string; trackSteps: { title: string; text: string }[]; image?: Img };
   why?: { heading: string; subheading: string; whyList: { title: string; text: string }[] };
   closing: { heading: string; paragraphs: string[]; primary?: { label: string; href: string }; secondary?: { label: string; href: string } };
 };

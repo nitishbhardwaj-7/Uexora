@@ -2,7 +2,7 @@ import Link from 'next/link';
 import CmsImage from '@/components/ui/CmsImage';
 import { Arrow } from '@/components/ui/Button';
 import ExamNav from '@/components/sections/ExamNav';
-import type { ExamTrack } from '@/content/types';
+import type { ExamTrack, Service } from '@/content/types';
 
 /** In-page anchors stay plain links (the smooth-scroll script handles them); pages use Link. */
 function Go({ href, className, children }: { href: string; className: string; children: React.ReactNode }) {
@@ -26,13 +26,27 @@ const Tick = () => (
 /**
  * Competitive exam page: a picker of four photo cards ("Choose your exam") that jump to a full
  * section per exam, and a slim exam bar that stays under the header while those sections are on
- * screen. Each exam runs: photo opening, the learning journey beside a photo, the three batches,
- * the approach beside a photo, why choose us (where given), and a closing call to action.
- * Sections alternate dark and cream so the long page keeps its rhythm.
+ * screen. Each exam runs: photo opening, the learning journey beside a photo, why choose us (where
+ * given) and a closing call to action. After the exams, once for the whole page: the three batch
+ * formats, then the approach. Sections alternate dark and cream so the long page keeps its rhythm.
  */
-export default function ExamTracks({ heading, text, tracks }: { heading: string; text?: string; tracks: ExamTrack[] }) {
+export default function ExamTracks({
+  heading,
+  text,
+  tracks,
+  batches,
+  approach,
+}: {
+  heading: string;
+  text?: string;
+  tracks: ExamTrack[];
+  batches?: Service['examBatches'];
+  approach?: Service['examApproach'];
+}) {
   const list = tracks.filter((t) => t?.slug && t?.title);
   if (!list.length) return null;
+  const rows = (batches?.batchRows || []).filter((b) => b?.name);
+  const steps = (approach?.approachSteps || []).filter((st) => st?.title);
 
   return (
     <div className="xtracks">
@@ -78,16 +92,108 @@ export default function ExamTracks({ heading, text, tracks }: { heading: string;
       <div className="xtracks__body">
         <ExamNav items={list.map((t) => ({ slug: t.slug, name: t.name }))} />
         {list.map((t, i) => (
-          <Track key={t.slug} t={t} n={i + 1} of={list.length} />
+          <Track key={t.slug} t={t} n={i + 1} of={list.length} hasBatches={rows.length > 0} />
         ))}
       </div>
+
+      {/* Once for the whole page: the three batch formats, each with its photo. */}
+      {rows.length ? (
+        <section id="batches" className="section xshared__batches" data-tone="light" aria-labelledby="batches-title">
+          <div className="container">
+            <div className="section-head">
+              <h2 id="batches-title" className="h2" data-split>
+                {batches!.heading}
+              </h2>
+              {batches!.text ? (
+                <p className="lead" data-reveal>
+                  {batches!.text}
+                </p>
+              ) : null}
+            </div>
+            <ol className="xbatch__list">
+              {rows.map((b, k) => (
+                <li key={b.name + k} className="xbatch">
+                  {b.image ? (
+                    <figure className="xbatch__photo" data-reveal="mask" data-reveal-delay={String(k * 0.14)}>
+                      <CmsImage src={b.image.src} alt={b.image.alt} fill sizes="(max-width: 900px) 92vw, 30vw" quality={82} />
+                      <span className="xbatch__ratio" aria-hidden="true">
+                        {b.ratio}
+                      </span>
+                    </figure>
+                  ) : null}
+                  <div className="xbatch__body" data-reveal data-reveal-delay={String(k * 0.14 + 0.2)}>
+                    <p className="xbatch__num">{b.number} —</p>
+                    <h3 className="xbatch__name">{b.name}</h3>
+                    <p className="xbatch__meta">
+                      <strong>{b.ratio} Batch</strong> <span>{b.tagline}</span>
+                    </p>
+                    <p className="xbatch__text">{b.text}</p>
+                    <ul className="xbatch__points">
+                      {b.points.map((pt) => (
+                        <li key={pt}>
+                          <Tick />
+                          {pt}
+                        </li>
+                      ))}
+                    </ul>
+                    {b.bestFor ? (
+                      <p className="xbatch__best">
+                        <strong>Best for:</strong> {b.bestFor}
+                      </p>
+                    ) : null}
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      ) : null}
+
+      {/* Once for the whole page: the approach, its photo staying beside the steps as they scroll. */}
+      {steps.length ? (
+        <section id="exam-approach" className="section xshared__approach" data-tone="dark" aria-labelledby="exam-approach-title">
+          <div className="container xapproach">
+            <div className="xapproach__aside">
+              <h2 id="exam-approach-title" className="h2" data-split>
+                {approach!.heading}
+              </h2>
+              <p className="xapproach__sub" data-reveal>
+                {approach!.subheading}
+              </p>
+              {approach!.image ? (
+                <figure className="xapproach__photo" data-reveal="mask" data-reveal-delay="0.1">
+                  <CmsImage src={approach!.image.src} alt={approach!.image.alt} fill sizes="(max-width: 900px) 92vw, 38vw" quality={82} />
+                </figure>
+              ) : null}
+            </div>
+            <div className="xapproach__main">
+              {approach!.text ? (
+                <p className="lead" data-reveal>
+                  {approach!.text}
+                </p>
+              ) : null}
+              <ol className="xapproach__steps" data-reveal-group data-stagger="0.12">
+                {steps.map((st, k) => (
+                  <li key={st.title + k}>
+                    <span className="xapproach__num" aria-hidden="true">
+                      {String(k + 1).padStart(2, '0')}
+                    </span>
+                    <div>
+                      <h3 className="xapproach__title">{st.title}</h3>
+                      <p>{st.text}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+            </div>
+          </div>
+        </section>
+      ) : null}
     </div>
   );
 }
 
-function Track({ t, n, of }: { t: ExamTrack; n: number; of: number }) {
-  const batches = (t.batchList || []).filter((b) => b?.name);
-  const steps = (t.approach?.trackSteps || []).filter((s) => s?.title);
+function Track({ t, n, of, hasBatches }: { t: ExamTrack; n: number; of: number; hasBatches: boolean }) {
   const why = (t.why?.whyList || []).filter((w) => w?.title);
 
   return (
@@ -115,10 +221,10 @@ function Track({ t, n, of }: { t: ExamTrack; n: number; of: number }) {
             ))}
             {t.tags?.length ? <p className="xtrack__tags">{t.tags.join(' · ')}</p> : null}
           </div>
-          {batches.length ? (
+          {hasBatches ? (
             <div className="btn-row" data-reveal data-reveal-delay="0.3">
-              <a href={`#${t.slug}-batches`} className="btn btn--gold">
-                <span className="btn__label">See the {t.name} batches</span>
+              <a href="#batches" className="btn btn--gold">
+                <span className="btn__label">See the batches</span>
                 <span className="btn__icon">
                   <Arrow />
                 </span>
@@ -155,95 +261,6 @@ function Track({ t, n, of }: { t: ExamTrack; n: number; of: number }) {
           ) : null}
         </div>
       </section>
-
-      {/* The three batches, each with its photo. */}
-      {batches.length ? (
-        <section id={`${t.slug}-batches`} className="section xtrack__batches" data-tone="dark" aria-labelledby={`${t.slug}-batches-title`}>
-          <div className="container">
-            <div className="section-head">
-              <h3 id={`${t.slug}-batches-title`} className="h2" data-split>
-                {t.batchHeading}
-              </h3>
-            </div>
-            <ol className="xbatch__list">
-              {batches.map((b, k) => (
-                <li key={b.name + k} className="xbatch">
-                  {b.image ? (
-                    <figure className="xbatch__photo" data-reveal="mask" data-reveal-delay={String(k * 0.14)}>
-                      <CmsImage src={b.image.src} alt={b.image.alt} fill sizes="(max-width: 900px) 92vw, 30vw" quality={82} />
-                      <span className="xbatch__ratio" aria-hidden="true">
-                        {b.ratio}
-                      </span>
-                    </figure>
-                  ) : null}
-                  <div className="xbatch__body" data-reveal data-reveal-delay={String(k * 0.14 + 0.2)}>
-                    <p className="xbatch__num">{b.number} —</p>
-                    <h4 className="xbatch__name">{b.name}</h4>
-                    <p className="xbatch__meta">
-                      <strong>{b.ratio} Batch</strong> <span>{b.tagline}</span>
-                    </p>
-                    <p className="xbatch__text">{b.text}</p>
-                    <ul className="xbatch__points">
-                      {b.points.map((p) => (
-                        <li key={p}>
-                          <Tick />
-                          {p}
-                        </li>
-                      ))}
-                    </ul>
-                    {b.bestFor ? (
-                      <p className="xbatch__best">
-                        <strong>Best for:</strong> {b.bestFor}
-                      </p>
-                    ) : null}
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-      ) : null}
-
-      {/* Approach: the photo stays beside the numbered steps as they scroll past. */}
-      {steps.length ? (
-        <section className="section xtrack__approach" data-tone="light" aria-labelledby={`${t.slug}-approach-title`}>
-          <div className="container xapproach">
-            <div className="xapproach__aside">
-              <h3 id={`${t.slug}-approach-title`} className="h2" data-split>
-                {t.approach.heading}
-              </h3>
-              <p className="xapproach__sub" data-reveal>
-                {t.approach.subheading}
-              </p>
-              {t.approach.image ? (
-                <figure className="xapproach__photo" data-reveal="mask" data-reveal-delay="0.1">
-                  <CmsImage src={t.approach.image.src} alt={t.approach.image.alt} fill sizes="(max-width: 900px) 92vw, 38vw" quality={82} />
-                </figure>
-              ) : null}
-            </div>
-            <div className="xapproach__main">
-              {t.approach.text ? (
-                <p className="lead" data-reveal>
-                  {t.approach.text}
-                </p>
-              ) : null}
-              <ol className="xapproach__steps" data-reveal-group data-stagger="0.12">
-                {steps.map((s, k) => (
-                  <li key={s.title + k}>
-                    <span className="xapproach__num" aria-hidden="true">
-                      {String(k + 1).padStart(2, '0')}
-                    </span>
-                    <div>
-                      <h4 className="xapproach__title">{s.title}</h4>
-                      <p>{s.text}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </div>
-        </section>
-      ) : null}
 
       {/* Why choose us (not every exam has one). */}
       {why.length ? (

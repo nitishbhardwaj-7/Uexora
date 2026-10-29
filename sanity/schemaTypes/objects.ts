@@ -288,55 +288,6 @@ export const service = defineType({
                 defineField({ name: 'image', title: 'Photo', type: 'picture' }),
               ],
             }),
-            defineField({ name: 'batchHeading', title: 'Batches heading', type: 'string' }),
-            defineField({
-              name: 'batchList',
-              title: 'Batches',
-              type: 'array',
-              of: [
-                defineArrayMember({
-                  type: 'object',
-                  name: 'examBatch',
-                  fields: [
-                    defineField({ name: 'number', title: 'Number', type: 'string', description: 'e.g. 01' }),
-                    defineField({ name: 'name', title: 'Name', type: 'string', validation: (r) => r.required() }),
-                    defineField({ name: 'ratio', title: 'Batch size', type: 'string', description: 'e.g. 1:6' }),
-                    defineField({ name: 'tagline', title: 'Tagline', type: 'string' }),
-                    defineField({ name: 'text', title: 'Description', type: 'text', rows: 2 }),
-                    defineField({ name: 'points', title: 'Points', type: 'array', of: [defineArrayMember({ type: 'string' })] }),
-                    defineField({ name: 'bestFor', title: 'Best for (optional)', type: 'string' }),
-                    defineField({ name: 'image', title: 'Photo', type: 'picture' }),
-                  ],
-                  preview: { select: { title: 'name', subtitle: 'ratio', media: 'image' } },
-                }),
-              ],
-            }),
-            defineField({
-              name: 'approach',
-              title: 'Approach',
-              type: 'object',
-              fields: [
-                defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-                defineField({ name: 'subheading', title: 'Subheading', type: 'string' }),
-                defineField({ name: 'text', title: 'Intro', type: 'text', rows: 3 }),
-                defineField({
-                  name: 'trackSteps',
-                  title: 'Steps',
-                  type: 'array',
-                  of: [
-                    defineArrayMember({
-                      type: 'object',
-                      name: 'examStep',
-                      fields: [
-                        defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
-                        defineField({ name: 'text', title: 'Text', type: 'text', rows: 3 }),
-                      ],
-                    }),
-                  ],
-                }),
-                defineField({ name: 'image', title: 'Photo', type: 'picture' }),
-              ],
-            }),
             defineField({
               name: 'why',
               title: 'Why choose us (optional)',
@@ -375,6 +326,67 @@ export const service = defineType({
           ],
           preview: { select: { title: 'title', subtitle: 'tagline', media: 'image' } },
         }),
+      ],
+    }),
+    defineField({
+      name: 'examBatches',
+      title: 'Exam batches',
+      type: 'object',
+      description: 'With exam tracks: the batch formats, shown once after the exams.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'text', title: 'Intro', type: 'text', rows: 2 }),
+        defineField({
+          name: 'batchRows',
+          title: 'Batches',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'sharedBatch',
+              fields: [
+                defineField({ name: 'number', title: 'Number', type: 'string', description: 'e.g. 01' }),
+                defineField({ name: 'name', title: 'Name', type: 'string', validation: (r) => r.required() }),
+                defineField({ name: 'ratio', title: 'Batch size', type: 'string', description: 'e.g. 1:6' }),
+                defineField({ name: 'tagline', title: 'Tagline', type: 'string' }),
+                defineField({ name: 'text', title: 'Description', type: 'text', rows: 2 }),
+                defineField({ name: 'points', title: 'Points', type: 'array', of: [defineArrayMember({ type: 'string' })] }),
+                defineField({ name: 'bestFor', title: 'Best for (optional)', type: 'string' }),
+                defineField({ name: 'image', title: 'Photo', type: 'picture' }),
+              ],
+              preview: { select: { title: 'name', subtitle: 'ratio', media: 'image' } },
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
+      name: 'examApproach',
+      title: 'Exam approach',
+      type: 'object',
+      description: 'With exam tracks: how students are prepared, shown once after the batches.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'subheading', title: 'Subheading', type: 'string' }),
+        defineField({ name: 'text', title: 'Intro', type: 'text', rows: 3 }),
+        defineField({
+          name: 'approachSteps',
+          title: 'Steps',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'sharedStep',
+              fields: [
+                defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+                defineField({ name: 'text', title: 'Text', type: 'text', rows: 3 }),
+              ],
+            }),
+          ],
+        }),
+        defineField({ name: 'image', title: 'Photo', type: 'picture' }),
       ],
     }),
     defineField({

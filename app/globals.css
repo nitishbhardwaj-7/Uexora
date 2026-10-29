@@ -7733,6 +7733,9 @@ html.reveal-ready .steps--seq.is-in .step p {
   display: grid;
   gap: 1.1rem;
 }
+.xshared__approach .xapproach__aside {
+  top: calc(var(--header-h) + 1.5rem);
+}
 .xapproach__sub {
   font-family: var(--font-sub), ui-sans-serif, system-ui, sans-serif;
   font-weight: 600;

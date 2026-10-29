@@ -222,7 +222,7 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
       </section>
 
       {/* Exam tracks (Competitive Exam Preparation): the picker and a section per exam. */}
-      {s.tracks?.length ? <ExamTracks heading={s.tracksHeading || 'Choose your exam'} text={s.tracksText} tracks={s.tracks} /> : null}
+      {s.tracks?.length ? <ExamTracks heading={s.tracksHeading || 'Choose your exam'} text={s.tracksText} tracks={s.tracks} batches={s.examBatches} approach={s.examApproach} /> : null}
 
       {/* With approach points (Education), they replace the quote and paragraphs; a page with its
           own exam tracks carries each exam's approach instead. */}

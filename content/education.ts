@@ -1,5 +1,5 @@
 import type { Service } from './types.ts';
-import { examTracks } from './exams.ts';
+import { examApproach, examBatches, examTracks } from './exams.ts';
 
 /**
  * Default content for the Education page. This is the fallback (and the seed) for the
@@ -139,6 +139,8 @@ const programmes: Service[] = [
     tracksHeading: 'Choose your exam',
     tracksText: 'Four live online programmes, each with 1:6, 1:15 and 1:30 batches. Choose an exam to see how we prepare for it.',
     tracks: examTracks,
+    examBatches,
+    examApproach,
     whoFor: 'Students preparing for competitive examinations such as JEE and NEET who want a clear, structured approach to the subjects involved.',
     details: [
       'Competitive examinations such as JEE and NEET reward a clear understanding of the subjects as much as hard work. Our preparation combines focused learning on the syllabus, concept building that connects topics together, and regular practice so that students become familiar with the format and pace of the exam.',

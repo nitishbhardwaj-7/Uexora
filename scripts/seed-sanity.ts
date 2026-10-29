@@ -51,8 +51,8 @@ const arrayTypes: Record<string, string> = {
   points: 'approachPoint',
   lines: 'comparisonRow',
   tracks: 'examTrack',
-  batchList: 'examBatch',
-  trackSteps: 'examStep',
+  batchRows: 'sharedBatch',
+  approachSteps: 'sharedStep',
   whyList: 'examWhy',
 };
 
