@@ -17,7 +17,7 @@ export const aiTools: NonNullable<Service['tools']> = {
     { name: 'Gemini', text: 'Multimodal AI exploration', logo: { src: '/images/ai-tools/gemini.svg', alt: 'Gemini logo' } },
     { name: 'Copilot', text: 'AI support for productivity', logo: { src: '/images/ai-tools/copilot.svg', alt: 'Microsoft Copilot logo' } },
     { name: 'Perplexity', text: 'Research and source discovery', logo: { src: '/images/ai-tools/perplexity.svg', alt: 'Perplexity logo' } },
-    { name: 'Canva AI', text: 'Design and presentation creation', logo: { src: '/images/ai-tools/canva.svg', alt: 'Canva logo' } },
+    { name: 'Canva AI', text: 'Design and presentation creation', logo: { src: '/images/ai-tools/canva.png', alt: 'Canva logo' } },
     { name: 'Notion AI', text: 'Planning, notes and knowledge', logo: { src: '/images/ai-tools/notion.svg', alt: 'Notion logo' } },
     { name: 'Midjourney', text: 'Creative visual exploration', logo: { src: '/images/ai-tools/midjourney.svg', alt: 'Midjourney logo' } },
     { name: 'ElevenLabs', text: 'AI voice and audio creation', logo: { src: '/images/ai-tools/elevenlabs.svg', alt: 'ElevenLabs logo' } },

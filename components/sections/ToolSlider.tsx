@@ -7,11 +7,15 @@ import type { Service } from '@/content/types';
 type Tool = NonNullable<Service['tools']>['toolCards'][number];
 
 /**
- * The tools students work with, as white logo cards in two rows that scroll sideways: five
- * columns at a time on wide screens, fewer on smaller ones. The arrows move one column and fade
- * at either end; touch and trackpads scroll it directly, snapping to the columns. The logos are
- * plain images (most are SVG), with the name beneath saying what each one is.
+ * The tools a programme works with, as white logo cards in rows that scroll sideways: five
+ * columns at a time on wide screens, fewer on smaller ones. Up to twelve tools sit in two rows; a
+ * longer list takes three, so that it does not run on too far. The arrows move one column and
+ * fade at either end, and hide when everything fits; touch and trackpads scroll it directly,
+ * snapping to the columns. The logos are plain images (most are SVG), with the name beneath
+ * saying what each one is.
  */
+const rowsFor = (n: number) => (n > 12 ? 3 : 2);
+
 export default function ToolSlider({ tools, label }: { tools: Tool[]; label: string }) {
   const track = useRef<HTMLUListElement>(null);
   const [atStart, setAtStart] = useState(true);
@@ -44,7 +48,7 @@ export default function ToolSlider({ tools, label }: { tools: Tool[]; label: str
 
   return (
     <div className="tools" role="region" aria-label={label}>
-      <ul ref={track} className="tools__track" style={{ '--cols': Math.ceil(tools.length / 2) } as React.CSSProperties} data-reveal-group data-stagger="0.05">
+      <ul ref={track} className="tools__track" style={{ '--cols': Math.ceil(tools.length / rowsFor(tools.length)) } as React.CSSProperties} data-reveal-group data-stagger="0.05">
         {tools.map((t, i) => (
           <li key={t.name + i} className="tools__card">
             <span className="tools__logo">

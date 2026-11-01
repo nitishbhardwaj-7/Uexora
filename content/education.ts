@@ -3,6 +3,7 @@ import { examApproach, examBatches, examTracks } from './exams.ts';
 import { englishApproach, englishBatches, englishTracks } from './english.ts';
 import { aiCourses } from './ai-courses.ts';
 import { aiProfessionalCourses } from './ai-professional-courses.ts';
+import { aiProfessionalTools } from './ai-professional-tools.ts';
 import { aiTools } from './ai-tools.ts';
 
 /**
@@ -218,6 +219,7 @@ const programmes: Service[] = [
       'For educators, that also means thinking about how AI fits into teaching and learning, and how to guide students in using it thoughtfully and responsibly.',
     ],
     courses: aiProfessionalCourses,
+    tools: aiProfessionalTools,
     faqs: [],
     text: 'Artificial intelligence is changing how people work, teach and learn. This programme helps working professionals and educators understand what AI can do, use AI tools practically in their everyday work and think about using them responsibly.',
   },
