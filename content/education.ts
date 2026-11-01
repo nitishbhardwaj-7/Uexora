@@ -299,6 +299,13 @@ export const education = {
     primary: { label: 'Explore the programmes', href: '/education#programmes' },
     secondary: { label: 'Speak with our education team', href: '/contact?division=education' },
   },
+  /** Figures in the band under the hero, each counting up as it comes into view. From the
+      client's reference ("Programs" spelt as the site spells it); confirm them before launch. */
+  stats: [
+    { value: '20+', label: 'Partner Institutions' },
+    { value: '2,000+', label: 'Learners' },
+    { value: '70+', label: 'AI Programmes & Solutions' },
+  ],
 
 
   about: {

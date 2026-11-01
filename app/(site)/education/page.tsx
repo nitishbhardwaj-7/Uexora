@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { BreadcrumbJsonLd } from '@/components/JsonLd';
 import PageHero from '@/components/sections/PageHero';
+import StatBand from '@/components/sections/StatBand';
 import Approach from '@/components/sections/Approach';
 import SkillsMosaic from '@/components/sections/SkillsMosaic';
 import { Statement, WhyChoose } from '@/components/sections/Blocks';
@@ -19,6 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function EducationPage() {
   const e = await getEducation();
+  const stats = (e.stats || []).filter((s) => s?.value && s?.label);
   return (
     <>
       <BreadcrumbJsonLd crumbs={[{ name: 'Education', path: '/education' }]} />
@@ -33,6 +35,18 @@ export default async function EducationPage() {
         slides={heroSlides('education', e.programmes)}
         chips={e.hero.chips}
       />
+
+      {/* Figures under the hero, counting up as they come into view. */}
+      {stats.length ? (
+        <section id="numbers" className="section stats-section" data-tone="dark" aria-labelledby="numbers-title">
+          <div className="container">
+            <h2 id="numbers-title" className="visually-hidden">
+              Uexora Education in numbers
+            </h2>
+            <StatBand items={stats} />
+          </div>
+        </section>
+      ) : null}
 
       <Approach
         id="about"

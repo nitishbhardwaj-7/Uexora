@@ -31,6 +31,25 @@ export const educationPage = defineType({
         defineField({ name: 'secondary', title: 'Secondary button', type: 'link' }),
       ],
     }),
+    defineField({
+      name: 'stats',
+      title: 'Numbers',
+      type: 'array',
+      group: 'hero',
+      description: 'Figures in a band under the hero; each counts up from zero as it comes into view. Three fit best. Use only figures the business can stand behind.',
+      of: [
+        defineArrayMember({
+          type: 'object',
+          name: 'stat',
+          fields: [
+            defineField({ name: 'value', title: 'Figure', type: 'string', description: 'As it should read, e.g. 2,000+', validation: (r) => r.required() }),
+            defineField({ name: 'label', title: 'Label', type: 'string', description: 'e.g. Learners', validation: (r) => r.required() }),
+          ],
+          preview: { select: { title: 'value', subtitle: 'label' } },
+        }),
+      ],
+      validation: (r) => r.max(4),
+    }),
 
     defineField({
       name: 'about',
