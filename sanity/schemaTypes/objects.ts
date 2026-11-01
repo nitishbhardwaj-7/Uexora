@@ -419,6 +419,35 @@ export const service = defineType({
       ],
     }),
     defineField({
+      name: 'tools',
+      title: 'Tool cards',
+      type: 'object',
+      description: 'Optional. Logo cards of the tools students work with (e.g. ChatGPT), shown after the course slider. Leave the cards empty to hide it.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'text', title: 'Intro', type: 'text', rows: 2 }),
+        defineField({ name: 'note', title: 'Note under the cards', type: 'string', description: 'e.g. Product names and logos are trademarks of their respective owners.' }),
+        defineField({
+          name: 'toolCards',
+          title: 'Cards',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'toolCard',
+              fields: [
+                defineField({ name: 'name', title: 'Name', type: 'string', validation: (r) => r.required() }),
+                defineField({ name: 'text', title: 'One line', type: 'string', description: 'e.g. Research and source discovery' }),
+                defineField({ name: 'logo', title: 'Logo', type: 'picture', description: "The tool's own logo, ideally an SVG or a square PNG on a transparent background." }),
+              ],
+              preview: { select: { title: 'name', subtitle: 'text', media: 'logo' } },
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: 'comparison',
       title: 'Comparison',
       type: 'object',

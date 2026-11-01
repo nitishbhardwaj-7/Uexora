@@ -39,6 +39,8 @@ export type Service = {
   examApproach?: { heading: string; subheading: string; text: string; approachSteps: { title: string; text: string }[]; image?: { src: string; alt: string } };
   /** Optional slider of the courses within the programme (e.g. AI Foundation), shown before the approach. */
   courses?: { heading: string; text?: string; courseSlides: { title: string; audience: string; text: string; image: { src: string; alt: string } }[] };
+  /** Optional cards of the tools students work with (e.g. ChatGPT), shown after the course slider. */
+  tools?: { heading: string; text?: string; note?: string; toolCards: { name: string; text?: string; logo?: { src: string; alt: string } }[] };
   /** Optional side-by-side comparison shown before the questions (e.g. against typical home tuition). */
   comparison?: { heading: string; text?: string; them: string; us: string; lines: { label: string; them: string; us: string }[] };
   /** Heading above the questions; "Common questions" when empty. */

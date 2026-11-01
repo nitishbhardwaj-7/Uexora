@@ -8,7 +8,7 @@ type Slide = NonNullable<Service['courses']>['courseSlides'][number];
 
 const pad = (n: number) => String(n).padStart(2, '0');
 
-function Chevron({ dir }: { dir: 'prev' | 'next' }) {
+export function Chevron({ dir }: { dir: 'prev' | 'next' }) {
   return (
     <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <path d={dir === 'prev' ? 'M10 3.5 5.5 8l4.5 4.5' : 'M6 3.5 10.5 8 6 12.5'} stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />

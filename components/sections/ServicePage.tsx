@@ -8,6 +8,7 @@ import ApproachGrid from '@/components/sections/ApproachGrid';
 import CompareTable from '@/components/sections/CompareTable';
 import ExamTracks from '@/components/sections/ExamTracks';
 import CourseSlider from '@/components/sections/CourseSlider';
+import ToolSlider from '@/components/sections/ToolSlider';
 import Monogram from '@/components/brand/Monogram';
 import CmsImage from '@/components/ui/CmsImage';
 import { ArrowLink } from '@/components/ui/Button';
@@ -60,6 +61,8 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
     .map((f) => ({ ...f, options: (f.options || []).filter((o) => o?.ratio && o?.title) }));
   const courses = (s.courses?.courseSlides || []).filter((c) => c?.title);
   const coursesHeading = s.courses?.heading || 'Explore Our Programmes';
+  const tools = (s.tools?.toolCards || []).filter((t) => t?.name);
+  const toolsHeading = s.tools?.heading || 'AI Tools Students Explore';
   const enquire = division === 'education' ? 'Speak with our education team' : 'Discuss your requirements';
   const faqs = s.faqs?.filter((f) => f.q && f.a) || [];
   const imageUrl = s.image ? (s.image.src.startsWith('http') ? s.image.src : `${site.url}${s.image.src}`) : null;
@@ -261,6 +264,26 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
             </div>
           </div>
           <CourseSlider slides={courses} label={coursesHeading} />
+        </section>
+      ) : null}
+
+      {/* The tools students work with: logo cards in two rows that scroll sideways. */}
+      {tools.length ? (
+        <section id="ai-tools" className="section tools-section" data-tone="light" aria-labelledby="tools-title">
+          <div className="container">
+            <div className="section-head">
+              <h2 id="tools-title" className="h2" data-split>
+                {toolsHeading}
+              </h2>
+              {s.tools?.text ? (
+                <p className="lead" data-reveal>
+                  {s.tools.text}
+                </p>
+              ) : null}
+            </div>
+            <ToolSlider tools={tools} label={toolsHeading} />
+            {s.tools?.note ? <p className="tools__note">{s.tools.note}</p> : null}
+          </div>
         </section>
       ) : null}
 
