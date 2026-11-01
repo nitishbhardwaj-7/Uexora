@@ -3081,18 +3081,15 @@ a.announce__text:focus-visible {
 .fmarquee__row + .fmarquee__row {
   border-top: 1px solid var(--line-dark);
 }
-/* Each row's heading: the division name, set large in the heading face. */
+/* Each row's heading: the division name in orange, as written (not in capitals). */
 .fmarquee__label {
   justify-self: start;
   margin-left: max(var(--gutter), calc((100vw - var(--container)) / 2 + var(--gutter)));
   margin-right: var(--gutter);
-  font-family: var(--font-heading), Georgia, serif;
-  font-size: clamp(1.75rem, 3.4vw, 3.1rem);
-  line-height: 1.05;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  -webkit-text-stroke: 0.03em currentColor;
-  paint-order: stroke fill;
+  font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
   color: var(--orange-500);
   transition: color 0.3s;
 }
@@ -3178,7 +3175,7 @@ a.fmarquee__item:focus-visible {
 }
 /* Card strip (division pages): photo cards with the name beneath, as in a project reel. */
 .fmarquee--cards .fmarquee__row {
-  gap: clamp(1.4rem, 2.4vw, 2rem);
+  gap: 1.4rem;
 }
 .fmarquee--cards .fmarquee__set li::after {
   display: none;
