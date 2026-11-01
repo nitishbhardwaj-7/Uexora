@@ -8143,6 +8143,38 @@ html.reveal-ready .steps--seq.is-in .step p {
   gap: 1.25rem;
   margin-top: clamp(1.75rem, 3vw, 2.5rem);
 }
+/* Pause / play for the self-moving slides; quiet until hovered. */
+.cslider__play {
+  display: grid;
+  place-items: center;
+  width: 2.4rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: rgba(246, 245, 240, 0.8);
+  cursor: pointer;
+  transition:
+    background-color 0.4s,
+    color 0.4s,
+    border-color 0.4s;
+}
+.cslider__play svg {
+  width: 0.85rem;
+}
+.cslider__play:hover {
+  background: var(--gold-500);
+  border-color: var(--gold-500);
+  color: var(--navy-900);
+}
+.cslider__play:focus-visible {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cslider__play {
+    display: none;
+  }
+}
 .cslider__count {
   font-family: var(--font-heading), Georgia, serif;
   font-size: 1.2rem;

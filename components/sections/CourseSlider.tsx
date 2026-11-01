@@ -24,10 +24,20 @@ function Chevron({ dir }: { dir: 'prev' | 'next' }) {
  * one is exposed to assistive technology. When it comes into view the centre card rises and the
  * neighbours slide out from behind it; without JavaScript or under reduced motion it simply
  * shows finished (see globals.css).
+ *
+ * It also moves on by itself every AUTOPLAY_MS while it is on screen. Moving it by hand restarts
+ * the wait; it holds while keyboard focus is inside it, and the button beside the count pauses
+ * it. Under reduced motion it never moves by itself.
  */
+const AUTOPLAY_MS = 2000;
+
 export default function CourseSlider({ slides, label }: { slides: Slide[]; label: string }) {
   const n = slides.length;
   const [active, setActive] = useState(0);
+  const [inView, setInView] = useState(false);
+  const [motionOk, setMotionOk] = useState(false);
+  const [keyboardIn, setKeyboardIn] = useState(false);
+  const [paused, setPaused] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const start = useRef<{ x: number; y: number } | null>(null);
   const swiped = useRef(false);
@@ -39,15 +49,18 @@ export default function CourseSlider({ slides, label }: { slides: Slide[]; label
   useEffect(() => {
     const el = root.current;
     if (!el || typeof IntersectionObserver === 'undefined') return;
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    el.classList.add('is-armed');
+    const motion = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    setMotionOk(motion);
+    if (motion) el.classList.add('is-armed');
     let done: number | undefined;
+    // Plays the entrance the first time it comes into view; keeps track of whether it is on
+    // screen, so it only moves by itself while someone can see it.
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (!entry.isIntersecting) return;
+        setInView(entry.isIntersecting);
+        if (!entry.isIntersecting || el.classList.contains('is-in')) return;
         el.classList.add('is-in');
         done = window.setTimeout(() => el.classList.add('is-done'), 1700);
-        io.disconnect();
       },
       { threshold: 0.3 },
     );
@@ -57,6 +70,22 @@ export default function CourseSlider({ slides, label }: { slides: Slide[]; label
       window.clearTimeout(done);
     };
   }, []);
+
+  // Every change, by hand or by itself, starts a fresh wait before the next one.
+  const playing = n > 1 && motionOk && inView && !keyboardIn && !paused;
+  useEffect(() => {
+    if (!playing) return;
+    const t = window.setTimeout(() => setActive((a) => (a + 1) % n), AUTOPLAY_MS);
+    return () => window.clearTimeout(t);
+  }, [playing, active, n]);
+
+  // Hold while keyboard focus is inside (a mouse click on an arrow does not count).
+  const onFocus = (e: React.FocusEvent) => {
+    if ((e.target as HTMLElement).matches?.(':focus-visible')) setKeyboardIn(true);
+  };
+  const onBlur = (e: React.FocusEvent) => {
+    if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setKeyboardIn(false);
+  };
 
   // Where a slide sits relative to the centre one, the shorter way round: -3 to 3.
   const posOf = (i: number) => {
@@ -89,7 +118,7 @@ export default function CourseSlider({ slides, label }: { slides: Slide[]; label
   };
 
   return (
-    <div ref={root} className="cslider" role="region" aria-roledescription="carousel" aria-label={label} onKeyDown={onKey}>
+    <div ref={root} className="cslider" role="region" aria-roledescription="carousel" aria-label={label} onKeyDown={onKey} onFocus={onFocus} onBlur={onBlur}>
       <div className="cslider__stage" onPointerDown={onPointerDown} onPointerUp={onPointerUp} onPointerCancel={() => (start.current = null)}>
         {slides.map((s, i) => {
           const d = posOf(i);
@@ -139,7 +168,13 @@ export default function CourseSlider({ slides, label }: { slides: Slide[]; label
       </div>
       {n > 1 ? (
         <div className="cslider__foot">
-          <p className="cslider__count" aria-live="polite">
+          <button type="button" className="cslider__play" aria-label={paused ? 'Play the slides' : 'Pause the slides'} onClick={() => setPaused((p) => !p)}>
+            <svg viewBox="0 0 16 16" aria-hidden="true">
+              {paused ? <path d="M5 3.2v9.6L12.6 8 5 3.2Z" fill="currentColor" /> : <path d="M5 3.5h2v9H5zM9 3.5h2v9H9z" fill="currentColor" />}
+            </svg>
+          </button>
+          {/* Announced only while it is still: a change every two seconds would talk over everything. */}
+          <p className="cslider__count" aria-live={playing ? 'off' : 'polite'}>
             <span className="cslider__now">{pad(active + 1)}</span>
             <span className="cslider__of"> / {pad(n)}</span>
             <span className="visually-hidden">: {slides[active].title}</span>
