@@ -390,6 +390,35 @@ export const service = defineType({
       ],
     }),
     defineField({
+      name: 'courses',
+      title: 'Course slider',
+      type: 'object',
+      description: 'Optional. The courses within this programme as a slider of large photo cards, shown before the approach. Leave the slides empty to hide it.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'text', title: 'Intro', type: 'text', rows: 2 }),
+        defineField({
+          name: 'courseSlides',
+          title: 'Slides',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'courseSlide',
+              fields: [
+                defineField({ name: 'title', title: 'Heading', type: 'string', validation: (r) => r.required() }),
+                defineField({ name: 'audience', title: 'Who it is for', type: 'string', description: 'e.g. Grade 1 to Grade 6' }),
+                defineField({ name: 'text', title: 'Description', type: 'text', rows: 3, description: 'Two or three lines; it sits over the photo.' }),
+                defineField({ name: 'image', title: 'Photo', type: 'picture', description: 'Landscape, around 2000 px wide. The text sits over the lower left, so keep the subject clear of that corner.' }),
+              ],
+              preview: { select: { title: 'title', subtitle: 'audience', media: 'image' } },
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: 'comparison',
       title: 'Comparison',
       type: 'object',

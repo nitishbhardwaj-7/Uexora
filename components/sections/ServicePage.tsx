@@ -7,6 +7,7 @@ import ProgrammeTabs from '@/components/sections/ProgrammeTabs';
 import ApproachGrid from '@/components/sections/ApproachGrid';
 import CompareTable from '@/components/sections/CompareTable';
 import ExamTracks from '@/components/sections/ExamTracks';
+import CourseSlider from '@/components/sections/CourseSlider';
 import Monogram from '@/components/brand/Monogram';
 import CmsImage from '@/components/ui/CmsImage';
 import { ArrowLink } from '@/components/ui/Button';
@@ -57,6 +58,8 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
   const features = (s.offerings?.features || [])
     .filter((f) => f?.title)
     .map((f) => ({ ...f, options: (f.options || []).filter((o) => o?.ratio && o?.title) }));
+  const courses = (s.courses?.courseSlides || []).filter((c) => c?.title);
+  const coursesHeading = s.courses?.heading || 'Explore Our Programmes';
   const enquire = division === 'education' ? 'Speak with our education team' : 'Discuss your requirements';
   const faqs = s.faqs?.filter((f) => f.q && f.a) || [];
   const imageUrl = s.image ? (s.image.src.startsWith('http') ? s.image.src : `${site.url}${s.image.src}`) : null;
@@ -70,6 +73,24 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
     serviceType: s.title,
     provider: { '@type': meta.schemaType, name: meta.name, url: `${site.url}${meta.path}`, parentOrganization: { '@type': 'Organization', name: site.legalName, url: site.url } },
     ...(imageUrl ? { image: imageUrl } : {}),
+    // The courses in the slider, as the programme's catalogue.
+    ...(courses.length
+      ? {
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: coursesHeading,
+            itemListElement: courses.map((c) => ({
+              '@type': 'Offer',
+              itemOffered: {
+                '@type': 'Service',
+                name: c.title,
+                ...(c.text ? { description: c.text } : {}),
+                ...(c.audience ? { audience: { '@type': 'Audience', audienceType: c.audience } } : {}),
+              },
+            })),
+          },
+        }
+      : {}),
   };
 
   return (
@@ -223,6 +244,25 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
 
       {/* Exam tracks (Competitive Exam Preparation): the picker and a section per exam. */}
       {s.tracks?.length ? <ExamTracks heading={s.tracksHeading || 'Choose your exam'} text={s.tracksText} tracks={s.tracks} batches={s.examBatches} approach={s.examApproach} /> : null}
+
+      {/* Courses within the programme (AI, Coding and Robotics): a slider of large photo cards. */}
+      {courses.length ? (
+        <section id="courses" className="section courses" data-tone="dark" aria-labelledby="courses-title">
+          <div className="container">
+            <div className="section-head">
+              <h2 id="courses-title" className="h2" data-split>
+                {coursesHeading}
+              </h2>
+              {s.courses?.text ? (
+                <p className="lead" data-reveal>
+                  {s.courses.text}
+                </p>
+              ) : null}
+            </div>
+          </div>
+          <CourseSlider slides={courses} label={coursesHeading} />
+        </section>
+      ) : null}
 
       {/* With approach points (Education), they replace the quote and paragraphs; a page with its
           own exam tracks carries each exam's approach instead. */}

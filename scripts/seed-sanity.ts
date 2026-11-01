@@ -54,6 +54,7 @@ const arrayTypes: Record<string, string> = {
   batchRows: 'sharedBatch',
   approachSteps: 'sharedStep',
   whyList: 'examWhy',
+  courseSlides: 'courseSlide',
 };
 
 const assetCache = new Map<string, string>();

@@ -7911,3 +7911,358 @@ html.reveal-ready .steps--seq.is-in .step p {
     font-size: 0.86rem;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Course slider (AI, Coding and Robotics): one large landscape card in the centre with its
+   text over the photo, the neighbours peeking out smaller and in shadow; it loops. The cards
+   move only when the slide changes: nothing zooms or drifts on hover.
+   -------------------------------------------------------------------------- */
+.courses {
+  overflow: clip;
+  background:
+    radial-gradient(70% 55% at 50% 66%, rgba(37, 80, 234, 0.22), rgba(37, 80, 234, 0) 70%),
+    var(--navy-950);
+}
+.cslider {
+  --w: min(1120px, 70vw);
+  position: relative;
+}
+.cslider__stage {
+  position: relative;
+  display: grid;
+  touch-action: pan-y;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.cslide {
+  --x: 0%;
+  --s: 1;
+  grid-area: 1 / 1;
+  justify-self: center;
+  position: relative;
+  isolation: isolate;
+  width: var(--w);
+  aspect-ratio: 16 / 9;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--navy-800);
+  color: #fff;
+  box-shadow: 0 50px 90px -50px rgba(0, 0, 0, 0.95);
+  transform: translateX(var(--x)) scale(var(--s));
+  transition:
+    transform 0.95s var(--ease-out),
+    opacity 0.7s var(--ease-out);
+  cursor: pointer;
+}
+.cslide[data-pos='0'] {
+  z-index: 4;
+  cursor: auto;
+}
+.cslide[data-pos='-1'],
+.cslide[data-pos='1'] {
+  --s: 0.8;
+  z-index: 3;
+}
+.cslide[data-pos='-1'] {
+  --x: -64%;
+}
+.cslide[data-pos='1'] {
+  --x: 64%;
+}
+.cslide[data-pos='-2'],
+.cslide[data-pos='2'] {
+  --s: 0.64;
+  z-index: 2;
+}
+.cslide[data-pos='-2'] {
+  --x: -118%;
+}
+.cslide[data-pos='2'] {
+  --x: 118%;
+}
+.cslide[data-pos='-3'],
+.cslide[data-pos='3'] {
+  --s: 0.5;
+  z-index: 1;
+  opacity: 0;
+  pointer-events: none;
+}
+.cslide[data-pos='-3'] {
+  --x: -160%;
+}
+.cslide[data-pos='3'] {
+  --x: 160%;
+}
+.cslide__photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  margin: 0;
+}
+.cslide__photo img {
+  object-fit: cover;
+  -webkit-user-drag: none;
+}
+/* Readability: a deep fade up from the lower left, where the text sits. */
+.cslide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(to top, rgba(4, 10, 36, 0.92) 0%, rgba(4, 10, 36, 0.6) 34%, rgba(4, 10, 36, 0) 64%),
+    linear-gradient(90deg, rgba(4, 10, 36, 0.62) 0%, rgba(4, 10, 36, 0) 58%);
+}
+/* The neighbours sit back in shadow, deeper the further out they are. */
+.cslide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--navy-950);
+  opacity: 0.6;
+  pointer-events: none;
+  transition: opacity 0.8s var(--ease-out);
+}
+.cslide[data-pos='0']::after {
+  opacity: 0;
+}
+.cslide[data-pos='-2']::after,
+.cslide[data-pos='2']::after {
+  opacity: 0.78;
+}
+.cslide__body {
+  position: absolute;
+  inset: auto auto 0 0;
+  z-index: 2;
+  display: grid;
+  gap: 0.7rem;
+  max-width: min(40rem, 84%);
+  padding: clamp(1.5rem, 3.2vw, 3.25rem);
+}
+.cslide__title {
+  font-family: var(--font-heading), Georgia, serif;
+  font-weight: 400;
+  font-size: clamp(1.9rem, 3.2vw, 3.1rem);
+  line-height: 1.04;
+  letter-spacing: 0.012em;
+  -webkit-text-stroke: 0.045em currentColor;
+  paint-order: stroke fill;
+  text-wrap: balance;
+  color: #fff;
+}
+.cslide__audience {
+  font-family: var(--font-sub), ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--accent-2);
+}
+.cslide__text {
+  max-width: 34rem;
+  font-size: clamp(0.98rem, 1.1vw, 1.08rem);
+  line-height: 1.6;
+  color: rgba(246, 245, 240, 0.86);
+  text-wrap: pretty;
+}
+/* The text leaves quickly and arrives line by line once its card is in the centre. */
+.cslide__body > * {
+  --k: 0;
+  opacity: 0;
+  translate: 0 16px;
+  transition:
+    opacity 0.3s ease,
+    translate 0.3s ease;
+}
+.cslide__body > :nth-child(2) {
+  --k: 1;
+}
+.cslide__body > :nth-child(3) {
+  --k: 2;
+}
+.cslide[data-pos='0'] .cslide__body > * {
+  opacity: 1;
+  translate: none;
+  transition:
+    opacity 0.8s var(--ease-out) calc(0.3s + var(--k) * 0.09s),
+    translate 1s var(--ease-out) calc(0.3s + var(--k) * 0.09s);
+}
+/* Round arrows on the edges of the centre card. Gold on hover, as elsewhere. */
+.cslider__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 6;
+  display: grid;
+  place-items: center;
+  width: clamp(2.9rem, 3.6vw, 3.5rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: rgba(4, 10, 36, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  translate: -50% -50%;
+  cursor: pointer;
+  transition:
+    background-color 0.4s,
+    color 0.4s,
+    border-color 0.4s,
+    opacity 0.7s var(--ease-out);
+}
+.cslider__arrow--prev {
+  left: calc(50% - var(--w) / 2);
+}
+.cslider__arrow--next {
+  left: calc(50% + var(--w) / 2);
+}
+.cslider__arrow svg {
+  width: 1.1rem;
+  transition: translate 0.5s var(--ease-out);
+}
+.cslider__arrow:hover {
+  background: var(--gold-500);
+  border-color: var(--gold-500);
+  color: var(--navy-900);
+}
+.cslider__arrow--prev:hover svg {
+  translate: -2px 0;
+}
+.cslider__arrow--next:hover svg {
+  translate: 2px 0;
+}
+.cslider__arrow:focus-visible {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 3px;
+}
+/* Where you are: the count, and an orange line that fills as you go. */
+.cslider__foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+}
+.cslider__count {
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums;
+  color: rgba(246, 245, 240, 0.5);
+}
+.cslider__now {
+  color: var(--gold-500);
+}
+.cslider__bar {
+  position: relative;
+  width: min(220px, 40vw);
+  height: 2px;
+  border-radius: 2px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.16);
+}
+.cslider__bar::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent-line);
+  transform-origin: left;
+  transform: scaleX(var(--p, 0));
+  transition: transform 0.9s var(--ease-out);
+}
+/* Entrance (only when JavaScript runs and motion is allowed): the centre card rises, then the
+   neighbours slide out from behind it and the text and arrows follow. The start state applies
+   at once; the timings below exist only for the entrance. */
+.cslider.is-armed:not(.is-in) .cslide {
+  opacity: 0;
+  transition: none;
+}
+.cslider.is-armed:not(.is-in) .cslide[data-pos='0'] {
+  transform: translateY(48px) scale(0.94);
+}
+.cslider.is-armed:not(.is-in) .cslide:not([data-pos='0']) {
+  --x: 0%;
+}
+.cslider.is-armed:not(.is-in) .cslide__body > *,
+.cslider.is-armed:not(.is-in) .cslider__arrow {
+  opacity: 0;
+  transition: none;
+}
+.cslider.is-armed:not(.is-in) .cslide__body > * {
+  translate: 0 16px;
+}
+.cslider.is-in:not(.is-done) .cslide {
+  transition:
+    transform 1.3s var(--ease-out),
+    opacity 0.9s var(--ease-out);
+}
+.cslider.is-in:not(.is-done) .cslide:not([data-pos='0']) {
+  transition-delay: 0.3s;
+}
+.cslider.is-in:not(.is-done) .cslide[data-pos='0'] .cslide__body > * {
+  transition-delay: calc(0.55s + var(--k) * 0.1s);
+}
+.cslider.is-in:not(.is-done) .cslider__arrow {
+  transition-delay: 0.9s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .cslide,
+  .cslide::after,
+  .cslide__body > *,
+  .cslide[data-pos='0'] .cslide__body > *,
+  .cslider__bar::after {
+    transition-duration: 0.01s !important;
+    transition-delay: 0s !important;
+  }
+}
+@media (max-width: 1100px) {
+  .cslider {
+    --w: 80vw;
+  }
+}
+/* Phones: the photo on top, the text on the card beneath it. */
+@media (max-width: 700px) {
+  .cslider {
+    --w: 84vw;
+  }
+  .cslide {
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+    aspect-ratio: auto;
+    border-radius: 20px;
+  }
+  .cslide[data-pos='-1'],
+  .cslide[data-pos='1'] {
+    --s: 0.86;
+  }
+  .cslide[data-pos='-1'] {
+    --x: -58%;
+  }
+  .cslide[data-pos='1'] {
+    --x: 58%;
+  }
+  .cslide__photo {
+    position: relative;
+    inset: auto;
+    z-index: auto;
+    flex: none;
+    aspect-ratio: 16 / 10;
+  }
+  .cslide::before {
+    display: none;
+  }
+  .cslide__body {
+    position: relative;
+    inset: auto;
+    max-width: none;
+    gap: 0.55rem;
+    padding: 1.25rem 1.25rem 1.5rem;
+  }
+  .cslide__title {
+    font-size: 1.75rem;
+  }
+  /* centred on the photo */
+  .cslider__arrow {
+    top: calc(var(--w) * 0.3125);
+  }
+}

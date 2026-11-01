@@ -1,6 +1,7 @@
 import type { Service } from './types.ts';
 import { examApproach, examBatches, examTracks } from './exams.ts';
 import { englishApproach, englishBatches, englishTracks } from './english.ts';
+import { aiCourses } from './ai-courses.ts';
 
 /**
  * Default content for the Education page. This is the fallback (and the seed) for the
@@ -192,6 +193,7 @@ const programmes: Service[] = [
       'Technology is becoming part of almost every field, and we believe students should have the chance to understand it from an early age. Through AI, coding and robotics programmes, learners explore new concepts, experiment with ideas and build things that work.',
       'The emphasis is on practical activities: trying, testing and improving, so that problem-solving becomes a habit rather than a lesson.',
     ],
+    courses: aiCourses,
     faqs: [
       { q: 'What age can learners start?', a: 'We believe students should have opportunities to understand technology from an early age. Tell us about the learner and we will suggest a suitable starting point.' },
       { q: 'Is prior coding experience needed?', a: 'No. Learners explore new concepts and experiment with ideas through practical activities.' },
