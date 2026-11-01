@@ -3,6 +3,7 @@ import { examApproach, examBatches, examTracks } from './exams.ts';
 import { englishApproach, englishBatches, englishTracks } from './english.ts';
 import { aiCourses } from './ai-courses.ts';
 import { aiProfessionalCourses } from './ai-professional-courses.ts';
+import { aiProfessionalJourney } from './ai-professional-journey.ts';
 import { aiProfessionalTools } from './ai-professional-tools.ts';
 import { aiTools } from './ai-tools.ts';
 
@@ -218,6 +219,7 @@ const programmes: Service[] = [
       'Artificial intelligence is already changing how people work, teach and learn. This programme helps professionals and educators understand what AI can and cannot do, and how to use it practically in their own work.',
       'For educators, that also means thinking about how AI fits into teaching and learning, and how to guide students in using it thoughtfully and responsibly.',
     ],
+    journey: aiProfessionalJourney,
     courses: aiProfessionalCourses,
     tools: aiProfessionalTools,
     faqs: [],

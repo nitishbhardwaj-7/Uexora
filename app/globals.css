@@ -8467,3 +8467,232 @@ html.reveal-ready .steps--seq.is-in .step p {
     border-radius: 18px;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Learning journey (AI for Professionals): the programme's stages as numbered circles on one
+   line, a card under each; below 1000px the line runs down the left with the cards beside it.
+   The line fills with the scroll (JourneySteps): the circles it reaches turn gold and the stage
+   it has reached takes the warm edge. Complete by default, so it reads in full without script or
+   motion. Nothing moves on hover.
+   -------------------------------------------------------------------------- */
+.journey-section {
+  background:
+    radial-gradient(50% 65% at 100% 100%, rgba(242, 189, 43, 0.14), rgba(242, 189, 43, 0) 70%),
+    radial-gradient(40% 55% at 0% 0%, rgba(242, 138, 46, 0.07), rgba(242, 138, 46, 0) 70%),
+    var(--cream);
+}
+.journey {
+  --node: clamp(3.4rem, 4.4vw, 4.25rem);
+  --gap: clamp(1rem, 1.6vw, 1.5rem);
+  --fill: 1;
+  display: grid;
+  grid-template-columns: repeat(var(--n, 4), minmax(0, 1fr));
+  gap: var(--gap);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.journey__step {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  justify-items: center;
+  row-gap: clamp(1.75rem, 2.6vw, 2.5rem);
+}
+/* The line on to the next circle: a hairline, with the accent filling it from the left. */
+.journey__seg {
+  position: absolute;
+  top: calc(var(--node) / 2 - 1px);
+  left: 50%;
+  width: calc(100% + var(--gap));
+  height: 2px;
+  border-radius: 2px;
+  background: var(--line);
+  transform-origin: left center;
+}
+.journey__fill {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--accent-line);
+  transform: scaleX(var(--fill));
+  transform-origin: left center;
+}
+.journey--live .journey__step {
+  --fill: 0;
+}
+/* A gold circle in a white ring with a fine gold edge, as in the client's reference. */
+.journey__node {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: var(--node);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--gold-500);
+  color: var(--navy-900);
+  font-family: var(--font-sub), ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(0.95rem, 1.1vw, 1.1rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  font-variant-numeric: tabular-nums;
+  box-shadow:
+    0 0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 0 7px rgba(242, 189, 43, 0.55),
+    0 18px 32px -16px rgba(217, 149, 10, 0.6);
+  transition:
+    background-color 0.5s,
+    color 0.5s,
+    box-shadow 0.5s;
+}
+/* Not reached yet: a white circle with a hairline edge. */
+.journey--live .journey__step:not(.is-lit) .journey__node {
+  background: var(--paper);
+  color: var(--muted);
+  box-shadow:
+    inset 0 0 0 1px var(--line),
+    0 0 0 6px rgba(255, 255, 255, 0.9),
+    0 0 0 7px var(--line),
+    0 18px 32px -20px rgba(10, 16, 48, 0.25);
+}
+/* As the line reaches a circle, one soft ring spreads out from it. */
+.journey__node::after {
+  content: '';
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-500);
+  opacity: 0;
+  pointer-events: none;
+}
+.journey--live .journey__step.is-lit .journey__node::after {
+  animation: journey-ping 1.2s var(--ease-out);
+}
+@keyframes journey-ping {
+  from {
+    opacity: 0.9;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 1.55;
+  }
+}
+.journey__card {
+  justify-self: stretch;
+  display: grid;
+  align-content: start;
+  gap: 0.6rem;
+  padding: clamp(1.5rem, 2.2vw, 2.1rem) clamp(1.25rem, 1.8vw, 1.75rem);
+  border: 1px solid rgba(10, 16, 48, 0.06);
+  border-radius: 22px;
+  background: var(--paper);
+  box-shadow: 0 18px 40px -30px rgba(10, 16, 48, 0.35);
+  transition:
+    border-color 0.5s,
+    box-shadow 0.5s;
+}
+.journey__label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+}
+.journey__title {
+  font-size: clamp(1.15rem, 1.45vw, 1.4rem);
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.journey__keep {
+  white-space: nowrap;
+}
+.journey__text {
+  font-size: 0.97rem;
+  line-height: 1.6;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+/* The stage the line has reached takes the warm edge a tool card shows on hover; pointing at
+   another stage moves the edge there while the pointer stays. */
+.journey__step.is-current .journey__card {
+  border-color: rgba(242, 138, 46, 0.45);
+  box-shadow: 0 22px 46px -28px rgba(10, 16, 48, 0.4);
+}
+@media (hover: hover) {
+  .journey__step:hover .journey__card {
+    border-color: rgba(242, 138, 46, 0.45);
+    box-shadow: 0 22px 46px -28px rgba(10, 16, 48, 0.4);
+  }
+  .journey:has(.journey__step:hover) .journey__step.is-current:not(:hover) .journey__card {
+    border-color: rgba(10, 16, 48, 0.06);
+    box-shadow: 0 18px 40px -30px rgba(10, 16, 48, 0.35);
+  }
+}
+/* Entrance: the list itself stays put; the hairlines draw on, then each circle and its card come
+   up in turn. Transitions apply only once .is-in is set, so the staging takes effect instantly. */
+html.reveal-ready .journey[data-reveal] {
+  opacity: 1 !important;
+  translate: none !important;
+  animation: none !important;
+}
+html.reveal-ready .journey:not(.is-in) .journey__seg {
+  scale: 0 1;
+}
+html.reveal-ready .journey:not(.is-in) .journey__node {
+  opacity: 0;
+  scale: 0.6;
+}
+html.reveal-ready .journey:not(.is-in) .journey__card {
+  opacity: 0;
+  translate: 0 28px;
+}
+.journey.is-in .journey__seg {
+  transition: scale 1s var(--ease-in-out) calc(var(--i, 0) * 0.14s + 0.1s);
+}
+.journey.is-in .journey__node {
+  transition:
+    opacity 0.6s ease calc(var(--i, 0) * 0.14s),
+    scale 1s var(--ease-out) calc(var(--i, 0) * 0.14s),
+    background-color 0.5s,
+    color 0.5s,
+    box-shadow 0.5s;
+}
+.journey.is-in .journey__card {
+  transition:
+    opacity 0.8s ease calc(var(--i, 0) * 0.14s + 0.2s),
+    translate 1.1s var(--ease-out) calc(var(--i, 0) * 0.14s + 0.2s),
+    border-color 0.5s,
+    box-shadow 0.5s;
+}
+/* Down the side: the circles in a column on the left, the line between them, the cards beside. */
+@media (max-width: 999px) {
+  .journey {
+    --gap: clamp(1rem, 2.6vw, 1.4rem);
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .journey__step {
+    grid-template-columns: var(--node) minmax(0, 1fr);
+    grid-template-rows: none;
+    column-gap: clamp(1rem, 3vw, 1.75rem);
+    justify-items: stretch;
+    align-items: start;
+  }
+  .journey__seg {
+    top: calc(var(--node) / 2);
+    left: calc(var(--node) / 2 - 1px);
+    width: 2px;
+    height: calc(100% + var(--gap));
+    transform-origin: center top;
+  }
+  .journey__fill {
+    transform: scaleY(var(--fill));
+    transform-origin: center top;
+  }
+  html.reveal-ready .journey:not(.is-in) .journey__seg {
+    scale: 1 0;
+  }
+}

@@ -390,6 +390,34 @@ export const service = defineType({
       ],
     }),
     defineField({
+      name: 'journey',
+      title: 'Learning journey',
+      type: 'object',
+      description: 'Optional. The stages of the programme (e.g. Discover, Learn, Apply, Grow) as numbered steps on a line, shown after the introduction. Leave the stages empty to hide it.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'text', title: 'Intro', type: 'text', rows: 2 }),
+        defineField({
+          name: 'journeySteps',
+          title: 'Stages',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'journeyStep',
+              fields: [
+                defineField({ name: 'label', title: 'Stage word', type: 'string', description: 'One word above the heading, e.g. Discover' }),
+                defineField({ name: 'title', title: 'Heading', type: 'string', validation: (r) => r.required() }),
+                defineField({ name: 'text', title: 'Description', type: 'text', rows: 3 }),
+              ],
+              preview: { select: { title: 'title', subtitle: 'label' } },
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: 'courses',
       title: 'Course slider',
       type: 'object',

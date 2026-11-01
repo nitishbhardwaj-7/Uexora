@@ -9,6 +9,7 @@ import CompareTable from '@/components/sections/CompareTable';
 import ExamTracks from '@/components/sections/ExamTracks';
 import CourseSlider from '@/components/sections/CourseSlider';
 import ToolSlider from '@/components/sections/ToolSlider';
+import JourneySteps from '@/components/sections/JourneySteps';
 import Monogram from '@/components/brand/Monogram';
 import CmsImage from '@/components/ui/CmsImage';
 import { ArrowLink } from '@/components/ui/Button';
@@ -59,6 +60,8 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
   const features = (s.offerings?.features || [])
     .filter((f) => f?.title)
     .map((f) => ({ ...f, options: (f.options || []).filter((o) => o?.ratio && o?.title) }));
+  const journey = (s.journey?.journeySteps || []).filter((j) => j?.title);
+  const journeyHeading = s.journey?.heading || 'Your Learning Journey';
   const courses = (s.courses?.courseSlides || []).filter((c) => c?.title);
   const coursesHeading = s.courses?.heading || 'Explore Our Programmes';
   const tools = (s.tools?.toolCards || []).filter((t) => t?.name);
@@ -244,6 +247,26 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
           ) : null}
         </div>
       </section>
+
+      {/* The programme's stages (AI for Professionals): numbered circles on a line that fills as
+          the page scrolls, a card under each. */}
+      {journey.length ? (
+        <section id="journey" className="section journey-section" data-tone="light" aria-labelledby="journey-title">
+          <div className="container">
+            <div className="section-head">
+              <h2 id="journey-title" className="h2" data-split>
+                {journeyHeading}
+              </h2>
+              {s.journey?.text ? (
+                <p className="lead" data-reveal>
+                  {s.journey.text}
+                </p>
+              ) : null}
+            </div>
+            <JourneySteps steps={journey} />
+          </div>
+        </section>
+      ) : null}
 
       {/* Exam tracks (Competitive Exam Preparation): the picker and a section per exam. */}
       {s.tracks?.length ? <ExamTracks heading={s.tracksHeading || 'Choose your exam'} text={s.tracksText} tracks={s.tracks} batches={s.examBatches} approach={s.examApproach} /> : null}

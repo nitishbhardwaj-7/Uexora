@@ -54,6 +54,7 @@ const arrayTypes: Record<string, string> = {
   batchRows: 'sharedBatch',
   approachSteps: 'sharedStep',
   whyList: 'examWhy',
+  journeySteps: 'journeyStep',
   courseSlides: 'courseSlide',
   toolCards: 'toolCard',
 };
