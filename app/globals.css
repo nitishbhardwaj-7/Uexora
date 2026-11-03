@@ -8938,47 +8938,6 @@ html.reveal-ready .pillar:not(.is-in) .pillar__list li {
 }
 
 /* --------------------------------------------------------------------------
-   Stages by age group (Communication): the grade stages' rising columns, taller steps, a list in
-   each. The columns grow and the text rises as .grades__steps does; below 900px they stack.
-   -------------------------------------------------------------------------- */
-.pathways .grades__step {
-  --rise: clamp(2rem, 4vw, 4rem);
-  padding: clamp(1.5rem, 2.4vw, 2.25rem) clamp(1.25rem, 2vw, 2rem) 1rem;
-}
-.pathway__title {
-  font-size: clamp(1.45rem, 2vw, 1.9rem);
-  font-weight: 600;
-  line-height: 1.2;
-  color: var(--fg);
-  text-wrap: balance;
-}
-.pathway__range {
-  margin-top: 0.4rem;
-  font-family: var(--font-sub);
-  font-size: 0.98rem;
-  font-weight: 600;
-  color: var(--gold-500);
-}
-.pathway__list {
-  margin: 1.25rem 0 0;
-  padding: 0;
-  list-style: none;
-}
-.pathway__list li {
-  padding-block: 0.6rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.14);
-  font-size: 1rem;
-  line-height: 1.45;
-  color: color-mix(in srgb, var(--fg) 86%, transparent);
-}
-@media (max-width: 900px) {
-  .pathways .grades__steps {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.25rem;
-  }
-}
-
-/* --------------------------------------------------------------------------
    Platforms (Communication): from 1000px a list beside one photo that stays in view, crossfading
    to the row nearest the middle of the screen (PlatformShowcase); narrower, each row carries its
    own photo. Rows read in full until the script takes over. Nothing moves on hover.

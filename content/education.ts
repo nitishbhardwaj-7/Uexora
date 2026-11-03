@@ -6,7 +6,7 @@ import { aiProfessionalCourses } from './ai-professional-courses.ts';
 import { aiProfessionalJourney } from './ai-professional-journey.ts';
 import { aiProfessionalTools } from './ai-professional-tools.ts';
 import { aiTools } from './ai-tools.ts';
-import { communicationPathways, communicationPillars, communicationPlatforms } from './communication-programme.ts';
+import { communicationCourses, communicationPillars, communicationPlatforms } from './communication-programme.ts';
 
 /**
  * Default content for the Education page. This is the fallback (and the seed) for the
@@ -239,7 +239,7 @@ const programmes: Service[] = [
     whoFor: 'UEXORA empowers students from Grade 5 through university with essential communication, public speaking, confidence and personality development skills through structured online learning, interactive activities and real performance opportunities.',
     details: [],
     pillars: communicationPillars,
-    pathways: communicationPathways,
+    courses: communicationCourses,
     platforms: communicationPlatforms,
     // DRAFT, for the client to review: the questions are ours; the answers keep to the client's facts.
     faqs: [

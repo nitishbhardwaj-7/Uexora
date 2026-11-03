@@ -44,8 +44,6 @@ export type Service = {
   heroTitle?: string;
   /** What the programme teaches, grouped (Communication): an icon, a title and a list per pillar. */
   pillars?: { heading: string; text?: string; pillarItems: { title: string; icon?: string; points: string[] }[] };
-  /** The programme by age group (Communication): rising columns, a list in each. */
-  pathways?: { heading: string; text?: string; pathwayStages: { title: string; range?: string; points: string[] }[] };
   /** Where students perform (Communication): a list beside a photo that follows the scroll. */
   platforms?: { heading: string; text?: string; platformItems: { name: string; text: string; image?: { src: string; alt: string } }[] };
   journey?: { heading: string; text?: string; journeySteps: { label?: string; title: string; text?: string }[] };

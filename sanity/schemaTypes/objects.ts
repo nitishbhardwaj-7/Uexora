@@ -434,34 +434,6 @@ export const service = defineType({
       ],
     }),
     defineField({
-      name: 'pathways',
-      title: 'Stages by age group',
-      type: 'object',
-      description: 'Optional. The programme by age group, as columns that rise from left to right. Three fit best. Leave the stages empty to hide it.',
-      options: { collapsible: true, collapsed: true },
-      fields: [
-        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-        defineField({ name: 'text', title: 'Intro', type: 'text', rows: 2 }),
-        defineField({
-          name: 'pathwayStages',
-          title: 'Stages',
-          type: 'array',
-          of: [
-            defineArrayMember({
-              type: 'object',
-              name: 'pathwayStage',
-              fields: [
-                defineField({ name: 'title', title: 'Name', type: 'string', validation: (r) => r.required() }),
-                defineField({ name: 'range', title: 'Who it is for', type: 'string', description: 'e.g. Grades 5–8' }),
-                defineField({ name: 'points', title: 'Points', type: 'array', of: [defineArrayMember({ type: 'string' })] }),
-              ],
-              preview: { select: { title: 'title', subtitle: 'range' } },
-            }),
-          ],
-        }),
-      ],
-    }),
-    defineField({
       name: 'platforms',
       title: 'Platforms',
       type: 'object',

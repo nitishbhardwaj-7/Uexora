@@ -63,7 +63,6 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
     .filter((f) => f?.title)
     .map((f) => ({ ...f, options: (f.options || []).filter((o) => o?.ratio && o?.title) }));
   const pillars = (s.pillars?.pillarItems || []).filter((p) => p?.title);
-  const pathways = (s.pathways?.pathwayStages || []).filter((p) => p?.title);
   const platforms = (s.platforms?.platformItems || []).filter((p) => p?.name);
   // The platforms end on a light section, so what follows swaps tones to keep them alternating.
   const approachTone = platforms.length ? sectionTone : altTone;
@@ -297,56 +296,6 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
         </section>
       ) : null}
 
-      {/* The programme by age group (Communication): the rising columns of the grade stages. */}
-      {pathways.length ? (
-        <section id="stages" className="section pathways" data-tone="dark" aria-labelledby="stages-title">
-          <div className="container">
-            <div className="section-head">
-              <h2 id="stages-title" className="h2" data-split>
-                {s.pathways!.heading}
-              </h2>
-              {s.pathways!.text ? (
-                <p className="lead" data-reveal>
-                  {s.pathways!.text}
-                </p>
-              ) : null}
-            </div>
-            <ol className="grades__steps" data-reveal style={{ '--n': pathways.length } as React.CSSProperties}>
-              {pathways.map((p, i) => (
-                <li key={p.title + i} className="grades__step" style={{ '--i': i } as React.CSSProperties}>
-                  <h3 className="pathway__title">{p.title}</h3>
-                  {p.range ? <p className="pathway__range">{p.range}</p> : null}
-                  <ul className="pathway__list">
-                    {(p.points || []).map((point, k) => (
-                      <li key={point + k}>{point}</li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
-      ) : null}
-
-      {/* Where students perform (Communication): a list beside a photo that follows the scroll. */}
-      {platforms.length ? (
-        <section id="platforms" className="section platforms-section" data-tone="light" aria-labelledby="platforms-title">
-          <div className="container">
-            <div className="section-head">
-              <h2 id="platforms-title" className="h2" data-split>
-                {s.platforms!.heading}
-              </h2>
-              {s.platforms!.text ? (
-                <p className="lead" data-reveal>
-                  {s.platforms!.text}
-                </p>
-              ) : null}
-            </div>
-            <PlatformShowcase items={platforms} />
-          </div>
-        </section>
-      ) : null}
-
       {/* The programme's stages (AI for Professionals): numbered circles on a line that fills as
           the page scrolls, a card under each. */}
       {journey.length ? (
@@ -386,6 +335,25 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
             </div>
           </div>
           <CourseSlider slides={courses} label={coursesHeading} />
+        </section>
+      ) : null}
+
+      {/* Where students perform (Communication): a list beside a photo that follows the scroll. */}
+      {platforms.length ? (
+        <section id="platforms" className="section platforms-section" data-tone="light" aria-labelledby="platforms-title">
+          <div className="container">
+            <div className="section-head">
+              <h2 id="platforms-title" className="h2" data-split>
+                {s.platforms!.heading}
+              </h2>
+              {s.platforms!.text ? (
+                <p className="lead" data-reveal>
+                  {s.platforms!.text}
+                </p>
+              ) : null}
+            </div>
+            <PlatformShowcase items={platforms} />
+          </div>
         </section>
       ) : null}
 

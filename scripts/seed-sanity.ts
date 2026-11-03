@@ -59,7 +59,6 @@ const arrayTypes: Record<string, string> = {
   courseSlides: 'courseSlide',
   toolCards: 'toolCard',
   pillarItems: 'pillarItem',
-  pathwayStages: 'pathwayStage',
   platformItems: 'platformItem',
 };
 

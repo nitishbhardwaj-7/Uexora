@@ -2,9 +2,10 @@ import type { Service } from './types.ts';
 
 /**
  * The sections of the Communication, Public Speaking and Confidence Building programme. The
- * pillars, stages, platforms and every line under them are the client's. DRAFT, for the client to
- * review: the stages heading and the platforms heading (the client gave neither). Fallback (and
- * seed) for the Sanity `educationPage` programme; studio edits override these.
+ * pillars, courses, platforms and every line under them are the client's (each course's list is
+ * written out as one sentence for the slider). DRAFT, for the client to review: the course
+ * slider's intro and the platforms heading (the client gave neither). Fallback (and seed) for the
+ * Sanity `educationPage` programme; studio edits override these.
  */
 export const communicationPillars: NonNullable<Service['pillars']> = {
   heading: 'UEXORA’s six learning pillars',
@@ -42,23 +43,27 @@ export const communicationPillars: NonNullable<Service['pillars']> = {
   ],
 };
 
-export const communicationPathways: NonNullable<Service['pathways']> = {
-  heading: 'From Grade 5 through university',
-  pathwayStages: [
+export const communicationCourses: NonNullable<Service['courses']> = {
+  heading: 'Explore Our Programmes',
+  text: 'Three stages, from Grade 5 through university.',
+  courseSlides: [
     {
       title: 'Foundation Explorers',
-      range: 'Grades 5–8',
-      points: ['Basic communication', 'Speaking without hesitation', 'Storytelling', 'Show and tell', 'Introduction to public speaking', 'Confidence games and activities'],
+      audience: 'Grades 5–8',
+      text: 'Basic communication, speaking without hesitation, storytelling, show and tell, introduction to public speaking, and confidence games and activities.',
+      image: { src: '/images/communication-courses/foundation-explorers.jpg', alt: 'A young student at a whiteboard beside the teacher, in front of classmates' },
     },
     {
       title: 'Emerging Leaders',
-      range: 'Grades 9–12',
-      points: ['Advanced public speaking', 'Debates and persuasive speaking', 'Hosting and anchoring', 'Leadership and teamwork', 'Presentation mastery', 'Critical thinking'],
+      audience: 'Grades 9–12',
+      text: 'Advanced public speaking, debates and persuasive speaking, hosting and anchoring, leadership and teamwork, presentation mastery and critical thinking.',
+      image: { src: '/images/communication-courses/emerging-leaders.jpg', alt: 'A teenage student with a backpack explaining work on a blackboard' },
     },
     {
       title: 'Future Professionals',
-      range: 'University Students',
-      points: ['Professional communication', 'Corporate presentations', 'Interview preparation', 'Public speaking and thought leadership', 'Negotiation and networking', 'Professional confidence'],
+      audience: 'University Students',
+      text: 'Professional communication, corporate presentations, interview preparation, public speaking and thought leadership, negotiation and networking, and professional confidence.',
+      image: { src: '/images/communication-courses/future-professionals.jpg', alt: 'A young woman in a suit presenting to a colleague in a meeting room' },
     },
   ],
 };
