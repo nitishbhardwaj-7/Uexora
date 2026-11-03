@@ -64,7 +64,7 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
     .map((f) => ({ ...f, options: (f.options || []).filter((o) => o?.ratio && o?.title) }));
   const pillars = (s.pillars?.pillarItems || []).filter((p) => p?.title);
   const pillarCols = pillars.length % 4 === 0 ? 4 : 3;
-  const serves = (s.serves?.serveItems || []).filter(Boolean);
+  const serves = (s.serves?.serveGroups || []).filter((g) => g?.text);
   const workshops = (s.workshops?.workshopItems || []).filter(Boolean);
   const platforms = (s.platforms?.platformItems || []).filter((p) => p?.name);
   // The platforms end on a light section, so what follows swaps tones to keep them alternating.
@@ -142,7 +142,7 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
               <ArrowLink href={contact}>Ask about this {meta.unit}</ArrowLink>
             </div>
           </div>
-          <div className={['split', 'split--overview', overviewPhoto ? '' : 'split--overview-text'].filter(Boolean).join(' ')}>
+          <div className={['split', 'split--overview', overviewPhoto ? '' : 'split--overview-text', overviewPhoto && !s.whoFor && !details.length ? 'split--overview-lone' : ''].filter(Boolean).join(' ')}>
             {overviewPhoto ? (
               <figure className="split__photo" data-reveal="mask" data-reveal-delay="0.15">
                 <div className="split__photo-in" data-parallax="0.15">
@@ -172,15 +172,20 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
             </div>
           </div>
 
-          {/* Who the programme can serve (Inclusive Learning): a ruled list, line by line. */}
+          {/* Who the programme can serve (Inclusive Learning): centred rows of four, so an odd count stays symmetrical. */}
           {serves.length ? (
             <div className="serves" aria-labelledby="serves-title">
-              <h3 id="serves-title" className="h3 serves__title" data-reveal>
+              <h3 id="serves-title" className="h2 serves__title" data-split>
                 {s.serves!.heading}
               </h3>
-              <ul className="serves__list" data-reveal-group data-stagger="0.07">
-                {serves.map((item, i) => (
-                  <li key={item + i}>{item}</li>
+              <ul className="serves__list">
+                {serves.map((g, i) => (
+                  <li key={g.text + i} className="serve" data-reveal style={{ '--c': i % 4 } as React.CSSProperties}>
+                    <span className="serve__icon">
+                      <ApproachIcon name={g.icon || ''} />
+                    </span>
+                    <p className="serve__text">{g.text}</p>
+                  </li>
                 ))}
               </ul>
             </div>

@@ -57,14 +57,14 @@ export const inclusiveAreas: NonNullable<Service['pillars']> = {
 
 export const inclusiveServes: NonNullable<Service['serves']> = {
   heading: 'Who the programme can serve',
-  serveItems: [
-    'Young children who need additional learning support',
-    'Children with autism spectrum disorder (ASD)',
-    'Children with ADHD',
-    'Children with speech and language difficulties',
-    'Children with learning differences',
-    'Children who experience social communication difficulties',
-    'Children who need support with emotional regulation and everyday independence',
+  serveGroups: [
+    { text: 'Young children who need additional learning support', icon: 'sprout' },
+    { text: 'Children with autism spectrum disorder (ASD)', icon: 'infinity' },
+    { text: 'Children with ADHD', icon: 'focus' },
+    { text: 'Children with speech and language difficulties', icon: 'speech' },
+    { text: 'Children with learning differences', icon: 'book' },
+    { text: 'Children who experience social communication difficulties', icon: 'team' },
+    { text: 'Children who need support with emotional regulation and everyday independence', icon: 'heart' },
   ],
 };
 

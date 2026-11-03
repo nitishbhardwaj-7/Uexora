@@ -45,7 +45,7 @@ export type Service = {
   /** What the programme teaches, grouped (Communication): an icon, a title and a list per pillar. */
   pillars?: { heading: string; text?: string; pillarItems: { title: string; icon?: string; points: string[] }[] };
   /** Who the programme can serve, under the overview (Inclusive Learning). */
-  serves?: { heading: string; serveItems: string[] };
+  serves?: { heading: string; serveGroups: { text: string; icon?: string }[] };
   /** Workshops, as a ruled list beside a photo (Inclusive Learning). */
   workshops?: { heading: string; text?: string; image?: { src: string; alt: string }; workshopItems: string[] };
   /** A closing statement after the programme's own sections (Inclusive Learning). */

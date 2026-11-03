@@ -3,7 +3,7 @@
  * the CSS can draw it on (stroke-dashoffset 1 to 0); --p orders the strokes within an icon, and
  * `acc` marks the accent strokes (gold).
  */
-export const APPROACH_ICONS = ['questions', 'bulb', 'globe', 'book', 'sliders', 'layers', 'search', 'puzzle', 'robot', 'speech', 'mic', 'person', 'team', 'career', 'routine', 'heart', 'family', 'compass'] as const;
+export const APPROACH_ICONS = ['questions', 'bulb', 'globe', 'book', 'sliders', 'layers', 'search', 'puzzle', 'robot', 'speech', 'mic', 'person', 'team', 'career', 'routine', 'heart', 'family', 'compass', 'sprout', 'infinity', 'focus'] as const;
 export type ApproachIconName = (typeof APPROACH_ICONS)[number];
 
 const p = (n: number) => ({ pathLength: 1, style: { '--p': n } as React.CSSProperties });
@@ -162,6 +162,28 @@ const ICONS: Record<ApproachIconName, React.ReactNode> = {
       <circle {...p(0)} cx="24" cy="24" r="19" />
       <path {...p(1)} d="M24 5v3M24 40v3M5 24h3M40 24h3" />
       <path {...p(2)} className="acc" d="M32 16l-5 11-11 5 5-11z" />
+    </>
+  ),
+  // A sprout with two leaves: young children, growing.
+  sprout: (
+    <>
+      <path {...p(0)} d="M14 43h20M24 43V22" />
+      <path {...p(1)} className="acc" d="M24 29c0-8-7-13-17-13 0 9 7 13 17 13z" />
+      <path {...p(2)} className="acc" d="M24 22c0-8 7-13 17-13 0 9-7 13-17 13z" />
+    </>
+  ),
+  // An infinity loop, the neurodiversity symbol: autism, without the puzzle piece.
+  infinity: (
+    <>
+      <path {...p(0)} d="M24 24c-3.6-5-7.2-8-11.5-8a8 8 0 0 0 0 16c4.3 0 7.9-3 11.5-8" />
+      <path {...p(1)} className="acc" d="M24 24c3.6 5 7.2 8 11.5 8a8 8 0 0 0 0-16c-4.3 0-7.9 3-11.5 8" />
+    </>
+  ),
+  // A circle inside a viewfinder's corners: attention and focus.
+  focus: (
+    <>
+      <path {...p(0)} d="M6 16V9a3 3 0 0 1 3-3h7M32 6h7a3 3 0 0 1 3 3v7M42 32v7a3 3 0 0 1-3 3h-7M16 42H9a3 3 0 0 1-3-3v-7" />
+      <circle {...p(1)} className="acc" cx="24" cy="24" r="8" />
     </>
   ),
 };

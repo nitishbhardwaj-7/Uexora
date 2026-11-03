@@ -470,11 +470,41 @@ export const service = defineType({
       name: 'serves',
       title: 'Who it can serve',
       type: 'object',
-      description: 'Optional. A ruled list under the opening photo and text. Leave the list empty to hide it.',
+      description: 'Optional. Centred rows of four under the opening photo and text, each with an animated icon. Leave the list empty to hide it.',
       options: { collapsible: true, collapsed: true },
       fields: [
         defineField({ name: 'heading', title: 'Heading', type: 'string' }),
-        defineField({ name: 'serveItems', title: 'List', type: 'array', of: [defineArrayMember({ type: 'string' })] }),
+        defineField({
+          name: 'serveGroups',
+          title: 'Groups',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'serveGroup',
+              fields: [
+                defineField({ name: 'text', title: 'Text', type: 'string', validation: (r) => r.required() }),
+                defineField({
+                  name: 'icon',
+                  title: 'Icon',
+                  type: 'string',
+                  options: {
+                    list: [
+                      { title: 'Sprout', value: 'sprout' },
+                      { title: 'Infinity', value: 'infinity' },
+                      { title: 'Focus', value: 'focus' },
+                      { title: 'Speech bubble', value: 'speech' },
+                      { title: 'Book', value: 'book' },
+                      { title: 'Team', value: 'team' },
+                      { title: 'Heart', value: 'heart' },
+                    ],
+                  },
+                }),
+              ],
+              preview: { select: { title: 'text' } },
+            }),
+          ],
+        }),
       ],
     }),
     defineField({
