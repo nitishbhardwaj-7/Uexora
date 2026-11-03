@@ -3,7 +3,7 @@
  * the CSS can draw it on (stroke-dashoffset 1 to 0); --p orders the strokes within an icon, and
  * `acc` marks the accent strokes (gold).
  */
-export const APPROACH_ICONS = ['questions', 'bulb', 'globe', 'book', 'sliders', 'layers', 'search', 'puzzle', 'robot', 'speech', 'mic', 'person', 'team', 'career'] as const;
+export const APPROACH_ICONS = ['questions', 'bulb', 'globe', 'book', 'sliders', 'layers', 'search', 'puzzle', 'robot', 'speech', 'mic', 'person', 'team', 'career', 'routine', 'heart', 'family', 'compass'] as const;
 export type ApproachIconName = (typeof APPROACH_ICONS)[number];
 
 const p = (n: number) => ({ pathLength: 1, style: { '--p': n } as React.CSSProperties });
@@ -131,6 +131,37 @@ const ICONS: Record<ApproachIconName, React.ReactNode> = {
       <path {...p(1)} d="M17 15v-3a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v3" />
       <path {...p(2)} className="acc" d="M5 27h38" />
       <path {...p(3)} className="acc" d="M24 24v6" />
+    </>
+  ),
+  // A clock: daily routines.
+  routine: (
+    <>
+      <circle {...p(0)} cx="24" cy="24" r="18" />
+      <path {...p(1)} className="acc" d="M24 13v11l7 4" />
+    </>
+  ),
+  // A heart with a pulse through it: emotional wellbeing.
+  heart: (
+    <>
+      <path {...p(0)} d="M24 42S6 32 6 18.5A10 10 0 0 1 24 12.5a10 10 0 0 1 18 6C42 32 24 42 24 42z" />
+      <path {...p(1)} className="acc" d="M14 24h5l2.5-5 3.5 9 2.5-4H34" />
+    </>
+  ),
+  // A parent beside a child: parent education.
+  family: (
+    <>
+      <circle {...p(0)} cx="17" cy="11" r="6" />
+      <path {...p(1)} d="M6 43v-9a11 11 0 0 1 22 0v9" />
+      <circle {...p(2)} className="acc" cx="36" cy="23" r="4.5" />
+      <path {...p(3)} className="acc" d="M28.5 43v-4a7.5 7.5 0 0 1 15 0v4" />
+    </>
+  ),
+  // A compass: finding the way towards adulthood.
+  compass: (
+    <>
+      <circle {...p(0)} cx="24" cy="24" r="19" />
+      <path {...p(1)} d="M24 5v3M24 40v3M5 24h3M40 24h3" />
+      <path {...p(2)} className="acc" d="M32 16l-5 11-11 5 5-11z" />
     </>
   ),
 };

@@ -63,6 +63,9 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
     .filter((f) => f?.title)
     .map((f) => ({ ...f, options: (f.options || []).filter((o) => o?.ratio && o?.title) }));
   const pillars = (s.pillars?.pillarItems || []).filter((p) => p?.title);
+  const pillarCols = pillars.length % 4 === 0 ? 4 : 3;
+  const serves = (s.serves?.serveItems || []).filter(Boolean);
+  const workshops = (s.workshops?.workshopItems || []).filter(Boolean);
   const platforms = (s.platforms?.platformItems || []).filter((p) => p?.name);
   // The platforms end on a light section, so what follows swaps tones to keep them alternating.
   const approachTone = platforms.length ? sectionTone : altTone;
@@ -169,6 +172,20 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
             </div>
           </div>
 
+          {/* Who the programme can serve (Inclusive Learning): a ruled list, line by line. */}
+          {serves.length ? (
+            <div className="serves" aria-labelledby="serves-title">
+              <h3 id="serves-title" className="h3 serves__title" data-reveal>
+                {s.serves!.heading}
+              </h3>
+              <ul className="serves__list" data-reveal-group data-stagger="0.07">
+                {serves.map((item, i) => (
+                  <li key={item + i}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
+
           {/* Support by school stage: one rising step per stage, each a little higher than the last. */}
           {grades.length ? (
             <div className="grades" aria-labelledby="grades-title">
@@ -270,9 +287,9 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
                 </p>
               ) : null}
             </div>
-            <ol className="pillars">
+            <ol className={['pillars', pillarCols === 4 ? 'pillars--four' : ''].filter(Boolean).join(' ')}>
               {pillars.map((p, i) => (
-                <li key={p.title + i} className="pillar" data-reveal style={{ '--c': i % 3 } as React.CSSProperties}>
+                <li key={p.title + i} className="pillar" data-reveal style={{ '--c': i % pillarCols } as React.CSSProperties}>
                   <div className="pillar__head">
                     <span className="pillar__icon">
                       <ApproachIcon name={p.icon || ''} />
@@ -357,6 +374,39 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
         </section>
       ) : null}
 
+      {/* Workshops (Inclusive Learning): a numbered list beside a photo that stays in view. */}
+      {workshops.length ? (
+        <section id="workshops" className="section workshops-section" data-tone="light" aria-labelledby="workshops-title">
+          <div className="container workshops">
+            <div className="workshops__side">
+              <h2 id="workshops-title" className="h2" data-split>
+                {s.workshops!.heading}
+              </h2>
+              {s.workshops!.text ? (
+                <p className="lead" data-reveal>
+                  {s.workshops!.text}
+                </p>
+              ) : null}
+              {s.workshops!.image?.src ? (
+                <figure className="workshops__photo" data-reveal="mask">
+                  <CmsImage src={s.workshops!.image.src} alt={s.workshops!.image.alt} fill sizes="(max-width: 900px) 92vw, 42vw" quality={82} />
+                </figure>
+              ) : null}
+            </div>
+            <ol className="workshops__list">
+              {workshops.map((item, i) => (
+                <li key={item + i} className="workshop" data-reveal>
+                  <span className="workshop__num" aria-hidden="true">
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  <p className="workshop__text">{item}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      ) : null}
+
       {/* The tools students work with: logo cards in two rows that scroll sideways. */}
       {tools.length ? (
         <section id="ai-tools" className="section tools-section" data-tone="light" aria-labelledby="tools-title">
@@ -373,6 +423,24 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
             </div>
             <ToolSlider tools={tools} label={toolsHeading} />
             {s.tools?.note ? <p className="tools__note">{s.tools.note}</p> : null}
+          </div>
+        </section>
+      ) : null}
+
+      {/* A closing statement (Inclusive Learning), before the approach shared across programmes. */}
+      {s.closing?.heading ? (
+        <section id="closing" className="section" data-tone="dark" aria-labelledby="closing-title">
+          <div className="container">
+            <div className="closing">
+              <h2 id="closing-title" className="h2" data-split>
+                {s.closing.heading}
+              </h2>
+              {s.closing.text ? (
+                <p className="closing__text" data-reveal data-reveal-delay="0.15">
+                  {s.closing.text}
+                </p>
+              ) : null}
+            </div>
           </div>
         </section>
       ) : null}

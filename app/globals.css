@@ -9071,3 +9071,137 @@ html.reveal-ready .pillar:not(.is-in) .pillar__list li {
     opacity: 1;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Inclusive Learning: eight learning areas fill two rows of four (the pillars above, narrower);
+   the people the programme can serve sit under the overview; the workshops are a ruled list beside
+   a photo that stays in view; a closing statement ends the programme's own content. Nothing moves
+   on hover.
+   -------------------------------------------------------------------------- */
+@media (min-width: 1181px) {
+  .pillars--four {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    column-gap: clamp(1.75rem, 2.6vw, 2.75rem);
+  }
+  .pillars--four .pillar__title {
+    min-height: 3.75em;
+    font-size: clamp(1.2rem, 1.45vw, 1.4rem);
+  }
+}
+@media (max-width: 1180px) {
+  .pillars--four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 620px) {
+  .pillars--four {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+.pillar__icon .aicon .knob {
+  fill: var(--cream);
+}
+
+.serves {
+  margin-top: clamp(3rem, 6vw, 5.5rem);
+}
+.serves__title {
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+.serves__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(2rem, 5vw, 5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.serves__list li {
+  padding-block: 1.1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+  line-height: 1.45;
+  color: var(--fg);
+  text-wrap: pretty;
+}
+
+.workshops-section {
+  background:
+    radial-gradient(50% 65% at 100% 0%, rgba(242, 189, 43, 0.14), rgba(242, 189, 43, 0) 70%),
+    radial-gradient(40% 55% at 0% 100%, rgba(242, 138, 46, 0.07), rgba(242, 138, 46, 0) 70%),
+    var(--cream);
+}
+.workshops {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: start;
+}
+.workshops__side {
+  position: sticky;
+  top: 14vh;
+}
+.workshops__photo {
+  position: relative;
+  margin: clamp(1.5rem, 3vw, 2.5rem) 0 0;
+  aspect-ratio: 4 / 3;
+  border-radius: 22px;
+  overflow: hidden;
+}
+.workshops__photo img {
+  object-fit: cover;
+}
+.workshops__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.workshop {
+  display: grid;
+  grid-template-columns: clamp(2.5rem, 4vw, 3.75rem) minmax(0, 1fr);
+  align-items: baseline;
+  padding-block: clamp(1.4rem, 2.4vw, 2.1rem);
+  border-top: 1px solid rgba(10, 16, 48, 0.14);
+}
+.workshop:last-child {
+  border-bottom: 1px solid rgba(10, 16, 48, 0.14);
+}
+.workshop__num {
+  font-family: var(--font-sub);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent-2);
+}
+.workshop__text {
+  font-family: var(--font-sub);
+  font-size: clamp(1.1rem, 1.55vw, 1.4rem);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+@media (max-width: 900px) {
+  .workshops {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .workshops__side {
+    position: static;
+  }
+  .serves__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.closing {
+  max-width: 56rem;
+  margin-inline: auto;
+  text-align: center;
+}
+.closing__text {
+  max-width: 46rem;
+  margin: clamp(1.5rem, 3vw, 2.25rem) auto 0;
+  font-size: clamp(1.05rem, 1.35vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}

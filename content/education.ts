@@ -7,6 +7,7 @@ import { aiProfessionalJourney } from './ai-professional-journey.ts';
 import { aiProfessionalTools } from './ai-professional-tools.ts';
 import { aiTools } from './ai-tools.ts';
 import { communicationCourses, communicationPillars, communicationPlatforms } from './communication-programme.ts';
+import { inclusiveAreas, inclusiveClosing, inclusiveCourses, inclusiveServes, inclusiveWorkshops } from './special-support-programme.ts';
 
 /**
  * Default content for the Education page. This is the fallback (and the seed) for the
@@ -251,24 +252,30 @@ const programmes: Service[] = [
     text: 'Building confident communicators, expressive thinkers and future leaders.',
   },
   {
-    title: 'Special Needs Students Programme',
+    title: 'Inclusive Learning & Special Support',
     slug: 'special-needs-students-programme',
-    promise: 'Learning support shaped around each student’s abilities, needs and pace, with patience and respect.',
-    seo: { description: 'Special needs students programme from Uexora Education: individualised teaching, additional learning support and qualified educators for different abilities, needs and paces.' },
+    heroTitle: 'Inclusive Learning\n& Special Support',
+    promise: 'Every Child Is Different. Every Child Can Grow. Every Child Deserves to Be Heard.',
+    seo: { description: 'Inclusive learning and special needs support for children from age 2 onwards: early communication, speech and language, individualised learning and parent education.' },
     image: { src: '/images/services/special-needs-students-programme.jpg', alt: 'A teacher helping a young student with maths homework' },
     heroImage: { src: '/images/heroes/services/special-needs-students-programme.jpg', alt: 'A teacher sitting beside a young boy and helping him write' },
-    highlights: ['Individualised teaching approaches', 'Additional learning support', 'Different abilities, needs and paces', 'Qualified educators'],
-    whoFor: 'Students who benefit from more individualised teaching, additional support and a learning pace that suits them, with understanding, patience and respect.',
-    details: [
-      'Every learner deserves to be treated with understanding, patience and respect. Some students benefit from more individualised teaching approaches and additional learning support, and we aim to provide learning pathways that recognise different abilities, needs and learning paces.',
-      'Programmes are matched to the support required, with qualified educators suited to that support, and we keep parents informed through clear communication.',
-    ],
+    highlights: ['From age 2 onwards', 'Speech and language services', 'Individualised support', 'Parent education'],
+    overviewHeading: 'Every Milestone Matters. Every Voice Deserves to Be Heard.',
+    whoFor: '',
+    details: [],
+    serves: inclusiveServes,
+    pillars: inclusiveAreas,
+    courses: inclusiveCourses,
+    workshops: inclusiveWorkshops,
+    closing: inclusiveClosing,
+    // DRAFT, for the client to review: the questions are ours; the answers keep to the client's facts.
     faqs: [
-      { q: 'Who is the special needs students programme for?', a: 'Students who benefit from more individualised teaching, additional learning support or a different learning pace.' },
-      { q: 'How do you decide on the right support?', a: 'By understanding each learner\'s abilities, needs and pace first, then matching programmes and qualified educators to the support required.' },
-      { q: 'How are parents involved?', a: 'Through clear communication about the approach being taken and the progress being made.' },
+      { q: 'Who is this programme for?', a: 'Children from age 2 onwards, including young children who need additional learning support, children with autism spectrum disorder (ASD) or ADHD, and children with speech and language difficulties, learning differences or social communication difficulties.' },
+      { q: 'What does the support cover?', a: 'Early communication and language, social and interactive learning, cognitive and academic development, everyday life skills, emotional and behavioural development, inclusive and individualised learning, parent education, and independence and future readiness.' },
+      { q: 'How are parents involved?', a: 'Through parent education: courses such as Understanding Autism, Communication at Home and Positive Parenting, and workshops on everyday situations.' },
+      { q: 'What do the parent workshops cover?', a: 'Practical situations such as supporting a child during a meltdown without punishment or shame, creating a visual timetable at home, making transitions easier and preparing for school meetings and support planning.' },
     ],
-    text: 'Every learner deserves to be treated with understanding, patience and respect. We recognise that some students benefit from more individualised teaching approaches and additional learning support. Our aim is to provide appropriate learning pathways that recognise different abilities, needs and learning paces, with programmes and qualified educators suited to the support required.',
+    text: 'Supporting children from age 2 onwards through early communication, speech and language services, developmental learning, individualised support and parent education.',
   },
   {
     title: 'Corporate Trainings',
