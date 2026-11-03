@@ -6,6 +6,7 @@ import { aiProfessionalCourses } from './ai-professional-courses.ts';
 import { aiProfessionalJourney } from './ai-professional-journey.ts';
 import { aiProfessionalTools } from './ai-professional-tools.ts';
 import { aiTools } from './ai-tools.ts';
+import { communicationPathways, communicationPillars, communicationPlatforms } from './communication-programme.ts';
 
 /**
  * Default content for the Education page. This is the fallback (and the seed) for the
@@ -228,22 +229,26 @@ const programmes: Service[] = [
   {
     title: 'Communication, Public Speaking and Confidence Building',
     slug: 'communication-public-speaking-and-confidence-building',
-    promise: 'Learn to share your ideas clearly and speak with confidence, in the classroom and beyond.',
-    seo: { description: 'Communication, public speaking and confidence building programme: learn to share ideas, speak in front of others and present yourself clearly and confidently.' },
+    heroTitle: 'Communication,\nPublic Speaking\nand Confidence\nBuilding',
+    promise: 'Students won’t just learn communication skills. They will get opportunities to practise, perform, present and showcase their abilities on different platforms and stages.',
+    seo: { description: 'Communication, public speaking and confidence skills for students from Grade 5 through university, with real opportunities to perform and present.' },
     image: { src: '/images/services/communication-public-speaking-and-confidence-building.jpg', alt: 'A woman speaking into a microphone on a stage' },
     heroImage: { src: '/images/heroes/services/communication-public-speaking-and-confidence-building.jpg', alt: 'A schoolboy presenting his drawings to his classmates' },
-    highlights: ['Public speaking', 'Clear communication', 'Presenting with confidence', 'Interview readiness'],
-    whoFor: 'Learners who know their subject but want to share their ideas, speak in front of others and present themselves with more confidence.',
-    details: [
-      'Knowing something and being able to express it confidently are two different skills. This programme helps learners become comfortable sharing their ideas, speaking in front of others, communicating clearly and presenting themselves with confidence.',
-      'These skills carry across the classroom, interviews, further education and everyday life, which is why we treat them as part of a complete education rather than an extra.',
-    ],
+    highlights: ['Grade 5 through university', 'Structured online learning', 'Interactive activities', 'Real performance opportunities'],
+    overviewHeading: 'Learn. Practise. Perform. Become.',
+    whoFor: 'UEXORA empowers students from Grade 5 through university with essential communication, public speaking, confidence and personality development skills through structured online learning, interactive activities and real performance opportunities.',
+    details: [],
+    pillars: communicationPillars,
+    pathways: communicationPathways,
+    platforms: communicationPlatforms,
+    // DRAFT, for the client to review: the questions are ours; the answers keep to the client's facts.
     faqs: [
-      { q: 'Who is this programme for?', a: 'Learners who want to become more comfortable sharing their ideas, speaking in front of others and presenting themselves with confidence.' },
-      { q: 'Where do these skills help?', a: 'In the classroom, during interviews, in further education and throughout life.' },
-      { q: 'Is it only about public speaking?', a: 'No. It covers communicating clearly, presenting with confidence and expressing ideas, in front of a group or one to one.' },
+      { q: 'Who is this programme for?', a: 'Students from Grade 5 through university, in three stages: Foundation Explorers for Grades 5–8, Emerging Leaders for Grades 9–12 and Future Professionals for university students.' },
+      { q: 'How do students learn?', a: 'Through structured online learning, interactive activities and real performance opportunities.' },
+      { q: 'Is it only about public speaking?', a: 'No. The six learning pillars also cover communication, confidence and personality development, critical thinking and expression, leadership and social skills, and academic and career readiness.' },
+      { q: 'Will students get to perform?', a: 'Yes. They get opportunities to practise, perform, present and showcase their abilities on different platforms and stages, such as The UEXORA Stage, Debate Arena and Digital Showcase.' },
     ],
-    text: 'Knowing something and being able to express it confidently are two different skills. We want to help learners become more comfortable sharing their ideas, speaking in front of others, communicating clearly and presenting themselves with confidence. These skills can make a difference in the classroom, during interviews, in further education and throughout life.',
+    text: 'Building confident communicators, expressive thinkers and future leaders.',
   },
   {
     title: 'Special Needs Students Programme',

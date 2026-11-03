@@ -10,6 +10,8 @@ import ExamTracks from '@/components/sections/ExamTracks';
 import CourseSlider from '@/components/sections/CourseSlider';
 import ToolSlider from '@/components/sections/ToolSlider';
 import JourneySteps from '@/components/sections/JourneySteps';
+import PlatformShowcase from '@/components/sections/PlatformShowcase';
+import ApproachIcon from '@/components/sections/ApproachIcon';
 import Monogram from '@/components/brand/Monogram';
 import CmsImage from '@/components/ui/CmsImage';
 import { ArrowLink } from '@/components/ui/Button';
@@ -60,6 +62,12 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
   const features = (s.offerings?.features || [])
     .filter((f) => f?.title)
     .map((f) => ({ ...f, options: (f.options || []).filter((o) => o?.ratio && o?.title) }));
+  const pillars = (s.pillars?.pillarItems || []).filter((p) => p?.title);
+  const pathways = (s.pathways?.pathwayStages || []).filter((p) => p?.title);
+  const platforms = (s.platforms?.platformItems || []).filter((p) => p?.name);
+  // The platforms end on a light section, so what follows swaps tones to keep them alternating.
+  const approachTone = platforms.length ? sectionTone : altTone;
+  const faqTone = platforms.length ? altTone : sectionTone;
   const journey = (s.journey?.journeySteps || []).filter((j) => j?.title);
   const journeyHeading = s.journey?.heading || 'Your Learning Journey';
   const courses = (s.courses?.courseSlides || []).filter((c) => c?.title);
@@ -111,7 +119,7 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
 
       <PageHero
         eyebrow={meta.name}
-        title={s.title}
+        title={s.heroTitle || s.title}
         lead={s.promise || s.text}
         tone={heroTone}
         primary={{ label: enquire, href: contact }}
@@ -126,7 +134,7 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
           {/* Heading row on top; below it the photo and the text start and end on the same lines. */}
           <div className="overview-head">
             <h2 id="overview-title" className="h2" data-split>
-              {division === 'education' ? 'Who it is for, and what it offers' : 'Who it is for, and what it covers'}
+              {s.overviewHeading || (division === 'education' ? 'Who it is for, and what it offers' : 'Who it is for, and what it covers')}
             </h2>
             <div data-reveal>
               <ArrowLink href={contact}>Ask about this {meta.unit}</ArrowLink>
@@ -248,6 +256,97 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
         </div>
       </section>
 
+      {/* What the programme teaches (Communication): three across; each pillar's line draws, its
+          icon draws on, then its list settles in. */}
+      {pillars.length ? (
+        <section id="pillars" className="section pillars-section" data-tone="light" aria-labelledby="pillars-title">
+          <div className="container">
+            <div className="section-head">
+              <h2 id="pillars-title" className="h2" data-split>
+                {s.pillars!.heading}
+              </h2>
+              {s.pillars!.text ? (
+                <p className="lead" data-reveal>
+                  {s.pillars!.text}
+                </p>
+              ) : null}
+            </div>
+            <ol className="pillars">
+              {pillars.map((p, i) => (
+                <li key={p.title + i} className="pillar" data-reveal style={{ '--c': i % 3 } as React.CSSProperties}>
+                  <div className="pillar__head">
+                    <span className="pillar__icon">
+                      <ApproachIcon name={p.icon || ''} />
+                    </span>
+                    <span className="pillar__num" aria-hidden="true">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <h3 className="pillar__title">{p.title}</h3>
+                  <ul className="pillar__list">
+                    {(p.points || []).map((point, k) => (
+                      <li key={point + k} style={{ '--k': k } as React.CSSProperties}>
+                        {point}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      ) : null}
+
+      {/* The programme by age group (Communication): the rising columns of the grade stages. */}
+      {pathways.length ? (
+        <section id="stages" className="section pathways" data-tone="dark" aria-labelledby="stages-title">
+          <div className="container">
+            <div className="section-head">
+              <h2 id="stages-title" className="h2" data-split>
+                {s.pathways!.heading}
+              </h2>
+              {s.pathways!.text ? (
+                <p className="lead" data-reveal>
+                  {s.pathways!.text}
+                </p>
+              ) : null}
+            </div>
+            <ol className="grades__steps" data-reveal style={{ '--n': pathways.length } as React.CSSProperties}>
+              {pathways.map((p, i) => (
+                <li key={p.title + i} className="grades__step" style={{ '--i': i } as React.CSSProperties}>
+                  <h3 className="pathway__title">{p.title}</h3>
+                  {p.range ? <p className="pathway__range">{p.range}</p> : null}
+                  <ul className="pathway__list">
+                    {(p.points || []).map((point, k) => (
+                      <li key={point + k}>{point}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+      ) : null}
+
+      {/* Where students perform (Communication): a list beside a photo that follows the scroll. */}
+      {platforms.length ? (
+        <section id="platforms" className="section platforms-section" data-tone="light" aria-labelledby="platforms-title">
+          <div className="container">
+            <div className="section-head">
+              <h2 id="platforms-title" className="h2" data-split>
+                {s.platforms!.heading}
+              </h2>
+              {s.platforms!.text ? (
+                <p className="lead" data-reveal>
+                  {s.platforms!.text}
+                </p>
+              ) : null}
+            </div>
+            <PlatformShowcase items={platforms} />
+          </div>
+        </section>
+      ) : null}
+
       {/* The programme's stages (AI for Professionals): numbered circles on a line that fills as
           the page scrolls, a card under each. */}
       {journey.length ? (
@@ -313,15 +412,15 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
       {/* With approach points (Education), they replace the quote and paragraphs; a page with its
           own exam tracks carries each exam's approach instead. */}
       {s.tracks?.length ? null : statement.points?.filter((p) => p?.title).length ? (
-        <ApproachGrid id="approach" heading={statement.heading} quote={statement.quote} points={statement.points.filter((p) => p?.title)} tone={altTone} />
+        <ApproachGrid id="approach" heading={statement.heading} quote={statement.quote} points={statement.points.filter((p) => p?.title)} tone={approachTone} />
       ) : (
-        <Statement id="approach" eyebrow={statement.heading} quote={statement.quote} paragraphs={statement.paragraphs.slice(0, 2)} tone={altTone} />
+        <Statement id="approach" eyebrow={statement.heading} quote={statement.quote} paragraphs={statement.paragraphs.slice(0, 2)} tone={approachTone} />
       )}
 
       {s.comparison?.lines?.length ? <CompareTable id="compare" data={s.comparison} tone={sectionTone} /> : null}
 
       {faqs.length ? (
-        <section id="questions" className="section" data-tone={sectionTone} aria-labelledby="faq-title">
+        <section id="questions" className="section" data-tone={faqTone} aria-labelledby="faq-title">
           <div className="container">
             <div className="section-head">
               <h2 id="faq-title" className="h2" data-split>

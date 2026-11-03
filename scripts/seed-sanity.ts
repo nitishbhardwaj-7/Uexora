@@ -58,6 +58,9 @@ const arrayTypes: Record<string, string> = {
   stats: 'stat',
   courseSlides: 'courseSlide',
   toolCards: 'toolCard',
+  pillarItems: 'pillarItem',
+  pathwayStages: 'pathwayStage',
+  platformItems: 'platformItem',
 };
 
 const assetCache = new Map<string, string>();

@@ -3,7 +3,7 @@
  * the CSS can draw it on (stroke-dashoffset 1 to 0); --p orders the strokes within an icon, and
  * `acc` marks the accent strokes (gold).
  */
-export const APPROACH_ICONS = ['questions', 'bulb', 'globe', 'book', 'sliders', 'layers', 'search', 'puzzle', 'robot'] as const;
+export const APPROACH_ICONS = ['questions', 'bulb', 'globe', 'book', 'sliders', 'layers', 'search', 'puzzle', 'robot', 'speech', 'mic', 'person', 'team', 'career'] as const;
 export type ApproachIconName = (typeof APPROACH_ICONS)[number];
 
 const p = (n: number) => ({ pathLength: 1, style: { '--p': n } as React.CSSProperties });
@@ -86,6 +86,51 @@ const ICONS: Record<ApproachIconName, React.ReactNode> = {
       <circle {...p(2)} className="acc" cx="24" cy="7" r="2.2" />
       <circle {...p(3)} className="acc" cx="18.5" cy="25" r="2.4" />
       <circle {...p(4)} className="acc" cx="29.5" cy="25" r="2.4" />
+    </>
+  ),
+  // A speech bubble with lines of text: speaking clearly.
+  speech: (
+    <>
+      <path {...p(0)} d="M10 8h28a5 5 0 0 1 5 5v16a5 5 0 0 1-5 5H22l-9 8v-8h-3a5 5 0 0 1-5-5V13a5 5 0 0 1 5-5z" />
+      <path {...p(1)} className="acc" d="M14 17h20" />
+      <path {...p(2)} className="acc" d="M14 25h13" />
+    </>
+  ),
+  // A microphone on its stand: public speaking.
+  mic: (
+    <>
+      <rect {...p(0)} x="18" y="5" width="12" height="23" rx="6" />
+      <path {...p(1)} d="M11 22v2a13 13 0 0 0 26 0v-2" />
+      <path {...p(2)} d="M24 37v6M16 43h16" />
+      <path {...p(3)} className="acc" d="M18 13h5M18 19h5" />
+    </>
+  ),
+  // A person with rays above: confidence.
+  person: (
+    <>
+      <circle {...p(0)} cx="24" cy="17" r="7" />
+      <path {...p(1)} d="M10 44v-3a14 14 0 0 1 28 0v3" />
+      <path {...p(2)} className="acc" d="M24 3v3M36.5 8l-2 2M11.5 8l2 2M42 18h-3M6 18h3" />
+    </>
+  ),
+  // Three people, the one in front leading: leadership and teamwork.
+  team: (
+    <>
+      <circle {...p(0)} cx="24" cy="14" r="6" />
+      <path {...p(1)} d="M13 41v-3a11 11 0 0 1 22 0v3" />
+      <circle {...p(2)} className="acc" cx="9" cy="20" r="4" />
+      <path {...p(3)} className="acc" d="M2 39v-2a8 8 0 0 1 6.5-7.8" />
+      <circle {...p(2)} className="acc" cx="39" cy="20" r="4" />
+      <path {...p(3)} className="acc" d="M46 39v-2a8 8 0 0 0-6.5-7.8" />
+    </>
+  ),
+  // A briefcase: career readiness.
+  career: (
+    <>
+      <rect {...p(0)} x="5" y="15" width="38" height="26" rx="4" />
+      <path {...p(1)} d="M17 15v-3a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v3" />
+      <path {...p(2)} className="acc" d="M5 27h38" />
+      <path {...p(3)} className="acc" d="M24 24v6" />
     </>
   ),
 };

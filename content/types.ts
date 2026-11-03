@@ -38,6 +38,16 @@ export type Service = {
   examBatches?: { heading: string; text?: string; batchRows: ExamBatch[] };
   examApproach?: { heading: string; subheading: string; text: string; approachSteps: { title: string; text: string }[]; image?: { src: string; alt: string } };
   /** Optional stages of the programme (e.g. Discover, Learn, Apply, Grow), shown after the introduction as numbered steps on a line. */
+  /** Replaces the overview section's standard heading (the client's own line, for example). */
+  overviewHeading?: string;
+  /** The title as it should break in the hero, one line per line of text; the title when empty. */
+  heroTitle?: string;
+  /** What the programme teaches, grouped (Communication): an icon, a title and a list per pillar. */
+  pillars?: { heading: string; text?: string; pillarItems: { title: string; icon?: string; points: string[] }[] };
+  /** The programme by age group (Communication): rising columns, a list in each. */
+  pathways?: { heading: string; text?: string; pathwayStages: { title: string; range?: string; points: string[] }[] };
+  /** Where students perform (Communication): a list beside a photo that follows the scroll. */
+  platforms?: { heading: string; text?: string; platformItems: { name: string; text: string; image?: { src: string; alt: string } }[] };
   journey?: { heading: string; text?: string; journeySteps: { label?: string; title: string; text?: string }[] };
   /** Optional slider of the courses within the programme (e.g. AI Foundation), shown before the approach. */
   courses?: { heading: string; text?: string; courseSlides: { title: string; audience: string; text: string; image: { src: string; alt: string } }[] };

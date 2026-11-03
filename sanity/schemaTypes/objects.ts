@@ -389,6 +389,106 @@ export const service = defineType({
         defineField({ name: 'image', title: 'Photo', type: 'picture' }),
       ],
     }),
+    defineField({ name: 'heroTitle', title: 'Title as shown in the hero (optional)', type: 'text', rows: 4, description: 'Put each line of the hero title on its own line here. Leave empty to use the title as it is.' }),
+    defineField({ name: 'overviewHeading', title: 'Overview heading (optional)', type: 'string', description: 'Replaces the standard heading above the opening photo and text.' }),
+    defineField({
+      name: 'pillars',
+      title: 'Learning pillars',
+      type: 'object',
+      description: 'Optional. What the programme teaches, grouped: an animated icon, a title and a list for each. Six fill two rows. Leave the pillars empty to hide it.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'text', title: 'Intro', type: 'text', rows: 2 }),
+        defineField({
+          name: 'pillarItems',
+          title: 'Pillars',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'pillarItem',
+              fields: [
+                defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+                defineField({
+                  name: 'icon',
+                  title: 'Icon',
+                  type: 'string',
+                  options: {
+                    list: [
+                      { title: 'Speech bubble', value: 'speech' },
+                      { title: 'Microphone', value: 'mic' },
+                      { title: 'Person', value: 'person' },
+                      { title: 'Lightbulb', value: 'bulb' },
+                      { title: 'Team', value: 'team' },
+                      { title: 'Briefcase', value: 'career' },
+                    ],
+                  },
+                }),
+                defineField({ name: 'points', title: 'Points', type: 'array', of: [defineArrayMember({ type: 'string' })] }),
+              ],
+              preview: { select: { title: 'title' } },
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
+      name: 'pathways',
+      title: 'Stages by age group',
+      type: 'object',
+      description: 'Optional. The programme by age group, as columns that rise from left to right. Three fit best. Leave the stages empty to hide it.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'text', title: 'Intro', type: 'text', rows: 2 }),
+        defineField({
+          name: 'pathwayStages',
+          title: 'Stages',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'pathwayStage',
+              fields: [
+                defineField({ name: 'title', title: 'Name', type: 'string', validation: (r) => r.required() }),
+                defineField({ name: 'range', title: 'Who it is for', type: 'string', description: 'e.g. Grades 5–8' }),
+                defineField({ name: 'points', title: 'Points', type: 'array', of: [defineArrayMember({ type: 'string' })] }),
+              ],
+              preview: { select: { title: 'title', subtitle: 'range' } },
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
+      name: 'platforms',
+      title: 'Platforms',
+      type: 'object',
+      description: 'Optional. Where students perform: a list beside a photo that changes with the scroll. Leave the platforms empty to hide it.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'text', title: 'Intro', type: 'text', rows: 2 }),
+        defineField({
+          name: 'platformItems',
+          title: 'Platforms',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'platformItem',
+              fields: [
+                defineField({ name: 'name', title: 'Name', type: 'string', validation: (r) => r.required() }),
+                defineField({ name: 'text', title: 'Description', type: 'text', rows: 2 }),
+                defineField({ name: 'image', title: 'Photo', type: 'picture', description: 'Cropped upright beside the list on large screens, wide on phones; keep the subject central.' }),
+              ],
+              preview: { select: { title: 'name', subtitle: 'text', media: 'image' } },
+            }),
+          ],
+        }),
+      ],
+    }),
     defineField({
       name: 'journey',
       title: 'Learning journey',

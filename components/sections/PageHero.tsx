@@ -1,3 +1,4 @@
+import { Fragment } from 'react';
 import CmsImage from '@/components/ui/CmsImage';
 import Link from 'next/link';
 import Monogram from '@/components/brand/Monogram';
@@ -69,7 +70,14 @@ export default function PageHero({ eyebrow, title, lead, tone = 'light', primary
             </nav>
           ) : null}
           <h1 id="page-title" className="h1">
-            {title}
+            {/* A title with line breaks (a programme's hero title) breaks where it says. */}
+            {title.split('\n').map((line, i) => (
+              <Fragment key={i}>
+                {i ? ' ' : null}
+                {i ? <br /> : null}
+                {line}
+              </Fragment>
+            ))}
           </h1>
           <p className="lead">
             {becauseYou(lead)}
