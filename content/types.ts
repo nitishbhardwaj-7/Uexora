@@ -49,9 +49,9 @@ export type Service = {
   /** Workshops, as a ruled list beside a photo (Inclusive Learning). */
   workshops?: { heading: string; text?: string; image?: { src: string; alt: string }; workshopItems: string[] };
   /** A closing statement after the programme's own sections (Inclusive Learning). */
-  closing?: { heading: string; text?: string };
-  /** Where students perform (Communication): a list beside a photo that follows the scroll. */
-  platforms?: { heading: string; text?: string; platformItems: { name: string; text: string; image?: { src: string; alt: string } }[] };
+  closing?: { heading: string; text?: string; image?: { src: string; alt: string } };
+  /** A list beside a photo that follows the scroll: where students perform (Communication), or numbered areas with their topics (Corporate Trainings). */
+  platforms?: { heading: string; text?: string; platformItems: { name: string; text?: string; points?: string[]; image?: { src: string; alt: string } }[] };
   journey?: { heading: string; text?: string; journeySteps: { label?: string; title: string; text?: string }[] };
   /** Optional slider of the courses within the programme (e.g. AI Foundation), shown before the approach. */
   courses?: { heading: string; text?: string; courseSlides: { title: string; audience: string; text: string; image: { src: string; alt: string } }[] };

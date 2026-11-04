@@ -69,15 +69,27 @@ export default function PlatformShowcase({ items }: { items: Platform[] }) {
       </div>
       <ol className="platforms__list">
         {items.map((p, i) => (
-          <li key={p.name + i} className="platform" data-reveal>
+          <li key={p.name + i} className={['platform', p.points?.length ? 'platform--points' : ''].filter(Boolean).join(' ')} data-reveal>
             {p.image ? (
               <figure className="platform__photo">
                 <CmsImage src={p.image.src} alt={p.image.alt} fill sizes="(max-width: 999px) 92vw, 1px" quality={82} />
               </figure>
             ) : null}
             <div className="platform__body">
+              {p.points?.length ? (
+                <span className="platform__num" aria-hidden="true">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+              ) : null}
               <h3 className="platform__name">{p.name}</h3>
-              <p className="platform__text">{p.text}</p>
+              {p.text ? <p className="platform__text">{p.text}</p> : null}
+              {p.points?.length ? (
+                <ul className="platform__points">
+                  {p.points.map((point, k) => (
+                    <li key={point + k}>{point}</li>
+                  ))}
+                </ul>
+              ) : null}
             </div>
           </li>
         ))}

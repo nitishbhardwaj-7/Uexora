@@ -442,7 +442,7 @@ export const service = defineType({
       name: 'platforms',
       title: 'Platforms',
       type: 'object',
-      description: 'Optional. Where students perform: a list beside a photo that changes with the scroll. Leave the platforms empty to hide it.',
+      description: 'Optional. A list beside a photo that changes with the scroll: where students perform, or training areas with their topics. Leave the list empty to hide it.',
       options: { collapsible: true, collapsed: true },
       fields: [
         defineField({ name: 'heading', title: 'Heading', type: 'string' }),
@@ -458,6 +458,7 @@ export const service = defineType({
               fields: [
                 defineField({ name: 'name', title: 'Name', type: 'string', validation: (r) => r.required() }),
                 defineField({ name: 'text', title: 'Description', type: 'text', rows: 2 }),
+                defineField({ name: 'points', title: 'Topics', type: 'array', description: 'Optional. With topics, the row is numbered and lists them in two columns.', of: [defineArrayMember({ type: 'string' })] }),
                 defineField({ name: 'image', title: 'Photo', type: 'picture', description: 'Cropped upright beside the list on large screens, wide on phones; keep the subject central.' }),
               ],
               preview: { select: { title: 'name', subtitle: 'text', media: 'image' } },
@@ -529,6 +530,7 @@ export const service = defineType({
       fields: [
         defineField({ name: 'heading', title: 'Heading', type: 'string' }),
         defineField({ name: 'text', title: 'Text', type: 'text', rows: 4 }),
+        defineField({ name: 'image', title: 'Photo', type: 'picture', description: 'Optional. Wide; shown full width behind the text, darkened so it reads.' }),
       ],
     }),
     defineField({

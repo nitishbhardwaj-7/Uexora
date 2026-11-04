@@ -67,9 +67,11 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
   const serves = (s.serves?.serveGroups || []).filter((g) => g?.text);
   const workshops = (s.workshops?.workshopItems || []).filter(Boolean);
   const platforms = (s.platforms?.platformItems || []).filter((p) => p?.name);
-  // The platforms end on a light section, so what follows swaps tones to keep them alternating.
-  const approachTone = platforms.length ? sectionTone : altTone;
-  const faqTone = platforms.length ? altTone : sectionTone;
+  const trainingAreas = platforms.filter((p) => p.points?.length);
+  // Platforms with nothing after them end on a light section, so what follows swaps tones to keep them alternating.
+  const endsLight = platforms.length && !s.closing?.heading;
+  const approachTone = endsLight ? sectionTone : altTone;
+  const faqTone = endsLight ? altTone : sectionTone;
   const journey = (s.journey?.journeySteps || []).filter((j) => j?.title);
   const journeyHeading = s.journey?.heading || 'Your Learning Journey';
   const courses = (s.courses?.courseSlides || []).filter((c) => c?.title);
@@ -103,6 +105,19 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
                 ...(c.text ? { description: c.text } : {}),
                 ...(c.audience ? { audience: { '@type': 'Audience', audienceType: c.audience } } : {}),
               },
+            })),
+          },
+        }
+      : {}),
+    // Or the training areas and their topics (Corporate Trainings).
+    ...(!courses.length && trainingAreas.length
+      ? {
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: s.platforms!.heading,
+            itemListElement: trainingAreas.map((p) => ({
+              '@type': 'Offer',
+              itemOffered: { '@type': 'Service', name: p.name, description: p.points!.join(', ') },
             })),
           },
         }
@@ -432,9 +447,15 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
         </section>
       ) : null}
 
-      {/* A closing statement (Inclusive Learning), before the approach shared across programmes. */}
+      {/* A closing statement (Inclusive Learning), before the approach shared across programmes;
+          with a photo (Corporate Trainings) it stands over the photo, full width. */}
       {s.closing?.heading ? (
-        <section id="closing" className="section" data-tone="dark" aria-labelledby="closing-title">
+        <section id="closing" className={['section', s.closing.image?.src ? 'closing-band' : ''].filter(Boolean).join(' ')} data-tone="dark" aria-labelledby="closing-title">
+          {s.closing.image?.src ? (
+            <figure className="closing-band__photo" data-parallax="0.12">
+              <CmsImage src={s.closing.image.src} alt={s.closing.image.alt} fill sizes="100vw" quality={82} />
+            </figure>
+          ) : null}
           <div className="container">
             <div className="closing">
               <h2 id="closing-title" className="h2" data-split>

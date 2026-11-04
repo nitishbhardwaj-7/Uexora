@@ -7,6 +7,7 @@ import { aiProfessionalJourney } from './ai-professional-journey.ts';
 import { aiProfessionalTools } from './ai-professional-tools.ts';
 import { aiTools } from './ai-tools.ts';
 import { communicationCourses, communicationPillars, communicationPlatforms } from './communication-programme.ts';
+import { corporateAreas, corporateWorkshops } from './corporate-programme.ts';
 import { inclusiveAreas, inclusiveClosing, inclusiveCourses, inclusiveServes, inclusiveWorkshops } from './special-support-programme.ts';
 
 /**
@@ -280,17 +281,25 @@ const programmes: Service[] = [
   {
     title: 'Corporate Trainings',
     slug: 'corporate-trainings',
-    promise: 'Training for teams and organisations, shaped around the skills your people need.',
-    seo: { description: 'Corporate trainings from Uexora Education: training for teams and organisations, shaped around the skills your people need.' },
+    // DRAFT, for the client to review: the hero line, drawn from the client's own sentence below.
+    promise: 'Practical training and development for stronger teams and future-ready professionals.',
+    seo: { description: 'Corporate trainings from Uexora Education: sales, digital marketing, leadership, customer service, soft skills, AI and HR, with customised workshops and seminars.' },
     image: { src: '/images/services/corporate-trainings.jpg', alt: 'A presenter leading a business seminar for a group of professionals' },
     heroImage: { src: '/images/heroes/services/corporate-trainings.jpg', alt: 'A trainer at a flip chart leading a session with a team around a table' },
-    highlights: ['Training for teams', 'Shaped around your goals', 'Practical, workplace-ready skills'],
-    whoFor: 'Companies, institutions and teams that want to develop their people’s skills through focused training.',
-    details: [
-      'Organisations grow when their people keep learning. We start by understanding what your organisation wants to achieve and who will take part, then shape the training around those goals.',
+    highlights: ['Seven areas of training', 'Customised workshops and seminars', 'Practical, future-ready skills'],
+    overviewHeading: 'Empowering People. Transforming Businesses.',
+    whoFor: '',
+    details: [],
+    platforms: corporateAreas,
+    closing: corporateWorkshops,
+    // DRAFT, for the client to review: the questions are ours; the answers keep to the client's facts.
+    faqs: [
+      { q: 'What does the corporate training cover?', a: 'Seven areas: sales and business development, marketing and digital marketing, leadership and management, customer service, professional and soft skills, technology, AI and digital skills, and HR and organisational development.' },
+      { q: 'Who is it for?', a: 'Organisations that want to build stronger teams, improve business performance and develop future-ready professionals.' },
+      { q: 'Do you run workshops and seminars?', a: 'Yes. We organise and deliver customised corporate workshops and seminars designed to enhance employee capabilities, develop leadership potential, improve business performance and encourage continuous professional growth.' },
+      { q: 'Does the training include AI?', a: 'Yes. Technology, AI and Digital Skills covers artificial intelligence for business and generative AI tools, and the marketing training includes AI tools for marketing.' },
     ],
-    faqs: [],
-    text: 'Organisations grow when their people keep learning. Our corporate trainings help teams build practical skills for the workplace, shaped around what each organisation wants to achieve.',
+    text: 'Uexora helps organisations build stronger teams, improve business performance, and develop future-ready professionals through practical corporate training and development solutions.',
   },
 ];
 
