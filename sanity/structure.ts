@@ -3,7 +3,9 @@ import { singletons } from './schemaTypes';
 
 const newest = [{ field: 'submittedAt', direction: 'desc' as const }];
 
-/** Studio sidebar: contact form enquiries, one entry per page plus the site settings, then the blog. */
+const byPosition = [{ field: 'order', direction: 'asc' as const }];
+
+/** Studio sidebar: contact form enquiries, one entry per page plus the site settings, the programme and service pages, then the blog. */
 export const structure: StructureResolver = (S) =>
   S.list()
     .title('Content')
@@ -22,6 +24,9 @@ export const structure: StructureResolver = (S) =>
         ),
       S.divider(),
       ...singletons.map((s) => S.listItem().title(s.title).id(s.type).child(S.document().schemaType(s.type).documentId(s.type))),
+      S.divider(),
+      S.listItem().title('Education programmes').id('programmes').child(S.documentTypeList('programme').title('Education programmes').defaultOrdering(byPosition)),
+      S.listItem().title('Marketing services').id('marketing-services').child(S.documentTypeList('marketingService').title('Marketing services').defaultOrdering(byPosition)),
       S.divider(),
       S.listItem().title('Blog posts').id('posts').child(S.documentTypeList('post').title('Blog posts').defaultOrdering([{ field: 'publishedAt', direction: 'desc' }])),
       S.listItem().title('Blog categories').id('categories').child(S.documentTypeList('category').title('Blog categories')),

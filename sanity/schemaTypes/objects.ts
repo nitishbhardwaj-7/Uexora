@@ -147,7 +147,7 @@ export const signpost = defineType({
   preview: { select: { title: 'need', subtitle: 'slug' } },
 });
 
-/** A programme or service with its own page at /<division>/<slug>. */
+/** The fields of a programme or service page at /<division>/<slug>; the documents are in servicePages.ts. */
 export const service = defineType({
   name: 'service',
   title: 'Programme / service',
@@ -679,6 +679,3 @@ export const strings = (name: string, title: string, description?: string) =>
 
 export const items = (name: string, title: string) =>
   defineField({ name, title, type: 'array', of: [defineArrayMember({ type: 'item' })] });
-
-export const services = (name: string, title: string) =>
-  defineField({ name, title, type: 'array', of: [defineArrayMember({ type: 'service' })] });

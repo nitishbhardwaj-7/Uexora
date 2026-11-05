@@ -1,6 +1,7 @@
 /**
- * Loads the default content from content/ into the Sanity project as the six
- * singleton documents (blog posts are seeded separately by seed-blog.ts), uploading the local photos as image assets.
+ * Loads the default content from content/ into the Sanity project as the six singleton
+ * documents and the programme and service pages (blog posts are seeded separately by
+ * seed-blog.ts), uploading the local photos as image assets.
  *
  * Run once after creating the project (and again any time you want to reset the
  * studio to the bundled copy):
@@ -36,8 +37,6 @@ const isObject = (v: unknown): v is Rec => typeof v === 'object' && v !== null &
 
 /** Array fields whose entries are objects need a `_type` (and a `_key`) in Sanity. */
 const arrayTypes: Record<string, string> = {
-  programmes: 'service',
-  services: 'service',
   reasons: 'item',
   steps: 'item',
   panels: 'panel',
@@ -60,6 +59,7 @@ const arrayTypes: Record<string, string> = {
   toolCards: 'toolCard',
   pillarItems: 'pillarItem',
   platformItems: 'platformItem',
+  serveGroups: 'serveGroup',
 };
 
 const assetCache = new Map<string, string>();
@@ -111,11 +111,15 @@ async function toSanity(value: unknown, key = ''): Promise<unknown> {
   return value;
 }
 
+// The programme and service pages are documents of their own, not part of their landing pages.
+const { programmes, ...educationPage } = education;
+const { services, ...marketingPage } = marketing;
+
 const docs: [string, unknown][] = [
   ['siteSettings', settings],
   ['homePage', home],
-  ['educationPage', education],
-  ['marketingPage', marketing],
+  ['educationPage', educationPage],
+  ['marketingPage', marketingPage],
   ['contactPage', contact],
   ['blogPage', blog],
 ];
@@ -125,5 +129,18 @@ for (const [type, content] of docs) {
   const body = (await toSanity(content)) as Rec;
   await client.createOrReplace({ _id: type, _type: type, ...body });
   console.log(`  ✓ published`);
+}
+
+const pages: [string, { slug: string }[]][] = [
+  ['programme', programmes],
+  ['marketingService', services],
+];
+for (const [type, list] of pages) {
+  for (const [order, page] of list.entries()) {
+    console.log(`${type}: ${page.slug}`);
+    const body = (await toSanity(page)) as Rec;
+    await client.createOrReplace({ _id: `${type}-${page.slug}`, _type: type, order, ...body });
+    console.log(`  ✓ published`);
+  }
 }
 console.log(`\nDone. Open /studio to edit.`);

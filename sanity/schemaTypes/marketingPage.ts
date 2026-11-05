@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
-import { iconOptions, items, paragraphs, services, strings } from './objects';
+import { iconOptions, items, paragraphs, strings } from './objects';
 
 export const marketingPage = defineType({
   name: 'marketingPage',
@@ -48,11 +48,10 @@ export const marketingPage = defineType({
       ],
     }),
 
-    defineField({ name: 'servicesHeading', title: 'Heading', type: 'string', group: 'services' }),
+    defineField({ name: 'servicesHeading', title: 'Heading', type: 'string', group: 'services', description: 'The heading of the list of services. The service pages themselves are under Marketing services in the sidebar.' }),
     defineField({ name: 'servicesHighlight', title: 'Highlighted word', type: 'string', group: 'services', description: 'A word from the heading shown in the yellow accent.' }),
     defineField({ name: 'servicesIntro', title: 'Intro', type: 'text', rows: 3, group: 'services' }),
     defineField({ name: 'servicesAside', title: 'Side note', type: 'text', rows: 3, group: 'services', description: 'Short paragraph shown to the right of the heading.' }),
-    { ...services('services', 'Services'), group: 'services' },
     defineField({ name: 'servicesCta', title: 'Card at the end of the list', type: 'ctaCard', group: 'services' }),
 
     defineField({

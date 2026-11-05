@@ -6,6 +6,7 @@ import { marketing, type MarketingContent } from '@/content/marketing';
 import { contact, type ContactContent } from '@/content/contact';
 import { blog, type BlogContent } from '@/content/blog';
 import { settings, type SettingsContent } from '@/content/settings';
+import type { Service } from '@/content/types';
 
 export type { HomeContent, EducationContent, MarketingContent, ContactContent, SettingsContent, BlogContent };
 
@@ -31,9 +32,31 @@ async function fetchSingleton<T>(type: string, defaults: T): Promise<T> {
   }
 }
 
+/**
+ * The programme or service pages of a division, each its own document. Each is laid over the
+ * default with the same page address. With no documents published, the list stays as it was.
+ */
+async function fetchServicePages(type: string, current: Service[], defaults: Service[]): Promise<Service[]> {
+  if (!client) return current;
+  try {
+    const docs = await client.fetch<(Partial<Service> & { slug?: string })[]>(`*[_type == $type && defined(slug)] | order(coalesce(order, 9999) asc, title asc)`, { type }, { next: { revalidate: 600, tags: ['sanity'] } });
+    if (!docs.length) return current;
+    return docs.map((doc) => overlay((defaults.find((d) => d.slug === doc.slug) || {}) as Service, doc));
+  } catch (err) {
+    console.error(`[cms] Could not load ${type} pages from Sanity; using the page's own list.`, err);
+    return current;
+  }
+}
+
 export const getSettings = () => fetchSingleton('siteSettings', settings);
 export const getHome = () => fetchSingleton('homePage', home);
-export const getEducation = () => fetchSingleton('educationPage', education);
-export const getMarketing = () => fetchSingleton('marketingPage', marketing);
+export const getEducation = async () => {
+  const page = await fetchSingleton('educationPage', education);
+  return { ...page, programmes: await fetchServicePages('programme', page.programmes, education.programmes) };
+};
+export const getMarketing = async () => {
+  const page = await fetchSingleton('marketingPage', marketing);
+  return { ...page, services: await fetchServicePages('marketingService', page.services, marketing.services) };
+};
 export const getContact = () => fetchSingleton('contactPage', contact);
 export const getBlog = () => fetchSingleton('blogPage', blog);
