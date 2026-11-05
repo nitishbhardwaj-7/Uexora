@@ -12,15 +12,18 @@ type Props = { content: HomeContent['hero'] };
 
 /**
  * One headline line split into words (server-rendered, so the text is intact for
- * search engines and screen readers). The highlighted word gets its own class.
+ * search engines and screen readers). The highlighted word or phrase gets its own class.
  */
+const bareWord = (w: string) => w.replace(/[^\p{L}\p{N}]/gu, '').toLowerCase();
+
 function Line({ text, highlight }: { text: string; highlight: string }) {
   const words = text.split(/\s+/).filter(Boolean);
+  const phrase = (highlight || '').split(/\s+/).map(bareWord).filter(Boolean);
+  const start = phrase.length ? words.findIndex((_, i) => phrase.every((p, k) => bareWord(words[i + k] || '') === p)) : -1;
   return (
     <>
       {words.map((w, i) => {
-        const bare = w.replace(/[^\p{L}\p{N}]/gu, '').toLowerCase();
-        const hl = highlight && bare === highlight.toLowerCase();
+        const hl = start >= 0 && i >= start && i < start + phrase.length;
         return (
           <span key={i}>
             <span className={['hero-word', hl ? 'hero-word--hl' : ''].filter(Boolean).join(' ')}>

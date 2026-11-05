@@ -20,8 +20,8 @@ export const homePage = defineType({
       type: 'object',
       group: 'hero',
       fields: [
-        strings('lines', 'Headline lines', 'One entry per line of the headline.'),
-        defineField({ name: 'highlight', title: 'Highlighted word', type: 'string', description: 'A word or phrase from the headline shown in gold.' }),
+        defineField({ name: 'lines', title: 'Headline lines', type: 'array', of: [defineArrayMember({ type: 'string' })], description: 'One entry per line of the headline. Left empty, the headline goes back to the default.' }),
+        defineField({ name: 'highlight', title: 'Highlighted word or phrase', type: 'string', description: 'Words from the headline, spelt the same way, shown in gold.' }),
         defineField({ name: 'sub', title: 'Subline', type: 'string' }),
         defineField({ name: 'subStrong', title: 'Subline (bold part)', type: 'string' }),
         defineField({ name: 'primary', title: 'Primary button', type: 'link' }),
