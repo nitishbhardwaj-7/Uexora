@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from 'sanity';
-import { items, paragraphs, services, strings } from './objects';
+import { iconOptions, items, paragraphs, services, strings } from './objects';
 
 export const marketingPage = defineType({
   name: 'marketingPage',
@@ -99,6 +99,24 @@ export const marketingPage = defineType({
         defineField({ name: 'heading', title: 'Heading', type: 'string' }),
         defineField({ name: 'quote', title: 'Pull quote', type: 'text', rows: 2 }),
         paragraphs(),
+        defineField({
+          name: 'points',
+          title: 'Approach points',
+          type: 'array',
+          description: 'Shown on every service page as a grid of three per row, each with a line icon.',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'approachPoint',
+              fields: [
+                defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+                defineField({ name: 'text', title: 'Text', type: 'text', rows: 3 }),
+                defineField({ name: 'icon', title: 'Icon', type: 'string', description: 'The animated line icon shown above the point.', options: { list: iconOptions } }),
+              ],
+              preview: { select: { title: 'title' } },
+            }),
+          ],
+        }),
       ],
     }),
 

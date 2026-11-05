@@ -3,7 +3,7 @@
  * the CSS can draw it on (stroke-dashoffset 1 to 0); --p orders the strokes within an icon, and
  * `acc` marks the accent strokes (gold).
  */
-export const APPROACH_ICONS = ['questions', 'bulb', 'globe', 'book', 'sliders', 'layers', 'search', 'puzzle', 'robot', 'speech', 'mic', 'person', 'team', 'career', 'routine', 'heart', 'family', 'compass', 'sprout', 'infinity', 'focus'] as const;
+export const APPROACH_ICONS = ['questions', 'bulb', 'globe', 'book', 'sliders', 'layers', 'search', 'puzzle', 'robot', 'speech', 'mic', 'person', 'team', 'career', 'routine', 'heart', 'family', 'compass', 'sprout', 'infinity', 'focus', 'chart', 'target', 'megaphone', 'code', 'device', 'shop'] as const;
 export type ApproachIconName = (typeof APPROACH_ICONS)[number];
 
 const p = (n: number) => ({ pathLength: 1, style: { '--p': n } as React.CSSProperties });
@@ -184,6 +184,54 @@ const ICONS: Record<ApproachIconName, React.ReactNode> = {
     <>
       <path {...p(0)} d="M6 16V9a3 3 0 0 1 3-3h7M32 6h7a3 3 0 0 1 3 3v7M42 32v7a3 3 0 0 1-3 3h-7M16 42H9a3 3 0 0 1-3-3v-7" />
       <circle {...p(1)} className="acc" cx="24" cy="24" r="8" />
+    </>
+  ),
+  // Rising bars and a trend line: measuring performance.
+  chart: (
+    <>
+      <path {...p(0)} d="M6 6v36h36" />
+      <path {...p(1)} d="M15 34v-8M24 34V21M33 34V15" />
+      <path {...p(2)} className="acc" d="M13 19l9-7 7 3 10-9" />
+    </>
+  ),
+  // A target and its centre: goals and audiences.
+  target: (
+    <>
+      <circle {...p(0)} cx="24" cy="24" r="19" />
+      <circle {...p(1)} cx="24" cy="24" r="11" />
+      <circle {...p(2)} className="acc" cx="24" cy="24" r="3.5" />
+    </>
+  ),
+  // A megaphone with sound lines: campaigns and launches.
+  megaphone: (
+    <>
+      <path {...p(0)} d="M8 19v10h7l18 9V10l-18 9H8z" />
+      <path {...p(1)} d="M15 29l3 11h6l-3-8" />
+      <path {...p(2)} className="acc" d="M39 18c2 3.5 2 8.5 0 12M43 13c3.5 6 3.5 16 0 22" />
+    </>
+  ),
+  // Angle brackets and a slash: building a website.
+  code: (
+    <>
+      <path {...p(0)} d="M15 13 4 24l11 11" />
+      <path {...p(1)} d="M33 13l11 11-11 11" />
+      <path {...p(2)} className="acc" d="M28 8 20 40" />
+    </>
+  ),
+  // A laptop and a phone: working on every device.
+  device: (
+    <>
+      <path {...p(0)} d="M9 33V11a3 3 0 0 1 3-3h24a3 3 0 0 1 3 3v6" />
+      <path {...p(1)} d="M3 33h26v2a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4v-2z" />
+      <rect {...p(2)} className="acc" x="33" y="21" width="12" height="20" rx="2.5" />
+    </>
+  ),
+  // A shopfront with an awning: local businesses.
+  shop: (
+    <>
+      <path {...p(0)} d="M9 22v20h30V22" />
+      <path {...p(1)} d="M9 8h30l5 11a5 5 0 0 1-10 0 5 5 0 0 1-10 0 5 5 0 0 1-10 0 5 5 0 0 1-10 0L9 8z" />
+      <path {...p(2)} className="acc" d="M19 42V30h10v12" />
     </>
   ),
 };

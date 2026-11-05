@@ -26,7 +26,7 @@ export default async function MarketingPage() {
         eyebrow={m.eyebrow}
         title={m.title}
         lead={m.lead}
-        tone="light"
+        tone="dark"
         primary={m.hero.primary}
         secondary={m.hero.secondary}
         background={m.hero.background}
@@ -36,6 +36,7 @@ export default async function MarketingPage() {
 
       <Approach
         id="about"
+        tone="dark"
         heading={m.about.heading}
         paragraphs={m.about.paragraphs}
         link={{ label: m.about.link, href: '/marketing#why-choose-us' }}
@@ -56,7 +57,7 @@ export default async function MarketingPage() {
         cta={m.servicesCta}
       />
 
-      <Steps id="how-we-work" eyebrow={m.how.heading} heading={m.how.title} intro={m.how.intro} steps={m.how.steps} outro={m.how.outro} tone="light" />
+      <Steps id="how-we-work" eyebrow={m.how.heading} heading={m.how.title} intro={m.how.intro} steps={m.how.steps} outro={m.how.outro} tone="dark" />
 
       <Audience id="who" heading={m.who.title} paragraphs={m.who.paragraphs} stages={m.who.stages} images={m.who.stageImages} tone="light" />
 

@@ -31,14 +31,13 @@ type Props = {
  * Detail page for one programme (Education) or service (Marketing):
  * hero, who it is for + detail, approach, questions, call to action. (The other programmes or
  * services are listed in the footer's sliders, so the page does not repeat them.)
- * Education pages follow the blue theme (dark sections), Marketing the cream theme.
+ * Both divisions follow the blue theme: dark sections, with light ones between them.
  */
 export default function ServicePage({ division, service: s, statement, cta }: Props) {
   const meta = divisionMeta[division];
-  const dark = division === 'education';
-  const heroTone = dark ? 'dark' : 'light';
-  const sectionTone = dark ? 'dark' : 'light';
-  const altTone = dark ? 'light' : 'dark';
+  const heroTone = 'dark';
+  const sectionTone = 'dark';
+  const altTone = 'light';
   const url = `${site.url}${servicePath(division, s.slug)}`;
   const contact = `/contact?division=${division}`;
   const unitCap = meta.unit.charAt(0).toUpperCase() + meta.unit.slice(1);
@@ -74,7 +73,26 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
   const faqTone = endsLight ? altTone : sectionTone;
   const journey = (s.journey?.journeySteps || []).filter((j) => j?.title);
   const journeyHeading = s.journey?.heading || 'Your Learning Journey';
-  const courses = (s.courses?.courseSlides || []).filter((c) => c?.title);
+  // Pillars and the journey are both light, so with pillars the journey waits until after the dark slider.
+  const journeyLate = pillars.length > 0;
+  const journeySection = journey.length ? (
+    <section id="journey" className="section journey-section" data-tone="light" aria-labelledby="journey-title">
+      <div className="container">
+        <div className="section-head">
+          <h2 id="journey-title" className="h2" data-split>
+            {journeyHeading}
+          </h2>
+          {s.journey?.text ? (
+            <p className="lead" data-reveal>
+              {s.journey.text}
+            </p>
+          ) : null}
+        </div>
+        <JourneySteps steps={journey} />
+      </div>
+    </section>
+  ) : null;
+  const courses =(s.courses?.courseSlides || []).filter((c) => c?.title);
   const coursesHeading = s.courses?.heading || 'Explore Our Programmes';
   const tools = (s.tools?.toolCards || []).filter((t) => t?.name);
   const toolsHeading = s.tools?.heading || 'AI Tools Students Explore';
@@ -335,23 +353,7 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
 
       {/* The programme's stages (AI for Professionals): numbered circles on a line that fills as
           the page scrolls, a card under each. */}
-      {journey.length ? (
-        <section id="journey" className="section journey-section" data-tone="light" aria-labelledby="journey-title">
-          <div className="container">
-            <div className="section-head">
-              <h2 id="journey-title" className="h2" data-split>
-                {journeyHeading}
-              </h2>
-              {s.journey?.text ? (
-                <p className="lead" data-reveal>
-                  {s.journey.text}
-                </p>
-              ) : null}
-            </div>
-            <JourneySteps steps={journey} />
-          </div>
-        </section>
-      ) : null}
+      {journeyLate ? null : journeySection}
 
       {/* Exam tracks (Competitive Exam Preparation): the picker and a section per exam. */}
       {s.tracks?.length ? <ExamTracks heading={s.tracksHeading || 'Choose your exam'} text={s.tracksText} tracks={s.tracks} batches={s.examBatches} approach={s.examApproach} /> : null}
@@ -374,6 +376,8 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
           <CourseSlider slides={courses} label={coursesHeading} />
         </section>
       ) : null}
+
+      {journeyLate ? journeySection : null}
 
       {/* Where students perform (Communication): a list beside a photo that follows the scroll. */}
       {platforms.length ? (

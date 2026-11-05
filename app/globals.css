@@ -1272,12 +1272,10 @@ html.reveal-ready .approach9__badge:not(.is-in) .aicon > * {
 }
 
 /* --------------------------------------------------------------------------
-   Division accents: Education keeps the brand yellow, Marketing uses orange.
-   Remapping the gold tokens recolours every accent on Marketing pages at once
-   (highlights, rules, dots, curves, labels, gold buttons). The logo is an image
-   and keeps its own colours.
+   Footer marquee: the Marketing row carries orange, so the two divisions read
+   apart. The pages themselves share one palette: gold highlights and buttons,
+   orange lines and small labels.
    -------------------------------------------------------------------------- */
-[data-division='marketing'],
 .fmarquee__row--marketing {
   --gold-600: var(--orange-600);
   --gold-500: var(--orange-500);
@@ -4647,6 +4645,12 @@ a.cdirect__value:hover {
 }
 .prose p {
   color: var(--ink-700);
+}
+[data-tone='dark'] .prose p {
+  color: var(--fg-muted);
+}
+[data-tone='dark'] .prose .em {
+  color: var(--fg);
 }
 .prose a {
   color: var(--blue-700);

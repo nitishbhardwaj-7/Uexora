@@ -30,7 +30,7 @@ export default function PageTransition({ children }: { children: React.ReactNode
     };
   }, [pathname]);
 
-  // Each division has its own warm accent (Education yellow, Marketing orange); see globals.css.
+  // Marks the division on the page wrapper, for anything that needs to tell them apart.
   const division = pathname?.startsWith('/marketing') ? 'marketing' : pathname?.startsWith('/education') ? 'education' : undefined;
 
   return (
