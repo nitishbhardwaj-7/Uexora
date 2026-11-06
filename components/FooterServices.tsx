@@ -2,7 +2,9 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { useRef } from 'react';
 import CmsImage from '@/components/ui/CmsImage';
+import { useMarquee } from './useMarquee';
 
 type Item = { title: string; href: string; image?: string };
 
@@ -16,6 +18,20 @@ function Thumb({ src }: { src?: string }) {
   );
 }
 type Row = { key: 'education' | 'marketing'; label: string; href: string; items: Item[] };
+
+/** The moving part of a row: drifts on its own and can be dragged or swiped (see useMarquee). */
+function MarqueeViewport({ direction, duration, children }: { direction: -1 | 1; duration: number; children: React.ReactNode }) {
+  const viewport = useRef<HTMLDivElement>(null);
+  const track = useRef<HTMLDivElement>(null);
+  useMarquee(viewport, track, direction, duration);
+  return (
+    <div ref={viewport} className="fmarquee__viewport">
+      <div ref={track} className="fmarquee__track" style={{ '--dur': `${duration}s` } as React.CSSProperties}>
+        {children}
+      </div>
+    </div>
+  );
+}
 
 /**
  * Footer service marquees. Education scrolls left, Marketing scrolls right; division pages
@@ -42,8 +58,7 @@ export default function FooterServices({ education, marketing }: { education: It
           <Link href={row.href} className="fmarquee__label">
             {row.label}
           </Link>
-          <div className="fmarquee__viewport">
-            <div className="fmarquee__track" style={{ '--dur': `${Math.max(28, row.items.length * 7)}s` } as React.CSSProperties}>
+          <MarqueeViewport direction={row.key === 'marketing' ? 1 : -1} duration={Math.max(28, row.items.length * 7)}>
               <ul className="fmarquee__set">
                 {row.items.map((it) => (
                   <li key={it.href}>
@@ -83,8 +98,7 @@ export default function FooterServices({ education, marketing }: { education: It
                   </li>
                 ))}
               </ul>
-            </div>
-          </div>
+          </MarqueeViewport>
         </nav>
       ))}
     </div>

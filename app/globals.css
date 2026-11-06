@@ -3111,6 +3111,25 @@ a.announce__text:focus-visible {
 .fmarquee__row:focus-within .fmarquee__track {
   animation-play-state: paused;
 }
+/* Once the script drives the row (components/useMarquee.ts) it can be dragged and swiped. */
+.fmarquee__viewport.is-live {
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.fmarquee__viewport.is-live .fmarquee__track {
+  animation: none;
+  will-change: transform;
+}
+.fmarquee__viewport.is-dragging,
+.fmarquee__viewport.is-dragging a {
+  cursor: grabbing;
+}
+.fmarquee__viewport.is-live img {
+  -webkit-user-drag: none;
+  pointer-events: none;
+}
 .fmarquee__set {
   display: flex;
   align-items: center;
