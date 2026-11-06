@@ -2,10 +2,13 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Arrow } from './ui/Button';
+import { NOT_SURE } from '@/lib/enquiry';
 
 type Division = 'education' | 'marketing' | 'general';
 type Status = 'idle' | 'sending' | 'sent' | 'error';
-type FieldErrors = Partial<Record<'division' | 'name' | 'email' | 'phone' | 'message', string>>;
+type FieldErrors = Partial<Record<'division' | 'name' | 'email' | 'phone' | 'course' | 'message', string>>;
+/** The course or service choices per division (the page titles from the studio). */
+export type CourseOptions = Partial<Record<Division, string[]>>;
 
 const LABELS: Record<Division, string> = {
   education: 'Uexora Education',
@@ -25,16 +28,21 @@ export default function ContactForm({
   initialDivision = 'general',
   email,
   note = 'We reply by email.',
+  courses = {},
 }: {
   initialDivision?: Division;
   /** Fallback address shown in error and success messages. */
   email: string;
   note?: string;
+  courses?: CourseOptions;
 }) {
   const [division, setDivision] = useState<Division>(initialDivision);
   // Arriving from a division's pages opens that division's form only, with no choice of
   // division; the choice is shown for a general visit (home page, menu).
   const choosing = initialDivision === 'general';
+  // Education asks for a course, Marketing for a service; a general enquiry has neither.
+  const options = courses[division]?.length ? [...courses[division]!, NOT_SURE] : null;
+  const courseLabel = division === 'marketing' ? 'Service you are interested in' : 'Course you are interested in';
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
@@ -62,6 +70,7 @@ export default function ContactForm({
           name: data.get('name'),
           email: data.get('email'),
           phone: data.get('phone'),
+          course: options ? data.get('course') : '',
           message: data.get('message'),
           company: data.get('company'),
           startedAt: startedAt.current,
@@ -129,19 +138,36 @@ export default function ContactForm({
         </div>
       </div>
 
-      <div className="field">
-        <label htmlFor="phone">Phone (optional)</label>
-        <input id="phone" name="phone" type="tel" autoComplete="tel" maxLength={40} placeholder="+91" aria-invalid={!!fieldErrors.phone} />
-        {fieldError('phone')}
+      <div className={options ? 'form__row' : undefined}>
+        <div className="field">
+          <label htmlFor="phone">Phone</label>
+          <input id="phone" name="phone" type="tel" autoComplete="tel" required minLength={7} maxLength={40} placeholder="+91" aria-invalid={!!fieldErrors.phone} />
+          {fieldError('phone')}
+        </div>
+        {options ? (
+          <div className="field">
+            <label htmlFor="course">{courseLabel}</label>
+            {/* keyed so switching division clears a choice from the other list */}
+            <select key={division} id="course" name="course" required defaultValue="" aria-invalid={!!fieldErrors.course}>
+              <option value="" disabled>
+                Choose one
+              </option>
+              {options.map((o) => (
+                <option key={o} value={o}>
+                  {o}
+                </option>
+              ))}
+            </select>
+            {fieldError('course')}
+          </div>
+        ) : null}
       </div>
 
       <div className="field">
-        <label htmlFor="message">{division === 'marketing' ? 'Tell us about your business and goals' : 'Tell us about the learner and their goals'}</label>
+        <label htmlFor="message">{division === 'marketing' ? 'Tell us about your business and goals' : 'Tell us about the learner and their goals'} (optional)</label>
         <textarea
           id="message"
           name="message"
-          required
-          minLength={10}
           maxLength={5000}
           placeholder={division === 'marketing' ? 'What does your business do, and what would you like marketing to achieve?' : 'Who is the learner, what are they working towards, and where do they need support?'}
           aria-invalid={!!fieldErrors.message}

@@ -22,6 +22,7 @@ export type EnquiryInput = {
   name: string;
   email: string;
   phone: string;
+  course: string;
   message: string;
   emailSent: boolean;
 };
@@ -36,7 +37,8 @@ export async function saveEnquiry(input: EnquiryInput): Promise<string> {
     name: input.name,
     email: input.email,
     phone: input.phone || undefined,
-    message: input.message,
+    course: input.course || undefined,
+    message: input.message || undefined,
     emailSent: input.emailSent,
     submittedAt: new Date().toISOString(),
   });

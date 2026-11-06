@@ -3264,7 +3264,9 @@ a.fmarquee__card:focus-visible {
 
 .footer__top {
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr) minmax(0, 1fr);
+  /* Brand on the left edge, the last column on the right edge, equal space between. */
+  grid-template-columns: minmax(0, 22rem) repeat(3, auto);
+  justify-content: space-between;
   gap: clamp(2rem, 3.5vw, 3.5rem);
   padding-bottom: clamp(2.5rem, 4vw, 3.5rem);
 }
@@ -3313,6 +3315,29 @@ a.fmarquee__card:focus-visible {
   color: rgba(246, 245, 240, 0.6);
   font-size: 0.9rem;
   margin-top: 1rem;
+}
+.footer__col .footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-left: -0.55rem;
+}
+.footer__social a {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: rgba(246, 245, 240, 0.78);
+  transition: color 0.3s, transform 0.3s var(--ease-out, ease);
+}
+.footer__social a:hover {
+  color: var(--gold-500);
+  transform: translateY(-2px);
+}
+.footer__social a:focus-visible {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 2px;
+  border-radius: 6px;
 }
 .footer__col p strong {
   color: var(--cream);
@@ -3376,7 +3401,8 @@ a.fmarquee__card:focus-visible {
 }
 @media (max-width: 900px) {
   .footer__top {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-content: stretch;
   }
   .footer__brand {
     grid-column: 1 / -1;
@@ -4286,8 +4312,22 @@ a.cdirect__value:hover {
   border-color: var(--blue-700);
   box-shadow: 0 1px 0 0 var(--blue-700);
 }
+.field select {
+  appearance: none;
+  padding-right: 2rem;
+  cursor: pointer;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235d6384' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat right 0.2rem center;
+}
+/* The 'Choose one' prompt reads like a placeholder until something is picked. */
+.field select:invalid {
+  color: rgba(93, 99, 132, 0.6);
+}
+.field select option {
+  color: var(--ink);
+}
 .field input[aria-invalid='true'],
-.field textarea[aria-invalid='true'] {
+.field textarea[aria-invalid='true'],
+.field select[aria-invalid='true'] {
   border-color: #b42318;
 }
 .segmented {

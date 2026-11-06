@@ -37,6 +37,7 @@ export const enquiry = defineType({
       readOnly: true,
       options: { list: Object.entries(DIVISION_LABELS).map(([value, title]) => ({ value, title })) },
     }),
+    defineField({ name: 'course', title: 'Course or service', type: 'string', readOnly: true }),
     defineField({ name: 'message', title: 'Message', type: 'text', rows: 8, readOnly: true }),
     defineField({ name: 'submittedAt', title: 'Received', type: 'datetime', readOnly: true }),
     defineField({
@@ -50,12 +51,12 @@ export const enquiry = defineType({
   ],
   orderings: [{ title: 'Newest first', name: 'submittedAtDesc', by: [{ field: 'submittedAt', direction: 'desc' }] }],
   preview: {
-    select: { name: 'name', email: 'email', division: 'division', status: 'status', date: 'submittedAt' },
-    prepare: ({ name, email, division, status, date }) => {
+    select: { name: 'name', email: 'email', division: 'division', course: 'course', status: 'status', date: 'submittedAt' },
+    prepare: ({ name, email, division, course, status, date }) => {
       const when = date ? new Date(date).toLocaleString('en-GB', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '';
       return {
         title: `${status === 'new' ? '● ' : ''}${name || email || 'Enquiry'}`,
-        subtitle: [DIVISION_LABELS[division] || division, when, STATUS_LABELS[status] || status].filter(Boolean).join(' · '),
+        subtitle: [course || DIVISION_LABELS[division] || division, when, STATUS_LABELS[status] || status].filter(Boolean).join(' · '),
       };
     },
   },

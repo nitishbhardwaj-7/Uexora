@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 import { site } from '@/lib/site';
-import { getSettings, type SettingsContent } from '@/lib/cms';
+import { getEducation, getMarketing, getSettings, type SettingsContent } from '@/lib/cms';
+import { NOT_SURE } from '@/lib/enquiry';
 import { EnquiryStoreConfigError, saveEnquiry } from '@/lib/cms/enquiries';
 
 /**
@@ -24,7 +25,7 @@ import { EnquiryStoreConfigError, saveEnquiry } from '@/lib/cms/enquiries';
 export const runtime = 'nodejs';
 
 type Division = 'education' | 'marketing' | 'general';
-type Payload = { division: Division; name: string; email: string; phone: string; message: string };
+type Payload = { division: Division; name: string; email: string; phone: string; course: string; message: string };
 type FieldErrors = Partial<Record<keyof Payload, string>>;
 
 const divisions = (s: SettingsContent): Record<Division, { label: string; to: string }> => ({
@@ -63,24 +64,34 @@ function clientKey(request: Request) {
 
 const text = (value: unknown) => (typeof value === 'string' ? value.trim() : '');
 
-function validate(body: Record<string, unknown>): { data?: Payload; fields?: FieldErrors } {
+/** The courses (Education) and services (Marketing) a visitor can pick, as on the form. */
+async function courseOptions(): Promise<Partial<Record<Division, string[]>>> {
+  const [e, m] = await Promise.all([getEducation(), getMarketing()]);
+  const titles = (list: { title?: string }[]) => [...list.map((p) => p.title).filter((t): t is string => !!t), NOT_SURE];
+  return { education: titles(e.programmes), marketing: titles(m.services) };
+}
+
+function validate(body: Record<string, unknown>, courses: Partial<Record<Division, string[]>>): { data?: Payload; fields?: FieldErrors } {
   const fields: FieldErrors = {};
   const division = text(body.division) as Division;
   const name = text(body.name);
   const email = text(body.email);
   const phone = text(body.phone);
+  const course = text(body.course);
   const message = text(body.message);
 
   if (!['education', 'marketing', 'general'].includes(division)) fields.division = 'Choose a division.';
   if (name.length < 2) fields.name = 'Please enter your name.';
   else if (name.length > MAX.name) fields.name = `Keep your name under ${MAX.name} characters.`;
   if (!EMAIL_RE.test(email) || email.length > MAX.email) fields.email = 'Please enter a valid email address.';
-  if (phone.length > MAX.phone) fields.phone = 'That phone number looks too long.';
-  if (message.length < 10) fields.message = 'Tell us a little more (at least 10 characters).';
-  else if (message.length > MAX.message) fields.message = `Keep your message under ${MAX.message} characters.`;
+  if (phone.replace(/\D/g, '').length < 7) fields.phone = 'Please enter your phone number.';
+  else if (phone.length > MAX.phone) fields.phone = 'That phone number looks too long.';
+  const allowed = courses[division];
+  if (allowed && !allowed.includes(course)) fields.course = division === 'marketing' ? 'Please choose a service.' : 'Please choose a course.';
+  if (message.length > MAX.message) fields.message = `Keep your message under ${MAX.message} characters.`;
 
   if (Object.keys(fields).length) return { fields };
-  return { data: { division, name, email, phone, message } };
+  return { data: { division, name, email, phone, course: allowed ? course : '', message } };
 }
 
 /* ---------- SMTP delivery ---------- */
@@ -106,9 +117,10 @@ function renderEmail(data: Payload, settings: SettingsContent) {
     `Division: ${label}`,
     `Name: ${data.name}`,
     `Email: ${data.email}`,
-    `Phone: ${data.phone || '-'}`,
+    `Phone: ${data.phone}`,
+    ...(data.course ? [`${data.division === 'marketing' ? 'Service' : 'Course'}: ${data.course}`] : []),
     '',
-    data.message,
+    data.message || '(No message)',
     '',
     `— Sent from the contact form at ${site.url}/contact`,
   ];
@@ -150,7 +162,7 @@ export async function POST(request: Request) {
   const settings = await getSettings();
   if (rateLimited(clientKey(request))) return fail(429, `Too many messages from this connection. Please wait a few minutes, or email ${settings.email} directly.`);
 
-  const { data, fields } = validate(body);
+  const { data, fields } = validate(body, await courseOptions());
   if (!data) return fail(400, 'Please check the highlighted fields.', fields);
 
   // 1. Email the division inbox.

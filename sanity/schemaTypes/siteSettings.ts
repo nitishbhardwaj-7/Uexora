@@ -6,6 +6,7 @@ export const siteSettings = defineType({
   type: 'document',
   groups: [
     { name: 'contact', title: 'Contact details', default: true },
+    { name: 'social', title: 'Social links' },
     { name: 'brand', title: 'Brand text' },
     { name: 'announcement', title: 'Announcement bar' },
   ],
@@ -15,6 +16,10 @@ export const siteSettings = defineType({
     defineField({ name: 'marketingEmail', title: 'Uexora Marketing Studio email', type: 'string', group: 'contact', validation: (r) => r.email() }),
     defineField({ name: 'phone', title: 'Phone', type: 'string', group: 'contact' }),
     defineField({ name: 'hours', title: 'Opening hours', type: 'string', group: 'contact' }),
+    defineField({ name: 'whatsapp', title: 'WhatsApp', type: 'url', group: 'social', description: 'A chat link with the number in international form, e.g. https://wa.me/919876543210. Leave empty to hide the icon.' }),
+    defineField({ name: 'instagram', title: 'Instagram', type: 'url', group: 'social', description: 'The profile link, e.g. https://www.instagram.com/yourname. Leave empty to hide the icon.' }),
+    defineField({ name: 'youtube', title: 'YouTube', type: 'url', group: 'social', description: 'The channel link, e.g. https://www.youtube.com/@yourname. Leave empty to hide the icon.' }),
+    defineField({ name: 'tiktok', title: 'TikTok', type: 'url', group: 'social', description: 'The profile link, e.g. https://www.tiktok.com/@yourname. Leave empty to hide the icon.' }),
     defineField({ name: 'tagline', title: 'Tagline', type: 'string', group: 'brand' }),
     defineField({
       name: 'description',

@@ -4,6 +4,7 @@ import Wordmark from './brand/Wordmark';
 import Tagline from './brand/Tagline';
 import FooterServices from './FooterServices';
 import ContactLink from './ContactLink';
+import SocialIcons from './SocialIcons';
 import { site } from '@/lib/site';
 import { getEducation, getMarketing, getSettings } from '@/lib/cms';
 import { servicePath } from '@/lib/cms/services';
@@ -73,6 +74,11 @@ export default async function Footer({ showBlog }: { showBlog?: boolean }) {
               <strong>Hours</strong>
               {s.hours}
             </p>
+          </div>
+
+          <div className="footer__col">
+            <p className="footer__heading">Follow us</p>
+            <SocialIcons className="footer__social" links={{ whatsapp: s.whatsapp, instagram: s.instagram, youtube: s.youtube, tiktok: s.tiktok }} />
           </div>
         </div>
 

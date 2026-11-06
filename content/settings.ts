@@ -12,6 +12,12 @@ export const settings = {
   marketingEmail: 'studio@uexora.com',
   phone: '',
   hours: 'Monday to Saturday, 09:00 – 19:00',
+  // TODO(client): placeholders (each network's home page) until the real profile links are added in the studio.
+  // WhatsApp takes a chat link such as https://wa.me/91XXXXXXXXXX. Clear a link to hide its icon.
+  whatsapp: 'https://www.whatsapp.com/',
+  instagram: 'https://www.instagram.com/',
+  youtube: 'https://www.youtube.com/',
+  tiktok: 'https://www.tiktok.com/',
   footerStatement: 'Two distinct divisions. One shared belief:',
   footerStatementStrong: 'your growth matters.',
   /** The scrolling strip under the navigation; switched on and off in the studio. */

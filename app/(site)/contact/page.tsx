@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { BreadcrumbJsonLd } from '@/components/JsonLd';
 import ContactForm from '@/components/ContactForm';
 import Monogram from '@/components/brand/Monogram';
-import { getContact, getSettings } from '@/lib/cms';
+import { getContact, getEducation, getMarketing, getSettings } from '@/lib/cms';
 import { pageMetadata } from '@/lib/seo';
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -12,7 +12,9 @@ export async function generateMetadata(): Promise<Metadata> {
 
 /** Contact: the headline, then the direct addresses beside the form. */
 export default async function ContactPage({ searchParams }: { searchParams: Promise<{ division?: string }> }) {
-  const [c, s, { division }] = await Promise.all([getContact(), getSettings(), searchParams]);
+  const [c, s, e, m, { division }] = await Promise.all([getContact(), getSettings(), getEducation(), getMarketing(), searchParams]);
+  const titles = (list: { title?: string }[]) => list.map((p) => p.title).filter((t): t is string => !!t);
+  const courses = { education: titles(e.programmes), marketing: titles(m.services) };
   const initial = division === 'education' || division === 'marketing' ? division : 'general';
   const direct = [
     { label: 'General', value: s.email, href: `mailto:${s.email}` },
@@ -66,7 +68,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
               {c.formHeading}
             </h2>
             {/* keyed so moving between contact links (e.g. menu after a division page) starts afresh */}
-            <ContactForm key={initial} initialDivision={initial} email={s.email} note={c.formNote} />
+            <ContactForm key={initial} initialDivision={initial} email={s.email} note={c.formNote} courses={courses} />
           </div>
         </div>
       </section>
