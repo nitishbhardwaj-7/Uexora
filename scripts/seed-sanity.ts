@@ -60,6 +60,7 @@ const arrayTypes: Record<string, string> = {
   pillarItems: 'pillarItem',
   platformItems: 'platformItem',
   serveGroups: 'serveGroup',
+  chipLinks: 'link',
 };
 
 const assetCache = new Map<string, string>();

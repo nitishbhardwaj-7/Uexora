@@ -25,7 +25,14 @@ export const educationPage = defineType({
       type: 'object',
       group: 'hero',
       fields: [
-        strings('chips', 'Keywords'),
+        { ...strings('chips', 'Keywords (old, without links)'), hidden: true },
+        defineField({
+          name: 'chipLinks',
+          title: 'Keywords',
+          type: 'array',
+          of: [defineArrayMember({ type: 'link' })],
+          description: 'Short keywords under the hero buttons, each linking to a page, e.g. /education/competitive-exam-preparation.',
+        }),
                 defineField({ name: 'background', title: 'Background photo', type: 'picture', description: 'Full-width photo behind the hero; people work best, with the subject towards the right.' }),
         defineField({ name: 'primary', title: 'Primary button', type: 'link' }),
         defineField({ name: 'secondary', title: 'Secondary button', type: 'link' }),

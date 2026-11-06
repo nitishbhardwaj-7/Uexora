@@ -30,7 +30,7 @@ export const menu = [
     links: [
       { label: 'About', href: '/education#about' },
       { label: 'What we do', href: '/education#programmes' },
-      { label: 'Our approach', href: '/education#approach' },
+      { label: 'Beyond the classroom', href: '/education#beyond' },
       { label: 'Why choose us', href: '/education#why-choose-us' },
     ],
   },

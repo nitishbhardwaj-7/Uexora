@@ -31,7 +31,7 @@ export default async function MarketingPage() {
         secondary={m.hero.secondary}
         background={m.hero.background}
         slides={heroSlides('marketing', m.services)}
-        chips={m.hero.chips}
+        chips={m.hero.chipLinks?.length ? m.hero.chipLinks : m.hero.chips}
       />
 
       <Approach

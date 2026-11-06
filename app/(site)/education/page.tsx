@@ -4,7 +4,7 @@ import PageHero from '@/components/sections/PageHero';
 import StatBand from '@/components/sections/StatBand';
 import Approach from '@/components/sections/Approach';
 import SkillsMosaic from '@/components/sections/SkillsMosaic';
-import { Statement, WhyChoose } from '@/components/sections/Blocks';
+import { WhyChoose } from '@/components/sections/Blocks';
 import ServiceCards from '@/components/sections/ServiceCards';
 import CtaBand from '@/components/sections/CtaBand';
 import Signpost from '@/components/sections/Signpost';
@@ -33,7 +33,7 @@ export default async function EducationPage() {
         secondary={e.hero.secondary}
         background={e.hero.background}
         slides={heroSlides('education', e.programmes)}
-        chips={e.hero.chips}
+        chips={e.hero.chipLinks?.length ? e.hero.chipLinks : e.hero.chips}
       />
 
       {/* Figures under the hero, counting up as they come into view. */}
@@ -71,8 +71,6 @@ export default async function EducationPage() {
         tone="light"
         cta={e.programmesCta}
       />
-
-      <Statement id="approach" eyebrow={e.approach.heading} quote={e.approach.quote} paragraphs={e.approach.paragraphs} tone="light" />
 
       <SkillsMosaic id="beyond" heading={e.beyond.heading} paragraphs={e.beyond.paragraphs} skills={e.beyond.skills} images={e.beyond.skillImages} tone="dark" />
 

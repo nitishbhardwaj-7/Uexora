@@ -15,7 +15,8 @@ type Props = {
   primary: { label: string; href: string };
   secondary?: { label: string; href: string };
   image?: { src: string; alt: string };
-  chips?: string[];
+  /** Short keywords under the buttons; one with an href links to its page. */
+  chips?: (string | { label: string; href?: string })[];
   /** Visible breadcrumb trail above the title (the last item is the current page's parent/kind). */
   crumbs?: { label: string; href?: string }[];
   /** Image-led variant (division landing pages): a full-width photo behind the hero. With an
@@ -94,11 +95,18 @@ export default function PageHero({ eyebrow, title, lead, tone = 'light', primary
           </div>
           {chips?.length ? (
             <div className="page-hero__meta">
-              {chips.map((c) => (
-                <span key={c} className="chip">
-                  {c}
-                </span>
-              ))}
+              {chips.map((c) => {
+                const { label, href } = typeof c === 'string' ? { label: c, href: undefined } : c;
+                return href ? (
+                  <Link key={label} href={href} className="chip chip--link">
+                    {label}
+                  </Link>
+                ) : (
+                  <span key={label} className="chip">
+                    {label}
+                  </span>
+                );
+              })}
             </div>
           ) : null}
         </div>
