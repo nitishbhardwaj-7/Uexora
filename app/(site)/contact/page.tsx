@@ -27,9 +27,11 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
     <>
       <BreadcrumbJsonLd crumbs={[{ name: 'Contact', path: '/contact' }]} />
 
-      <section className="page-hero contact-hero" data-tone="light" aria-labelledby="page-title">
+      {/* One section: the headline and the direct addresses on the left, the form beside them from
+          the top on wider screens. On phones it reads headline, form, then the addresses. */}
+      <section id="enquire" className="page-hero contact-hero" data-tone="light" aria-labelledby="page-title">
         <Monogram className="page-hero__mark" variant="mono" style={{ color: 'var(--blue-700)' }} />
-        <div className="container">
+        <div className="container contact">
           <div className="page-hero__copy contact-hero__copy">
             <h1 id="page-title" className="h1" data-split data-split-delay="0.1">
               {c.title}
@@ -38,11 +40,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
               {c.lead}
             </p>
           </div>
-        </div>
-      </section>
 
-      <section id="enquire" className="section section--flush-top" data-tone="light" aria-labelledby="enquire-title">
-        <div className="container contact">
           <aside className="contact__rail" data-reveal>
             <div className="contact__block">
               <h2 className="contact__h">Write directly</h2>
@@ -63,7 +61,7 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
             </div>
           </aside>
 
-          <div className="contact__form" data-reveal data-reveal-delay="0.15">
+          <div className="contact__form" data-reveal data-reveal-delay="0.25">
             <h2 id="enquire-title" className="contact__form-title">
               {c.formHeading}
             </h2>

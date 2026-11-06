@@ -1,7 +1,7 @@
 import type { Service } from './types.ts';
 
 /**
- * The sections of the Inclusive Learning & Special Support programme. The areas, the people it can
+ * The sections of the Special Needs Students Programme. The areas, the people it can
  * serve, the parent courses, the workshops and the closing statement are the client's (each area's
  * list is split from one sentence). DRAFT, for the client to review: the headings of the areas, the
  * people it can serve and the courses (the client gave none). The course photos are general

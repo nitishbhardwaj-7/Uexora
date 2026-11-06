@@ -253,9 +253,9 @@ const programmes: Service[] = [
     text: 'Building confident communicators, expressive thinkers and future leaders.',
   },
   {
-    title: 'Inclusive Learning & Special Support',
+    title: 'Special Needs Students Programme',
     slug: 'special-needs-students-programme',
-    heroTitle: 'Inclusive Learning\n& Special Support',
+    heroTitle: 'Special Needs\nStudents Programme',
     promise: 'Every Child Is Different. Every Child Can Grow. Every Child Deserves to Be Heard.',
     seo: { description: 'Inclusive learning and special needs support for children from age 2 onwards: early communication, speech and language, individualised learning and parent education.' },
     image: { src: '/images/services/special-needs-students-programme.jpg', alt: 'A teacher helping a young student with maths homework' },
@@ -433,7 +433,7 @@ export const education = {
       'The world is changing, and education needs to prepare learners for more than the next test.',
       'Strong academic knowledge remains important, but so do communication, creativity, problem-solving, confidence and the ability to adapt to new technologies. These skills can help learners make better use of their knowledge and prepare for different opportunities throughout life.',
       'At Uexora Education, our vision is to bring these different aspects of learning together, so students and learners can develop not only what they know, but also what they can do with it.',
-      "We don't promise overnight success. We believe in consistent effort, the right guidance and the value of taking one step forward at a time.",
+      "We believe in consistent effort, the right guidance and the value of taking one step forward at a time.",
     ],
     skills: ['Communication & Presentation', 'AI & Digital Literacy', 'Creativity & Innovation', 'Critical Thinking & Problem-Solving', 'Confidence & Leadership', 'Adaptability & Lifelong Learning'],
     /** One photo per skill, in the same order. */
@@ -457,7 +457,7 @@ export const education = {
       { need: 'Exploring technology hands-on', slug: 'ai-coding-and-robotics-for-students' },
       { need: 'Using AI in my work or my teaching', slug: 'ai-for-professionals-and-educators' },
       { need: 'Speaking and presenting with confidence', slug: 'communication-public-speaking-and-confidence-building' },
-      { need: 'Learning that needs more individual support', slug: 'special-needs-students-programme' },
+      { need: 'Support for special needs students', slug: 'special-needs-students-programme' },
       { need: 'Training for a team or organisation', slug: 'corporate-trainings' },
     ],
   },
@@ -487,7 +487,7 @@ export const education = {
     reasons: [
       {
         title: 'Everything in One Place',
-        text: 'From school tuition and competitive exam preparation to AI, robotics, public speaking and language proficiency, we bring a wide range of learning opportunities together on one platform. This makes it easier to explore different programmes as your goals evolve.',
+        text: 'From school tuition and competitive exam preparation to AI, robotics, public speaking, language proficiency, special needs support and corporate trainings, we bring a wide range of learning opportunities together on one platform. This makes it easier to explore different programmes as your goals evolve.',
       },
       {
         title: 'Learning That Fits Different Needs',

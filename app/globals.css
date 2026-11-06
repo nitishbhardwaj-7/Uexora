@@ -4178,22 +4178,30 @@ html.reveal-ready .statement[data-seq].is-in .statement__mark {
    Contact
    -------------------------------------------------------------------------- */
 .contact-hero.page-hero {
-  padding-bottom: clamp(40px, 5vw, 72px);
+  padding-bottom: var(--section);
 }
-.contact-hero__copy {
-  max-width: 50rem;
-}
-
-/* Details rail beside the form. */
+/* The headline and the direct addresses on the left, the form beside them from the top. */
 .contact {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
-  gap: clamp(2.5rem, 6vw, 7rem);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  grid-template-areas:
+    'copy form'
+    'rail form';
+  grid-template-rows: auto 1fr;
+  column-gap: clamp(2.5rem, 5vw, 6rem);
+  row-gap: clamp(2.5rem, 4vw, 3.5rem);
   align-items: start;
 }
+.contact-hero__copy {
+  grid-area: copy;
+  max-width: 34rem;
+}
+.contact-hero__copy .h1 {
+  font-size: clamp(2.6rem, 4.6vw, 4.6rem);
+}
 .contact__rail {
-  position: sticky;
-  top: calc(var(--header-h) + 1.5rem);
+  grid-area: rail;
   display: grid;
   gap: clamp(2.2rem, 3.5vw, 3.2rem);
 }
@@ -4240,6 +4248,7 @@ a.cdirect__value:hover {
 
 /* The form: a paper card with underline fields. */
 .contact__form {
+  grid-area: form;
   display: grid;
   gap: 1.6rem;
   padding: clamp(1.6rem, 3vw, 3rem);
@@ -4412,14 +4421,12 @@ a.cdirect__value:hover {
 
 @media (max-width: 900px) {
   .contact {
-    grid-template-columns: 1fr;
-  }
-  .contact__rail {
-    position: static;
-    order: 2;
-  }
-  .contact__form {
-    order: 1;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      'copy'
+      'form'
+      'rail';
+    grid-template-rows: auto;
   }
 }
 @media (max-width: 560px) {
