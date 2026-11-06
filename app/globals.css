@@ -7261,6 +7261,7 @@ html.reveal-ready .steps--seq.is-in .step p {
   overflow: hidden;
   background: var(--navy-800);
   isolation: isolate;
+  container-type: inline-size;
 }
 .skills__tile img {
   object-fit: cover;
@@ -7284,6 +7285,8 @@ html.reveal-ready .steps--seq.is-in .step p {
   font-weight: 400;
   font-synthesis-weight: none;
   font-size: clamp(1.4rem, 2.1vw, 2.1rem);
+  /* Never larger than the card allows, so the longest word (e.g. Problem-Solving) fits a phone card. */
+  font-size: min(clamp(1.4rem, 2.1vw, 2.1rem), 9.5cqi);
   line-height: 1.05;
   letter-spacing: 0.01em;
   -webkit-text-stroke: 0.04em currentColor;
