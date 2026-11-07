@@ -156,10 +156,44 @@ const programmes: Service[] = [
       'Competitive examinations such as JEE and NEET reward a clear understanding of the subjects as much as hard work. Our preparation combines focused learning on the syllabus, concept building that connects topics together, and regular practice so that students become familiar with the format and pace of the exam.',
       'We don\'t promise overnight results. We believe in consistent effort, the right guidance and taking one step forward at a time, with realistic goals agreed with each student.',
     ],
+    faqHeading: 'Common Questions Asked',
+    // Questions: the client's. Answers: DRAFT for the client to review, written only from what the
+    // page already says (four exams, live online classes, 1:6 / 1:15 / 1:30 batches, revision on
+    // request in 1:6, exam-style practice). Nos. 2, 5, 6, 7 and 8 need the client's confirmation:
+    // no starting grade, mock tests, study materials or progress reports are promised until they do.
     faqs: [
-      { q: 'Which examinations does this programme prepare students for?', a: 'Competitive examinations such as JEE and NEET. Ask us if you are preparing for a different exam and we will tell you what we can support.' },
-      { q: 'How does the preparation work?', a: 'Through focused learning, concept building and regular practice, with realistic goals agreed with each student.' },
-      { q: 'Do you guarantee results?', a: 'No. We believe in consistent effort, the right guidance and the value of taking one step forward at a time.' },
+      {
+        q: 'What competitive exams does Uexora offer preparation for?',
+        a: 'We offer live online preparation for NEET, JEE Main, JEE Advanced and Olympiads. If you are preparing for a different exam, ask us and we will tell you what we can support.',
+      },
+      {
+        q: 'At what grade or class should students start preparing for competitive exams?',
+        a: 'There is no single right time, and it depends on the exam and on the student. Olympiads can be a good fit while students are still building their foundations, while JEE and NEET preparation becomes more focused in the senior school years. Speak to our academic team and we will help you decide when and where to begin.',
+      },
+      {
+        q: 'Do you offer online classes for competitive exam preparation?',
+        a: 'Yes. All of our competitive exam preparation is taught through live online classes, so students can learn from wherever they are. Each programme is offered in three batch sizes: 1:6, 1:15 and 1:30.',
+      },
+      {
+        q: 'Are the classes suitable for beginners?',
+        a: 'Yes. Our preparation begins with building strong foundations, so students who are just starting out can develop a clear understanding of the core concepts before moving on to more challenging problems.',
+      },
+      {
+        q: 'Do you provide personalised learning plans for students?',
+        a: 'Students choose the batch that suits them best. The 1:6 Personalised Prep batch offers greater attention to each student’s learning needs, and students can request focused revision classes when they need extra support. Talk to our academic team about what would work best for your child.',
+      },
+      {
+        q: 'How do you track students’ progress and performance?',
+        a: 'Regular practice with exam-style questions helps show where a student is doing well and which areas need more attention, so revision can focus on strengthening weaker topics. Our academic team can explain how progress is followed in your chosen batch.',
+      },
+      {
+        q: 'Do you provide practice tests, mock exams and study materials?',
+        a: 'Practice is part of every batch: students work through exam-style questions to improve accuracy, recognise common question patterns and prepare for exam conditions. Ask our academic team what is included in the batch you are considering.',
+      },
+      {
+        q: 'Can students balance school academics with competitive exam preparation?',
+        a: 'Yes. Because classes are live and online, students do not need to travel, and a structured, consistent schedule makes it easier to plan preparation alongside schoolwork. Our team can help you choose a batch that fits your child’s routine.',
+      },
     ],
     text: 'Preparing for a competitive exam takes commitment, practice and a clear understanding of the subjects involved. We aim to support students preparing for examinations such as JEE and NEET through focused learning, concept building and regular practice.',
   },
