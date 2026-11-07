@@ -321,8 +321,10 @@ export const service = defineType({
             }),
             defineField({
               name: 'why',
-              title: 'Why choose us (optional)',
+              title: 'Why choose us (no longer shown)',
               type: 'object',
+              // Replaced by the page-wide "Exam: why choose us" below; hidden so old entries stay but aren't edited.
+              hidden: true,
               fields: [
                 defineField({ name: 'heading', title: 'Heading', type: 'string' }),
                 defineField({ name: 'subheading', title: 'Subheading', type: 'string' }),
@@ -418,6 +420,32 @@ export const service = defineType({
           ],
         }),
         defineField({ name: 'image', title: 'Photo', type: 'picture' }),
+      ],
+    }),
+    defineField({
+      name: 'examWhy',
+      title: 'Exam: why choose us',
+      type: 'object',
+      description: 'With exam tracks: why choose us, shown once at the end of the page, after the approach.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'heading', title: 'Heading', type: 'string' }),
+        defineField({ name: 'subheading', title: 'Subheading', type: 'string' }),
+        defineField({
+          name: 'whyList',
+          title: 'Reasons',
+          type: 'array',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'sharedWhy',
+              fields: [
+                defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+                defineField({ name: 'text', title: 'Text', type: 'text', rows: 2 }),
+              ],
+            }),
+          ],
+        }),
       ],
     }),
     defineField({ name: 'heroTitle', title: 'Title as shown in the hero (optional)', type: 'text', rows: 4, description: 'Put each line of the hero title on its own line here. Leave empty to use the title as it is.' }),

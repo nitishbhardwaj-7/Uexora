@@ -8003,6 +8003,21 @@ html.reveal-ready .steps--seq.is-in .step p {
   border-radius: 2px;
   background: var(--accent-line);
 }
+/* The shared list at the end of the exam page: three across, two on tablets, one on phones. */
+.xwhy__list--shared {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  row-gap: clamp(2.25rem, 4vw, 3.5rem);
+}
+@media (max-width: 900px) {
+  .xwhy__list--shared {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 560px) {
+  .xwhy__list--shared {
+    grid-template-columns: 1fr;
+  }
+}
 .xwhy__title {
   font-size: 1.12rem;
   line-height: 1.3;

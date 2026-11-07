@@ -26,9 +26,9 @@ const Tick = () => (
 /**
  * Competitive exam page: a picker of four photo cards ("Choose your exam") that jump to a full
  * section per exam, and a slim exam bar that stays under the header while those sections are on
- * screen. Each exam runs: photo opening, the learning journey beside a photo, why choose us (where
- * given) and a closing call to action. After the exams, once for the whole page: the three batch
- * formats, then the approach. Sections alternate dark and cream so the long page keeps its rhythm.
+ * screen. Each exam runs: photo opening, the learning journey beside a photo and a closing call to
+ * action. After the exams, once for the whole page: the three batch formats, the approach, then
+ * why choose us. Sections alternate dark and cream so the long page keeps its rhythm.
  */
 export default function ExamTracks({
   heading,
@@ -36,17 +36,20 @@ export default function ExamTracks({
   tracks,
   batches,
   approach,
+  why,
 }: {
   heading: string;
   text?: string;
   tracks: ExamTrack[];
   batches?: Service['examBatches'];
   approach?: Service['examApproach'];
+  why?: Service['examWhy'];
 }) {
   const list = tracks.filter((t) => t?.slug && t?.title);
   if (!list.length) return null;
   const rows = (batches?.batchRows || []).filter((b) => b?.name);
   const steps = (approach?.approachSteps || []).filter((st) => st?.title);
+  const reasons = (why?.whyList || []).filter((w) => w?.title);
 
   return (
     <div className="xtracks">
@@ -189,13 +192,37 @@ export default function ExamTracks({
           </div>
         </section>
       ) : null}
+
+      {/* Once for the whole page, at the end: why choose us. */}
+      {reasons.length ? (
+        <section id="why-uexora" className="section xshared__why" data-tone="light" aria-labelledby="why-uexora-title">
+          <div className="container">
+            <div className="section-head">
+              <h2 id="why-uexora-title" className="h2" data-split>
+                {why!.heading}
+              </h2>
+              {why!.subheading ? (
+                <p className="lead" data-reveal>
+                  {why!.subheading}
+                </p>
+              ) : null}
+            </div>
+            <ul className="xwhy__list xwhy__list--shared" data-reveal-group data-stagger="0.1">
+              {reasons.map((w, k) => (
+                <li key={w.title + k}>
+                  <h3 className="xwhy__title">{w.title}</h3>
+                  <p>{w.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
     </div>
   );
 }
 
 function Track({ t, n, of, hasBatches }: { t: ExamTrack; n: number; of: number; hasBatches: boolean }) {
-  const why = (t.why?.whyList || []).filter((w) => w?.title);
-
   return (
     <article id={t.slug} className="xtrack" aria-labelledby={`${t.slug}-title`}>
       {/* Opening: the exam's photo across the band, its title and promise on the left. */}
@@ -261,32 +288,6 @@ function Track({ t, n, of, hasBatches }: { t: ExamTrack; n: number; of: number; 
           ) : null}
         </div>
       </section>
-
-      {/* Why choose us (not every exam has one). */}
-      {why.length ? (
-        <section className="section xtrack__why" data-tone="dark" aria-labelledby={`${t.slug}-why-title`}>
-          <div className="container">
-            <div className="section-head">
-              <h3 id={`${t.slug}-why-title`} className="h2" data-split>
-                {t.why!.heading}
-              </h3>
-              {t.why!.subheading ? (
-                <p className="lead" data-reveal>
-                  {t.why!.subheading}
-                </p>
-              ) : null}
-            </div>
-            <ul className="xwhy__list" data-reveal-group data-stagger="0.1">
-              {why.map((w, k) => (
-                <li key={w.title + k}>
-                  <h4 className="xwhy__title">{w.title}</h4>
-                  <p>{w.text}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-      ) : null}
 
       {/* Closing call to action over a quiet wash of the exam's photo. */}
       <section className="section xtrack__closing" data-tone="dark" aria-labelledby={`${t.slug}-closing-title`}>

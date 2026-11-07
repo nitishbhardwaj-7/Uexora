@@ -65,16 +65,6 @@ export const examTracks: ExamTrack[] = [
       ],
       image: { src: '/images/exams/jee-main-journey.jpg', alt: 'A student working through mathematics problems by hand beside an open textbook' },
     },
-    why: {
-      heading: 'Why Choose Uexora for JEE Main?',
-      subheading: 'Preparation Built Around Understanding, Not Just Memorisation.',
-      whyList: [
-        { title: 'Live Online Learning', text: 'Learn from wherever you are, with online classes that support a more flexible approach to exam preparation.' },
-        { title: 'Three Batch Options', text: 'Choose between 1:6, 1:15, and 1:30 learning environments based on your preferences and academic needs.' },
-        { title: 'Flexible Revision in the 1:6 Batch', text: 'Request focused revision classes when you need additional help with challenging topics.' },
-        { title: 'A Structured Learning Approach', text: 'Build your preparation step by step through concept development, practice, and revision.' },
-      ],
-    },
     closing: {
       heading: 'Your Engineering Journey Starts Here.',
       paragraphs: [
@@ -104,17 +94,6 @@ export const examTracks: ExamTrack[] = [
         'From strengthening fundamental concepts to tackling challenging, multi-step problems, our goal is to help students think more clearly, solve more effectively, and prepare with purpose.',
       ],
       image: { src: '/images/exams/jee-advanced-journey.jpg', alt: 'A student studying late in the evening under a desk lamp' },
-    },
-    why: {
-      heading: 'Why Choose Uexora for JEE Advanced?',
-      subheading: 'Learning That Challenges You to Think Deeper.',
-      whyList: [
-        { title: 'Live Online Classes', text: 'Prepare from wherever you are through a structured online learning experience.' },
-        { title: 'Three Batch Options', text: 'Choose the 1:6, 1:15 or 1:30 format according to your learning preferences and need for individual attention.' },
-        { title: 'Flexible Revision in the 1:6 Batch', text: 'Request focused revision classes when you need additional help understanding difficult topics.' },
-        { title: 'Concept-Driven Preparation', text: 'Focus on understanding why methods work, not just memorising formulas or repeating familiar solutions.' },
-        { title: 'A Structured Approach to Practice', text: 'Build your skills progressively through conceptual learning, challenging questions, and revision.' },
-      ],
     },
     closing: {
       heading: 'Your IIT Journey Begins with the Way You Think.',
@@ -146,17 +125,6 @@ export const examTracks: ExamTrack[] = [
         'Whether your child is developing a strong academic foundation or preparing for challenging Olympiad examinations, our focus is on nurturing deeper understanding and a lasting interest in learning.',
       ],
       image: { src: '/images/exams/olympiad-journey.jpg', alt: 'A boy looking through a microscope during a science lesson' },
-    },
-    why: {
-      heading: 'Why Choose Uexora for Olympiad Preparation?',
-      subheading: 'More Than Exam Preparation. A Foundation for Lifelong Learning.',
-      whyList: [
-        { title: 'Live Online Classes', text: 'Access structured learning from wherever you are, without the need to travel to a physical classroom.' },
-        { title: 'Three Batch Options', text: 'Choose between 1:6, 1:15, and 1:30 learning environments based on your preferences and academic needs.' },
-        { title: 'Flexible Revision in the 1:6 Batch', text: 'Request focused revision classes when you need additional support with challenging concepts.' },
-        { title: 'Concept-Driven Learning', text: 'Develop a deeper understanding of the ideas behind problems rather than relying solely on memorisation.' },
-        { title: 'A Focus on Thinking Skills', text: 'Strengthen logical reasoning, analytical thinking, and the ability to approach unfamiliar challenges.' },
-      ],
     },
     closing: {
       heading: 'Every Great Discovery Begins with a Question.',
@@ -237,4 +205,22 @@ export const examApproach: NonNullable<import('./types.ts').Service['examApproac
     { title: 'Prepare for Exam Day', text: 'Work towards improving time management, question selection, and the ability to apply knowledge under examination conditions.' },
   ],
   image: { src: '/images/exams/jee-main-approach.jpg', alt: 'A student drawing with a ruler on graph paper beside an open textbook' },
+};
+
+/**
+ * Why choose us, the same for every exam: shown once at the end of the page, after the approach.
+ * The client's own reasons from the JEE Main, JEE Advanced and Olympiad sections, merged so each
+ * appears once (wording taken from those sections, nothing new added).
+ */
+export const examWhy: NonNullable<import('./types.ts').Service['examWhy']> = {
+  heading: 'Why Choose Uexora?',
+  subheading: 'Preparation Built Around Understanding, Not Just Memorisation.',
+  whyList: [
+    { title: 'Live Online Classes', text: 'Learn from wherever you are, with online classes that support a more flexible approach to exam preparation.' },
+    { title: 'Three Batch Options', text: 'Choose between 1:6, 1:15, and 1:30 learning environments based on your preferences and academic needs.' },
+    { title: 'Flexible Revision in the 1:6 Batch', text: 'Request focused revision classes when you need additional help with challenging topics.' },
+    { title: 'Concept-Driven Preparation', text: 'Focus on understanding why methods work, not just memorising formulas or repeating familiar solutions.' },
+    { title: 'A Structured Learning Approach', text: 'Build your preparation step by step through concept development, practice, and revision.' },
+    { title: 'A Focus on Thinking Skills', text: 'Strengthen logical reasoning, analytical thinking, and the ability to approach unfamiliar challenges.' },
+  ],
 };

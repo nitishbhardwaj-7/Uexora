@@ -1,5 +1,5 @@
 import type { Service } from './types.ts';
-import { examApproach, examBatches, examTracks } from './exams.ts';
+import { examApproach, examBatches, examTracks, examWhy } from './exams.ts';
 import { englishApproach, englishBatches, englishTracks } from './english.ts';
 import { aiCourses } from './ai-courses.ts';
 import { aiProfessionalCourses } from './ai-professional-courses.ts';
@@ -150,6 +150,7 @@ const programmes: Service[] = [
     tracks: examTracks,
     examBatches,
     examApproach,
+    examWhy,
     whoFor: 'Students preparing for competitive examinations such as JEE and NEET who want a clear, structured approach to the subjects involved.',
     details: [
       'Competitive examinations such as JEE and NEET reward a clear understanding of the subjects as much as hard work. Our preparation combines focused learning on the syllabus, concept building that connects topics together, and regular practice so that students become familiar with the format and pace of the exam.',
