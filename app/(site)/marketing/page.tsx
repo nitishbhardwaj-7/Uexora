@@ -26,7 +26,7 @@ export default async function MarketingPage() {
         eyebrow={m.eyebrow}
         title={m.title}
         lead={m.lead}
-        tone="dark"
+        tone="light"
         primary={m.hero.primary}
         secondary={m.hero.secondary}
         background={m.hero.background}
