@@ -315,14 +315,17 @@ export const education = {
   lead:
     'From academic success and future-ready skills to confidence, communication and personal growth, we bring more opportunities to learn and develop. Because, you matter.',
   hero: {
-    chips: ['School tuition', 'JEE & NEET', 'IELTS · PTE · TOEFL', 'AI & robotics', 'Public speaking'],
+    chips: ['School tuition', 'JEE & NEET', 'IELTS · PTE · TOEFL', 'AI & robotics', 'AI for professionals', 'Public speaking', 'Special needs support', 'Corporate trainings'],
     /** The keywords under the hero buttons, each linking to its programme. */
     chipLinks: [
       { label: 'School tuition', href: '/education/academic-support-and-school-tuition' },
       { label: 'JEE & NEET', href: '/education/competitive-exam-preparation' },
       { label: 'IELTS · PTE · TOEFL', href: '/education/overseas-education-and-english-language' },
       { label: 'AI & robotics', href: '/education/ai-coding-and-robotics-for-students' },
+      { label: 'AI for professionals', href: '/education/ai-for-professionals-and-educators' },
       { label: 'Public speaking', href: '/education/communication-public-speaking-and-confidence-building' },
+      { label: 'Special needs support', href: '/education/special-needs-students-programme' },
+      { label: 'Corporate trainings', href: '/education/corporate-trainings' },
     ],
     background: { src: '/images/heroes/education-hero-bg.jpg', alt: 'Two smiling students at their desks in a classroom, one reading a textbook' },
     primary: { label: 'Explore the programmes', href: '/education#programmes' },
