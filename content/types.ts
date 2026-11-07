@@ -37,6 +37,8 @@ export type Service = {
   /** With exam tracks: the batch formats and the approach, shown once after the exams. */
   examBatches?: { heading: string; text?: string; batchRows: ExamBatch[] };
   examApproach?: { heading: string; subheading: string; text: string; approachSteps: { title: string; text: string }[]; image?: { src: string; alt: string } };
+  /** This page's own approach points, in place of the division's shared ones. */
+  approachPoints?: { title: string; subtitle?: string; text?: string; icon?: string }[];
   /** With exam tracks: why choose us, shown once at the end, after the approach. */
   examWhy?: { heading: string; subheading?: string; whyList: { title: string; text: string }[] };
   /** Optional stages of the programme (e.g. Discover, Learn, Apply, Grow), shown after the introduction as numbered steps on a line. */

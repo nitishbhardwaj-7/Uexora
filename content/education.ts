@@ -23,6 +23,40 @@ const programmes: Service[] = [
     seo: { description: 'Academic support and school tuition from Uexora Education: help understanding subjects, working through difficult concepts and building confidence in studies.' },
     image: { src: '/images/services/academic-support-study-together.jpg', alt: 'Two students working through an assignment together outdoors' },
     heroImage: { src: '/images/heroes/services/academic-support-and-school-tuition-2.jpg', alt: 'A young student taking notes during a one-to-one online lesson with her tutor on a laptop' },
+    // "Our Approach to Learning" on this page: the client's six headings, each with the text and
+    // icon of the matching shared point (approach.points below), in place of the shared nine.
+    approachPoints: [
+      {
+        title: 'Teaching Methods That Make Learning Enjoyable',
+        text: 'Interactive lessons and engaging activities encourage students to participate, ask questions, and enjoy discovering new ideas.',
+        icon: 'questions',
+      },
+      {
+        title: 'Practical Understanding of Concepts Over Rote Learning',
+        text: 'We help students understand why concepts work, so they can apply their knowledge beyond memorised answers.',
+        icon: 'bulb',
+      },
+      {
+        title: 'Real-Life Application',
+        text: 'Students explore how classroom concepts relate to everyday situations, practical challenges, and real-world applications.',
+        icon: 'globe',
+      },
+      {
+        title: 'Story-Based Learning',
+        text: 'We use relatable stories, examples, and explanations to help students connect new concepts with what they already know.',
+        icon: 'book',
+      },
+      {
+        title: 'Personalised Learning',
+        text: 'Learning support is tailored to each student’s current understanding, individual needs, and pace of progress.',
+        icon: 'sliders',
+      },
+      {
+        title: 'Mastery at Your Own Pace',
+        text: 'Students strengthen their understanding through guided practice and revisit difficult concepts before progressing.',
+        icon: 'layers',
+      },
+    ],
     highlights: ['Subject understanding', 'Working through difficult concepts', 'Confidence in studies', 'Guidance that fits each student'],
     whoFor: 'School students who want extra guidance with their subjects, from everyday schoolwork to the concepts they find hardest.',
     details: [],
