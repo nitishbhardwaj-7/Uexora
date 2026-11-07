@@ -11,11 +11,16 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 /** Contact: the headline, then the direct addresses beside the form. */
-export default async function ContactPage({ searchParams }: { searchParams: Promise<{ division?: string }> }) {
-  const [c, s, e, m, { division }] = await Promise.all([getContact(), getSettings(), getEducation(), getMarketing(), searchParams]);
+export default async function ContactPage({ searchParams }: { searchParams: Promise<{ division?: string; course?: string; batch?: string }> }) {
+  const [c, s, e, m, { division, course, batch }] = await Promise.all([getContact(), getSettings(), getEducation(), getMarketing(), searchParams]);
   const titles = (list: { title?: string }[]) => list.map((p) => p.title).filter((t): t is string => !!t);
   const courses = { education: titles(e.programmes), marketing: titles(m.services) };
   const initial = division === 'education' || division === 'marketing' ? division : 'general';
+  // Coming from a programme page (a batch card, say): its course is chosen and the batch named in
+  // the message. Only a course from the list and a short plain batch name are taken from the link.
+  const initialCourse = initial !== 'general' && course && courses[initial].includes(course) ? course : undefined;
+  const cleanBatch = typeof batch === 'string' && /^[\w :&-]{1,60}$/.test(batch) ? batch.trim() : '';
+  const initialMessage = cleanBatch ? `I’m interested in the ${cleanBatch} batch.` : undefined;
   const direct = [
     { label: 'General', value: s.email, href: `mailto:${s.email}` },
     { label: 'Uexora Education', value: s.educationEmail, href: `mailto:${s.educationEmail}` },
@@ -61,12 +66,21 @@ export default async function ContactPage({ searchParams }: { searchParams: Prom
             </div>
           </aside>
 
-          <div className="contact__form" data-reveal data-reveal-delay="0.25">
+          {/* #enquiry: links that open the form directly (batch cards) land here, heading included. */}
+          <div id="enquiry" className="contact__form" data-reveal data-reveal-delay="0.25">
             <h2 id="enquire-title" className="contact__form-title">
               {c.formHeading}
             </h2>
             {/* keyed so moving between contact links (e.g. menu after a division page) starts afresh */}
-            <ContactForm key={initial} initialDivision={initial} email={s.email} note={c.formNote} courses={courses} />
+            <ContactForm
+              key={[initial, initialCourse, cleanBatch].join('|')}
+              initialDivision={initial}
+              initialCourse={initialCourse}
+              initialMessage={initialMessage}
+              email={s.email}
+              note={c.formNote}
+              courses={courses}
+            />
           </div>
         </div>
       </section>

@@ -17,6 +17,21 @@ function Go({ href, className, children }: { href: string; className: string; ch
   );
 }
 
+/**
+ * A batch card as one link to the enquiry form, with the batch named so the form can say which
+ * one the visitor chose; lands on the form itself. Without a form link it is a plain card.
+ */
+function BatchLink({ b, enquire, children }: { b: NonNullable<Service['examBatches']>['batchRows'][number]; enquire?: string; children: React.ReactNode }) {
+  if (!enquire) return <>{children}</>;
+  const batch = [b.ratio, b.name].filter(Boolean).join(' ');
+  const href = `${enquire}${enquire.includes('?') ? '&' : '?'}batch=${encodeURIComponent(batch)}#enquiry`;
+  return (
+    <Link href={href} className="xbatch__link" data-cursor aria-label={`${batch} batch: enquire about this batch`}>
+      {children}
+    </Link>
+  );
+}
+
 const Tick = () => (
   <svg className="xbatch__tick" viewBox="0 0 20 20" aria-hidden="true">
     <path d="M4.5 10.5 8.3 14 15.5 6.5" />
@@ -37,6 +52,7 @@ export default function ExamTracks({
   batches,
   approach,
   why,
+  enquire,
 }: {
   heading: string;
   text?: string;
@@ -44,6 +60,8 @@ export default function ExamTracks({
   batches?: Service['examBatches'];
   approach?: Service['examApproach'];
   why?: Service['examWhy'];
+  /** The contact form for this programme (division and course set); each batch card links to it. */
+  enquire?: string;
 }) {
   const list = tracks.filter((t) => t?.slug && t?.title);
   if (!list.length) return null;
@@ -116,6 +134,7 @@ export default function ExamTracks({
             <ol className="xbatch__list">
               {rows.map((b, k) => (
                 <li key={b.name + k} className="xbatch">
+                  <BatchLink b={b} enquire={enquire}>
                   {b.image ? (
                     <figure className="xbatch__photo" data-reveal="mask" data-reveal-delay={String(k * 0.14)}>
                       <CmsImage src={b.image.src} alt={b.image.alt} fill sizes="(max-width: 900px) 92vw, 30vw" quality={82} />
@@ -144,7 +163,14 @@ export default function ExamTracks({
                         <strong>Best for:</strong> {b.bestFor}
                       </p>
                     ) : null}
+                    {enquire ? (
+                      <span className="xbatch__cta">
+                        <span>Enquire about this batch</span>
+                        <Arrow />
+                      </span>
+                    ) : null}
                   </div>
+                  </BatchLink>
                 </li>
               ))}
             </ol>

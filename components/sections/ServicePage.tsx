@@ -356,7 +356,7 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
       {journeyLate ? null : journeySection}
 
       {/* Exam tracks (Competitive Exam Preparation): the picker and a section per exam. */}
-      {s.tracks?.length ? <ExamTracks heading={s.tracksHeading || 'Choose your exam'} text={s.tracksText} tracks={s.tracks} batches={s.examBatches} approach={s.examApproach} why={s.examWhy} /> : null}
+      {s.tracks?.length ? <ExamTracks heading={s.tracksHeading || 'Choose your exam'} text={s.tracksText} tracks={s.tracks} batches={s.examBatches} approach={s.examApproach} why={s.examWhy} enquire={`${contact}&course=${encodeURIComponent(s.title)}`} /> : null}
 
       {/* Courses within the programme (AI, Coding and Robotics): a slider of large photo cards. */}
       {courses.length ? (

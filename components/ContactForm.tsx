@@ -26,11 +26,17 @@ const fieldErrorStyle = { color: '#b42318' } as const;
  */
 export default function ContactForm({
   initialDivision = 'general',
+  initialCourse,
+  initialMessage,
   email,
   note = 'We reply by email.',
   courses = {},
 }: {
   initialDivision?: Division;
+  /** Preselected course or service (one of the options), e.g. from a programme page. */
+  initialCourse?: string;
+  /** Starting text for the message, e.g. the batch chosen on a programme page. */
+  initialMessage?: string;
   /** Fallback address shown in error and success messages. */
   email: string;
   note?: string;
@@ -148,7 +154,14 @@ export default function ContactForm({
           <div className="field">
             <label htmlFor="course">{courseLabel}</label>
             {/* keyed so switching division clears a choice from the other list */}
-            <select key={division} id="course" name="course" required defaultValue="" aria-invalid={!!fieldErrors.course}>
+            <select
+              key={division}
+              id="course"
+              name="course"
+              required
+              defaultValue={division === initialDivision && initialCourse && options.includes(initialCourse) ? initialCourse : ''}
+              aria-invalid={!!fieldErrors.course}
+            >
               <option value="" disabled>
                 Choose one
               </option>
@@ -169,6 +182,7 @@ export default function ContactForm({
           id="message"
           name="message"
           maxLength={5000}
+          defaultValue={initialMessage}
           placeholder={division === 'marketing' ? 'What does your business do, and what would you like marketing to achieve?' : 'Who is the learner, what are they working towards, and where do they need support?'}
           aria-invalid={!!fieldErrors.message}
         />
