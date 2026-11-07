@@ -416,31 +416,37 @@ export const education = {
     points: [
       {
         title: 'Interactive Learning That Keeps Them Curious',
+        subtitle: 'Teaching methods that make learning enjoyable',
         text: 'Interactive lessons and engaging activities encourage students to participate, ask questions, and enjoy discovering new ideas.',
         icon: 'questions',
       },
       {
         title: 'Understanding Before Memorising',
+        subtitle: 'Practical understanding of concepts over rote learning.',
         text: 'We help students understand why concepts work, so they can apply their knowledge beyond memorised answers.',
         icon: 'bulb',
       },
       {
         title: 'Connect Learning to the Real World',
+        subtitle: 'Real-Life Application',
         text: 'Students explore how classroom concepts relate to everyday situations, practical challenges, and real-world applications.',
         icon: 'globe',
       },
       {
         title: 'Make Complex Ideas Easier to Understand',
+        subtitle: 'Story-Based Learning',
         text: 'We use relatable stories, examples, and explanations to help students connect new concepts with what they already know.',
         icon: 'book',
       },
       {
         title: 'Learning That Adapts to the Student',
+        subtitle: 'Personalised Learning',
         text: 'Learning support is tailored to each student’s current understanding, individual needs, and pace of progress.',
         icon: 'sliders',
       },
       {
         title: 'Build Strong Foundations, One Concept at a Time',
+        subtitle: 'Mastery at Your Own Pace',
         text: 'Students strengthen their understanding through guided practice and revisit difficult concepts before progressing.',
         icon: 'layers',
       },
