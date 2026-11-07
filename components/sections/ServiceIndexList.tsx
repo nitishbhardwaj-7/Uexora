@@ -84,7 +84,8 @@ export default function ServiceIndexList({ division, items, all, compact }: Prop
                 </span>
                 <span className="pindex__body">
                   <span className="pindex__title h3">{s.title}</span>
-                  <span className="pindex__text">{s.text}</span>
+                  {/* The same line as under the title on the service's own page. */}
+                  <span className="pindex__text">{s.promise || s.text}</span>
                 </span>
                 <span className="pindex__thumb" aria-hidden="true">
                   {s.image ? (
