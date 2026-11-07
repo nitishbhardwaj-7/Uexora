@@ -3358,6 +3358,114 @@ a.fmarquee__card:focus-visible {
   outline-offset: 2px;
   border-radius: 6px;
 }
+
+/* Floating WhatsApp button (components/WhatsAppButton.tsx): bottom right on every page, under
+   the full-screen menu and the intro loader. In WhatsApp's own green so it reads at a glance. */
+.wa-float {
+  --wa: #25d366;
+  position: fixed;
+  right: calc(clamp(16px, 2.4vw, 32px) + env(safe-area-inset-right, 0px));
+  bottom: calc(clamp(16px, 2.4vw, 32px) + env(safe-area-inset-bottom, 0px));
+  z-index: 80;
+  display: grid;
+  place-items: center;
+  width: clamp(56px, 4.4vw, 64px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--wa);
+  color: #fff;
+  box-shadow: 0 14px 30px -10px rgba(37, 211, 102, 0.55), 0 6px 18px -8px rgba(4, 10, 40, 0.5);
+  transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out);
+  animation: wa-in 0.9s var(--ease-out) 2.2s both;
+}
+.wa-float__icon {
+  position: relative;
+  z-index: 1;
+  width: 52%;
+  height: 52%;
+  animation: wa-nudge 6s ease-in-out 4s infinite;
+}
+/* Two rings that ripple outwards in turn. */
+.wa-float__ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--wa);
+  pointer-events: none;
+  opacity: 0;
+  animation: wa-ring 2.6s cubic-bezier(0.2, 0.6, 0.3, 1) 3s infinite;
+}
+.wa-float__ring--late {
+  animation-delay: 4.3s;
+}
+.wa-float:hover,
+.wa-float:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 0 0 3px var(--gold-500), 0 20px 38px -12px rgba(37, 211, 102, 0.65), 0 8px 22px -8px rgba(4, 10, 40, 0.55);
+}
+.wa-float:hover .wa-float__icon {
+  animation-play-state: paused;
+}
+.wa-float:focus-visible {
+  outline: none;
+}
+@keyframes wa-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes wa-ring {
+  0% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.75);
+  }
+}
+/* A quick wiggle, then a long rest. */
+@keyframes wa-nudge {
+  0%,
+  86%,
+  100% {
+    transform: rotate(0);
+  }
+  88% {
+    transform: rotate(-14deg) scale(1.08);
+  }
+  90% {
+    transform: rotate(12deg) scale(1.08);
+  }
+  92% {
+    transform: rotate(-8deg) scale(1.04);
+  }
+  94% {
+    transform: rotate(5deg);
+  }
+  96% {
+    transform: rotate(0);
+  }
+}
+@media print {
+  .wa-float {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wa-float,
+  .wa-float__icon {
+    animation: none;
+  }
+  .wa-float__ring {
+    display: none;
+  }
+}
 .footer__col p strong {
   color: var(--cream);
   display: block;

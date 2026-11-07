@@ -7,6 +7,7 @@ import Announcement from '@/components/Announcement';
 import Enhancements from '@/components/Enhancements';
 import PageTransition from '@/components/PageTransition';
 import PrefetchRoutes from '@/components/PrefetchRoutes';
+import WhatsAppButton from '@/components/WhatsAppButton';
 
 /**
  * Everything around a page: intro loader, header, footer and the scroll enhancements.
@@ -26,6 +27,7 @@ export default async function SiteChrome({ children }: { children: React.ReactNo
         <PageTransition>{children}</PageTransition>
       </main>
       <Footer showBlog={blog} />
+      {s.whatsapp ? <WhatsAppButton href={s.whatsapp} /> : null}
       <Enhancements />
       <PrefetchRoutes />
     </>
