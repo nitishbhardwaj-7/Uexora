@@ -71,8 +71,6 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
   const endsLight = platforms.length && !s.closing?.heading;
   const approachTone = endsLight ? sectionTone : altTone;
   const faqTone = endsLight ? altTone : sectionTone;
-  const ownPoints = (s.approachPoints || []).filter((p) => p?.title);
-  const approachPoints = ownPoints.length ? ownPoints : (statement.points || []).filter((p) => p?.title);
   const journey = (s.journey?.journeySteps || []).filter((j) => j?.title);
   const journeyHeading = s.journey?.heading || 'Your Learning Journey';
   // Pillars and the journey are both light, so with pillars the journey waits until after the dark slider.
@@ -478,10 +476,9 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
       ) : null}
 
       {/* With approach points (Education), they replace the quote and paragraphs; a page with its
-          own exam tracks carries each exam's approach instead. A page's own points, when set,
-          take the place of the division's shared ones. */}
-      {s.tracks?.length ? null : approachPoints.length ? (
-        <ApproachGrid id="approach" heading={statement.heading} quote={statement.quote} points={approachPoints} tone={approachTone} />
+          own exam tracks carries each exam's approach instead. */}
+      {s.tracks?.length ? null : statement.points?.filter((p) => p?.title).length ? (
+        <ApproachGrid id="approach" heading={statement.heading} quote={statement.quote} points={statement.points.filter((p) => p?.title)} tone={approachTone} />
       ) : (
         <Statement id="approach" eyebrow={statement.heading} quote={statement.quote} paragraphs={statement.paragraphs.slice(0, 2)} tone={approachTone} />
       )}

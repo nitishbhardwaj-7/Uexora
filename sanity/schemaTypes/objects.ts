@@ -423,25 +423,6 @@ export const service = defineType({
       ],
     }),
     defineField({
-      name: 'approachPoints',
-      title: 'Approach points for this page (optional)',
-      type: 'array',
-      description: 'Replaces the shared approach points (Education or Marketing page) on this page only. Leave empty to show the shared ones.',
-      of: [
-        defineArrayMember({
-          type: 'object',
-          name: 'pageApproachPoint',
-          fields: [
-            defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
-            defineField({ name: 'subtitle', title: 'Subtitle (optional)', type: 'string' }),
-            defineField({ name: 'text', title: 'Text', type: 'text', rows: 3 }),
-            defineField({ name: 'icon', title: 'Icon', type: 'string', options: { list: iconOptions } }),
-          ],
-          preview: { select: { title: 'title', subtitle: 'text' } },
-        }),
-      ],
-    }),
-    defineField({
       name: 'examWhy',
       title: 'Exam: why choose us',
       type: 'object',
