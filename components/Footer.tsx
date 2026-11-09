@@ -78,7 +78,7 @@ export default async function Footer({ showBlog }: { showBlog?: boolean }) {
 
           <div className="footer__col">
             <p className="footer__heading">Follow us</p>
-            <SocialIcons className="footer__social" links={{ whatsapp: s.whatsapp, instagram: s.instagram, youtube: s.youtube, tiktok: s.tiktok }} />
+            <SocialIcons className="footer__social" links={{ instagram: s.instagram, facebook: s.facebook, linkedin: s.linkedin, youtube: s.youtube, tiktok: s.tiktok }} />
           </div>
         </div>
 

@@ -13,9 +13,12 @@ export const settings = {
   phone: '',
   hours: 'Monday to Saturday, 09:00 – 19:00',
   // TODO(client): placeholders (each network's home page) until the real profile links are added in the studio.
-  // WhatsApp takes a chat link such as https://wa.me/91XXXXXXXXXX. Clear a link to hide its icon.
+  // WhatsApp takes a chat link such as https://wa.me/91XXXXXXXXXX and drives the floating button
+  // only; the others are the footer icons. Clear a link to hide its button or icon.
   whatsapp: 'https://www.whatsapp.com/',
   instagram: 'https://www.instagram.com/',
+  facebook: 'https://www.facebook.com/',
+  linkedin: 'https://www.linkedin.com/',
   youtube: 'https://www.youtube.com/',
   tiktok: 'https://www.tiktok.com/',
   footerStatement: 'Two distinct divisions. One shared belief:',
