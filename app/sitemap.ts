@@ -20,6 +20,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...e.programmes.map((p) => page(servicePath('education', p.slug), 0.7)),
     ...m.services.map((s) => page(servicePath('marketing', s.slug), 0.7)),
     page('/contact', 0.8),
+    page('/book-demo', 0.7),
     ...(posts.length ? [page('/blog', 0.7, 'weekly')] : []),
     ...posts.map((p) => ({ url: `${site.url}${postPath(p.slug)}`, lastModified: new Date(p.publishedAt), changeFrequency: 'monthly' as const, priority: 0.6 })),
   ];

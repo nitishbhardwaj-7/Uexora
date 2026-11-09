@@ -94,6 +94,14 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
   ) : null;
   const courses =(s.courses?.courseSlides || []).filter((c) => c?.title);
   const coursesHeading = s.courses?.heading || 'Explore Our Programmes';
+  // The hero's second button: to this page's own programmes (the slider, or the exam picker) when
+  // it has them. Without them, Education offers a free demo class; Marketing keeps its service list.
+  const ownProgrammes = courses.length ? '#courses' : s.tracks?.length ? '#exams' : '';
+  const heroSecondary = ownProgrammes
+    ? { label: `All ${meta.units}`, href: ownProgrammes }
+    : division === 'education'
+      ? { label: 'Book a free demo class', href: `/book-demo?programme=${encodeURIComponent(s.title)}` }
+      : { label: `All ${meta.units}`, href: meta.listAnchor };
   const tools = (s.tools?.toolCards || []).filter((t) => t?.name);
   const toolsHeading = s.tools?.heading || 'AI Tools Students Explore';
   const enquire = division === 'education' ? 'Speak with our education team' : 'Discuss your requirements';
@@ -158,7 +166,7 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
         lead={s.promise || s.text}
         tone={heroTone}
         primary={{ label: enquire, href: contact }}
-        secondary={{ label: `All ${meta.units}`, href: meta.listAnchor }}
+        secondary={heroSecondary}
         background={s.heroImage || s.image}
         chips={s.highlights}
         crumbs={[{ label: meta.name, href: meta.path }, { label: unitCap }]}

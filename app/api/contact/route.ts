@@ -25,8 +25,8 @@ import { EnquiryStoreConfigError, saveEnquiry } from '@/lib/cms/enquiries';
 export const runtime = 'nodejs';
 
 type Division = 'education' | 'marketing' | 'general';
-type Payload = { division: Division; name: string; email: string; phone: string; course: string; message: string };
-type FieldErrors = Partial<Record<keyof Payload, string>>;
+type Payload = { division: Division; name: string; email: string; phone: string; course: string; message: string; demo?: boolean };
+type FieldErrors = Partial<Record<keyof Payload | 'grade' | 'subject' | 'preferred', string>>;
 
 const divisions = (s: SettingsContent): Record<Division, { label: string; to: string }> => ({
   education: { label: 'Uexora Education', to: s.educationEmail || s.email },
@@ -94,6 +94,54 @@ function validate(body: Record<string, unknown>, courses: Partial<Record<Divisio
   return { data: { division, name, email, phone, course: allowed ? course : '', message } };
 }
 
+/** "2026-11-12T16:30" as the visitor picked it (their own local time), or null if it is not a real date. */
+function readPreferred(value: string) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})$/.exec(value);
+  if (!m) return null;
+  const [y, mo, d, h, min] = m.slice(1).map(Number);
+  const at = new Date(Date.UTC(y, mo - 1, d, h, min));
+  return at.getUTCMonth() === mo - 1 && at.getUTCDate() === d ? at : null;
+}
+
+/** The Book a Free Demo Class form. Its details go in the enquiry's message, so the studio and email need nothing new. */
+function validateDemo(body: Record<string, unknown>, courses: Partial<Record<Division, string[]>>): { data?: Payload; fields?: FieldErrors } {
+  const fields: FieldErrors = {};
+  const name = text(body.name);
+  const grade = text(body.grade);
+  const subject = text(body.subject);
+  const phone = text(body.phone);
+  const email = text(body.email);
+  const preferred = readPreferred(text(body.preferred));
+
+  if (name.length < 2) fields.name = 'Please enter your name.';
+  else if (name.length > MAX.name) fields.name = `Keep your name under ${MAX.name} characters.`;
+  if (!grade) fields.grade = 'Please enter the grade.';
+  else if (grade.length > 40) fields.grade = 'Keep the grade under 40 characters.';
+  if (!subject) fields.subject = 'Please enter the subject.';
+  else if (subject.length > 100) fields.subject = 'Keep the subject under 100 characters.';
+  if (phone.replace(/\D/g, '').length < 7) fields.phone = 'Please enter your phone number.';
+  else if (phone.length > MAX.phone) fields.phone = 'That phone number looks too long.';
+  if (!EMAIL_RE.test(email) || email.length > MAX.email) fields.email = 'Please enter a valid email address.';
+  // The time has no time zone, so only one that has passed everywhere is refused here; the form's own minimum is exact.
+  if (!preferred) fields.preferred = 'Please choose a date and time.';
+  else if (preferred.getTime() < Date.now() - 12 * 3600 * 1000) fields.preferred = 'Please choose a date and time in the future.';
+
+  if (Object.keys(fields).length) return { fields };
+  const programme = text(body.programme);
+  const when = preferred!.toLocaleString('en-IN', { timeZone: 'UTC', dateStyle: 'medium', timeStyle: 'short' });
+  return {
+    data: {
+      division: 'education',
+      name,
+      email,
+      phone,
+      course: courses.education?.includes(programme) ? programme : '',
+      message: ['Free demo class request', `Grade: ${grade}`, `Subject: ${subject}`, `Preferred date and time: ${when}`].join('\n'),
+      demo: true,
+    },
+  };
+}
+
 /* ---------- SMTP delivery ---------- */
 
 class MailConfigError extends Error {}
@@ -124,7 +172,7 @@ function renderEmail(data: Payload, settings: SettingsContent) {
     '',
     `— Sent from the contact form at ${site.url}/contact`,
   ];
-  return { to, subject: `${label}: enquiry from ${data.name}`, text: lines.join('\n') };
+  return { to, subject: `${label}: ${data.demo ? 'free demo class request' : 'enquiry'} from ${data.name}`, text: lines.join('\n') };
 }
 
 async function deliver(data: Payload, settings: SettingsContent) {
@@ -162,7 +210,8 @@ export async function POST(request: Request) {
   const settings = await getSettings();
   if (rateLimited(clientKey(request))) return fail(429, `Too many messages from this connection. Please wait a few minutes, or email ${settings.email} directly.`);
 
-  const { data, fields } = validate(body, await courseOptions());
+  const options = await courseOptions();
+  const { data, fields } = body.type === 'demo' ? validateDemo(body, options) : validate(body, options);
   if (!data) return fail(400, 'Please check the highlighted fields.', fields);
 
   // 1. Email the division inbox.
