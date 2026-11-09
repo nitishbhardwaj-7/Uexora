@@ -160,7 +160,8 @@ export const educationPage = defineType({
         defineField({ name: 'rows', title: 'Situations', type: 'array', of: [defineArrayMember({ type: 'signpost' })] }),
       ],
     }),
-    defineField({ name: 'faqs', title: 'Common questions', type: 'array', group: 'why', of: [defineArrayMember({ type: 'faq' })] }),
+    // No longer shown on the Education page (each programme page has its own questions); hidden so old entries stay but aren't edited.
+    defineField({ name: 'faqs', title: 'Common questions (no longer shown)', type: 'array', group: 'why', hidden: true, of: [defineArrayMember({ type: 'faq' })] }),
     defineField({
       name: 'why',
       title: 'Why choose us',

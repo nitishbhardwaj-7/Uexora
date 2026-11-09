@@ -8,7 +8,6 @@ import { WhyChoose } from '@/components/sections/Blocks';
 import ServiceCards from '@/components/sections/ServiceCards';
 import CtaBand from '@/components/sections/CtaBand';
 import Signpost from '@/components/sections/Signpost';
-import Faq from '@/components/sections/Faq';
 import { getEducation } from '@/lib/cms';
 import { heroSlides } from '@/lib/cms/services';
 import { pageMetadata } from '@/lib/seo';
@@ -75,19 +74,6 @@ export default async function EducationPage() {
       <SkillsMosaic id="beyond" heading={e.beyond.heading} paragraphs={e.beyond.paragraphs} skills={e.beyond.skills} images={e.beyond.skillImages} tone="dark" />
 
       <Signpost id="choose" division="education" heading={e.choose.heading} intro={e.choose.intro} rows={e.choose.rows} services={e.programmes} tone="light" />
-
-      <section id="questions" className="section section--flush-top" data-tone="light" aria-labelledby="faq-title">
-        <div className="container">
-          <div className="section-head">
-            <h2 id="faq-title" className="h2" data-split>
-              Common questions
-            </h2>
-          </div>
-          <div data-reveal>
-            <Faq items={e.faqs} askHref="/contact?division=education" />
-          </div>
-        </div>
-      </section>
 
       <WhyChoose
         id="why-choose-us"
