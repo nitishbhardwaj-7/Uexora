@@ -128,6 +128,7 @@ function validateDemo(body: Record<string, unknown>, courses: Partial<Record<Div
 
   if (Object.keys(fields).length) return { fields };
   const programme = text(body.programme);
+  const within = text(body.course).slice(0, 120);
   const when = preferred!.toLocaleString('en-IN', { timeZone: 'UTC', dateStyle: 'medium', timeStyle: 'short' });
   return {
     data: {
@@ -136,7 +137,7 @@ function validateDemo(body: Record<string, unknown>, courses: Partial<Record<Div
       email,
       phone,
       course: courses.education?.includes(programme) ? programme : '',
-      message: ['Free demo class request', `Grade: ${grade}`, `Subject: ${subject}`, `Preferred date and time: ${when}`].join('\n'),
+      message: ['Free demo class request', ...(within ? [`Programme chosen: ${within}`] : []), `Grade: ${grade}`, `Subject: ${subject}`, `Preferred date and time: ${when}`].join('\n'),
       demo: true,
     },
   };

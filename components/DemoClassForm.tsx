@@ -14,7 +14,7 @@ const fieldErrorStyle = { color: '#b42318' } as const;
  * Book a free demo class. Posts to the contact route (`type: 'demo'`), so it shares that route's
  * spam checks, email to the Education inbox and copy in the studio's Enquiries.
  */
-export default function DemoClassForm({ programme, email, note }: { programme?: string; email: string; note: string }) {
+export default function DemoClassForm({ programme, course, email, note }: { programme?: string; course?: string; email: string; note: string }) {
   const [status, setStatus] = useState<Status>('idle');
   const [error, setError] = useState<string | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
@@ -44,6 +44,7 @@ export default function DemoClassForm({ programme, email, note }: { programme?: 
         body: JSON.stringify({
           type: 'demo',
           programme,
+          course,
           name: data.get('name'),
           grade: data.get('grade'),
           subject: data.get('subject'),
@@ -80,7 +81,7 @@ export default function DemoClassForm({ programme, email, note }: { programme?: 
     <form id="demo-form" className="form" onSubmit={send}>
       {programme ? (
         <p className="form__division">
-          <span>Demo class for</span> <strong>{programme}</strong>
+          <span>Demo class for</span> <strong>{course || programme}</strong>
         </p>
       ) : null}
 

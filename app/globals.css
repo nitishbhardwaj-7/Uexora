@@ -8388,6 +8388,39 @@ html.reveal-ready .steps--seq.is-in .step p {
   max-width: min(40rem, 84%);
   padding: clamp(1.5rem, 3.2vw, 3.25rem);
 }
+/* Education's slides: the whole centre card is a link to the demo class form, with this cue on it. */
+.cslide__link {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  border-radius: inherit;
+  -webkit-user-drag: none;
+}
+.cslide__link:focus-visible {
+  outline: 2px solid var(--gold-500);
+  outline-offset: -4px;
+}
+.cslide__cta {
+  display: inline-flex;
+  align-items: center;
+  justify-self: start;
+  gap: 0.55rem;
+  margin-top: 0.25rem;
+  padding-bottom: 0.15rem;
+  border-bottom: 1px solid var(--gold-500);
+  font-family: var(--font-sub), ui-sans-serif, system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 0.98rem;
+  color: var(--gold-500);
+}
+.cslide__cta svg {
+  width: 1rem;
+  height: 1rem;
+  transition: transform 0.4s var(--ease-out);
+}
+.cslide:hover .cslide__cta svg {
+  transform: translateX(4px);
+}
 .cslide__title {
   font-family: var(--font-heading), Georgia, serif;
   font-weight: 400;

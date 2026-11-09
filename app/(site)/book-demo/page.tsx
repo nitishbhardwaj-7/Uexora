@@ -9,10 +9,12 @@ import { demoClass } from '@/content/demo';
 export const metadata: Metadata = pageMetadata({ title: demoClass.seo.title, description: demoClass.seo.description, path: '/book-demo' });
 
 /** Book a free demo class: laid out like the contact page. A programme page's button names its programme in the link. */
-export default async function BookDemoPage({ searchParams }: { searchParams: Promise<{ programme?: string }> }) {
-  const [s, e, { programme }] = await Promise.all([getSettings(), getEducation(), searchParams]);
-  // Only one of the real programme titles is taken from the link.
-  const chosen = e.programmes.find((p) => p.title === programme)?.title;
+export default async function BookDemoPage({ searchParams }: { searchParams: Promise<{ programme?: string; course?: string }> }) {
+  const [s, e, { programme, course }] = await Promise.all([getSettings(), getEducation(), searchParams]);
+  // Only a real programme title, and a real course within it (a slide on its page), are taken from the link.
+  const found = e.programmes.find((p) => p.title === programme);
+  const chosen = found?.title;
+  const chosenCourse = found?.courses?.courseSlides?.find((c) => c.title === course)?.title;
   const inbox = s.educationEmail || s.email;
 
   return (
@@ -51,7 +53,7 @@ export default async function BookDemoPage({ searchParams }: { searchParams: Pro
 
           <div className="contact__form" data-reveal data-reveal-delay="0.25">
             <h2 className="contact__form-title">{demoClass.formHeading}</h2>
-            <DemoClassForm key={chosen || 'any'} programme={chosen} email={inbox} note={demoClass.note} />
+            <DemoClassForm key={`${chosen}|${chosenCourse}`} programme={chosen} course={chosenCourse} email={inbox} note={demoClass.note} />
           </div>
         </div>
       </section>

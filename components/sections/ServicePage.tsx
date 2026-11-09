@@ -381,7 +381,7 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
               ) : null}
             </div>
           </div>
-          <CourseSlider slides={courses} label={coursesHeading} />
+          <CourseSlider slides={courses} label={coursesHeading} demoFor={division === 'education' ? s.title : undefined} />
         </section>
       ) : null}
 

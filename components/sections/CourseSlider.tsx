@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 import CmsImage from '@/components/ui/CmsImage';
+import { Arrow } from '@/components/ui/Button';
 import type { Service } from '@/content/types';
 
 type Slide = NonNullable<Service['courses']>['courseSlides'][number];
@@ -31,8 +33,10 @@ export function Chevron({ dir }: { dir: 'prev' | 'next' }) {
  */
 const AUTOPLAY_MS = 2000;
 
-export default function CourseSlider({ slides, label }: { slides: Slide[]; label: string }) {
+export default function CourseSlider({ slides, label, demoFor }: { slides: Slide[]; label: string; /** The programme's title: makes the centre slide a link to its free demo class form. */ demoFor?: string }) {
   const n = slides.length;
+  // With links on the slides, the slide stays put under the mouse so the click lands on the one being read.
+  const [hovering, setHovering] = useState(false);
   const [active, setActive] = useState(0);
   const [inView, setInView] = useState(false);
   const [motionOk, setMotionOk] = useState(false);
@@ -72,7 +76,7 @@ export default function CourseSlider({ slides, label }: { slides: Slide[]; label
   }, []);
 
   // Every change, by hand or by itself, starts a fresh wait before the next one.
-  const playing = n > 1 && motionOk && inView && !keyboardIn && !paused;
+  const playing = n > 1 && motionOk && inView && !keyboardIn && !paused && !(demoFor && hovering);
   useEffect(() => {
     if (!playing) return;
     const t = window.setTimeout(() => setActive((a) => (a + 1) % n), AUTOPLAY_MS);
@@ -119,7 +123,14 @@ export default function CourseSlider({ slides, label }: { slides: Slide[]; label
 
   return (
     <div ref={root} className="cslider" role="region" aria-roledescription="carousel" aria-label={label} onKeyDown={onKey} onFocus={onFocus} onBlur={onBlur}>
-      <div className="cslider__stage" onPointerDown={onPointerDown} onPointerUp={onPointerUp} onPointerCancel={() => (start.current = null)}>
+      <div
+        className="cslider__stage"
+        onPointerDown={onPointerDown}
+        onPointerUp={onPointerUp}
+        onPointerCancel={() => (start.current = null)}
+        onPointerEnter={(e) => e.pointerType === 'mouse' && setHovering(true)}
+        onPointerLeave={(e) => e.pointerType === 'mouse' && setHovering(false)}
+      >
         {slides.map((s, i) => {
           const d = posOf(i);
           return (
@@ -151,7 +162,26 @@ export default function CourseSlider({ slides, label }: { slides: Slide[]; label
                 <h3 className="cslide__title">{s.title}</h3>
                 {s.audience ? <p className="cslide__audience">{s.audience}</p> : null}
                 {s.text ? <p className="cslide__text">{s.text}</p> : null}
+                {demoFor ? (
+                  <span className="cslide__cta" aria-hidden="true">
+                    Book a free demo class
+                    <Arrow />
+                  </span>
+                ) : null}
               </div>
+              {/* Only the centre slide links; a click on a neighbour brings it to the centre first. */}
+              {demoFor && d === 0 ? (
+                <Link
+                  href={`/book-demo?programme=${encodeURIComponent(demoFor)}&course=${encodeURIComponent(s.title)}`}
+                  className="cslide__link"
+                  data-cursor
+                  draggable={false}
+                  aria-label={`${s.title}: book a free demo class`}
+                  onClick={(e) => {
+                    if (swiped.current) e.preventDefault();
+                  }}
+                />
+              ) : null}
             </div>
           );
         })}
