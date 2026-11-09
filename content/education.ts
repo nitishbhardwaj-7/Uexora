@@ -9,6 +9,7 @@ import { aiTools } from './ai-tools.ts';
 import { communicationCourses, communicationPillars, communicationPlatforms } from './communication-programme.ts';
 import { corporateAreas, corporateWorkshops } from './corporate-programme.ts';
 import { inclusiveAreas, inclusiveClosing, inclusiveCourses, inclusiveServes, inclusiveWorkshops } from './special-support-programme.ts';
+import { aiProfessionalsApproach, aiStudentsApproach, communicationApproach, corporateApproach, specialNeedsApproach } from './programme-approaches.ts';
 
 /**
  * Default content for the Education page. This is the fallback (and the seed) for the
@@ -237,6 +238,7 @@ const programmes: Service[] = [
     ],
     courses: aiCourses,
     tools: aiTools,
+    approach: aiStudentsApproach,
     faqs: [
       { q: 'What age can learners start?', a: 'We believe students should have opportunities to understand technology from an early age. Tell us about the learner and we will suggest a suitable starting point.' },
       { q: 'Is prior coding experience needed?', a: 'No. Learners explore new concepts and experiment with ideas through practical activities.' },
@@ -260,6 +262,7 @@ const programmes: Service[] = [
     journey: aiProfessionalJourney,
     courses: aiProfessionalCourses,
     tools: aiProfessionalTools,
+    approach: aiProfessionalsApproach,
     faqs: [],
     text: 'Artificial intelligence is changing how people work, teach and learn. This programme helps working professionals and educators understand what AI can do, use AI tools practically in their everyday work and think about using them responsibly.',
   },
@@ -278,6 +281,7 @@ const programmes: Service[] = [
     pillars: communicationPillars,
     courses: communicationCourses,
     platforms: communicationPlatforms,
+    approach: communicationApproach,
     // DRAFT, for the client to review: the questions are ours; the answers keep to the client's facts.
     faqs: [
       { q: 'Who is this programme for?', a: 'Students from Grade 5 through university, in three stages: Foundation Explorers for Grades 5–8, Emerging Leaders for Grades 9–12 and Future Professionals for university students.' },
@@ -304,6 +308,7 @@ const programmes: Service[] = [
     courses: inclusiveCourses,
     workshops: inclusiveWorkshops,
     closing: inclusiveClosing,
+    approach: specialNeedsApproach,
     // DRAFT, for the client to review: the questions are ours; the answers keep to the client's facts.
     faqs: [
       { q: 'Who is this programme for?', a: 'Children from age 2 onwards, including young children who need additional learning support, children with autism spectrum disorder (ASD) or ADHD, and children with speech and language difficulties, learning differences or social communication difficulties.' },
@@ -327,6 +332,7 @@ const programmes: Service[] = [
     details: [],
     platforms: corporateAreas,
     closing: corporateWorkshops,
+    approach: corporateApproach,
     // DRAFT, for the client to review: the questions are ours; the answers keep to the client's facts.
     faqs: [
       { q: 'What does the corporate training cover?', a: 'Seven areas: sales and business development, marketing and digital marketing, leadership and management, customer service, professional and soft skills, technology, AI and digital skills, and HR and organisational development.' },

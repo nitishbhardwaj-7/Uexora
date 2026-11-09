@@ -92,7 +92,7 @@ export const educationPage = defineType({
           name: 'points',
           title: 'Approach points',
           type: 'array',
-          description: 'Shown on every programme page as a grid of three per row, with a photo each. Nine fills three rows.',
+          description: 'Shown as a grid of three per row on programme pages that do not have approach points of their own. Nine fills three rows.',
           of: [
             defineArrayMember({
               type: 'object',

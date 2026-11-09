@@ -655,6 +655,35 @@ export const service = defineType({
       ],
     }),
     defineField({
+      name: 'approach',
+      title: 'This page’s approach',
+      type: 'object',
+      description: 'Optional. Points for this page’s approach section, in place of the ones shared across the division. Leave the points empty to keep the current ones.',
+      options: { collapsible: true, collapsed: true },
+      fields: [
+        defineField({ name: 'quote', title: 'Line under the heading', type: 'text', rows: 2 }),
+        defineField({
+          name: 'approachPoints',
+          title: 'Points',
+          type: 'array',
+          description: 'Three per row, so six or nine fill the rows evenly.',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              name: 'approachPoint',
+              fields: [
+                defineField({ name: 'title', title: 'Title', type: 'string', validation: (r) => r.required() }),
+                defineField({ name: 'subtitle', title: 'Subtitle (optional)', type: 'string' }),
+                defineField({ name: 'text', title: 'Text', type: 'text', rows: 3 }),
+                defineField({ name: 'icon', title: 'Icon', type: 'string', description: 'The animated line icon shown above the point.', options: { list: iconOptions } }),
+              ],
+              preview: { select: { title: 'title', subtitle: 'subtitle' } },
+            }),
+          ],
+        }),
+      ],
+    }),
+    defineField({
       name: 'comparison',
       title: 'Comparison',
       type: 'object',

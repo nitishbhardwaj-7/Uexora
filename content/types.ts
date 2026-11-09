@@ -57,6 +57,8 @@ export type Service = {
   journey?: { heading: string; text?: string; journeySteps: { label?: string; title: string; text?: string }[] };
   /** Optional slider of the courses within the programme (e.g. AI Foundation), shown before the approach. */
   courses?: { heading: string; text?: string; courseSlides: { title: string; audience: string; text: string; image: { src: string; alt: string } }[] };
+  /** This page's own approach section, in place of the division's shared points. */
+  approach?: { quote?: string; approachPoints: { title: string; subtitle?: string; text?: string; icon?: string; image?: { src: string; alt: string } }[] };
   /** Optional cards of the tools students work with (e.g. ChatGPT), shown after the course slider. */
   tools?: { heading: string; text?: string; note?: string; toolCards: { name: string; text?: string; logo?: { src: string; alt: string } }[] };
   /** Optional side-by-side comparison shown before the questions (e.g. against typical home tuition). */

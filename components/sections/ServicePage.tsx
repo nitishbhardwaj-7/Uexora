@@ -105,6 +105,10 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
   const tools = (s.tools?.toolCards || []).filter((t) => t?.name);
   const toolsHeading = s.tools?.heading || 'AI Tools Students Explore';
   const enquire = division === 'education' ? 'Speak with our education team' : 'Discuss your requirements';
+  // A page's own approach points replace the division's shared ones, along with the line above them.
+  const ownApproach = (s.approach?.approachPoints || []).filter((p) => p?.title);
+  const approachPoints = ownApproach.length ? ownApproach : (statement.points || []).filter((p) => p?.title);
+  const approachQuote = (ownApproach.length && s.approach?.quote) || statement.quote;
   const faqs = s.faqs?.filter((f) => f.q && f.a) || [];
   const imageUrl = s.image ? (s.image.src.startsWith('http') ? s.image.src : `${site.url}${s.image.src}`) : null;
 
@@ -485,8 +489,8 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
 
       {/* With approach points (Education), they replace the quote and paragraphs; a page with its
           own exam tracks carries each exam's approach instead. */}
-      {s.tracks?.length ? null : statement.points?.filter((p) => p?.title).length ? (
-        <ApproachGrid id="approach" heading={statement.heading} quote={statement.quote} points={statement.points.filter((p) => p?.title)} tone={approachTone} />
+      {s.tracks?.length ? null : approachPoints.length ? (
+        <ApproachGrid id="approach" heading={statement.heading} quote={approachQuote} points={approachPoints} tone={approachTone} />
       ) : (
         <Statement id="approach" eyebrow={statement.heading} quote={statement.quote} paragraphs={statement.paragraphs.slice(0, 2)} tone={approachTone} />
       )}

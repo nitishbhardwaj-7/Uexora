@@ -55,6 +55,7 @@ const arrayTypes: Record<string, string> = {
   whyList: 'examWhy',
   journeySteps: 'journeyStep',
   stats: 'stat',
+  approachPoints: 'approachPoint',
   courseSlides: 'courseSlide',
   toolCards: 'toolCard',
   pillarItems: 'pillarItem',
