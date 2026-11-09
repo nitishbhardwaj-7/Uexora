@@ -7628,10 +7628,7 @@ html.reveal-ready .steps--seq.is-in .step p {
   translate: 0 3px;
 }
 
-/* Sticky exam bar: stays under the header while the exam sections are on screen. */
-.xtracks__body {
-  position: relative;
-}
+/* Sticky exam bar: stays under the header from the first exam to the end of the page. */
 .xnav {
   position: sticky;
   top: var(--header-h);
@@ -8297,9 +8294,10 @@ html.reveal-ready .steps--seq.is-in .step p {
   color: #fff;
   box-shadow: 0 50px 90px -50px rgba(0, 0, 0, 0.95);
   transform: translateX(var(--x)) scale(var(--s));
+  /* Eased at both ends, so the travel is seen rather than over in the first moments. */
   transition:
-    transform 0.95s var(--ease-out),
-    opacity 0.7s var(--ease-out);
+    transform 1.6s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 1.2s ease;
   cursor: pointer;
 }
 .cslide[data-pos='0'] {
@@ -8370,7 +8368,7 @@ html.reveal-ready .steps--seq.is-in .step p {
   background: var(--navy-950);
   opacity: 0.6;
   pointer-events: none;
-  transition: opacity 0.8s var(--ease-out);
+  transition: opacity 1.4s ease;
 }
 .cslide[data-pos='0']::after {
   opacity: 0;
@@ -8465,8 +8463,8 @@ html.reveal-ready .steps--seq.is-in .step p {
   opacity: 1;
   translate: none;
   transition:
-    opacity 0.8s var(--ease-out) calc(0.3s + var(--k) * 0.09s),
-    translate 1s var(--ease-out) calc(0.3s + var(--k) * 0.09s);
+    opacity 0.9s var(--ease-out) calc(0.8s + var(--k) * 0.09s),
+    translate 1s var(--ease-out) calc(0.8s + var(--k) * 0.09s);
 }
 /* Round arrows on the edges of the centre card. Gold on hover, as elsewhere. */
 .cslider__arrow {
@@ -8580,7 +8578,7 @@ html.reveal-ready .steps--seq.is-in .step p {
   background: var(--accent-line);
   transform-origin: left;
   transform: scaleX(var(--p, 0));
-  transition: transform 0.9s var(--ease-out);
+  transition: transform 1.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 /* Entrance (only when JavaScript runs and motion is allowed): the centre card rises, then the
    neighbours slide out from behind it and the text and arrows follow. The start state applies

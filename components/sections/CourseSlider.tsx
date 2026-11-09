@@ -27,11 +27,13 @@ export function Chevron({ dir }: { dir: 'prev' | 'next' }) {
  * neighbours slide out from behind it; without JavaScript or under reduced motion it simply
  * shows finished (see globals.css).
  *
- * It also moves on by itself every AUTOPLAY_MS while it is on screen. Moving it by hand restarts
- * the wait; it holds while keyboard focus is inside it, and the button beside the count pauses
- * it. Under reduced motion it never moves by itself.
+ * It also moves on by itself every AUTOPLAY_MS while it is on screen, and waits the longer
+ * AFTER_HAND_MS once someone has moved it by hand, so there is time to read what they chose. It
+ * holds while keyboard focus is inside it, and the button beside the count pauses it. Under
+ * reduced motion it never moves by itself.
  */
-const AUTOPLAY_MS = 2000;
+const AUTOPLAY_MS = 6000;
+const AFTER_HAND_MS = 10000;
 
 export default function CourseSlider({ slides, label, demoFor }: { slides: Slide[]; label: string; /** The programme's title: makes the centre slide a link to its free demo class form. */ demoFor?: string }) {
   const n = slides.length;
@@ -45,10 +47,17 @@ export default function CourseSlider({ slides, label, demoFor }: { slides: Slide
   const root = useRef<HTMLDivElement>(null);
   const start = useRef<{ x: number; y: number } | null>(null);
   const swiped = useRef(false);
+  const movedByHand = useRef(false);
 
   const wrap = (i: number) => ((i % n) + n) % n;
-  const go = (i: number) => setActive(wrap(i));
-  const step = (by: number) => setActive((a) => wrap(a + by));
+  const go = (i: number) => {
+    movedByHand.current = true;
+    setActive(wrap(i));
+  };
+  const step = (by: number) => {
+    movedByHand.current = true;
+    setActive((a) => wrap(a + by));
+  };
 
   useEffect(() => {
     const el = root.current;
@@ -79,7 +88,13 @@ export default function CourseSlider({ slides, label, demoFor }: { slides: Slide
   const playing = n > 1 && motionOk && inView && !keyboardIn && !paused && !(demoFor && hovering);
   useEffect(() => {
     if (!playing) return;
-    const t = window.setTimeout(() => setActive((a) => (a + 1) % n), AUTOPLAY_MS);
+    const t = window.setTimeout(
+      () => {
+        movedByHand.current = false;
+        setActive((a) => (a + 1) % n);
+      },
+      movedByHand.current ? AFTER_HAND_MS : AUTOPLAY_MS,
+    );
     return () => window.clearTimeout(t);
   }, [playing, active, n]);
 
@@ -203,7 +218,7 @@ export default function CourseSlider({ slides, label, demoFor }: { slides: Slide
               {paused ? <path d="M5 3.2v9.6L12.6 8 5 3.2Z" fill="currentColor" /> : <path d="M5 3.5h2v9H5zM9 3.5h2v9H9z" fill="currentColor" />}
             </svg>
           </button>
-          {/* Announced only while it is still: a change every two seconds would talk over everything. */}
+          {/* Announced only while it is still: a change every few seconds would talk over everything. */}
           <p className="cslider__count" aria-live={playing ? 'off' : 'polite'}>
             <span className="cslider__now">{pad(active + 1)}</span>
             <span className="cslider__of"> / {pad(n)}</span>

@@ -3,9 +3,10 @@
 import { useEffect, useState } from 'react';
 
 /**
- * Slim bar that stays under the header while the exam sections are on screen, so a parent can
- * jump between NEET, JEE Main, JEE Advanced and Olympiad from anywhere in them. The exam being
- * read is underlined. Links are ordinary anchors (the smooth-scroll script handles them).
+ * Slim bar that stays under the header from the first exam to the end of the page, so a parent can
+ * jump between NEET, JEE Main, JEE Advanced and Olympiad from anywhere below them. The exam being
+ * read is underlined, and none is on the sections after the exams. Links are ordinary anchors (the
+ * smooth-scroll script handles them).
  */
 export default function ExamNav({ items }: { items: { slug: string; name: string }[] }) {
   const [active, setActive] = useState<string | null>(null);
@@ -18,6 +19,7 @@ export default function ExamNav({ items }: { items: { slug: string; name: string
       (entries) => {
         entries.forEach((e) => {
           if (e.isIntersecting) setActive(e.target.id);
+          else setActive((now) => (now === e.target.id ? null : now));
         });
       },
       { rootMargin: '-33% 0px -66% 0px' },

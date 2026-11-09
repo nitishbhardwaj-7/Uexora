@@ -18,10 +18,11 @@ const HEADER_OFFSET = -72;
 
 /**
  * How far below the top of the screen a section should land: under the fixed header, and under
- * the exam bar too when the section sits in the exam tracks (where that bar stays stuck).
+ * the exam bar too when the section comes after that bar (from there on it stays stuck).
  */
 function offsetFor(el: HTMLElement) {
-  const bar = el.closest('.xtracks__body') ? document.querySelector<HTMLElement>('.xnav')?.offsetHeight || 0 : 0;
+  const nav = document.querySelector<HTMLElement>('.xnav');
+  const bar = nav && nav.compareDocumentPosition(el) & Node.DOCUMENT_POSITION_FOLLOWING ? nav.offsetHeight : 0;
   return HEADER_OFFSET - bar;
 }
 

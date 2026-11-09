@@ -41,8 +41,8 @@ const Tick = () => (
 
 /**
  * Competitive exam page: a picker of four photo cards ("Choose your exam") that jump to a full
- * section per exam, and a slim exam bar that stays under the header while those sections are on
- * screen. Each exam runs: photo opening, the learning journey beside a photo and a closing call to
+ * section per exam, and a slim exam bar that stays under the header from there to the end of the
+ * page. Each exam runs: photo opening, the learning journey beside a photo and a closing call to
  * action. After the exams, once for the whole page: the three batch formats, the approach, then
  * why choose us. Sections alternate dark and cream so the long page keeps its rhythm.
  */
@@ -71,7 +71,7 @@ export default function ExamTracks({
   const reasons = (why?.whyList || []).filter((w) => w?.title);
 
   return (
-    <div className="xtracks">
+    <>
       <section id="exams" className="section xpick" data-tone="dark" aria-labelledby="exams-title">
         <div className="container">
           <div className="section-head">
@@ -111,12 +111,11 @@ export default function ExamTracks({
         </div>
       </section>
 
-      <div className="xtracks__body">
-        <ExamNav items={list.map((t) => ({ slug: t.slug, name: t.name }))} />
-        {list.map((t, i) => (
-          <Track key={t.slug} t={t} n={i + 1} of={list.length} hasBatches={rows.length > 0} />
-        ))}
-      </div>
+      {/* Left unwrapped so the bar's limit is the page itself: it stays stuck to the end of the page. */}
+      <ExamNav items={list.map((t) => ({ slug: t.slug, name: t.name }))} />
+      {list.map((t, i) => (
+        <Track key={t.slug} t={t} n={i + 1} of={list.length} hasBatches={rows.length > 0} />
+      ))}
 
       {/* Once for the whole page: the three batch formats, each with its photo. */}
       {rows.length ? (
@@ -238,7 +237,7 @@ export default function ExamTracks({
           </div>
         </section>
       ) : null}
-    </div>
+    </>
   );
 }
 
