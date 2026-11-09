@@ -472,7 +472,7 @@ export const education = {
   },
 
   beyond: {
-    heading: 'Preparing for More Than the Classroom',
+    heading: 'Preparing for More Than the Basic',
     paragraphs: [
       'The world is changing, and education needs to prepare learners for more than the next test.',
       'Strong academic knowledge remains important, but so do communication, creativity, problem-solving, confidence and the ability to adapt to new technologies. These skills can help learners make better use of their knowledge and prepare for different opportunities throughout life.',
