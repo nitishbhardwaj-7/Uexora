@@ -178,7 +178,7 @@ export const englishBatches: NonNullable<Service['examBatches']> = {
 
 /** How we prepare students for English tests: shown once, after the batches. */
 export const englishApproach: NonNullable<Service['examApproach']> = {
-  heading: 'Our Approach to English Test Preparation',
+  heading: 'Our Approach to Overseas Exams Preparation',
   subheading: 'Understand the Test. Build the Skills. Practise with Purpose.',
   text: 'English tests measure how well you use the language, not how much you have memorised. Students need to understand each task, build skills across listening, reading, writing and speaking, and manage their time on the day.',
   approachSteps: [
