@@ -65,7 +65,6 @@ export default async function EducationPage() {
         heading={e.programmesHeading}
         highlight={e.programmesHighlight}
         intro={e.programmesIntro}
-        aside={e.programmesAside}
         items={e.programmes}
         tone="light"
         cta={e.programmesCta}

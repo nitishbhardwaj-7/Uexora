@@ -401,7 +401,6 @@ export const education = {
   /** A word from the heading shown in the yellow accent. */
   programmesHighlight: 'brighter',
   programmesIntro: 'Our education programmes are designed to help students build real skills, gain confidence and open doors to global opportunities.',
-  programmesAside: 'From academic support to overseas education, we provide personalised guidance at every step of the learning journey.',
   programmes,
   programmesCta: {
     heading: 'Not sure which programme fits?',

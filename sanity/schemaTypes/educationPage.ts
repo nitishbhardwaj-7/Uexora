@@ -76,7 +76,7 @@ export const educationPage = defineType({
     defineField({ name: 'programmesHeading', title: 'Heading', type: 'string', group: 'programmes', description: 'The heading of the list of programmes. The programme pages themselves are under Education programmes in the sidebar.' }),
     defineField({ name: 'programmesHighlight', title: 'Highlighted word', type: 'string', group: 'programmes', description: 'A word from the heading shown in the yellow accent.' }),
     defineField({ name: 'programmesIntro', title: 'Intro', type: 'text', rows: 3, group: 'programmes' }),
-    defineField({ name: 'programmesAside', title: 'Side note', type: 'text', rows: 3, group: 'programmes', description: 'Short paragraph shown to the right of the heading.' }),
+    defineField({ name: 'programmesAside', title: 'Side note (no longer shown)', type: 'text', rows: 3, group: 'programmes', hidden: true }),
     defineField({ name: 'programmesCta', title: 'Card at the end of the list', type: 'ctaCard', group: 'programmes' }),
 
     defineField({
