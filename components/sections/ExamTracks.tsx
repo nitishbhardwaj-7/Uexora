@@ -2,6 +2,7 @@ import Link from 'next/link';
 import CmsImage from '@/components/ui/CmsImage';
 import { Arrow } from '@/components/ui/Button';
 import ExamNav from '@/components/sections/ExamNav';
+import WhyReasons from '@/components/sections/WhyReasons';
 import type { ExamTrack, Service } from '@/content/types';
 
 /** In-page anchors stay plain links (the smooth-scroll script handles them); pages use Link. */
@@ -233,14 +234,7 @@ export default function ExamTracks({
                 </p>
               ) : null}
             </div>
-            <ul className="xwhy__list xwhy__list--shared" data-reveal-group data-stagger="0.1">
-              {reasons.map((w, k) => (
-                <li key={w.title + k}>
-                  <h3 className="xwhy__title">{w.title}</h3>
-                  <p>{w.text}</p>
-                </li>
-              ))}
-            </ul>
+            <WhyReasons items={reasons} />
           </div>
         </section>
       ) : null}
