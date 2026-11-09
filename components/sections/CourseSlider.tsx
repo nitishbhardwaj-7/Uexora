@@ -37,8 +37,6 @@ const AFTER_HAND_MS = 10000;
 
 export default function CourseSlider({ slides, label, demoFor }: { slides: Slide[]; label: string; /** The programme's title: makes the centre slide a link to its free demo class form. */ demoFor?: string }) {
   const n = slides.length;
-  // With links on the slides, the slide stays put under the mouse so the click lands on the one being read.
-  const [hovering, setHovering] = useState(false);
   const [active, setActive] = useState(0);
   const [inView, setInView] = useState(false);
   const [motionOk, setMotionOk] = useState(false);
@@ -85,7 +83,7 @@ export default function CourseSlider({ slides, label, demoFor }: { slides: Slide
   }, []);
 
   // Every change, by hand or by itself, starts a fresh wait before the next one.
-  const playing = n > 1 && motionOk && inView && !keyboardIn && !paused && !(demoFor && hovering);
+  const playing = n > 1 && motionOk && inView && !keyboardIn && !paused;
   useEffect(() => {
     if (!playing) return;
     const t = window.setTimeout(
@@ -143,8 +141,6 @@ export default function CourseSlider({ slides, label, demoFor }: { slides: Slide
         onPointerDown={onPointerDown}
         onPointerUp={onPointerUp}
         onPointerCancel={() => (start.current = null)}
-        onPointerEnter={(e) => e.pointerType === 'mouse' && setHovering(true)}
-        onPointerLeave={(e) => e.pointerType === 'mouse' && setHovering(false)}
       >
         {slides.map((s, i) => {
           const d = posOf(i);
