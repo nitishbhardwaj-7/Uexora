@@ -9891,6 +9891,9 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
+  /* Fades out towards the top and bottom, so the light never ends in a hard line at a section edge. */
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
 }
 .mk-aurora i {
   position: absolute;
