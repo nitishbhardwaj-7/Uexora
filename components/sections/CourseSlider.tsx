@@ -35,8 +35,26 @@ export function Chevron({ dir }: { dir: 'prev' | 'next' }) {
 const AUTOPLAY_MS = 6000;
 const AFTER_HAND_MS = 10000;
 
-export default function CourseSlider({ slides, label, demoFor }: { slides: Slide[]; label: string; /** The programme's title: makes the centre slide a link to its free demo class form. */ demoFor?: string }) {
+export default function CourseSlider({
+  slides,
+  label,
+  demoFor,
+  enquireFor,
+}: {
+  slides: Slide[];
+  label: string;
+  /** An Education programme's title: makes the centre slide a link to its free demo class form. */
+  demoFor?: string;
+  /** A Marketing service's title: makes the centre slide a link to the Marketing enquiry form, with that service chosen. */
+  enquireFor?: string;
+}) {
   const n = slides.length;
+  // Where the centre slide leads, if anywhere, and what it says.
+  const cta = demoFor
+    ? { text: 'Book a free demo class', aria: 'book a free demo class', href: (t: string) => `/book-demo?programme=${encodeURIComponent(demoFor)}&course=${encodeURIComponent(t)}` }
+    : enquireFor
+      ? { text: 'Discuss this service', aria: `discuss ${enquireFor}`, href: () => `/contact?division=marketing&course=${encodeURIComponent(enquireFor)}#enquiry` }
+      : null;
   const [active, setActive] = useState(0);
   const [inView, setInView] = useState(false);
   const [motionOk, setMotionOk] = useState(false);
@@ -173,21 +191,21 @@ export default function CourseSlider({ slides, label, demoFor }: { slides: Slide
                 <h3 className="cslide__title">{s.title}</h3>
                 {s.audience ? <p className="cslide__audience">{s.audience}</p> : null}
                 {s.text ? <p className="cslide__text">{s.text}</p> : null}
-                {demoFor ? (
+                {cta ? (
                   <span className="cslide__cta" aria-hidden="true">
-                    Book a free demo class
+                    {cta.text}
                     <Arrow />
                   </span>
                 ) : null}
               </div>
               {/* Only the centre slide links; a click on a neighbour brings it to the centre first. */}
-              {demoFor && d === 0 ? (
+              {cta && d === 0 ? (
                 <Link
-                  href={`/book-demo?programme=${encodeURIComponent(demoFor)}&course=${encodeURIComponent(s.title)}`}
+                  href={cta.href(s.title)}
                   className="cslide__link"
                   data-cursor
                   draggable={false}
-                  aria-label={`${s.title}: book a free demo class`}
+                  aria-label={`${s.title}: ${cta.aria}`}
                   onClick={(e) => {
                     if (swiped.current) e.preventDefault();
                   }}
