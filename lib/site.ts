@@ -3,10 +3,24 @@
  * tagline, description, page copy) lives in content/ and is editable in the studio;
  * read it through lib/cms.
  */
+/**
+ * The public address every canonical link, sitemap entry, share image and structured-data URL is
+ * built on. NEXT_PUBLIC_SITE_URL wins when it is set; otherwise, on Vercel, the project's
+ * production domain (VERCEL_PROJECT_PRODUCTION_URL, which becomes the custom domain once one is
+ * attached), so search engines are never pointed at a domain that does not serve this site.
+ */
+function siteUrl() {
+  const set = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+  if (set) return set.replace(/\/+$/, '');
+  const vercel = process.env.VERCEL_PROJECT_PRODUCTION_URL?.trim();
+  if (vercel) return `https://${vercel.replace(/^https?:\/\//, '').replace(/\/+$/, '')}`;
+  return 'https://uexora.com';
+}
+
 export const site = {
   name: 'UEXORA',
   legalName: 'Uexora',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'https://uexora.com',
+  url: siteUrl(),
 };
 
 export const nav = [

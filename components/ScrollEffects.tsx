@@ -200,7 +200,16 @@ export default function ScrollEffects() {
         typeEls.forEach((el) => {
           let split: SplitText;
           try {
-            split = new SplitText(el, { type: 'words,chars', wordsClass: 'type-word', charsClass: 'type-char', aria: 'auto' });
+            // Not aria: 'auto': that puts aria-label on the element, which ARIA forbids on a <p>.
+            // The letters are hidden from assistive technology instead and the sentence is read
+            // from one visually hidden copy, so it is not spelt out letter by letter.
+            const text = el.textContent?.trim() || '';
+            split = new SplitText(el, { type: 'words,chars', wordsClass: 'type-word', charsClass: 'type-char', aria: 'none' });
+            split.words.forEach((w) => w.setAttribute('aria-hidden', 'true'));
+            const said = document.createElement('span');
+            said.className = 'visually-hidden';
+            said.textContent = text;
+            el.append(said);
           } catch {
             el.classList.add('is-typed');
             return;
@@ -234,7 +243,8 @@ export default function ScrollEffects() {
           const seq = el.closest<HTMLElement>('[data-seq]');
           let split: SplitText;
           try {
-            split = new SplitText(el, { type: 'words', wordsClass: 'ink-word', aria: 'auto' });
+            // Whole words read normally, so no aria-label (forbidden on a <p>) is needed.
+            split = new SplitText(el, { type: 'words', wordsClass: 'ink-word', aria: 'none' });
           } catch {
             el.classList.add('is-worded');
             seq?.classList.add('is-in');

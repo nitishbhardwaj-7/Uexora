@@ -391,7 +391,7 @@ export const aiSections: Sections = {
  */
 export const aeoGeoSections: Sections = {
   seo: {
-    title: 'AEO & GEO Services | Answer & Generative Engine Optimisation | Uexora',
+    title: 'AEO & GEO: Answer & Generative Engine Optimisation | Uexora',
     description: 'AEO and GEO from Uexora Marketing Studio: content and website structure that help AI assistants and answer-led search understand, trust and mention your business.',
   },
   overviewHeading: 'AEO & GEO: Helping Your Business Become Part of the Answer',

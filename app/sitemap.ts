@@ -6,10 +6,11 @@ import { getPosts, postPath } from '@/lib/cms/blog';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const [e, m, posts] = await Promise.all([getEducation(), getMarketing(), getPosts()]);
-  const now = new Date();
+  // No lastModified on the pages: the sitemap is rebuilt on every request, so "now" would claim
+  // every page changed every time, and Google learns to ignore a lastmod that is never accurate.
+  // Posts carry their real publication date.
   const page = (path: string, priority: number, changeFrequency: 'weekly' | 'monthly' = 'monthly') => ({
     url: `${site.url}${path}`,
-    lastModified: now,
     changeFrequency,
     priority,
   });

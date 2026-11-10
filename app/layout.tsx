@@ -70,9 +70,15 @@ export async function generateMetadata(): Promise<Metadata> {
     authors: [{ name: site.legalName }],
     creator: site.legalName,
     publisher: site.legalName,
-    alternates: { canonical: '/' },
-    openGraph: { type: 'website', siteName: site.name, locale: 'en_GB', url: '/', title, description: s.description },
+    // No canonical here: every page sets its own through pageMetadata(), and a layout-wide one
+    // would point the 404 page (and anything new that forgets) at the home page.
+    openGraph: { type: 'website', siteName: site.name, locale: 'en_GB', title, description: s.description },
     twitter: { card: 'summary_large_image', title, description: s.description },
+    // Google Search Console / Bing Webmaster Tools ownership tags, when their codes are set.
+    verification: {
+      ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } : {}),
+      ...(process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION ? { other: { 'msvalidate.01': process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION } } : {}),
+    },
     robots: {
       index: true,
       follow: true,

@@ -347,7 +347,7 @@ export const education = {
   seo: {
     title: 'Uexora Education | Tuition, JEE & NEET, IELTS, AI & Robotics',
     description:
-      'Uexora Education: school tuition, JEE and NEET preparation, overseas education with IELTS, PTE and TOEFL, AI, coding and robotics, AI for professionals and educators, public speaking, special needs support and corporate trainings.',
+      'Uexora Education: school tuition, JEE and NEET, IELTS, PTE and TOEFL, AI and robotics, public speaking, special needs support and corporate training.',
   },
 
   eyebrow: 'Uexora Education',
