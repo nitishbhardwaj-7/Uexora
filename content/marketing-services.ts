@@ -382,3 +382,74 @@ export const aiSections: Sections = {
     { q: 'Is AI-written content safe to publish?', a: 'Only after a person has checked it. We treat AI output as a starting point, to be reviewed for accuracy and for how well it fits your brand.' },
   ],
 };
+
+/**
+ * AEO & GEO (answer engine and generative engine optimisation). DRAFT, all of it, for the client
+ * to review: written by us, not from the client's copy. It describes what this work usually covers
+ * and promises no results; the client should confirm they offer each item, and the assistants
+ * named. Photos are reused from the SEO and AI pages until the service has its own.
+ */
+export const aeoGeoSections: Sections = {
+  seo: {
+    title: 'AEO & GEO Services | Answer & Generative Engine Optimisation | Uexora',
+    description: 'AEO and GEO from Uexora Marketing Studio: content and website structure that help AI assistants and answer-led search understand, trust and mention your business.',
+  },
+  overviewHeading: 'AEO & GEO: Helping Your Business Become Part of the Answer',
+  whoFor: '',
+  details: [
+    'More people now ask a question and read a single answer, from a search engine’s answer box, a voice assistant or an AI assistant such as ChatGPT, Gemini or Perplexity, instead of clicking through a list of links. Answer engine optimisation (AEO) and generative engine optimisation (GEO) help your business be understood, trusted and mentioned in those answers.',
+    'The work builds on good SEO: clear content that answers real questions, a website that machines can read easily, and consistent information about your business across the web. Nobody controls what an AI assistant says, so we set realistic expectations and share what we see as the work progresses.',
+  ],
+  serves: {
+    heading: 'Who AEO & GEO helps',
+    serveGroups: [
+      { text: 'Businesses that AI assistants do not mention yet', icon: 'robot' },
+      { text: 'Companies already investing in SEO', icon: 'search' },
+      { text: 'Local businesses customers ask about', icon: 'shop' },
+      { text: 'Brands that want accurate answers about them', icon: 'chart' },
+    ],
+  },
+  journey: {
+    heading: 'How AEO & GEO work progresses',
+    journeySteps: [
+      { title: 'Review', text: 'We look at how search engines and AI assistants currently answer questions about your business and your field.' },
+      { title: 'Plan', text: 'We agree on the questions that matter most to your customers and the pages that should answer them.' },
+      { title: 'Optimise', text: 'We improve content, structure and the information about your business across the web.' },
+      { title: 'Monitor', text: 'We keep checking the answers, share what changes and look for the next opportunities.' },
+    ],
+  },
+  courses: {
+    heading: 'What our AEO & GEO services cover',
+    text: 'The main areas of the work, planned around what your business needs first.',
+    courseSlides: [
+      slide('Answer-Ready Content', 'Clear, direct answers to the questions your customers actually ask.', photo('seo-on-page-content', 'Hands typing on a laptop beside a notebook and a cup of coffee')),
+      slide('Structured Data', 'Markup that helps search engines and AI tools read your pages accurately.', photo('seo-technical', 'A person working on a laptop in a bright room')),
+      slide('Consistent Business Information', 'The same accurate details about your business wherever it is listed.', photo('seo-local', 'A woman working at a laptop among cardboard boxes')),
+      slide('Monitoring AI Answers', 'Checking how assistants describe your business and your competitors.', photo('ai-insights', 'Four colleagues discussing work around a laptop at a meeting table')),
+    ],
+  },
+  workshops: {
+    heading: 'Signs your business needs AEO & GEO',
+    image: photo('seo-keyword-research', 'Hands typing on a laptop open at a search engine, with a phone beside it'),
+    workshopItems: [
+      'AI assistants recommend competitors when asked about what you offer.',
+      'Answers about your business are out of date or wrong.',
+      'Your pages do not answer the questions customers ask before buying.',
+      'Your business details differ from one website or listing to another.',
+      'You rank in search but rarely appear in answer boxes or AI summaries.',
+      'You have no way of knowing what AI assistants say about you.',
+    ],
+  },
+  closing: {
+    heading: 'Be Part of the Answer Customers Hear',
+    text: 'When customers ask a question instead of searching, the aim is for your business to be understood, trusted and mentioned in the answer.',
+    image: photo('ai-automation', 'A man typing on a laptop with an AI assistant open on screen, a pair of glasses beside it'),
+  },
+  faqs: [
+    { q: 'What are AEO and GEO?', a: 'Answer engine optimisation (AEO) helps your content appear in direct answers, such as answer boxes and voice assistants. Generative engine optimisation (GEO) helps AI assistants understand, trust and mention your business in the answers they write.' },
+    { q: 'How are they different from SEO?', a: 'SEO helps your pages rank in a list of results. AEO and GEO build on it, aiming for your business to be the answer, or part of it, when people ask a question directly.' },
+    { q: 'Do we still need SEO?', a: 'Yes. AEO and GEO depend on many of the same foundations: relevant content, a well-structured website and a trustworthy online presence.' },
+    { q: 'Can you guarantee that AI assistants will mention us?', a: 'No. Each assistant decides its own answers, so nobody can honestly promise a mention. We focus on the work that makes your business easier to understand and trust, and we share what we see over time.' },
+    { q: 'How long does it take?', a: 'Like SEO, it is a long-term activity. We set realistic expectations and share insights as the work progresses.' },
+  ],
+};

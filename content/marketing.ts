@@ -1,5 +1,5 @@
 import type { Service } from './types.ts';
-import { aiSections, paidSections, seoSections, socialSections, strategySections, webSections } from './marketing-services.ts';
+import { aeoGeoSections, aiSections, paidSections, seoSections, socialSections, strategySections, webSections } from './marketing-services.ts';
 
 /**
  * Default content for the Marketing page. This is the fallback (and the seed) for the
@@ -67,6 +67,17 @@ const services: Service[] = [
     ...aiSections,
     text: 'We explore practical ways to use artificial intelligence to support marketing activities, improve efficiency and help businesses work smarter. The right solution depends on the business, its goals and the problem it wants to solve.',
   },
+  // DRAFT (all of this service's copy; see aeoGeoSections). Photos reused from the AI page for now.
+  {
+    title: 'AEO & GEO',
+    slug: 'aeo-and-geo',
+    promise: 'Help AI assistants and answer-led search understand, trust and mention your business.',
+    image: { src: '/images/marketing-services/ai-people.jpg', alt: 'A man seen from behind, working at a laptop with an AI assistant open on screen' },
+    heroImage: { src: '/images/marketing-services/ai-content.jpg', alt: 'A man working on a laptop with an AI assistant open on screen' },
+    highlights: ['Answer engine optimisation', 'Generative engine optimisation', 'Answer-ready content', 'Visibility in AI answers'],
+    ...aeoGeoSections,
+    text: 'More people now ask AI assistants and answer-led search for recommendations instead of browsing a list of links. We help businesses shape their content and online information so it can be understood, trusted and mentioned in those answers.',
+  },
 ];
 
 export const marketing = {
@@ -90,6 +101,7 @@ export const marketing = {
       { label: 'Social', href: '/marketing/social-media-marketing' },
       { label: 'Web', href: '/marketing/website-design-and-development' },
       { label: 'AI', href: '/marketing/ai-powered-marketing-solutions' },
+      { label: 'AEO & GEO', href: '/marketing/aeo-and-geo' },
     ],
     background: { src: '/images/heroes/marketing-hero-bg.jpg', alt: 'A team reviewing printed charts and a laptop together around a white table' },
     primary: { label: 'Explore our approach', href: '/marketing#how-we-work' },
@@ -187,6 +199,8 @@ export const marketing = {
       { need: 'Our social presence does not reflect the brand', slug: 'social-media-marketing' },
       { need: 'Our website is not winning us customers', slug: 'website-design-and-development' },
       { need: 'We want to work smarter with AI', slug: 'ai-powered-marketing-solutions' },
+      // DRAFT wording.
+      { need: 'AI assistants do not mention our business', slug: 'aeo-and-geo' },
     ],
   },
 
