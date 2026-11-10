@@ -14,7 +14,6 @@ gsap.registerPlugin(ScrollTrigger);
  * so the page reads exactly as written without it.
  *
  *  - Hero depth: as the hero scrolls away its copy lifts off and the photo card sinks back.
- *  - Stages: each navy section opens out from a rounded card to the full width as it arrives.
  *  - Aurora: soft blue and orange light drifts across the navy sections with the scroll.
  *  - Marquee ([data-mk-track]): rows of service names run in opposite directions, faster and
  *    slanted while the page is scrolled, and turn round when the scroll does.
@@ -44,20 +43,10 @@ export default function MarketingMotion() {
         if (media) tl.to(media, { yPercent: 10, scale: 0.88, rotate: -3, ease: 'none' }, 0);
       }
 
-      // Navy sections: drifting light in every one; the stage opening only where a navy section
-      // follows a light one (after another navy section the inset would show as a lopsided edge).
-      const blocks = Array.from(root.querySelectorAll<HTMLElement>('section[data-tone], .mk-marquee')).filter((s) => !s.parentElement?.closest('section'));
-      const side = narrow ? 3 : 4.5;
-      const round = narrow ? 22 : 44;
-      blocks.forEach((sec, i) => {
-        if (sec.dataset.tone !== 'dark' || sec.classList.contains('page-hero')) return;
-        if (i > 0 && blocks[i - 1].dataset.tone !== 'dark') {
-          gsap.fromTo(
-            sec,
-            { clipPath: `inset(0% ${side}% 0% ${side}% round ${round}px)` },
-            { clipPath: 'inset(0% 0% 0% 0% round 0px)', ease: 'none', scrollTrigger: { trigger: sec, start: 'top bottom', end: 'top 20%', scrub: 0.4 } },
-          );
-        }
+      // Navy sections: soft light drifting across with the scroll. The sections themselves stay
+      // full width and still, so no edge ever shows at their sides.
+      const dark = Array.from(root.querySelectorAll<HTMLElement>('section[data-tone="dark"]')).filter((s) => !s.classList.contains('page-hero') && !s.parentElement?.closest('section'));
+      dark.forEach((sec) => {
 
         const aurora = document.createElement('span');
         aurora.className = 'mk-aurora';
