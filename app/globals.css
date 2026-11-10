@@ -9879,3 +9879,124 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
     animation: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Marketing motion layer (components/MarketingMotion.tsx): the drifting light in
+   navy sections, the steps timeline and the service-name marquee.
+   -------------------------------------------------------------------------- */
+/* Drifting light: two soft pools, blue and orange, behind the content of navy sections. */
+.mk-aurora {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.mk-aurora i {
+  position: absolute;
+  width: max(60vw, 640px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  will-change: transform;
+}
+.mk-aurora__a {
+  top: -35%;
+  left: -20%;
+  background: radial-gradient(circle, rgba(37, 80, 234, 0.42), rgba(37, 80, 234, 0.12) 38%, transparent 68%);
+}
+.mk-aurora__b {
+  right: -22%;
+  bottom: -40%;
+  background: radial-gradient(circle, rgba(242, 138, 46, 0.3), rgba(242, 138, 46, 0.08) 40%, transparent 68%);
+}
+[data-division='marketing'] section[data-tone='dark'] > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Steps timeline: fills from the left across the top rule of the row as it scrolls by. */
+[data-division='marketing'] .steps {
+  position: relative;
+}
+.mk-timeline {
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--blue-400), var(--orange-500) 55%, var(--gold-400));
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+/* Words of a heading split for the marketing word-by-word rise keep the accent gradient. */
+[data-division='marketing'] .hl .split-word {
+  background: inherit;
+  background-size: inherit;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: inherit;
+}
+
+/* Service-name marquee: a solid row and an outlined row, in the heading face. */
+.mk-marquee {
+  position: relative;
+  display: grid;
+  gap: clamp(0.2rem, 0.8vw, 0.6rem);
+  padding-block: clamp(2.5rem, 6vw, 5.5rem);
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--fg);
+}
+.mk-marquee__track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+.mk-marquee__set {
+  display: flex;
+  flex: none;
+}
+.mk-marquee__item {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-heading), Georgia, serif;
+  font-size: clamp(2.6rem, 7.4vw, 7rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+}
+/* A slanted stroke in the brand gradient between names. */
+.mk-marquee__item::after {
+  content: '/';
+  padding-inline: 0.45em;
+  background: linear-gradient(160deg, var(--blue-500), var(--orange-500) 55%, var(--gold-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 0;
+}
+.mk-marquee__track--solid .mk-marquee__item {
+  color: var(--ink);
+}
+.mk-marquee__track--solid .mk-marquee__item:nth-child(3n + 2) {
+  background: linear-gradient(100deg, var(--orange-600), var(--gold-600) 50%, var(--orange-500));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.mk-marquee__track--outline .mk-marquee__item {
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 1.4px var(--blue-700);
+}
+@media (max-width: 700px) {
+  .mk-marquee__track--outline .mk-marquee__item {
+    -webkit-text-stroke-width: 1px;
+  }
+}

@@ -5,6 +5,7 @@ import Approach from '@/components/sections/Approach';
 import { Statement, Steps, WhyChoose } from '@/components/sections/Blocks';
 import Audience from '@/components/sections/Audience';
 import ServiceCards from '@/components/sections/ServiceCards';
+import ServiceMarquee from '@/components/sections/ServiceMarquee';
 import CtaBand from '@/components/sections/CtaBand';
 import Signpost from '@/components/sections/Signpost';
 import Faq from '@/components/sections/Faq';
@@ -56,6 +57,8 @@ export default async function MarketingPage() {
         tone="light"
         cta={m.servicesCta}
       />
+
+      <ServiceMarquee items={m.services.map((s) => s.title)} />
 
       <Steps id="how-we-work" eyebrow={m.how.heading} heading={m.how.title} intro={m.how.intro} steps={m.how.steps} outro={m.how.outro} tone="dark" />
 

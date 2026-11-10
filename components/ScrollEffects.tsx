@@ -162,10 +162,20 @@ export default function ScrollEffects() {
       const splitOne = (h: HTMLElement) => {
         if (h.classList.contains('is-split')) return;
         h.classList.add('is-split');
+        // Marketing pages: each word rises out of its line's mask and turns upright, in turn.
+        const byWord = !!h.closest('[data-division="marketing"]');
         let split: SplitText;
         try {
-          split = new SplitText(h, { type: 'lines', mask: 'lines', linesClass: 'split-line', aria: 'none' });
+          split = new SplitText(h, byWord ? { type: 'lines,words', mask: 'lines', linesClass: 'split-line', wordsClass: 'split-word', aria: 'none' } : { type: 'lines', mask: 'lines', linesClass: 'split-line', aria: 'none' });
         } catch {
+          return;
+        }
+        if (byWord) {
+          gsap.fromTo(
+            split.words,
+            { yPercent: 120, rotate: 7, transformOrigin: '0% 100%' },
+            { yPercent: 0, rotate: 0, duration: 1.3, ease: motion.ease.out, stagger: 0.055, delay: parseFloat(h.dataset.splitDelay || '0') }
+          );
           return;
         }
         gsap.fromTo(

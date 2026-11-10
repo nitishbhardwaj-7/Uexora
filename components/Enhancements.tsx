@@ -5,6 +5,7 @@ import { useEffect, useState, type ComponentType } from 'react';
 type Mods = {
   SmoothScroll: ComponentType;
   ScrollEffects: ComponentType;
+  MarketingMotion: ComponentType;
   Cursor: ComponentType;
   Spotlight: ComponentType;
 };
@@ -22,10 +23,10 @@ export default function Enhancements() {
     const Noop = () => null;
     const pointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const load = async () => {
-      const [a, b] = await Promise.all([import('./SmoothScroll'), import('./ScrollEffects')]);
+      const [a, b, m] = await Promise.all([import('./SmoothScroll'), import('./ScrollEffects'), import('./MarketingMotion')]);
       // Cursor and spotlight only matter with a mouse; never ship them to touch devices.
       const [c, d] = pointer ? await Promise.all([import('./Cursor'), import('./Spotlight')]) : [{ default: Noop }, { default: Noop }];
-      if (!cancelled) setMods({ SmoothScroll: a.default, ScrollEffects: b.default, Cursor: c.default, Spotlight: d.default });
+      if (!cancelled) setMods({ SmoothScroll: a.default, ScrollEffects: b.default, MarketingMotion: m.default, Cursor: c.default, Spotlight: d.default });
     };
     const idle = (window as Window & { requestIdleCallback?: (cb: () => void, o?: { timeout: number }) => number }).requestIdleCallback;
     if (idle) idle(load, { timeout: 1500 });
@@ -40,6 +41,7 @@ export default function Enhancements() {
     <>
       <mods.SmoothScroll />
       <mods.ScrollEffects />
+      <mods.MarketingMotion />
       <mods.Cursor />
       <mods.Spotlight />
     </>
