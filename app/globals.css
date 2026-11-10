@@ -9774,3 +9774,108 @@ html.reveal-ready .serve:not(.is-in) .serve__text {
 .closing-band .closing__text {
   color: var(--fg);
 }
+
+/* --------------------------------------------------------------------------
+   Marketing pages: gradient photo frames, a coloured glow round the photos and
+   gradient accent words. Scoped to [data-division='marketing'] (set on the page
+   wrapper by PageTransition), so Education keeps its quieter look. Orange is used
+   only in frames, glows and text, never on buttons. No zoom or movement on hover.
+   -------------------------------------------------------------------------- */
+@property --mk-spin {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+@keyframes mk-spin {
+  to {
+    --mk-spin: 360deg;
+  }
+}
+@keyframes mk-shimmer {
+  from {
+    background-position: 0% 50%;
+  }
+  to {
+    background-position: 100% 50%;
+  }
+}
+
+/* A thin border in the brand colours that turns slowly round each photo. The border
+   area shows the conic gradient; the photo fills the padding box inside it. */
+[data-division='marketing'] :is(.page-hero__media, .approach__photo, .pindex__frame, .audience__card, .pcta__photo, .step__photo) {
+  border: 3px solid transparent;
+  background:
+    linear-gradient(var(--navy-900), var(--navy-900)) padding-box,
+    conic-gradient(from var(--mk-spin), var(--blue-500), var(--orange-500) 22%, var(--gold-400) 40%, var(--orange-600) 58%, var(--blue-400) 78%, var(--blue-500)) border-box;
+  animation: mk-spin 10s linear infinite;
+}
+/* Each photo starts at a different point on the ring, so they do not turn in step. */
+[data-division='marketing'] .audience__card:nth-child(2),
+[data-division='marketing'] .pcta__photo--2 {
+  animation-delay: -3.3s;
+}
+[data-division='marketing'] .audience__card:nth-child(3),
+[data-division='marketing'] .pcta__photo--3 {
+  animation-delay: -6.6s;
+}
+/* The audience cards keep their own entrance animation and add the ring to it. */
+html.reveal-ready [data-division='marketing'] .audience__card[data-reveal='mask'].is-in:not(.no-anim),
+html.reveal-ready [data-division='marketing'] .approach__photo[data-reveal='mask'].is-in:not(.no-anim) {
+  animation:
+    mask-in 1.3s cubic-bezier(0.76, 0, 0.24, 1) both,
+    mk-spin 10s linear infinite;
+}
+html.reveal-ready [data-division='marketing'] .audience__card:nth-child(2)[data-reveal='mask'].is-in:not(.no-anim) {
+  animation-delay: 0s, -3.3s;
+}
+html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-reveal='mask'].is-in:not(.no-anim) {
+  animation-delay: 0s, -6.6s;
+}
+
+/* Coloured glow: orange below, blue round the sides. Photos that unmask on entry are clipped
+   to their own box, so their glow is drawn on the wrapper with drop-shadow instead. */
+[data-division='marketing'] :is(.page-hero__media, .pindex__frame, .step__photo) {
+  box-shadow:
+    0 40px 80px -34px rgba(242, 138, 46, 0.7),
+    0 0 70px -20px rgba(37, 80, 234, 0.6);
+}
+[data-division='marketing'] [data-tone='dark'] :is(.pindex__frame, .step__photo) {
+  box-shadow:
+    0 40px 90px -36px rgba(242, 138, 46, 0.55),
+    0 0 70px -18px rgba(79, 120, 255, 0.55);
+}
+[data-division='marketing'] .pcta__photo {
+  box-shadow:
+    0 30px 60px -28px rgba(242, 138, 46, 0.55),
+    0 12px 40px -22px rgba(37, 80, 234, 0.4);
+}
+[data-division='marketing'] .approach__media {
+  filter: drop-shadow(0 30px 50px rgba(242, 138, 46, 0.38)) drop-shadow(0 0 40px rgba(79, 120, 255, 0.45));
+}
+[data-division='marketing'] .audience__cards {
+  filter: drop-shadow(0 26px 34px rgba(242, 138, 46, 0.32)) drop-shadow(0 0 30px rgba(37, 80, 234, 0.28));
+}
+
+/* Accent words: an orange-to-gold blend that drifts slowly across the word. Deeper tones
+   on cream so the word stays readable; brighter ones on navy. */
+[data-division='marketing'] .hl {
+  background: linear-gradient(100deg, var(--orange-600), var(--gold-600) 30%, var(--orange-500) 55%, var(--gold-600) 80%, var(--orange-600));
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: mk-shimmer 6s ease-in-out infinite alternate;
+}
+[data-division='marketing'] [data-tone='dark'] .hl {
+  background-image: linear-gradient(100deg, var(--orange-500), var(--gold-400) 30%, var(--orange-400) 55%, var(--gold-500) 80%, var(--orange-500));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-division='marketing'] :is(.page-hero__media, .approach__photo, .pindex__frame, .audience__card, .pcta__photo, .step__photo, .hl) {
+    animation: none;
+  }
+  html.reveal-ready [data-division='marketing'] :is(.audience__card, .approach__photo)[data-reveal='mask'].is-in:not(.no-anim) {
+    animation: none;
+  }
+}
