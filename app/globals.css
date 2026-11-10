@@ -2064,6 +2064,9 @@ html.reveal-ready .approach9__badge:not(.is-in) .aicon > * {
 .menu__foot a:hover {
   color: #fff;
 }
+.menu__you {
+  color: var(--gold-500);
+}
 .menu .menu__item {
   transform: translateY(30px);
   opacity: 0;

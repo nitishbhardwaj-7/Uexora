@@ -4,11 +4,28 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Logo from './brand/Logo';
-import Monogram from './brand/Monogram';
 import { nav as baseNav, blogNav, menu } from '@/lib/site';
 import { Arrow } from './ui/Button';
 import CmsImage from './ui/CmsImage';
 import { contactHref } from '@/lib/cms/services';
+
+/** The tagline with the word "you" (on its own, any case) in the brand yellow: "Focused On You". */
+function Tagline({ text }: { text: string }) {
+  const parts = (text || '').split(/(\byou\b)/i);
+  return (
+    <>
+      {parts.map((p, i) =>
+        i % 2 ? (
+          <span key={i} className="menu__you">
+            {p}
+          </span>
+        ) : (
+          p
+        ),
+      )}
+    </>
+  );
+}
 
 type Props = { email: string; tagline: string; /** True once the blog has a published post. */ showBlog?: boolean };
 
@@ -165,13 +182,14 @@ export default function Header({ email, tagline, showBlog }: Props) {
             </nav>
           </div>
           <div className="menu__foot menu__item" style={{ '--i': nav.length + 1 } as React.CSSProperties}>
-            <div>
-              <Monogram variant="mono" style={{ width: 36, color: 'var(--gold-500)' }} />
+            {/* The original artwork, linking home; a click also closes the menu when already there. */}
+            <div onClick={() => setOpen(false)}>
+              <Logo markOnly size="sm" className="menu__logo" />
             </div>
             <div>
               <a href={`mailto:${email}`}>{email}</a>
               <br />
-              {tagline}
+              <Tagline text={tagline} />
             </div>
           </div>
         </div>
