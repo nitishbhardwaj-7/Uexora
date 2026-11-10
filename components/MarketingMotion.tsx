@@ -15,8 +15,6 @@ gsap.registerPlugin(ScrollTrigger);
  *
  *  - Hero depth: as the hero scrolls away its copy lifts off and the photo card sinks back.
  *  - Aurora: soft blue and orange light drifts across the navy sections with the scroll.
- *  - Marquee ([data-mk-track]): rows of service names run in opposite directions, faster and
- *    slanted while the page is scrolled, and turn round when the scroll does.
  *  - Audience cards rise at different speeds; the steps get a timeline that fills with scroll.
  *  (Headings rise word by word: see the marketing branch in ScrollEffects.)
  */
@@ -29,8 +27,6 @@ export default function MarketingMotion() {
     if (!root) return;
     const narrow = isNarrow();
     const added: HTMLElement[] = [];
-    let tick: ((time: number, dt: number) => void) | null = null;
-    let onResize: (() => void) | null = null;
 
     const ctx = gsap.context(() => {
       // Hero depth.
@@ -47,7 +43,6 @@ export default function MarketingMotion() {
       // full width and still, so no edge ever shows at their sides.
       const dark = Array.from(root.querySelectorAll<HTMLElement>('section[data-tone="dark"]')).filter((s) => !s.classList.contains('page-hero') && !s.parentElement?.closest('section'));
       dark.forEach((sec) => {
-
         const aurora = document.createElement('span');
         aurora.className = 'mk-aurora';
         aurora.setAttribute('aria-hidden', 'true');
@@ -81,66 +76,12 @@ export default function MarketingMotion() {
           gsap.fromTo(bar, { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: list, start: 'top 85%', end: 'bottom 55%', scrub: 0.5 } });
         });
       }
-
-      // Marquee rows.
-      const tracks = Array.from(root.querySelectorAll<HTMLElement>('[data-mk-track]'));
-      if (tracks.length) {
-        const rows = tracks.map((el, i) => ({
-          el,
-          x: 0,
-          dir: i % 2 ? 1 : -1,
-          w: 0,
-          setX: gsap.quickSetter(el, 'x', 'px') as (v: number) => void,
-          setSkew: gsap.quickSetter(el, 'skewX', 'deg') as (v: number) => void,
-        }));
-        // The outlined row starts part of the way along, so the two rows never show the same name together.
-        const measure = () =>
-          rows.forEach((r, i) => {
-            const first = !r.w;
-            r.w = (r.el.firstElementChild as HTMLElement | null)?.offsetWidth || 0;
-            if (first && i % 2) r.x = -r.w * 0.37;
-          });
-        measure();
-        document.fonts?.ready.then(measure);
-        onResize = measure;
-        window.addEventListener('resize', onResize);
-
-        let visible = false;
-        const band = tracks[0].closest<HTMLElement>('.mk-marquee') || tracks[0];
-        ScrollTrigger.create({ trigger: band, start: 'top bottom', end: 'bottom top', onToggle: (self) => (visible = self.isActive) });
-
-        let lastY = window.scrollY;
-        let heading = 1;
-        let skew = 0;
-        tick = (_time, dt) => {
-          const y = window.scrollY;
-          const v = window.__lenis?.velocity ?? y - lastY;
-          lastY = y;
-          if (!visible) return;
-          if (v > 0.2) heading = 1;
-          else if (v < -0.2) heading = -1;
-          const frames = Math.min(dt, 50) / 16.67;
-          const speed = frames * (narrow ? 0.7 : 1) * (1.1 + Math.min(Math.abs(v), 50) * 0.32);
-          skew += (gsap.utils.clamp(-6, 6, v * 0.22) - skew) * 0.1;
-          rows.forEach((r) => {
-            if (!r.w) return;
-            r.x += r.dir * heading * speed;
-            if (r.x <= -r.w) r.x += r.w;
-            if (r.x > 0) r.x -= r.w;
-            r.setX(r.x);
-            r.setSkew(-skew * r.dir);
-          });
-        };
-        gsap.ticker.add(tick);
-      }
     }, root);
 
     const refresh = setTimeout(() => ScrollTrigger.refresh(), 300);
 
     return () => {
       clearTimeout(refresh);
-      if (tick) gsap.ticker.remove(tick);
-      if (onResize) window.removeEventListener('resize', onResize);
       ctx.revert();
       added.forEach((n) => n.remove());
     };
