@@ -155,7 +155,6 @@ const programmes: Service[] = [
     whoFor: 'Students preparing for competitive examinations such as JEE and NEET who want a clear, structured approach to the subjects involved.',
     details: [
       'Competitive examinations such as JEE and NEET reward a clear understanding of the subjects as much as hard work. Our preparation combines focused learning on the syllabus, concept building that connects topics together, and regular practice so that students become familiar with the format and pace of the exam.',
-      'We don\'t promise overnight results. We believe in consistent effort, the right guidance and taking one step forward at a time, with realistic goals agreed with each student.',
     ],
     faqHeading: 'Common Questions Asked',
     // Questions: the client's. Answers: DRAFT for the client to review, written only from what the
