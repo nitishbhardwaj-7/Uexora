@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Arrow } from './ui/Button';
+import PhoneField, { phoneValue } from './ui/PhoneField';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 type FieldName = 'name' | 'grade' | 'subject' | 'phone' | 'email' | 'preferred';
@@ -48,7 +49,7 @@ export default function DemoClassForm({ programme, course, email, note }: { prog
           name: data.get('name'),
           grade: data.get('grade'),
           subject: data.get('subject'),
-          phone: data.get('phone'),
+          phone: phoneValue(data),
           email: data.get('email'),
           preferred: data.get('preferred'),
           company: data.get('company'),
@@ -104,11 +105,7 @@ export default function DemoClassForm({ programme, course, email, note }: { prog
           <input id="subject" name="subject" type="text" required maxLength={100} placeholder="e.g. Mathematics" aria-invalid={!!fieldErrors.subject} />
           {fieldError('subject')}
         </div>
-        <div className="field">
-          <label htmlFor="phone">Phone number</label>
-          <input id="phone" name="phone" type="tel" autoComplete="tel" required minLength={7} maxLength={40} placeholder="+91" aria-invalid={!!fieldErrors.phone} />
-          {fieldError('phone')}
-        </div>
+        <PhoneField label="Phone number" invalid={!!fieldErrors.phone} error={fieldError('phone')} />
       </div>
 
       <div className="form__row">

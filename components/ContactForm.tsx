@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { Arrow } from './ui/Button';
+import PhoneField, { phoneValue } from './ui/PhoneField';
 import { NOT_SURE } from '@/lib/enquiry';
 
 type Division = 'education' | 'marketing' | 'general';
@@ -75,7 +76,7 @@ export default function ContactForm({
           division,
           name: data.get('name'),
           email: data.get('email'),
-          phone: data.get('phone'),
+          phone: phoneValue(data),
           course: options ? data.get('course') : '',
           message: data.get('message'),
           company: data.get('company'),
@@ -145,11 +146,7 @@ export default function ContactForm({
       </div>
 
       <div className={options ? 'form__row' : undefined}>
-        <div className="field">
-          <label htmlFor="phone">Phone</label>
-          <input id="phone" name="phone" type="tel" autoComplete="tel" required minLength={7} maxLength={40} placeholder="+91" aria-invalid={!!fieldErrors.phone} />
-          {fieldError('phone')}
-        </div>
+        <PhoneField label="Phone" invalid={!!fieldErrors.phone} error={fieldError('phone')} />
         {options ? (
           <div className="field">
             <label htmlFor="course">{courseLabel}</label>

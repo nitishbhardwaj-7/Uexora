@@ -1408,6 +1408,11 @@ html.reveal-ready .approach9__badge:not(.is-in) .aicon > * {
   --btn-hover: var(--navy-900);
   --btn-hover-fg: #fff;
 }
+/* …and the blue button beside a white outline one hovers to white, not gold. */
+.btn-row:has(.btn--ghost) .btn--blue {
+  --btn-hover: #fff;
+  --btn-hover-fg: var(--navy-900);
+}
 .btn-row:has(.btn--blue) .btn--ghost:hover .btn__icon,
 .btn-row:has(.btn:not(.btn--blue, .btn--gold, .btn--light, .btn--ghost)) .btn--ghost:hover .btn__icon {
   background: rgba(255, 255, 255, 0.16);
@@ -4468,6 +4473,57 @@ a.cdirect__value:hover {
 .field textarea[aria-invalid='true'],
 .field select[aria-invalid='true'] {
   border-color: #b42318;
+}
+/* Phone: a calling-code picker in front of the number, on one shared underline. The select
+   sits invisibly over the short code so the closed field stays compact. */
+.phone {
+  display: flex;
+  align-items: stretch;
+  border-bottom: 1px solid var(--line);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.phone:focus-within {
+  border-color: var(--blue-700);
+  box-shadow: 0 1px 0 0 var(--blue-700);
+}
+.phone[data-invalid] {
+  border-color: #b42318;
+}
+.field .phone input,
+.field .phone input:focus {
+  border: 0;
+  box-shadow: none;
+}
+.phone__code {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex: none;
+  margin-right: 0.85rem;
+  padding-right: 0.85rem;
+  border-right: 1px solid var(--line);
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+.phone__code::after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235d6384' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E") no-repeat center;
+}
+.field .phone__code select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.phone__code:has(select:focus-visible) {
+  outline: 2px solid var(--blue-700);
+  outline-offset: 2px;
 }
 .segmented {
   display: flex;
