@@ -52,6 +52,29 @@ export default function PageHero({ eyebrow, title, lead, tone = 'light', primary
             />
           </div>
           <div className="page-hero__veil" aria-hidden="true" />
+          {/* Graphics over the photo, in the spirit of the home hero: a faint grid, warm and blue
+              glows, rings behind the card, and a sweeping line. Shown on the Marketing
+              landing only (see globals.css). */}
+          <div className="page-hero__decor" aria-hidden="true">
+            <div className="page-hero__lines" />
+            <div className="page-hero__glow page-hero__glow--gold" />
+            <div className="page-hero__glow page-hero__glow--orange" />
+            <div className="page-hero__glow page-hero__glow--blue" />
+            <div className="page-hero__ring page-hero__ring--1" />
+            <div className="page-hero__ring page-hero__ring--2" />
+            <svg className="page-hero__sweep" viewBox="0 0 1600 900" preserveAspectRatio="none" fill="none">
+              <defs>
+                <linearGradient id="hero-sweep" x1="0" y1="1" x2="1" y2="0">
+                  <stop offset="0" stopColor="#f2bd2b" stopOpacity="0" />
+                  <stop offset="0.35" stopColor="#f2bd2b" />
+                  <stop offset="0.7" stopColor="#f47a20" />
+                  <stop offset="1" stopColor="#2550ea" stopOpacity="0" />
+                </linearGradient>
+              </defs>
+              <path d="M-40 860 C 380 760, 640 520, 980 470 S 1460 330, 1660 60" stroke="url(#hero-sweep)" strokeWidth="3" pathLength="1" />
+              <path d="M-40 900 C 420 820, 700 600, 1020 560 S 1480 420, 1660 160" stroke="url(#hero-sweep)" strokeWidth="2" strokeDasharray="0.006 0.012" pathLength="1" opacity="0.7" />
+            </svg>
+          </div>
         </>
       ) : (
         <Monogram className="page-hero__mark" variant="mono" style={{ color: dark ? '#fff' : 'var(--blue-700)' }} />
