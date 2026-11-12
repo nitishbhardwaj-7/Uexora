@@ -7,8 +7,9 @@ import { marketingPage } from './marketingPage';
 import { contactPage } from './contactPage';
 import { blogPage, category, post } from './blog';
 import { enquiry } from './enquiry';
+import { review } from './review';
 
-export const schemaTypes = [link, item, step, picture, seo, faq, signpost, ctaCard, ctaBand, siteSettings, homePage, educationPage, marketingPage, programme, marketingService, contactPage, blogPage, category, post, enquiry];
+export const schemaTypes = [link, item, step, picture, seo, faq, signpost, ctaCard, ctaBand, siteSettings, homePage, educationPage, marketingPage, programme, marketingService, contactPage, blogPage, category, post, enquiry, review];
 
 /** One document each; created by the seed script and edited in place. */
 export const singletons = [

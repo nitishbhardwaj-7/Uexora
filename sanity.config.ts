@@ -18,7 +18,12 @@ export default defineConfig({
   schema: {
     types: schemaTypes,
     // Singletons are opened from the sidebar, never created from the "new document" menu.
-    templates: (templates) => templates.filter((t) => !singletonTypes.has(t.schemaType) && t.schemaType !== 'enquiry'),
+    // A review created from the Education or Marketing list starts with that page chosen.
+    templates: (templates) => [
+      ...templates.filter((t) => !singletonTypes.has(t.schemaType) && t.schemaType !== 'enquiry'),
+      { id: 'review-education', title: 'Education review', schemaType: 'review', value: { division: 'education', permission: false } },
+      { id: 'review-marketing', title: 'Marketing review', schemaType: 'review', value: { division: 'marketing', permission: false } },
+    ],
   },
   document: {
     actions: (prev, { schemaType }) => {

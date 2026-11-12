@@ -8,7 +8,9 @@ import ServiceCards from '@/components/sections/ServiceCards';
 import CtaBand from '@/components/sections/CtaBand';
 import Signpost from '@/components/sections/Signpost';
 import Faq from '@/components/sections/Faq';
+import Reviews from '@/components/sections/Reviews';
 import { getMarketing } from '@/lib/cms';
+import { getReviews } from '@/lib/cms/reviews';
 import { heroSlides } from '@/lib/cms/services';
 import { pageMetadata } from '@/lib/seo';
 
@@ -18,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function MarketingPage() {
-  const m = await getMarketing();
+  const [m, reviews] = await Promise.all([getMarketing(), getReviews('marketing')]);
   return (
     <>
       <BreadcrumbJsonLd crumbs={[{ name: 'Marketing', path: '/marketing' }]} />
@@ -77,6 +79,9 @@ export default async function MarketingPage() {
           </div>
         </div>
       </section>
+
+      {/* Real reviews from Studio; hidden until there is one. Heading: DRAFT copy. */}
+      <Reviews id="reviews" eyebrow="Reviews" heading="What our clients say" reviews={reviews} tone="dark" />
 
       <WhyChoose
         id="why-choose-us"
