@@ -11,17 +11,23 @@ type Point = { title: string; subtitle?: string; text?: string; icon?: string; i
  * badge sends out one soft pulse, and the text rises in. On hover an icon redraws.
  */
 /**
- * Each programme page plays the section in its own way (see globals.css, "Approach variants"),
- * chosen to suit the programme:
+ * Every page that shows the section plays it in its own way (see globals.css, "Approach
+ * variants"), chosen to suit the page:
  *   stack   (school tuition)        badges drop in like blocks settling, text rises firmly
  *   circuit (AI, coding, robotics)  a signal runs from the number to the badge, which powers on
  *   focus   (AI for professionals)  everything sharpens from a blur, the ring settles inwards
  *   wave    (communication)         badges pop and send out sound waves, lines spread from the centre
  *   wipe    (corporate trainings)   badges slide in, text is wiped on left to right
  *   gentle  (special needs)         slow, soft fades and a calm breathing glow
- *   ring    (any other page)        badge turns in, ring traces round, line runs out to the number
+ *   ring    (marketing strategy)    badge turns in, ring traces round, line runs out to the number
+ *   scan    (SEO)                   a gold light sweeps across each badge, text slides in from the left
+ *   target  (paid advertising)      rings close in on the badge and lock on, the number lands
+ *   flip    (social media)          badges flip round like cards, text tips up like a feed
+ *   iris    (website design)        badges open from the centre, text loads top to bottom
+ *   spark   (AI marketing)          badges flicker on with a glow, ring and icon draw quickly
+ *   orbit   (AEO and GEO)           badges swing in on an arc while their ring spins into place
  */
-export type ApproachVariant = 'ring' | 'stack' | 'circuit' | 'focus' | 'wave' | 'wipe' | 'gentle';
+export type ApproachVariant = 'ring' | 'stack' | 'circuit' | 'focus' | 'wave' | 'wipe' | 'gentle' | 'scan' | 'target' | 'flip' | 'iris' | 'spark' | 'orbit';
 const VARIANTS: Record<string, ApproachVariant> = {
   'academic-support-and-school-tuition': 'stack',
   'ai-coding-and-robotics-for-students': 'circuit',
@@ -29,6 +35,13 @@ const VARIANTS: Record<string, ApproachVariant> = {
   'communication-public-speaking-and-confidence-building': 'wave',
   'corporate-trainings': 'wipe',
   'special-needs-students-programme': 'gentle',
+  'digital-marketing-strategy': 'ring',
+  'search-engine-optimisation': 'scan',
+  'paid-advertising-and-lead-generation': 'target',
+  'social-media-marketing': 'flip',
+  'website-design-and-development': 'iris',
+  'ai-powered-marketing-solutions': 'spark',
+  'aeo-and-geo': 'orbit',
 };
 export const approachVariant = (slug: string): ApproachVariant => VARIANTS[slug] || 'ring';
 
