@@ -1152,6 +1152,9 @@ html.reveal-ready .curricula__list:not(.is-in) .curricula__name {
   inset: -8px;
   width: calc(100% + 16px);
   height: calc(100% + 16px);
+  /* the global svg rule caps width at 100%, which shrank the ring and pushed it left */
+  max-width: none;
+  max-height: none;
   rotate: -90deg;
   overflow: visible;
   pointer-events: none;
