@@ -34,7 +34,7 @@ const programmes: Service[] = [
         { grades: '1–5', title: 'Primary years', text: 'Reading, writing and number skills, curiosity and good study habits, built patiently so that learning feels enjoyable.' },
         { grades: '6–8', title: 'Middle school', text: 'A firmer grasp of core subjects as topics become more demanding, with help organising work and thinking independently.' },
         { grades: '9–10', title: 'Secondary', text: 'Clear concepts across subjects, regular practice and steady preparation for board examinations.' },
-        { grades: '11–12', title: 'Senior secondary', text: 'Focused support in the chosen stream, from difficult concepts to revision and board examination preparation.' },
+        { grades: '11–12', title: 'Senior secondary', text: 'Focused support in the chosen stream, including STEM subjects for science students, from difficult concepts to revision and board examination preparation.' },
       ],
     },
     curricula: {
@@ -152,9 +152,9 @@ const programmes: Service[] = [
     examBatches,
     examApproach,
     examWhy,
-    whoFor: 'Students preparing for competitive examinations such as JEE and NEET who want a clear, structured approach to the subjects involved.',
+    whoFor: 'Students preparing for competitive examinations such as JEE and NEET who want a clear, structured approach to the STEM subjects involved.',
     details: [
-      'Competitive examinations such as JEE and NEET reward a clear understanding of the subjects as much as hard work. Our preparation combines focused learning on the syllabus, concept building that connects topics together, and regular practice so that students become familiar with the format and pace of the exam.',
+      'Competitive examinations such as JEE and NEET reward a clear understanding of the STEM subjects they test (Physics, Chemistry, Mathematics and Biology) as much as hard work. Our preparation combines focused learning on the syllabus, concept building that connects topics together, and regular practice so that students become familiar with the format and pace of the exam.',
     ],
     faqHeading: 'Common Questions Asked',
     // Questions: the client's. Answers: DRAFT for the client to review, written only from what the
@@ -225,14 +225,14 @@ const programmes: Service[] = [
   {
     title: 'AI, Coding and Robotics for Students',
     slug: 'ai-coding-and-robotics-for-students',
-    promise: 'Explore AI, coding and robotics by building, testing and improving real projects.',
-    seo: { description: 'AI, coding and robotics programmes for students: explore new concepts, experiment with ideas and build problem-solving skills through practical activities.' },
+    promise: 'Hands-on STEM learning: explore AI, coding and robotics by building, testing and improving real projects.',
+    seo: { description: 'STEM programmes in AI, coding and robotics for students: explore ideas, experiment and build problem-solving skills through hands-on activities.' },
     image: { src: '/images/services/ai-coding-pair-programming.jpg', alt: 'Two people working through code together on a laptop' },
     heroImage: { src: '/images/heroes/services/ai-coding-and-robotics-for-students.jpg', alt: 'Students building robots together while their teacher looks on' },
-    highlights: ['Artificial intelligence', 'Coding', 'Robotics', 'Hands-on problem solving'],
+    highlights: ['Artificial intelligence', 'Coding', 'Robotics', 'Hands-on STEM projects'],
     whoFor: 'Learners from an early age who want to understand the technology shaping almost every field, through practical activities rather than theory alone.',
     details: [
-      'Technology is becoming part of almost every field, and we believe students should have the chance to understand it from an early age. Through AI, coding and robotics programmes, learners explore new concepts, experiment with ideas and build things that work.',
+      'Technology is becoming part of almost every field, and we believe students should have the chance to understand it from an early age. Through STEM programmes in AI, coding and robotics, learners explore new concepts, experiment with ideas and build things that work.',
       'The emphasis is on practical activities: trying, testing and improving, so that problem-solving becomes a habit rather than a lesson.',
     ],
     courses: aiCourses,
@@ -243,7 +243,7 @@ const programmes: Service[] = [
       { q: 'Is prior coding experience needed?', a: 'No. Learners explore new concepts and experiment with ideas through practical activities.' },
       { q: 'What do learners actually do?', a: 'They explore AI, coding and robotics concepts, experiment with ideas and develop problem-solving skills through hands-on activities.' },
     ],
-    text: 'Technology is becoming part of almost every field, and we believe students should have opportunities to understand it from an early age. Through AI, coding and robotics programmes, learners can explore new concepts, experiment with ideas and develop problem-solving skills through practical activities.',
+    text: 'Technology is becoming part of almost every field, and we believe students should have opportunities to understand it from an early age. Through STEM programmes in AI, coding and robotics, learners can explore new concepts, experiment with ideas and develop problem-solving skills through practical activities.',
   },
   {
     title: 'AI for Professionals & Educators',
@@ -345,9 +345,9 @@ const programmes: Service[] = [
 
 export const education = {
   seo: {
-    title: 'Uexora Education | Tuition, JEE & NEET, IELTS, AI & Robotics',
+    title: 'Uexora Education | STEM, Tuition, JEE & NEET, IELTS & AI',
     description:
-      'Uexora Education: school tuition, JEE and NEET, IELTS, PTE and TOEFL, AI and robotics, public speaking, special needs support and corporate training.',
+      'Uexora Education: school tuition, STEM with AI, coding and robotics, JEE and NEET, IELTS, PTE and TOEFL, public speaking, special needs and corporate training.',
   },
 
   eyebrow: 'Uexora Education',
@@ -355,13 +355,13 @@ export const education = {
   lead:
     'From academic success and future-ready skills to confidence, communication and personal growth, we bring more opportunities to learn and develop. Because, you matter.',
   hero: {
-    chips: ['School tuition', 'JEE & NEET', 'IELTS · PTE · TOEFL', 'AI & robotics', 'AI for professionals', 'Public speaking', 'Special needs support', 'Corporate trainings'],
+    chips: ['School tuition', 'JEE & NEET', 'IELTS · PTE · TOEFL', 'STEM, AI & robotics', 'AI for professionals', 'Public speaking', 'Special needs support', 'Corporate trainings'],
     /** The keywords under the hero buttons, each linking to its programme. */
     chipLinks: [
       { label: 'School tuition', href: '/education/academic-support-and-school-tuition' },
       { label: 'JEE & NEET', href: '/education/competitive-exam-preparation' },
       { label: 'IELTS · PTE · TOEFL', href: '/education/overseas-education-and-english-language' },
-      { label: 'AI & robotics', href: '/education/ai-coding-and-robotics-for-students' },
+      { label: 'STEM, AI & robotics', href: '/education/ai-coding-and-robotics-for-students' },
       { label: 'AI for professionals', href: '/education/ai-for-professionals-and-educators' },
       { label: 'Public speaking', href: '/education/communication-public-speaking-and-confidence-building' },
       { label: 'Special needs support', href: '/education/special-needs-students-programme' },
@@ -384,7 +384,7 @@ export const education = {
     heading: 'Learning is about more than grades and examinations.',
     paragraphs: [
       "At Uexora Education, we believe learning is about more than grades and examinations. It's about discovering what you're good at, building confidence, developing useful skills and preparing for the opportunities ahead.",
-      'Every learner is different. Some need extra support with their schoolwork, while others are preparing for competitive exams, planning to study abroad or exploring new areas like artificial intelligence and robotics. Some want to improve their communication skills, become more confident speakers or develop at their own pace with the right learning support.',
+      'Every learner is different. Some need extra support with their schoolwork, while others are preparing for competitive exams, planning to study abroad or exploring STEM areas like artificial intelligence, coding and robotics. Some want to improve their communication skills, become more confident speakers or develop at their own pace with the right learning support.',
     ],
     link: 'Why choose Uexora Education',
     image: { src: '/images/sections/education-approach.jpg', alt: 'A student smiling as she writes in a notebook at a sunlit desk beside a computer and house plants' },
@@ -469,7 +469,7 @@ export const education = {
       {
         title: 'Future-Ready Skills',
         subtitle: 'Go Beyond Textbooks. Explore What’s Next.',
-        text: 'Students discover AI, robotics, and emerging technologies through practical activities and hands-on projects.',
+        text: 'Students discover STEM, AI, robotics and emerging technologies through practical activities and hands-on projects.',
         icon: 'robot',
       },
     ] as { title: string; subtitle?: string; text: string; icon?: string; image?: { src: string; alt: string } }[],
@@ -502,7 +502,7 @@ export const education = {
       { need: 'Stronger results and more confidence in school subjects', slug: 'academic-support-and-school-tuition' },
       { need: 'Preparing for JEE or NEET', slug: 'competitive-exam-preparation' },
       { need: 'Studying abroad or proving English proficiency', slug: 'overseas-education-and-english-language' },
-      { need: 'Exploring technology hands-on', slug: 'ai-coding-and-robotics-for-students' },
+      { need: 'Exploring STEM and technology hands-on', slug: 'ai-coding-and-robotics-for-students' },
       { need: 'Using AI in my work or my teaching', slug: 'ai-for-professionals-and-educators' },
       { need: 'Speaking and presenting with confidence', slug: 'communication-public-speaking-and-confidence-building' },
       { need: 'Support for special needs students', slug: 'special-needs-students-programme' },
@@ -547,7 +547,7 @@ export const education = {
       },
       {
         title: 'Preparing for the Future',
-        text: 'The world is changing, and new opportunities require new skills. Through areas such as artificial intelligence, coding and robotics, we aim to help learners explore emerging technologies and develop a mindset of curiosity and continuous learning.',
+        text: 'The world is changing, and new opportunities require new skills. Through STEM areas such as artificial intelligence, coding and robotics, we aim to help learners explore emerging technologies and develop a mindset of curiosity and continuous learning.',
       },
       {
         title: 'Support for Every Next Step',
