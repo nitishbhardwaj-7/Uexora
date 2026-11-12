@@ -3,7 +3,7 @@
  * the CSS can draw it on (stroke-dashoffset 1 to 0); --p orders the strokes within an icon, and
  * `acc` marks the accent strokes (gold).
  */
-export const APPROACH_ICONS = ['questions', 'bulb', 'globe', 'book', 'sliders', 'layers', 'search', 'puzzle', 'robot', 'speech', 'mic', 'person', 'team', 'career', 'routine', 'heart', 'family', 'compass', 'sprout', 'infinity', 'focus', 'chart', 'target', 'megaphone', 'code', 'device', 'shop'] as const;
+export const APPROACH_ICONS = ['questions', 'bulb', 'globe', 'book', 'sliders', 'layers', 'search', 'puzzle', 'robot', 'speech', 'mic', 'person', 'team', 'career', 'routine', 'heart', 'family', 'compass', 'sprout', 'infinity', 'focus', 'chart', 'target', 'megaphone', 'code', 'device', 'shop', 'iterate', 'chip', 'steps', 'aicheck', 'rocket', 'scales', 'shield'] as const;
 export type ApproachIconName = (typeof APPROACH_ICONS)[number];
 
 const p = (n: number) => ({ pathLength: 1, style: { '--p': n } as React.CSSProperties });
@@ -232,6 +232,65 @@ const ICONS: Record<ApproachIconName, React.ReactNode> = {
       <path {...p(0)} d="M9 22v20h30V22" />
       <path {...p(1)} d="M9 8h30l5 11a5 5 0 0 1-10 0 5 5 0 0 1-10 0 5 5 0 0 1-10 0 5 5 0 0 1-10 0L9 8z" />
       <path {...p(2)} className="acc" d="M19 42V30h10v12" />
+    </>
+  ),
+  // Two arrows chasing each other round a tick: try, test, improve.
+  iterate: (
+    <>
+      <path {...p(0)} d="M38.5 19.5A15 15 0 0 0 9.5 19.5M5.5 15.5l4 4 4-4" />
+      <path {...p(1)} d="M9.5 28.5A15 15 0 0 0 38.5 28.5M42.5 32.5l-4-4-4 4" />
+      <path {...p(2)} className="acc" d="M18 24.5l4 4 8-8" />
+    </>
+  ),
+  // A microchip with its pins: looking inside the technology.
+  chip: (
+    <>
+      <rect {...p(0)} x="14" y="14" width="20" height="20" rx="3" />
+      <path {...p(1)} d="M19 8v6M24 8v6M29 8v6M19 34v6M24 34v6M29 34v6M8 19h6M8 24h6M8 29h6M34 19h6M34 24h6M34 29h6" />
+      <rect {...p(2)} className="acc" x="20" y="20" width="8" height="8" rx="1.5" />
+    </>
+  ),
+  // Steps rising to a flag: a starting point for every age and stage.
+  steps: (
+    <>
+      <path {...p(0)} d="M4 42h40" />
+      <path {...p(1)} d="M6 42v-8h10v-9h10v-9h10v26" />
+      <path {...p(2)} className="acc" d="M36 16V5l7 3-7 3" />
+    </>
+  ),
+  // An AI sparkle, and a smaller one under a magnifier: using AI and checking what it gives.
+  aicheck: (
+    <>
+      <path {...p(0)} d="M18 5c1.2 6.5 3.5 8.8 10 10-6.5 1.2-8.8 3.5-10 10-1.2-6.5-3.5-8.8-10-10 6.5-1.2 8.8-3.5 10-10z" />
+      <circle {...p(1)} cx="32" cy="32" r="8" />
+      <path {...p(2)} d="M38 38l6 6" />
+      <path {...p(3)} className="acc" d="M32 28c.5 2.5 1.5 3.5 4 4-2.5.5-3.5 1.5-4 4-.5-2.5-1.5-3.5-4-4 2.5-.5 3.5-1.5 4-4z" />
+    </>
+  ),
+  // A rocket lifting off: from an idea to a finished result.
+  rocket: (
+    <>
+      <path {...p(0)} d="M24 4c6 4 9 11 9 19v9H15v-9c0-8 3-15 9-19z" />
+      <circle {...p(1)} className="acc" cx="24" cy="18" r="3.5" />
+      <path {...p(2)} d="M15 25l-6 6v6l6-3M33 25l6 6v6l-6-3" />
+      <path {...p(3)} className="acc" d="M20 36c0 3.5 2 6 4 8 2-2 4-4.5 4-8" />
+    </>
+  ),
+  // A balance: what AI can do weighed against what it cannot.
+  scales: (
+    <>
+      <path {...p(0)} d="M24 9v33M16 42h16" />
+      <path {...p(1)} d="M8 14h32" />
+      <path {...p(2)} d="M8 14 3 25a5 5 0 0 0 10 0L8 14zM40 14l-5 11a5 5 0 0 0 10 0l-5-11z" />
+      <circle {...p(3)} className="acc" cx="24" cy="7" r="2.5" />
+    </>
+  ),
+  // A shield with a padlock: privacy, risk and responsible use.
+  shield: (
+    <>
+      <path {...p(0)} d="M24 4l16 6v12c0 10-7 17-16 22C15 39 8 32 8 22V10l16-6z" />
+      <rect {...p(1)} className="acc" x="18" y="22" width="12" height="10" rx="2" />
+      <path {...p(2)} className="acc" d="M20.5 22v-3a3.5 3.5 0 0 1 7 0v3" />
     </>
   ),
 };

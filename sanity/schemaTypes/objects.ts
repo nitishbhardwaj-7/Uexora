@@ -31,6 +31,13 @@ export const iconOptions = [
   { title: 'Heart', value: 'heart' },
   { title: 'Sprout', value: 'sprout' },
   { title: 'Infinity', value: 'infinity' },
+  { title: 'Cycle with a tick (try, test, improve)', value: 'iterate' },
+  { title: 'Microchip', value: 'chip' },
+  { title: 'Rising steps', value: 'steps' },
+  { title: 'AI sparkle under a magnifier', value: 'aicheck' },
+  { title: 'Rocket', value: 'rocket' },
+  { title: 'Balance scale', value: 'scales' },
+  { title: 'Shield with a lock', value: 'shield' },
 ];
 
 export const link = defineType({
