@@ -1185,7 +1185,8 @@ html.reveal-ready .curricula__list:not(.is-in) .curricula__name {
   transform-origin: left center;
 }
 html.reveal-ready .approach9__badge[data-reveal].is-in {
-  animation: approach9-badge-in 1s cubic-bezier(0.34, 1.4, 0.64, 1) both;
+  /* backwards, not both: once played the badge goes back to its own styles, so hover still lifts it */
+  animation: approach9-badge-in 1s cubic-bezier(0.34, 1.4, 0.64, 1) backwards;
 }
 @keyframes approach9-badge-in {
   from {
@@ -10373,5 +10374,326 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
   }
   .review {
     scroll-snap-align: start;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Approach variants: each programme page plays "Our Approach" its own way (ApproachGrid.tsx
+   picks one per page). The default above is "ring"; these override parts of it. Every badge
+   animation uses fill-mode backwards so hover keeps working once it has played.
+   -------------------------------------------------------------------------- */
+
+/* stack (school tuition): badges drop in and settle like blocks, the text rises firmly. */
+html.reveal-ready .approach9[data-variant='stack'] .approach9__badge[data-reveal].is-in {
+  animation: approach9-stack-drop 1.1s cubic-bezier(0.3, 1.25, 0.5, 1) backwards;
+}
+@keyframes approach9-stack-drop {
+  0% {
+    opacity: 0;
+    translate: 0 -70px;
+  }
+  55% {
+    opacity: 1;
+    translate: 0 6px;
+  }
+  75% {
+    translate: 0 -3px;
+  }
+  100% {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+html.reveal-ready .approach9[data-variant='stack'] .approach9__body[data-reveal].is-in {
+  animation: approach9-stack-rise 1.2s cubic-bezier(0.2, 0.9, 0.2, 1) backwards;
+}
+@keyframes approach9-stack-rise {
+  from {
+    opacity: 0;
+    translate: 0 64px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+html.reveal-ready .approach9[data-variant='stack'] .approach9__badge:not(.is-in) ~ .approach9__num {
+  translate: 0 -24px;
+}
+.approach9[data-variant='stack'] .approach9__badge.is-in::after {
+  animation: none;
+}
+
+/* circuit (AI, coding and robotics): the number lights first, a signal runs along the line to
+   the badge, the badge powers on with a flash, then its ring and icon draw. */
+.approach9[data-variant='circuit'] .approach9__rule {
+  transform-origin: right center;
+  background: linear-gradient(90deg, var(--gold-500), color-mix(in srgb, var(--gold-500) 35%, transparent));
+}
+.approach9[data-variant='circuit'] .approach9__badge.is-in ~ .approach9__rule {
+  transition: scale 0.8s cubic-bezier(0.65, 0, 0.35, 1) calc(var(--d, 0s) + 0.25s);
+}
+html.reveal-ready .approach9[data-variant='circuit'] .approach9__badge:not(.is-in) ~ .approach9__num {
+  translate: 18px 0;
+}
+.approach9[data-variant='circuit'] .approach9__badge.is-in ~ .approach9__num {
+  transition:
+    opacity 0.5s ease var(--d, 0s),
+    translate 0.7s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s);
+}
+html.reveal-ready .approach9[data-variant='circuit'] .approach9__badge[data-reveal].is-in {
+  animation: approach9-power-on 0.9s ease-out backwards;
+  /* beats the inline delay ScrollEffects sets: the badge waits for the signal */
+  animation-delay: calc(var(--d, 0s) + 0.95s) !important;
+}
+@keyframes approach9-power-on {
+  0% {
+    opacity: 0;
+    scale: 0.82;
+    filter: brightness(2.6) saturate(0.4);
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+    filter: none;
+  }
+}
+.approach9[data-variant='circuit'] .approach9__badge.is-in .approach9__ring circle {
+  transition: stroke-dashoffset 1s cubic-bezier(0.65, 0, 0.35, 1) calc(var(--d, 0s) + 1.3s);
+}
+.approach9[data-variant='circuit'] .approach9__badge.is-in .aicon > * {
+  transition: stroke-dashoffset 1.1s cubic-bezier(0.65, 0, 0.35, 1) calc(var(--d, 0s) + 1.35s + var(--p, 0) * 0.12s);
+}
+.approach9[data-variant='circuit'] .approach9__badge.is-in::after {
+  animation-delay: calc(var(--d, 0s) + 2.1s);
+}
+
+/* focus (AI for professionals): badge and text sharpen from a blur, the ring settles inwards
+   instead of tracing, the line opens from its centre and the number comes into focus. */
+html.reveal-ready .approach9[data-variant='focus'] .approach9__badge[data-reveal].is-in {
+  animation: approach9-focus-in 1.2s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+@keyframes approach9-focus-in {
+  from {
+    opacity: 0;
+    scale: 1.3;
+    filter: blur(14px);
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+    filter: blur(0);
+  }
+}
+html.reveal-ready .approach9[data-variant='focus'] .approach9__body[data-reveal].is-in {
+  animation: approach9-focus-text 1.3s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+@keyframes approach9-focus-text {
+  from {
+    opacity: 0;
+    translate: 0 0;
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    filter: blur(0);
+  }
+}
+.approach9[data-variant='focus'] .approach9__ring circle {
+  stroke-dashoffset: 0 !important;
+}
+.approach9[data-variant='focus'] .approach9__badge.is-in .approach9__ring {
+  transition:
+    opacity 0.9s ease calc(var(--d, 0s) + 0.45s),
+    scale 1.1s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--d, 0s) + 0.45s);
+}
+html.reveal-ready .approach9[data-variant='focus'] .approach9__badge:not(.is-in) .approach9__ring {
+  opacity: 0;
+  scale: 1.5;
+}
+.approach9[data-variant='focus'] .approach9__rule {
+  transform-origin: center;
+}
+html.reveal-ready .approach9[data-variant='focus'] .approach9__badge:not(.is-in) ~ .approach9__num {
+  translate: 0 0;
+  filter: blur(8px);
+}
+.approach9[data-variant='focus'] .approach9__badge.is-in ~ .approach9__num {
+  transition:
+    opacity 0.8s ease calc(var(--d, 0s) + 0.9s),
+    filter 0.9s ease calc(var(--d, 0s) + 0.9s);
+}
+.approach9[data-variant='focus'] .approach9__badge.is-in::after {
+  animation: none;
+}
+
+/* wave (communication): badges pop up and send out two sound waves, the ring traces from the
+   bottom, the line spreads from its centre and the number rises from below. */
+.approach9__badge::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--gold-500);
+  opacity: 0;
+  pointer-events: none;
+}
+html.reveal-ready .approach9[data-variant='wave'] .approach9__badge[data-reveal].is-in {
+  animation: approach9-pop 0.8s cubic-bezier(0.34, 1.7, 0.64, 1) backwards;
+}
+@keyframes approach9-pop {
+  from {
+    opacity: 0;
+    scale: 0.3;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+.approach9[data-variant='wave'] .approach9__ring {
+  rotate: 90deg;
+}
+.approach9[data-variant='wave'] .approach9__badge.is-in::before,
+.approach9[data-variant='wave'] .approach9__badge.is-in::after {
+  animation: approach9-wave 1.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.approach9[data-variant='wave'] .approach9__badge.is-in::before {
+  animation-delay: calc(var(--d, 0s) + 0.45s);
+}
+.approach9[data-variant='wave'] .approach9__badge.is-in::after {
+  animation-delay: calc(var(--d, 0s) + 0.8s);
+}
+@keyframes approach9-wave {
+  from {
+    opacity: 0.8;
+    scale: 1;
+  }
+  to {
+    opacity: 0;
+    scale: 2;
+  }
+}
+.approach9[data-variant='wave'] .approach9__rule {
+  transform-origin: center;
+}
+html.reveal-ready .approach9[data-variant='wave'] .approach9__badge:not(.is-in) ~ .approach9__num {
+  translate: 0 22px;
+}
+
+/* wipe (corporate trainings): badges slide in from the left while their ring traces the other
+   way round, the text is wiped on left to right and the number comes in from the right. */
+html.reveal-ready .approach9[data-variant='wipe'] .approach9__badge[data-reveal].is-in {
+  animation: approach9-slide-in 1s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+@keyframes approach9-slide-in {
+  from {
+    opacity: 0;
+    translate: -48px 0;
+    rotate: -90deg;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    rotate: 0deg;
+  }
+}
+.approach9[data-variant='wipe'] .approach9__ring {
+  scale: -1 1;
+}
+html.reveal-ready .approach9[data-variant='wipe'] .approach9__body[data-reveal].is-in {
+  animation: approach9-wipe 1.1s cubic-bezier(0.65, 0, 0.35, 1) backwards;
+}
+@keyframes approach9-wipe {
+  from {
+    opacity: 1;
+    translate: 0 0;
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    clip-path: inset(0 0 0 0);
+  }
+}
+html.reveal-ready .approach9[data-variant='wipe'] .approach9__badge:not(.is-in) ~ .approach9__num {
+  translate: 24px 0;
+}
+.approach9[data-variant='wipe'] .approach9__badge.is-in::after {
+  animation: none;
+}
+
+/* gentle (special needs): slow, soft fades. The badge settles in, its ring traces slowly, a
+   warm halo breathes twice and the text drifts up a short way. */
+html.reveal-ready .approach9[data-variant='gentle'] .approach9__badge[data-reveal].is-in {
+  animation: approach9-settle 1.8s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+@keyframes approach9-settle {
+  from {
+    opacity: 0;
+    scale: 0.88;
+  }
+  to {
+    opacity: 1;
+    scale: 1;
+  }
+}
+.approach9[data-variant='gentle'] .approach9__badge.is-in .approach9__ring circle {
+  transition: stroke-dashoffset 2.2s cubic-bezier(0.45, 0, 0.25, 1) calc(var(--d, 0s) + 0.3s);
+}
+.approach9[data-variant='gentle'] .approach9__badge.is-in .aicon > * {
+  transition: stroke-dashoffset 1.8s cubic-bezier(0.45, 0, 0.25, 1) calc(var(--d, 0s) + 0.35s + var(--p, 0) * 0.18s);
+}
+.approach9[data-variant='gentle'] .approach9__badge::after {
+  border: 0;
+  box-shadow: 0 0 0 9px color-mix(in srgb, var(--gold-500) 22%, transparent);
+}
+.approach9[data-variant='gentle'] .approach9__badge.is-in::after {
+  animation: approach9-breathe 2.6s ease-in-out calc(var(--d, 0s) + 1.4s) 2 both;
+}
+@keyframes approach9-breathe {
+  0%,
+  100% {
+    opacity: 0;
+    scale: 1;
+  }
+  50% {
+    opacity: 1;
+    scale: 1.12;
+  }
+}
+html.reveal-ready .approach9[data-variant='gentle'] .approach9__body[data-reveal].is-in {
+  animation: approach9-drift 1.8s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+}
+@keyframes approach9-drift {
+  from {
+    opacity: 0;
+    translate: 0 16px;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+.approach9[data-variant='gentle'] .approach9__badge.is-in ~ .approach9__rule {
+  transition: scale 1.8s cubic-bezier(0.45, 0, 0.25, 1) calc(var(--d, 0s) + 0.8s);
+}
+html.reveal-ready .approach9[data-variant='gentle'] .approach9__badge:not(.is-in) ~ .approach9__num {
+  translate: 0 0;
+}
+.approach9[data-variant='gentle'] .approach9__badge.is-in ~ .approach9__num {
+  transition: opacity 1.4s ease calc(var(--d, 0s) + 1.4s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.reveal-ready .approach9 .approach9__badge[data-reveal].is-in,
+  html.reveal-ready .approach9 .approach9__body[data-reveal].is-in,
+  .approach9 .approach9__badge::before,
+  .approach9 .approach9__badge::after {
+    animation: none !important;
   }
 }

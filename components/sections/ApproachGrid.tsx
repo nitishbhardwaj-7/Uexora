@@ -10,12 +10,34 @@ type Point = { title: string; subtitle?: string; text?: string; icon?: string; i
  * stroke by stroke, a gold line runs out to the point's number, which slides in at its end, the
  * badge sends out one soft pulse, and the text rises in. On hover an icon redraws.
  */
-export default function ApproachGrid({ id, heading, quote, points, tone }: { id: string; heading: string; quote?: string; points: Point[]; tone: 'light' | 'dark' }) {
+/**
+ * Each programme page plays the section in its own way (see globals.css, "Approach variants"),
+ * chosen to suit the programme:
+ *   stack   (school tuition)        badges drop in like blocks settling, text rises firmly
+ *   circuit (AI, coding, robotics)  a signal runs from the number to the badge, which powers on
+ *   focus   (AI for professionals)  everything sharpens from a blur, the ring settles inwards
+ *   wave    (communication)         badges pop and send out sound waves, lines spread from the centre
+ *   wipe    (corporate trainings)   badges slide in, text is wiped on left to right
+ *   gentle  (special needs)         slow, soft fades and a calm breathing glow
+ *   ring    (any other page)        badge turns in, ring traces round, line runs out to the number
+ */
+export type ApproachVariant = 'ring' | 'stack' | 'circuit' | 'focus' | 'wave' | 'wipe' | 'gentle';
+const VARIANTS: Record<string, ApproachVariant> = {
+  'academic-support-and-school-tuition': 'stack',
+  'ai-coding-and-robotics-for-students': 'circuit',
+  'ai-for-professionals-and-educators': 'focus',
+  'communication-public-speaking-and-confidence-building': 'wave',
+  'corporate-trainings': 'wipe',
+  'special-needs-students-programme': 'gentle',
+};
+export const approachVariant = (slug: string): ApproachVariant => VARIANTS[slug] || 'ring';
+
+export default function ApproachGrid({ id, heading, quote, points, tone, variant = 'ring' }: { id: string; heading: string; quote?: string; points: Point[]; tone: 'light' | 'dark'; variant?: ApproachVariant }) {
   const rows: Point[][] = [];
   for (let i = 0; i < points.length; i += 3) rows.push(points.slice(i, i + 3));
 
   return (
-    <section id={id} className="section approach9" data-tone={tone} aria-labelledby={`${id}-title`}>
+    <section id={id} className="section approach9" data-tone={tone} data-variant={variant} aria-labelledby={`${id}-title`}>
       <div className="container">
         <div className="approach9__head">
           <h2 id={`${id}-title`} className="h2" data-split>
