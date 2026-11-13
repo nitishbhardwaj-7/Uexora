@@ -3936,6 +3936,41 @@ a.fmarquee__card:focus-visible {
     mask-image: radial-gradient(ellipse 90% 60% at 40% 30%, #000 15%, transparent 70%);
   }
 }
+/* Marketing landing without the photo: a white backdrop with soft cream washes, a fine warm paper
+   grain over it, and the same graphics (grid, glows, rings, sweep). */
+[data-division='marketing'] .page-hero--plain {
+  background-color: #fff;
+}
+[data-division='marketing'] .page-hero--plain .page-hero__veil {
+  background:
+    radial-gradient(52% 62% at 6% 18%, color-mix(in srgb, var(--mk-cream-deep) 80%, transparent), transparent 72%),
+    radial-gradient(42% 58% at 94% 78%, color-mix(in srgb, var(--mk-cream) 95%, transparent), transparent 72%),
+    radial-gradient(38% 40% at 52% 108%, color-mix(in srgb, var(--mk-cream-deep) 55%, transparent), transparent 72%),
+    linear-gradient(to top, var(--bg) 0%, transparent 14%);
+}
+[data-division='marketing'] .page-hero--plain .page-hero__decor::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.52 0 0 0 0 0.38 0 0 0 0 0.16 0.16 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 240px 240px;
+  opacity: 0.7;
+}
+[data-division='marketing'] .page-hero--plain .page-hero__copy::before {
+  display: none;
+}
+[data-division='marketing'] .page-hero--plain .lead {
+  text-shadow: none;
+}
+@media (max-width: 900px) {
+  /* The veil is off on small screens, so the washes go on the section itself. */
+  [data-division='marketing'] .page-hero--plain {
+    background:
+      radial-gradient(85% 40% at 0% 0%, var(--mk-cream-deep), transparent 72%),
+      radial-gradient(75% 35% at 100% 70%, var(--mk-cream), transparent 72%),
+      #fff;
+  }
+}
 /* Readability over the photo without hiding it: a soft pool of the page colour behind the
    copy only, a faint glow around the type, and frosted chips and outline button. */
 .page-hero--immersive .page-hero__copy {

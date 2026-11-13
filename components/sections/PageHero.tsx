@@ -25,32 +25,37 @@ type Props = {
   stat?: { value: string; label: string; text?: string };
   /** Image-led variant only: photos that take turns in a floating card on the right. */
   slides?: HeroSlide[];
+  /** Image-led layout without the photo behind it (Marketing landing): a plain backdrop with
+      cream washes, a paper grain and the graphics. The photo is not loaded at all. */
+  plain?: boolean;
 };
 
-export default function PageHero({ eyebrow, title, lead, tone = 'light', primary, secondary, image, chips, crumbs, background, stat, slides }: Props) {
+export default function PageHero({ eyebrow, title, lead, tone = 'light', primary, secondary, image, chips, crumbs, background, stat, slides, plain = false }: Props) {
   const dark = tone === 'dark';
-  const immersive = !!background;
+  const immersive = !!background || plain;
   return (
     <section
-      className={['page-hero', image || immersive ? 'page-hero--full' : '', immersive ? 'page-hero--immersive' : '', immersive && !image && slides?.length ? 'page-hero--slides' : ''].filter(Boolean).join(' ')}
+      className={['page-hero', image || immersive ? 'page-hero--full' : '', immersive ? 'page-hero--immersive' : '', immersive && !image && slides?.length ? 'page-hero--slides' : '', plain ? 'page-hero--plain' : ''].filter(Boolean).join(' ')}
       data-tone={tone}
       aria-labelledby="page-title"
     >
       {immersive ? (
         <>
-          <div className="page-hero__bg" data-parallax="0.12">
-            {/* Cropped to fill the hero's full height, so it is drawn wider than the viewport:
-                ask for a larger file than 100vw or it looks soft. */}
-            <CmsImage
-              src={background!.src}
-              alt={background!.alt}
-              fill
-              sizes="(max-width: 900px) 100vw, 135vw"
-              quality={82}
-              preload
-              fetchPriority="high"
-            />
-          </div>
+          {background && !plain ? (
+            <div className="page-hero__bg" data-parallax="0.12">
+              {/* Cropped to fill the hero's full height, so it is drawn wider than the viewport:
+                  ask for a larger file than 100vw or it looks soft. */}
+              <CmsImage
+                src={background.src}
+                alt={background.alt}
+                fill
+                sizes="(max-width: 900px) 100vw, 135vw"
+                quality={82}
+                preload
+                fetchPriority="high"
+              />
+            </div>
+          ) : null}
           <div className="page-hero__veil" aria-hidden="true" />
           {/* Graphics over the photo, in the spirit of the home hero: a faint grid, warm and blue
               glows, rings behind the card, and a sweeping line. Shown on the Marketing

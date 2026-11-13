@@ -32,6 +32,7 @@ export default async function MarketingPage() {
         primary={m.hero.primary}
         secondary={m.hero.secondary}
         background={m.hero.background}
+        plain
         slides={heroSlides('marketing', m.services)}
         chips={m.hero.chipLinks?.length ? m.hero.chipLinks : m.hero.chips}
       />
