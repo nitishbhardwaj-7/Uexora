@@ -10310,52 +10310,87 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
 }
 
 /* --------------------------------------------------------------------------
-   Customer reviews (Education and Marketing landing pages). Cards in a grid; on phones they
-   scroll sideways one at a time. Marketing gives the cards its gradient frame.
+   Customer reviews (Education and Marketing landing pages). Glass cards with a thin gold top
+   light; the reviewer always sits on the same line at the foot of each card. One or two reviews
+   sit in a grid; three or more run as a slow slider (two rows, opposite ways, from six).
    -------------------------------------------------------------------------- */
 .reviews {
   list-style: none;
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
-  gap: clamp(1rem, 2vw, 1.6rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: clamp(1rem, 2vw, 1.5rem);
 }
 .reviews[data-count='1'] {
-  max-width: 760px;
+  max-width: 640px;
 }
 .review figure {
   position: relative;
+  isolation: isolate;
   height: 100%;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 1.1rem;
-  padding: clamp(1.6rem, 2.6vw, 2.4rem);
-  border: 1px solid var(--rule);
-  border-radius: 1.4rem;
-  background: color-mix(in srgb, var(--fg) 4%, transparent);
+  gap: 1.35rem;
+  padding: clamp(1.7rem, 2.4vw, 2.3rem);
+  border-radius: 1.6rem;
+  border: 1px solid color-mix(in srgb, var(--fg) 11%, transparent);
+  background:
+    radial-gradient(120% 80% at 100% 0%, color-mix(in srgb, var(--blue-500) 16%, transparent), transparent 60%),
+    linear-gradient(160deg, color-mix(in srgb, var(--fg) 7%, transparent), color-mix(in srgb, var(--fg) 2%, transparent) 70%);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--fg) 8%, transparent),
+    0 34px 70px -48px rgba(0, 0, 0, 0.85);
   overflow: hidden;
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
+}
+/* the thin gold light along the top edge */
+.review figure::before {
+  content: '';
+  position: absolute;
+  inset: 0 12% auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold-400), transparent);
+  opacity: 0.75;
+}
+.review figure:hover {
+  border-color: color-mix(in srgb, var(--gold-500) 45%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--fg) 10%, transparent),
+    0 34px 70px -40px color-mix(in srgb, var(--gold-500) 35%, transparent);
+}
+[data-division='marketing'] .review figure {
+  background:
+    radial-gradient(110% 70% at 100% 0%, color-mix(in srgb, var(--blue-500) 18%, transparent), transparent 60%),
+    radial-gradient(80% 60% at 0% 100%, color-mix(in srgb, var(--orange-500) 9%, transparent), transparent 65%),
+    linear-gradient(160deg, color-mix(in srgb, var(--fg) 7%, transparent), color-mix(in srgb, var(--fg) 2%, transparent) 70%);
 }
 .review__mark {
   position: absolute;
-  top: 0.32em;
-  right: 0.3em;
-  font-family: var(--font-heading), serif;
-  font-size: clamp(5.5rem, 7vw, 7rem);
-  line-height: 0.6;
-  color: var(--gold-500);
-  opacity: 0.18;
+  right: clamp(1.2rem, 2vw, 1.8rem);
+  bottom: clamp(1.1rem, 1.8vw, 1.6rem);
+  z-index: -1;
+  width: 4.2rem;
+  height: 4.2rem;
+  fill: var(--gold-500);
+  opacity: 0.1;
   pointer-events: none;
+}
+.review__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 .review__stars {
   display: flex;
-  gap: 0.25rem;
+  gap: 0.22rem;
   margin: 0;
 }
 .review__stars svg {
-  width: 1.05rem;
-  height: 1.05rem;
+  width: 1rem;
+  height: 1rem;
   fill: none;
   stroke: var(--gold-500);
   stroke-width: 1.3;
@@ -10364,70 +10399,71 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
 .review__stars svg.is-on {
   fill: var(--gold-500);
 }
+.review__topic {
+  font-family: var(--font-sub), sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-align: right;
+  color: var(--gold-400);
+}
 .review__quote {
   margin: 0;
   flex: 1;
 }
 .review__quote p {
-  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
-  line-height: 1.6;
+  font-size: clamp(1.06rem, 1.2vw, 1.18rem);
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--fg) 90%, transparent);
 }
 .review__by {
   display: flex;
   align-items: center;
-  gap: 0.9rem;
-  padding-top: 1.1rem;
-  border-top: 1px solid var(--rule);
+  gap: 1rem;
+  padding-top: 1.35rem;
+  border-top: 1px solid color-mix(in srgb, var(--fg) 10%, transparent);
+}
+/* The reviewer's photo (or initials) inside a gold-to-blue ring. */
+.review__avatar {
+  flex: none;
+  width: 60px;
+  height: 60px;
+  padding: 2px;
+  border-radius: 50%;
+  background: conic-gradient(from 210deg, var(--gold-400), var(--orange-500), var(--blue-500), var(--gold-400));
+  box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.8);
+}
+.review__avatar > * {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid var(--navy-900);
+  object-fit: cover;
+  background: radial-gradient(circle at 30% 25%, var(--blue-600), var(--navy-900) 75%);
+  color: var(--cream);
+  font-family: var(--font-heading), serif;
+  font-size: 1.2rem;
 }
 .review__who {
   display: grid;
-  gap: 0.2rem;
+  gap: 0.15rem;
   min-width: 0;
 }
-/* The reviewer's own photo, or their initials on a gold-rimmed disc. */
-.review__avatar {
-  flex: none;
-  display: grid;
-  place-items: center;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: radial-gradient(circle at 30% 25%, var(--blue-600), var(--navy-900) 75%);
-  box-shadow:
-    0 0 0 2px color-mix(in srgb, var(--gold-500) 75%, transparent),
-    0 0 0 5px color-mix(in srgb, var(--gold-500) 14%, transparent);
-  color: var(--cream);
-  font-family: var(--font-heading), serif;
-  font-size: 1.25rem;
-  letter-spacing: 0.02em;
-}
-.review__avatar img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 .review__name {
-  font-weight: 700;
+  font-family: var(--font-sub), sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--fg);
 }
 .review__role {
-  font-size: 0.9rem;
+  font-size: 0.86rem;
   color: var(--fg-muted);
-}
-/* Marks the dev-only placeholder cards; quiet, so the layout can be judged as it will look. */
-.review__sample {
-  margin-top: 0.15rem;
-  font-size: 0.68rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: color-mix(in srgb, var(--gold-500) 70%, transparent);
-}
-[data-division='marketing'] .review figure {
-  border: 2px solid transparent;
-  background:
-    linear-gradient(var(--navy-900), var(--navy-900)) padding-box,
-    linear-gradient(135deg, var(--blue-500), var(--orange-500) 45%, var(--gold-400) 75%, var(--blue-400)) border-box;
-  box-shadow: 0 30px 60px -40px rgba(244, 122, 32, 0.45);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 @media (max-width: 999px) {
   .reviews {
@@ -10448,8 +10484,8 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
   }
 }
 
-/* Three or more reviews: a slow, endless slider across the full width. The set of cards is
-   repeated (--copies) and the track moves by exactly one set, so the loop is seamless. */
+/* The slider: each row repeats its set of cards (--copies) and moves by exactly one set, so the
+   loop is seamless. The second row drifts the other way. */
 .section-head.reviews-head {
   display: flex;
   align-items: flex-end;
@@ -10466,18 +10502,18 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
   flex: none;
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  border: 1px solid var(--rule);
+  border: 1px solid color-mix(in srgb, var(--fg) 18%, transparent);
   background: color-mix(in srgb, var(--fg) 5%, transparent);
   color: var(--fg);
   cursor: pointer;
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 .reviews-pause svg {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   fill: currentColor;
 }
 .reviews-pause:hover {
@@ -10489,20 +10525,25 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
   outline-offset: 3px;
 }
 .reviews-marquee {
-  --gap: clamp(1rem, 2vw, 1.6rem);
+  --gap: clamp(1rem, 1.6vw, 1.4rem);
+  display: grid;
+  gap: var(--gap);
   overflow: hidden;
-  padding-block: 0.5rem 2.5rem;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
-  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  padding-block: 0.4rem 1rem;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
 }
 .reviews-marquee__track {
   display: flex;
   width: max-content;
-  animation: reviews-slide var(--dur, 54s) linear infinite;
+  animation: reviews-slide var(--dur, 60s) linear infinite;
+}
+.reviews-marquee__row[data-reverse] .reviews-marquee__track {
+  animation-direction: reverse;
 }
 .reviews-marquee:hover .reviews-marquee__track,
 .reviews-marquee:focus-within .reviews-marquee__track,
-.reviews-marquee__track[data-paused] {
+.reviews-marquee[data-paused] .reviews-marquee__track {
   animation-play-state: paused;
 }
 @keyframes reviews-slide {
@@ -10519,7 +10560,21 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
   list-style: none;
 }
 .reviews-marquee__set .review {
-  width: clamp(290px, 27vw, 420px);
+  width: clamp(300px, 29vw, 440px);
+}
+.reviews-note {
+  margin-top: 1.4rem;
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+  opacity: 0.8;
+}
+@media (max-width: 899px) {
+  .reviews-marquee__row[data-reverse] {
+    display: none;
+  }
+  .reviews-marquee__set .review {
+    width: min(82vw, 380px);
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .reviews-marquee {
@@ -10531,11 +10586,13 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
   .reviews-marquee__track {
     animation: none;
   }
+  .reviews-marquee__row[data-reverse],
   .reviews-marquee__set + .reviews-marquee__set,
   .reviews-pause {
     display: none;
   }
 }
+
 
 /* --------------------------------------------------------------------------
    Approach variants: each programme page plays "Our Approach" its own way (ApproachGrid.tsx

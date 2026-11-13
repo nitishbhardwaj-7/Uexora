@@ -26,24 +26,46 @@ const initials = (name: string) =>
 function Card({ r }: { r: Review }) {
   return (
     <figure>
-      <span className="review__mark" aria-hidden="true">
-        “
-      </span>
-      {r.rating ? <Stars rating={r.rating} /> : null}
+      <svg className="review__mark" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9.6 5.5C5.9 6.9 3.8 9.9 3.8 14v4.5h6.4v-6.4H7.1c.1-2.7 1.3-4.5 3.5-5.4zM20.2 5.5c-3.7 1.4-5.8 4.4-5.8 8.5v4.5h6.4v-6.4h-3.1c.1-2.7 1.3-4.5 3.5-5.4z" />
+      </svg>
+      <div className="review__top">
+        {r.rating ? <Stars rating={r.rating} /> : <span />}
+        {r.programme ? <span className="review__topic">{r.programme}</span> : null}
+      </div>
       <blockquote className="review__quote">
         <p>{r.quote}</p>
       </blockquote>
       <figcaption className="review__by">
         <span className="review__avatar" aria-hidden="true">
-          {r.photo ? <CmsImage src={r.photo.src} alt="" width={120} height={120} sizes="60px" /> : initials(r.name)}
+          {r.photo ? <CmsImage src={r.photo.src} alt="" width={128} height={128} sizes="64px" /> : <span>{initials(r.name)}</span>}
         </span>
         <span className="review__who">
           <span className="review__name">{r.name}</span>
-          {r.role || r.programme ? <span className="review__role">{[r.role, r.programme].filter(Boolean).join(' · ')}</span> : null}
-          {r.sample ? <span className="review__sample">Placeholder · development only</span> : null}
+          {r.role ? <span className="review__role">{r.role}</span> : null}
         </span>
       </figcaption>
     </figure>
+  );
+}
+
+/** One row of the slider: the set repeated so the loop has no gap; the copies are hidden. */
+function Row({ reviews, reverse, speed }: { reviews: Review[]; reverse?: boolean; speed: number }) {
+  const copies = reviews.length < 5 ? 3 : 2;
+  return (
+    <div className="reviews-marquee__row" data-reverse={reverse || undefined}>
+      <div className="reviews-marquee__track" style={{ '--copies': copies, '--dur': `${reviews.length * speed}s` } as React.CSSProperties}>
+        {Array.from({ length: copies }, (_, c) => (
+          <ul key={c} className="reviews-marquee__set" aria-hidden={c > 0 || undefined} inert={c > 0 || undefined}>
+            {reviews.map((r, i) => (
+              <li key={`${r.name}-${i}`} className="review">
+                <Card r={r} />
+              </li>
+            ))}
+          </ul>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -51,9 +73,9 @@ function Card({ r }: { r: Review }) {
  * Customer reviews on a landing page, from Studio (Reviews). Renders nothing until there is at
  * least one real review, so a page never shows an empty or invented section.
  *
- * Three or more reviews run as a slow, endless slider: the set is repeated so the loop has no
- * gap, the copies are hidden from screen readers and the keyboard, and it pauses on hover, on
- * keyboard focus and with its pause button. With reduced motion it is a plain sideways scroll.
+ * Three or more reviews run as a slow, endless slider; six or more fill two rows that drift in
+ * opposite directions on wide screens. It pauses on hover, on keyboard focus and with its pause
+ * button, and with reduced motion it is a plain sideways scroll.
  */
 export default function Reviews({
   id,
@@ -70,9 +92,12 @@ export default function Reviews({
 }) {
   if (!reviews.length) return null;
   const slider = reviews.length >= 3;
-  // Enough copies that one copy is always wider than the screen, so the loop never shows a gap.
-  const copies = slider ? (reviews.length < 5 ? 3 : 2) : 1;
-  const trackId = `${id}-track`;
+  const twoRows = reviews.length >= 6;
+  // The second row starts halfway through the list, so the two rows never line up.
+  const half = Math.ceil(reviews.length / 2);
+  const second = [...reviews.slice(half), ...reviews.slice(0, half)];
+  const marqueeId = `${id}-marquee`;
+  const placeholders = reviews.some((r) => r.sample);
 
   return (
     <section id={id} className="section reviews-section" data-tone={tone} aria-labelledby={`${id}-title`}>
@@ -86,7 +111,7 @@ export default function Reviews({
               {heading}
             </h2>
           </div>
-          {slider ? <ReviewsPause target={trackId} /> : null}
+          {slider ? <ReviewsPause target={marqueeId} /> : null}
         </div>
         {slider ? null : (
           <ul className="reviews" data-count={reviews.length}>
@@ -99,23 +124,13 @@ export default function Reviews({
         )}
       </div>
       {slider ? (
-        <div className="reviews-marquee" data-reveal>
-          <div
-            id={trackId}
-            className="reviews-marquee__track"
-            style={{ '--copies': copies, '--dur': `${reviews.length * 9}s` } as React.CSSProperties}
-          >
-            {Array.from({ length: copies }, (_, c) => (
-              <ul key={c} className="reviews-marquee__set" aria-hidden={c > 0 || undefined} inert={c > 0 || undefined}>
-                {reviews.map((r, i) => (
-                  <li key={`${r.name}-${i}`} className="review">
-                    <Card r={r} />
-                  </li>
-                ))}
-              </ul>
-            ))}
-          </div>
+        <div id={marqueeId} className="reviews-marquee" data-reveal>
+          <Row reviews={reviews} speed={10} />
+          {twoRows ? <Row reviews={second} speed={12} reverse /> : null}
         </div>
+      ) : null}
+      {placeholders ? (
+        <p className="container reviews-note">Placeholder reviews and stock photos, shown in development only. Real reviews from Studio replace them.</p>
       ) : null}
     </section>
   );
