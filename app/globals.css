@@ -10389,8 +10389,8 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
   flex: none;
   display: grid;
   place-items: center;
-  width: 56px;
-  height: 56px;
+  width: 60px;
+  height: 60px;
   border-radius: 50%;
   overflow: hidden;
   background: radial-gradient(circle at 30% 25%, var(--blue-600), var(--navy-900) 75%);
@@ -10414,13 +10414,13 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
   font-size: 0.9rem;
   color: var(--fg-muted);
 }
+/* Marks the dev-only placeholder cards; quiet, so the layout can be judged as it will look. */
 .review__sample {
-  margin-top: 0.4rem;
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  margin-top: 0.15rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #e5484d;
+  color: color-mix(in srgb, var(--gold-500) 70%, transparent);
 }
 [data-division='marketing'] .review figure {
   border: 2px solid transparent;

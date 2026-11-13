@@ -35,12 +35,12 @@ function Card({ r }: { r: Review }) {
       </blockquote>
       <figcaption className="review__by">
         <span className="review__avatar" aria-hidden="true">
-          {r.photo ? <CmsImage src={r.photo.src} alt="" width={112} height={112} sizes="56px" /> : initials(r.name)}
+          {r.photo ? <CmsImage src={r.photo.src} alt="" width={120} height={120} sizes="60px" /> : initials(r.name)}
         </span>
         <span className="review__who">
           <span className="review__name">{r.name}</span>
           {r.role || r.programme ? <span className="review__role">{[r.role, r.programme].filter(Boolean).join(' · ')}</span> : null}
-          {r.sample ? <span className="review__sample">Sample, shown in development only</span> : null}
+          {r.sample ? <span className="review__sample">Placeholder · development only</span> : null}
         </span>
       </figcaption>
     </figure>
