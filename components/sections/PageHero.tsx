@@ -151,7 +151,7 @@ export default function PageHero({ eyebrow, title, lead, tone = 'light', primary
                 fetchPriority={immersive ? undefined : 'high'}
               />
             </div>
-            <Monogram />
+            {plain ? null : <Monogram />}
             {stat ? (
               <div className="page-hero__stat">
                 <strong>{stat.value}</strong>

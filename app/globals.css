@@ -3963,6 +3963,17 @@ a.fmarquee__card:focus-visible {
   text-shadow: none;
 }
 @media (max-width: 900px) {
+  /* No photo behind the copy to make room for: the hero's own card goes under the copy instead. */
+  .page-hero--plain.page-hero--immersive {
+    padding-bottom: clamp(40px, 9vw, 64px);
+  }
+  .page-hero--plain.page-hero--immersive .page-hero__media {
+    display: block;
+    justify-self: stretch;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    margin-top: clamp(28px, 7vw, 44px);
+  }
   /* The veil is off on small screens, so the washes go on the section itself. */
   [data-division='marketing'] .page-hero--plain {
     background:

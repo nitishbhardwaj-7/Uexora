@@ -35,7 +35,11 @@ type Props = {
  */
 export default function ServicePage({ division, service: s, statement, cta }: Props) {
   const meta = divisionMeta[division];
-  const heroTone = 'dark';
+  // Marketing pages open like the Marketing landing: a plain white and cream hero with dark type,
+  // the page's photo as a card on the right. Education keeps its full photo behind a dark hero.
+  const plainHero = division === 'marketing';
+  const heroTone = plainHero ? 'light' : 'dark';
+  const heroPhoto = s.heroImage || s.image;
   const sectionTone = 'dark';
   const altTone = 'light';
   const url = `${site.url}${servicePath(division, s.slug)}`;
@@ -171,7 +175,9 @@ export default function ServicePage({ division, service: s, statement, cta }: Pr
         tone={heroTone}
         primary={{ label: enquire, href: contact }}
         secondary={heroSecondary}
-        background={s.heroImage || s.image}
+        background={heroPhoto}
+        image={plainHero ? heroPhoto : undefined}
+        plain={plainHero}
         chips={s.highlights}
         crumbs={[{ label: meta.name, href: meta.path }, { label: unitCap }]}
       />
