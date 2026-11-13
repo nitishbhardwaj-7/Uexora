@@ -4160,34 +4160,50 @@ a.fmarquee__card:focus-visible {
   }
 }
 @media (max-width: 900px) {
-  /* Phones and tablets: the copy starts straight under the header, and the photo sits below it
-     at full width in its own 3:2 shape (so it scales with the screen rather than being cropped
-     to a sliver). Its top and bottom edges fade into the page colour; the fade is a mask on the
-     photo itself, so it moves with the parallax and never shows an edge. */
+  /* Phones and tablets: as on a laptop, the photo fills the whole hero behind the copy. The
+     veil is a top-to-bottom wash of the page colour, deeper behind the text and at the foot so
+     the type stays readable and the hero runs into the next section. */
   .page-hero--immersive {
-    --hero-photo-h: calc(100vw * 2 / 3);
+    min-height: 100svh;
+    align-content: center;
+    padding-top: calc(var(--header-h) + var(--announce-h) + clamp(28px, 6vw, 56px));
+    padding-bottom: clamp(48px, 10vw, 80px);
+  }
+  /* The Marketing landing has no photo: its copy starts under the header with its card below. */
+  .page-hero--plain.page-hero--immersive {
     min-height: 0;
     align-content: start;
-    padding-top: calc(var(--header-h) + var(--announce-h) + clamp(28px, 6vw, 56px));
-    padding-bottom: calc(var(--hero-photo-h) + 1rem);
+  }
+  .page-hero--plain .page-hero__veil {
+    display: none;
   }
   .page-hero__bg {
-    inset: auto 0 0;
-    height: var(--hero-photo-h);
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 82%, transparent 100%);
-    mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 82%, transparent 100%);
+    inset: 0;
   }
   .page-hero__bg img {
-    object-position: center;
+    object-position: 62% center;
   }
-  .page-hero__veil,
+  .page-hero__veil {
+    background: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--bg) 62%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 42%, transparent) 30%,
+      color-mix(in srgb, var(--bg) 52%, transparent) 62%,
+      color-mix(in srgb, var(--bg) 88%, transparent) 92%,
+      var(--bg) 100%
+    );
+  }
   .page-hero--immersive .page-hero__copy::before {
     display: none;
+  }
+  .page-hero--immersive:not(.page-hero--plain) .page-hero__copy h1,
+  .page-hero--immersive:not(.page-hero--plain) .page-hero__copy .lead {
+    text-shadow: 0 2px 18px color-mix(in srgb, var(--bg) 80%, transparent);
   }
   .page-hero--immersive .page-hero__grid {
     grid-template-columns: 1fr;
   }
-  /* The photo below the copy already carries the hero on small screens. */
+  /* The photo behind the copy carries the hero on small screens, so the card is not shown. */
   .page-hero--immersive .page-hero__media {
     display: none;
   }
