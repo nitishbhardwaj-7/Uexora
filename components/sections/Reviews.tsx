@@ -74,8 +74,8 @@ function Row({ reviews, reverse, speed }: { reviews: Review[]; reverse?: boolean
  * least one real review, so a page never shows an empty or invented section.
  *
  * Three or more reviews run as a slow, endless slider; six or more fill two rows that drift in
- * opposite directions on wide screens. It pauses on hover, on keyboard focus and with its pause
- * button, and with reduced motion it is a plain sideways scroll.
+ * opposite directions on wide screens. Hover or keyboard focus pauses just that row, the pause
+ * button stops both, and with reduced motion it is a plain sideways scroll.
  */
 export default function Reviews({
   id,

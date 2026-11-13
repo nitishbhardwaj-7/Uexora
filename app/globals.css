@@ -10541,8 +10541,9 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
 .reviews-marquee__row[data-reverse] .reviews-marquee__track {
   animation-direction: reverse;
 }
-.reviews-marquee:hover .reviews-marquee__track,
-.reviews-marquee:focus-within .reviews-marquee__track,
+/* Hover or keyboard focus stops only the row under it; the pause button stops both. */
+.reviews-marquee__row:hover .reviews-marquee__track,
+.reviews-marquee__row:focus-within .reviews-marquee__track,
 .reviews-marquee[data-paused] .reviews-marquee__track {
   animation-play-state: paused;
 }
