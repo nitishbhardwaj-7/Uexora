@@ -97,7 +97,6 @@ export default function Reviews({
   const half = Math.ceil(reviews.length / 2);
   const second = [...reviews.slice(half), ...reviews.slice(0, half)];
   const marqueeId = `${id}-marquee`;
-  const placeholders = reviews.some((r) => r.sample);
 
   return (
     <section id={id} className="section reviews-section" data-tone={tone} aria-labelledby={`${id}-title`}>
@@ -128,9 +127,6 @@ export default function Reviews({
           <Row reviews={reviews} speed={10} />
           {twoRows ? <Row reviews={second} speed={12} reverse /> : null}
         </div>
-      ) : null}
-      {placeholders ? (
-        <p className="container reviews-note">Placeholder reviews and stock photos, shown in development only. Real reviews from Studio replace them.</p>
       ) : null}
     </section>
   );

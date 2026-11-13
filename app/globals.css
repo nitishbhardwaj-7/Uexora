@@ -10562,12 +10562,6 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
 .reviews-marquee__set .review {
   width: clamp(300px, 29vw, 440px);
 }
-.reviews-note {
-  margin-top: 1.4rem;
-  font-size: 0.8rem;
-  color: var(--fg-muted);
-  opacity: 0.8;
-}
 @media (max-width: 899px) {
   .reviews-marquee__row[data-reverse] {
     display: none;
