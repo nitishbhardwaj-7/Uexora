@@ -10373,10 +10373,39 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
   line-height: 1.6;
 }
 .review__by {
-  display: grid;
-  gap: 0.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
   padding-top: 1.1rem;
   border-top: 1px solid var(--rule);
+}
+.review__who {
+  display: grid;
+  gap: 0.2rem;
+  min-width: 0;
+}
+/* The reviewer's own photo, or their initials on a gold-rimmed disc. */
+.review__avatar {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: radial-gradient(circle at 30% 25%, var(--blue-600), var(--navy-900) 75%);
+  box-shadow:
+    0 0 0 2px color-mix(in srgb, var(--gold-500) 75%, transparent),
+    0 0 0 5px color-mix(in srgb, var(--gold-500) 14%, transparent);
+  color: var(--cream);
+  font-family: var(--font-heading), serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+}
+.review__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .review__name {
   font-weight: 700;
@@ -10416,6 +10445,95 @@ html.reveal-ready [data-division='marketing'] .audience__card:nth-child(3)[data-
   }
   .review {
     scroll-snap-align: start;
+  }
+}
+
+/* Three or more reviews: a slow, endless slider across the full width. The set of cards is
+   repeated (--copies) and the track moves by exactly one set, so the loop is seamless. */
+.section-head.reviews-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  max-width: none;
+}
+.reviews-head > div {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 56rem;
+}
+.reviews-pause {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--rule);
+  background: color-mix(in srgb, var(--fg) 5%, transparent);
+  color: var(--fg);
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.reviews-pause svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+.reviews-pause:hover {
+  background: color-mix(in srgb, var(--fg) 12%, transparent);
+  border-color: color-mix(in srgb, var(--fg) 40%, transparent);
+}
+.reviews-pause:focus-visible {
+  outline: 2px solid var(--gold-500);
+  outline-offset: 3px;
+}
+.reviews-marquee {
+  --gap: clamp(1rem, 2vw, 1.6rem);
+  overflow: hidden;
+  padding-block: 0.5rem 2.5rem;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.reviews-marquee__track {
+  display: flex;
+  width: max-content;
+  animation: reviews-slide var(--dur, 54s) linear infinite;
+}
+.reviews-marquee:hover .reviews-marquee__track,
+.reviews-marquee:focus-within .reviews-marquee__track,
+.reviews-marquee__track[data-paused] {
+  animation-play-state: paused;
+}
+@keyframes reviews-slide {
+  to {
+    translate: calc(-100% / var(--copies, 2)) 0;
+  }
+}
+.reviews-marquee__set {
+  display: flex;
+  gap: var(--gap);
+  /* the trailing gap belongs to the set, so each copy is exactly one step long */
+  padding: 0 var(--gap) 0 0;
+  margin: 0;
+  list-style: none;
+}
+.reviews-marquee__set .review {
+  width: clamp(290px, 27vw, 420px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reviews-marquee {
+    overflow-x: auto;
+    -webkit-mask-image: none;
+    mask-image: none;
+    padding-inline: var(--gutter, 5vw);
+  }
+  .reviews-marquee__track {
+    animation: none;
+  }
+  .reviews-marquee__set + .reviews-marquee__set,
+  .reviews-pause {
+    display: none;
   }
 }
 

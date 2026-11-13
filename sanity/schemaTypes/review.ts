@@ -32,6 +32,12 @@ export const review = defineType({
       description: 'e.g. "Parent of a Grade 9 student", "JEE Main student", "Founder, Bloom Bakery".',
       validation: (r) => r.max(80),
     }),
+    defineField({
+      name: 'photo',
+      title: 'Reviewer’s photo',
+      type: 'picture',
+      description: 'Optional: a photo of the reviewer that they sent and agreed to show (never a stock photo). Without one, their initials are shown.',
+    }),
     defineField({ name: 'programme', title: 'Programme or service', type: 'string', description: 'Optional: the programme or service they used.', validation: (r) => r.max(80) }),
     defineField({
       name: 'rating',
@@ -54,9 +60,10 @@ export const review = defineType({
   ],
   orderings: [{ title: 'Position', name: 'order', by: [{ field: 'order', direction: 'asc' }] }],
   preview: {
-    select: { title: 'name', role: 'role', division: 'division', rating: 'rating' },
-    prepare: ({ title, role, division, rating }) => ({
+    select: { title: 'name', role: 'role', division: 'division', rating: 'rating', media: 'photo' },
+    prepare: ({ title, role, division, rating, media }) => ({
       title,
+      media,
       subtitle: [division === 'marketing' ? 'Marketing' : 'Education', role, rating ? `${rating}★` : ''].filter(Boolean).join(' · '),
     }),
   },
