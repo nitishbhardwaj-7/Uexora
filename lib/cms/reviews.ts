@@ -15,9 +15,9 @@ type RawReview = Omit<Review, 'photo'> & { photo?: { asset?: unknown; alt?: stri
 const fetchOpts: { next: { revalidate: number; tags: string[] } } = { next: { revalidate: 600, tags: ['sanity'] } };
 
 /**
- * Reviews for a landing page, from Studio. Only real reviews published with the reviewer's
- * permission are returned; there are no bundled defaults, so a page shows no reviews section
- * until the client has added one.
+ * Reviews for a landing page, from Studio: real reviews published with the reviewer's
+ * permission, plus any cards marked "Sample text", whose wording says plainly that it is a
+ * placeholder. There are no bundled defaults, so with neither a page shows no reviews section.
  *
  * In development only, and only while Studio has none, clearly labelled sample cards stand in
  * so the layout and the slider can be seen. They never reach the live site.
@@ -27,7 +27,7 @@ export async function getReviews(division: 'education' | 'marketing'): Promise<R
   if (client) {
     try {
       const raw = await client.fetch<RawReview[]>(
-        `*[_type == "review" && division == $division && permission == true && defined(name) && defined(quote)] | order(coalesce(order, 999) asc, _createdAt desc) { name, role, programme, rating, quote, photo }`,
+        `*[_type == "review" && division == $division && (permission == true || sample == true) && defined(name) && defined(quote)] | order(coalesce(order, 999) asc, _createdAt desc) { name, role, programme, rating, quote, photo }`,
         { division },
         fetchOpts,
       );

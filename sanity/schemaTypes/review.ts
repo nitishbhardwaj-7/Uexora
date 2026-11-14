@@ -49,20 +49,30 @@ export const review = defineType({
     }),
     defineField({ name: 'quote', title: 'Review', type: 'text', rows: 5, description: 'In the reviewer’s own words. Light edits for spelling only.', validation: (r) => r.required().min(20).max(600) }),
     defineField({
+      name: 'sample',
+      title: 'Sample text (placeholder)',
+      type: 'boolean',
+      initialValue: false,
+      description: 'On for the placeholder cards that hold the section’s place until real reviews arrive. Replace the text with a real review and turn this off, or delete the card.',
+    }),
+    defineField({
       name: 'permission',
       title: 'This is a real review, shared with the reviewer’s permission',
       type: 'boolean',
       initialValue: false,
-      description: 'Required for the review to appear on the site.',
-      validation: (r) => r.custom((v) => (v === true ? true : 'Tick this to confirm the review is real and may be published.')),
+      description: 'Required for a real review to appear on the site.',
+      validation: (r) =>
+        r.custom((v, ctx) =>
+          v === true || (ctx.document as { sample?: boolean } | undefined)?.sample ? true : 'Tick this to confirm the review is real and may be published.',
+        ),
     }),
     defineField({ name: 'order', title: 'Position', type: 'number', description: 'Lower numbers show first.' }),
   ],
   orderings: [{ title: 'Position', name: 'order', by: [{ field: 'order', direction: 'asc' }] }],
   preview: {
-    select: { title: 'name', role: 'role', division: 'division', rating: 'rating', media: 'photo' },
-    prepare: ({ title, role, division, rating, media }) => ({
-      title,
+    select: { title: 'name', role: 'role', division: 'division', rating: 'rating', media: 'photo', sample: 'sample' },
+    prepare: ({ title, role, division, rating, media, sample }) => ({
+      title: sample ? `SAMPLE · ${title}` : title,
       media,
       subtitle: [division === 'marketing' ? 'Marketing' : 'Education', role, rating ? `${rating}★` : ''].filter(Boolean).join(' · '),
     }),
