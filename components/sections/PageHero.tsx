@@ -43,13 +43,14 @@ export default function PageHero({ eyebrow, title, lead, tone = 'light', primary
         <>
           {background && !plain ? (
             <div className="page-hero__bg" data-parallax="0.12">
-              {/* Cropped to fill the hero's full height, so it is drawn wider than the viewport:
+              {/* Cropped to fill a box taller than the photo's own shape (the full hero on wide
+                  screens, down to the buttons on phones), so it is drawn wider than the viewport:
                   ask for a larger file than 100vw or it looks soft. */}
               <CmsImage
                 src={background.src}
                 alt={background.alt}
                 fill
-                sizes="(max-width: 900px) 100vw, 135vw"
+                sizes="(max-width: 900px) 220vw, 135vw"
                 quality={82}
                 preload
                 fetchPriority="high"

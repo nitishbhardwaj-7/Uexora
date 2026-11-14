@@ -4186,6 +4186,19 @@ a.fmarquee__card:focus-visible {
   .page-hero__bg img {
     object-position: center;
   }
+  /* Where supported, the photo reaches down behind the buttons (it ends just below them, so it
+     fits each page's copy); elsewhere it keeps the landscape shape above. */
+  @supports (anchor-name: --a) {
+    .page-hero--immersive:not(.page-hero--plain) .btn-row {
+      anchor-name: --hero-actions;
+    }
+    .page-hero--immersive:not(.page-hero--plain) .page-hero__bg {
+      aspect-ratio: auto;
+      bottom: calc(anchor(--hero-actions bottom) - clamp(28px, 8vw, 48px));
+      -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 72%, transparent 100%);
+      mask-image: linear-gradient(to bottom, #000 0, #000 72%, transparent 100%);
+    }
+  }
   /* A light tint for the title, deepening to the page colour at the photo's foot. */
   .page-hero__bg::after {
     content: '';
