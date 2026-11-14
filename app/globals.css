@@ -4160,12 +4160,12 @@ a.fmarquee__card:focus-visible {
   }
 }
 @media (max-width: 900px) {
-  /* Phones and tablets: as on a laptop, the photo fills the whole hero behind the copy. The
-     veil is a top-to-bottom wash of the page colour, deeper behind the text and at the foot so
-     the type stays readable and the hero runs into the next section. */
+  /* Phones and tablets: the photo keeps its own landscape shape (as on a laptop, no tall crop)
+     at full width under the header, with the breadcrumb and title on it; its foot fades into
+     the page colour, and the rest of the copy carries on below. */
   .page-hero--immersive {
-    min-height: 100svh;
-    align-content: center;
+    min-height: 0;
+    align-content: start;
     padding-top: calc(var(--header-h) + var(--announce-h) + clamp(28px, 6vw, 56px));
     padding-bottom: clamp(48px, 10vw, 80px);
   }
@@ -4178,20 +4178,28 @@ a.fmarquee__card:focus-visible {
     display: none;
   }
   .page-hero__bg {
-    inset: 0;
+    inset: calc(var(--header-h) + var(--announce-h)) 0 auto;
+    aspect-ratio: 3 / 2;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 62%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0, #000 62%, transparent 100%);
   }
   .page-hero__bg img {
-    object-position: 62% center;
+    object-position: center;
   }
-  .page-hero__veil {
+  /* A light tint for the title, deepening to the page colour at the photo's foot. */
+  .page-hero__bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
     background: linear-gradient(
       to bottom,
-      color-mix(in srgb, var(--bg) 62%, transparent) 0%,
-      color-mix(in srgb, var(--bg) 42%, transparent) 30%,
-      color-mix(in srgb, var(--bg) 52%, transparent) 62%,
-      color-mix(in srgb, var(--bg) 88%, transparent) 92%,
-      var(--bg) 100%
+      color-mix(in srgb, var(--bg) 30%, transparent) 0%,
+      color-mix(in srgb, var(--bg) 40%, transparent) 60%,
+      color-mix(in srgb, var(--bg) 70%, transparent) 100%
     );
+  }
+  .page-hero__veil {
+    display: none;
   }
   .page-hero--immersive .page-hero__copy::before {
     display: none;
